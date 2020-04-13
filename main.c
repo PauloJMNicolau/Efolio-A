@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include "ui/menu.h"
 #include "sgbd/sgbd.h"
+#include "sgbd/arvore.h"
+#include "sgbd/alunos.h"
+#include "sgbd/ucs.h"
 
 int main(int argc, char ** argv){
 
@@ -13,14 +16,18 @@ int main(int argc, char ** argv){
     INSCRICAO * i6 = criarInscricao(1,5,L"2012/2013");
     
     TREE_INSCRICAO * arvore = criarArvore();
-    inserirNaArvore(i1,arvore);
-    inserirNaArvore(i2,arvore);
-    inserirNaArvore(i3,arvore);
-    inserirNaArvore(i4,arvore);
-    inserirNaArvore(i5,arvore);
-    inserirNaArvore(i6,arvore);
+    inserirArvore(arvore,i1);
+    inserirArvore(arvore,i2);
+    inserirArvore(arvore,i3);
+    inserirArvore(arvore,i4);
+    inserirArvore(arvore,i5);
+    inserirArvore(arvore,i6);
     
+    NoINSCRICAO * no = procuraInscricao(1,2,L"2012/2013", arvore->raiz);
+    NoINSCRICAO * no1 = procuraInscricao(1,8,L"2013/2014", arvore->raiz);
+    NoINSCRICAO * no2 = procuraInscricao(1,5,L"2012/2013", arvore->raiz);
 
+    //removerElementoInscricao(no,arvore);
 
     return 0;
 }
