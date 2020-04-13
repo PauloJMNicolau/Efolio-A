@@ -1,5 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+<<<<<<< HEAD
+=======
+#include <string.h>
+>>>>>>> separaçao
 #include <wchar.h>
 #include <wctype.h>
 
