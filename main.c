@@ -2,9 +2,7 @@
 #include <stdlib.h>
 #include "ui/menu.h"
 #include "sgbd/sgbd.h"
-#include "sgbd/arvore.h"
-#include "sgbd/alunos.h"
-#include "sgbd/ucs.h"
+
 
 int main(int argc, char ** argv){
 
@@ -15,18 +13,19 @@ int main(int argc, char ** argv){
     INSCRICAO * i5 = criarInscricao(1,8,L"2013/2014");
     INSCRICAO * i6 = criarInscricao(1,5,L"2012/2013");
     
-    TREE_INSCRICAO * arvore = criarArvore();
-    inserirArvore(arvore,i1);
-    inserirArvore(arvore,i2);
-    inserirArvore(arvore,i3);
-    inserirArvore(arvore,i4);
-    inserirArvore(arvore,i5);
-    inserirArvore(arvore,i6);
+    LISTA_PASTA * inscricoes = criarListaPastas();
+    adicionarInscricao(i1,inscricoes);
+    adicionarInscricao(i2,inscricoes);
+    adicionarInscricao(i3,inscricoes);
+    adicionarInscricao(i4,inscricoes);
+    adicionarInscricao(i5,inscricoes);
+    adicionarInscricao(i6,inscricoes);
     
-    NoINSCRICAO * no = procuraInscricao(1,2,L"2012/2013", arvore->raiz);
-    NoINSCRICAO * no1 = procuraInscricao(1,8,L"2013/2014", arvore->raiz);
-    NoINSCRICAO * no2 = procuraInscricao(1,5,L"2012/2013", arvore->raiz);
+    INSCRICAO* no = procuraInscricao(inscricoes, L"2012/2013",2,1);
+    INSCRICAO* no1 = procuraInscricao(inscricoes, L"2013/2014",8,1);
+    INSCRICAO* no2 = procuraInscricao(inscricoes, L"2012/2013",5,1);
 
+    removerInscricao(i6,inscricoes);
     //removerElementoInscricao(no,arvore);
 
     return 0;

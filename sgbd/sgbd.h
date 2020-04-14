@@ -3,7 +3,7 @@
 #include <string.h>
 #include <wchar.h>
 #include <wctype.h>
-#include "arvore.h"
+#include "inscricoes.h"
 #include "alunos.h"
 #include "ucs.h"
 
