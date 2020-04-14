@@ -5,12 +5,6 @@
 #include "global.h"
 #include "menu.h"
 
-int main()
-{
-    setlocale(LC_ALL,"");
-    menuPrincipal();
-}
-
 //Menu principal com as opções possíveis
 void menuPrincipal() {
     int opcao;
