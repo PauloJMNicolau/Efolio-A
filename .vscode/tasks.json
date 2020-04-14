@@ -13,10 +13,14 @@
 				"${workspaceFolder}/sgbd/alunos.c",
 				"${workspaceFolder}/sgbd/ucs.c",
 <<<<<<< HEAD
+<<<<<<< HEAD
 				"${workspaceFolder}/sgbd/inscricoes.c",
 =======
 				"${workspaceFolder}/sgbd/arvore.c",
 >>>>>>> separaçao
+=======
+				"${workspaceFolder}/sgbd/inscricoes.c",
+>>>>>>> reconfiguração arvore
                 "-o",
                 "${workspaceFolder}/dist/efolio"
             ],

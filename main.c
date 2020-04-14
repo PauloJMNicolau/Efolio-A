@@ -2,9 +2,7 @@
 #include <stdlib.h>
 #include "ui/menu.h"
 #include "sgbd/sgbd.h"
-#include "sgbd/arvore.h"
-#include "sgbd/alunos.h"
-#include "sgbd/ucs.h"
+
 
 
 int main(int argc, char ** argv){
