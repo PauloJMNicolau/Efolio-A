@@ -68,7 +68,7 @@ void menuAlunos() {
         wscanf(L"%d", &opcao);
 
         switch (opcao) {
-        /*    case 1:
+            case 1:
                 adicionarAluno();
                 break;
             case 2:
@@ -79,7 +79,7 @@ void menuAlunos() {
                 break;
             case 4:
                 modificarAluno();
-                break;*/
+                break;
             case 0:
                 break;
             default: {
@@ -107,7 +107,7 @@ void menuUCS() {
         wscanf(L"%d", &opcao);
 
         switch (opcao) {
-         /*   case 1:
+           case 1:
                 adicionarUC();
                 break;
             case 2:
@@ -118,7 +118,7 @@ void menuUCS() {
                 break;
             case 4:
                 modificarUC();
-                break;*/
+                break;
             case 0:
                 break;
             default: {
@@ -146,7 +146,7 @@ void menuInscricoes() {
         wscanf(L"%d", &opcao);
 
         switch (opcao) {
-         /*   case 1:
+            case 1:
                 adicionarInscricao();
                 break;
             case 2:
@@ -157,7 +157,7 @@ void menuInscricoes() {
                 break;
             case 4:
                 modificarInscricao();
-                break;*/
+                break;
             case 0:
                 break;
             default: {
@@ -183,7 +183,7 @@ void menuPropinas() {
         wscanf(L"%d", &opcao);
 
         switch (opcao) {
-         /*   case 1:
+            case 1:
                 calcularPropina();
                 break;*/
             case 0:
@@ -212,12 +212,12 @@ void menuConsultas() {
         wscanf(L"%d", &opcao);
 
         switch (opcao) {
-        /*    case 1:
+            case 1:
                 listaInscAluno();
                 break;
             case 2:
                 listaInscUC();
-                break;*/
+                break;
             case 0:
                 break;
             default: {
@@ -245,7 +245,7 @@ void menuReports() {
         wscanf(L"%d", &opcao);
 
         switch (opcao) {
-         /*   case 1:
+            case 1:
                 repECTSAluno();
                 break;
             case 2:
@@ -256,7 +256,7 @@ void menuReports() {
                 break;
             case 4:
                 repTotalAlunAnoLet();
-                break;*/
+                break;
             case 0:
                 break;
             default: {
