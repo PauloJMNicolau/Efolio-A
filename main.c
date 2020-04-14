@@ -13,7 +13,6 @@ int main(int argc, char ** argv){
     INSCRICAO * i4 = criarInscricao(1,7,L"2012/2013");
     INSCRICAO * i5 = criarInscricao(1,8,L"2013/2014");
     INSCRICAO * i6 = criarInscricao(1,5,L"2012/2013");
-    
     LISTA_PASTA * inscricoes = criarListaPastas();
     adicionarInscricao(i1,inscricoes);
     adicionarInscricao(i2,inscricoes);

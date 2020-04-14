@@ -28,8 +28,6 @@ typedef struct noPasta{
     struct noPasta * proximo;   //Proxima Pasta na lista
 } NO_PASTA;
 
-
-
 //Estrutura para pasta 
 typedef struct listaAnual{
     int pastas;         //Quantidade de pastas
