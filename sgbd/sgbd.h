@@ -3,9 +3,7 @@
 #include <string.h>
 #include <wchar.h>
 #include <wctype.h>
-#include "inscricoes.h"
-#include "alunos.h"
-#include "ucs.h"
+#include "ficheiros.h"
 
 /* ***********************
  *      Estruturas       *

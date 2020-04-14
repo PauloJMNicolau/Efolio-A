@@ -12,7 +12,8 @@
 				"${workspaceFolder}/sgbd/sgbd.c",
 				"${workspaceFolder}/sgbd/alunos.c",
 				"${workspaceFolder}/sgbd/ucs.c",
-				"${workspaceFolder}/sgbd/inscricoes.c",
+                "${workspaceFolder}/sgbd/inscricoes.c",
+                "${workspaceFolder}/sgbd/ficheiros.c",
                 "-o",
                 "${workspaceFolder}/dist/efolio"
             ],

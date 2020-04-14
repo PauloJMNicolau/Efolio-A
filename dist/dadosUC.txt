@@ -22,4 +22,14 @@
 21076   Investigação Operacional    2   2
 21077   Linguagens de Programação   2   2
 21179   Laboratório de Desenvolvimento de Software  2   2
-21020   
+21020   Computação Gráfica  3   1
+21062   Gestão de Projetos Informáticos 3   1
+21103   Sistemas de Gestão de Bases de Dados    3   1
+21110   Sistemas Multimédia 3   1
+21180   Computação Numérica 3   1
+21181   Segurança em Redes e Computadores   3   1
+21018   Compilação  3   2
+21097   Raciocinio e Representação do Conhecimento  3   2
+21108   Sistemas Distribuidos   3   2
+21182   Laboratório de Sistemas e Serviços Web  3   2
+21184   Projeto de Engenharia Informática   3   2
