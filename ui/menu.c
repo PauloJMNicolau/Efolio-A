@@ -1,13 +1,22 @@
 #include <stdio.h>
 #include <wchar.h>
-#include <string.h>
+#include <unistd.h>
+#include <locale.h>
+#include "global.h"
 #include "menu.h"
+
+int main()
+{
+    setlocale(LC_ALL,"");
+    menuPrincipal();
+}
 
 //Menu principal com as opções possíveis
 void menuPrincipal() {
     int opcao;
     
     do {
+        clearScreen();
         wprintf(L"Menu Principal\n");
         wprintf(L"Escolha uma das seguintes opções:\n");
         wprintf(L"1 - Alunos\n");
@@ -35,12 +44,15 @@ void menuPrincipal() {
                 break;
             case 5:
                 menuConsultas();
+                break;
             case 6:
                 menuReports(); 
             case 0:
                 break;
-            default:
+            default: {
                 wprintf(L"Opção inválida!\n");
+                sleep(1);
+            }
         }
     } while (opcao != 0);
 }
@@ -48,8 +60,11 @@ void menuPrincipal() {
 //Submenu para funções relacionadas directamente com alunos
 void menuAlunos() {
     int opcao;
-
+    
     do {
+        clearScreen();
+        wprintf(L"Menu Alunos\n");
+        wprintf(L"Escolha uma das seguintes opções:\n");
         wprintf(L"1 - Adicionar Aluno\n");
         wprintf(L"2 - Remover Aluno\n");
         wprintf(L"3 - Consultar Aluno\n");
@@ -59,7 +74,7 @@ void menuAlunos() {
         wscanf(L"%d", &opcao);
 
         switch (opcao) {
-            case 1:
+        /*    case 1:
                 adicionarAluno();
                 break;
             case 2:
@@ -70,11 +85,13 @@ void menuAlunos() {
                 break;
             case 4:
                 modificarAluno();
-                break;
+                break;*/
             case 0:
                 break;
-            default:
+            default: {
                 wprintf(L"Opção inválida!\n");
+                sleep(1);
+            }
         }
     } while (opcao != 0);
 }
@@ -82,8 +99,11 @@ void menuAlunos() {
 //Submenu para funções relacionadas directamente com UCs
 void menuUCS() {
     int opcao;
-
+    
     do {
+        clearScreen();
+        wprintf(L"Menu UC's\n");
+        wprintf(L"Escolha uma das seguintes opções:\n");
         wprintf(L"1 - Adicionar UC\n");
         wprintf(L"2 - Remover UC\n");
         wprintf(L"3 - Consultar UC\n");
@@ -93,7 +113,7 @@ void menuUCS() {
         wscanf(L"%d", &opcao);
 
         switch (opcao) {
-            case 1:
+         /*   case 1:
                 adicionarUC();
                 break;
             case 2:
@@ -104,11 +124,13 @@ void menuUCS() {
                 break;
             case 4:
                 modificarUC();
-                break;
+                break;*/
             case 0:
                 break;
-            default:
+            default: {
                 wprintf(L"Opção inválida!\n");
+                sleep(1);
+            }
         }
     } while (opcao != 0);
 }
@@ -116,8 +138,11 @@ void menuUCS() {
 //Submenu para funções relacionadas directamente com incrições
 void menuInscricoes() {
     int opcao;
-
+    
     do {
+        clearScreen();
+        wprintf(L"Menu Inscrições\n");
+        wprintf(L"Escolha uma das seguintes opções:\n");
         wprintf(L"1 - Adicionar Inscrição\n");
         wprintf(L"2 - Remover Inscrição\n");
         wprintf(L"3 - Consultar Inscrição\n");
@@ -127,7 +152,7 @@ void menuInscricoes() {
         wscanf(L"%d", &opcao);
 
         switch (opcao) {
-            case 1:
+         /*   case 1:
                 adicionarInscricao();
                 break;
             case 2:
@@ -138,11 +163,13 @@ void menuInscricoes() {
                 break;
             case 4:
                 modificarInscricao();
-                break;
+                break;*/
             case 0:
                 break;
-            default:
+            default: {
                 wprintf(L"Opção inválida!\n");
+                sleep(1);
+            }
         }
     } while (opcao != 0);
 }
@@ -153,19 +180,24 @@ void menuPropinas() {
     int opcao;
 
     do {
+        clearScreen();
+        wprintf(L"Menu Propinas\n");
+        wprintf(L"Escolha uma das seguintes opções:\n");
         wprintf(L"1 - Calcular Propinas\n");
         wprintf(L"0 - Menu anterior\n");
 
         wscanf(L"%d", &opcao);
 
         switch (opcao) {
-            case 1:
+         /*   case 1:
                 calcularPropina();
-                break;
+                break;*/
             case 0:
                 break;
-            default:
+            default: {
                 wprintf(L"Opção inválida!\n");
+                sleep(1);
+            }
         }
     } while (opcao != 0);
 }
@@ -174,8 +206,11 @@ void menuPropinas() {
 //Submenu para funções relacionadas directamente com consultas
 void menuConsultas() {
     int opcao;
-
+    
     do {
+        clearScreen();
+        wprintf(L"Menu Consultas\n");
+        wprintf(L"Escolha uma das seguintes opções:\n");
         wprintf(L"1 - Lista de inscrições por aluno\n");
         wprintf(L"2 - Lista de inscrições por UC\n");
         wprintf(L"0 - Menu anterior\n");
@@ -183,16 +218,18 @@ void menuConsultas() {
         wscanf(L"%d", &opcao);
 
         switch (opcao) {
-            case 1:
+        /*    case 1:
                 listaInscAluno();
                 break;
             case 2:
                 listaInscUC();
-                break;
+                break;*/
             case 0:
                 break;
-            default:
+            default: {
                 wprintf(L"Opção inválida!\n");
+                sleep(1);
+            }
         }
     } while (opcao != 0);
 }
@@ -200,8 +237,11 @@ void menuConsultas() {
 //Submenu para funções relacionadas directamente com reports
 void menuReports() {
     int opcao;
-
+    
     do {
+        clearScreen();
+        wprintf(L"Menu Reports\n");
+        wprintf(L"Escolha uma das seguintes opções:\n");        
         wprintf(L"1 - Número total de ECTS por aluno\n");
         wprintf(L"2 - Alunos para época especial de exames\n");
         wprintf(L"3 - Situações de potencial abandono escolar\n");
@@ -211,7 +251,7 @@ void menuReports() {
         wscanf(L"%d", &opcao);
 
         switch (opcao) {
-            case 1:
+         /*   case 1:
                 repECTSAluno();
                 break;
             case 2:
@@ -222,11 +262,13 @@ void menuReports() {
                 break;
             case 4:
                 repTotalAlunAnoLet();
-                break;
+                break;*/
             case 0:
                 break;
-            default:
+            default: {
                 wprintf(L"Opção inválida!\n");
+                sleep(1);
+            }
         }
     } while (opcao != 0);
 }
