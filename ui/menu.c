@@ -185,7 +185,7 @@ void menuPropinas() {
         switch (opcao) {
             case 1:
                 calcularPropina();
-                break;*/
+                break;
             case 0:
                 break;
             default: {
