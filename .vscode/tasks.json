@@ -14,6 +14,7 @@
 				"${workspaceFolder}/sgbd/ucs.c",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 				"${workspaceFolder}/sgbd/inscricoes.c",
 =======
 				"${workspaceFolder}/sgbd/arvore.c",
@@ -21,6 +22,10 @@
 =======
 				"${workspaceFolder}/sgbd/inscricoes.c",
 >>>>>>> reconfiguração arvore
+=======
+                "${workspaceFolder}/sgbd/inscricoes.c",
+                "${workspaceFolder}/sgbd/ficheiros.c",
+>>>>>>> ficheiro
                 "-o",
                 "${workspaceFolder}/dist/efolio"
             ],
