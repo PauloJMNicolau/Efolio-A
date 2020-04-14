@@ -7,9 +7,9 @@
 #include "alunos.h"
 #include "ucs.h"
 
-/************************
- *      Estruturas      *
- * **********************/
+/* ***********************
+ *      Estruturas       *
+ * ********************* */
 
 //Estrutura de Dados da Base Dados
 typedef struct sgdb{
