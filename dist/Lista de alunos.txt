@@ -1,0 +1,42 @@
+#Nº     Nome       País
+1800001-Ana Silva-Portugal
+1800002-Ana Tavares-Portugal
+1800003-Lorenzo Peetro-Itália
+1800004-Pietro Giovanni-Itália
+1800005-Rafael Fonseca-Portugal
+1800006-Richard Tree-Englaterra
+1800007-Ella Lars-Coácia
+1800008-José Mortagua-Portugal
+1800009-Elisabeth Fredrik-suécia
+1800010-Chin Jin-China
+1800011-Akira Gohan-Japão
+1800012-Do yoon-coreia do sul
+1800013-Alice Rodrigues-Portugal
+1800014-Hugo Lisboa-Portugal
+1800015-Raquel sousa-Portugal
+1800016-Patricia Cavaleiro-Portugal
+1800017-Sonia Campos-Portugal
+1800018-Andre Abílio-Portugal
+1800019-Artur sousa-Portugal
+1800020-Diego pietro-Grécia
+1800021-Heitor Silva-Portugal
+1800022-Sebastian Maxwell-Escócia 
+1800023-Matheus Davi-Brasil
+180024-Rodrigo Vinícios-Brasil
+180025-Guilherme Pinto-Portugal
+180026-Gabriel Fernandes- Portugal
+180027-Ricardo Silva-Portugal
+180028-Silvio Fernandes-Portugal
+180029-Júlia Larissa- Brasil
+180030-Zalika Urbi-Angola
+180031-Diara siham-Angola
+180032-Álvaro Lopes-Portugal
+180033-Bernardo Pinto-Portugal
+180034-César Rodrigues-Portugal
+180035-Daniel Filipe-Portugal
+180036-Frederico Santos-Portugal
+180037-Nuno Mateus-Portugal
+180038-Renato Salvador-Portugal
+180039-Eva simões-Portugal
+180040-Rebeca Ferraz-Itália
+
