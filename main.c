@@ -3,14 +3,35 @@
 #include "ui/menu.h"
 #include "sgbd/sgbd.h"
 
+/********************************
+ *          Headers             *
+ ********************************/
+
+//Executar o Programa Completo
+void executarPrograma();
+
+
+/********************************
+ *          Programa            *
+ ********************************/
+
+//Executar o Programa Completo
+void executarPrograma(){
+    //Carregar programa (Carregar Dados)
+    SGBD * sgbd = criarBaseDados();
+    carregarFicheiros(sgbd);
+    //Mostrar Menu
+    menuPrincipal();
+    //Terminar Programa (Libertar memoria)
+}
 
 
 int main(int argc, char ** argv){
     setlocale(LC_ALL,"pt_PT.UTF-8");
     setlocale(LC_CTYPE, " ");
-    menuPrincipal();
-    LIST_UC * lista = criarListaUC();
-    lerUCTexto(lista);
+    executarPrograma();
+
+
 
     INSCRICAO * i1 = criarInscricao(1,2,L"2012/2013");
     INSCRICAO * i2 = criarInscricao(1,4,L"2011/2012");

@@ -19,28 +19,20 @@ SGBD *criarBaseDados(){
         exit(_ERR_MEMORYALLOC);
     }
     baseDados->alunos = criarListaAluno();
-    //baseDados->inscricoes = NULL;
+    baseDados->inscricoes = criarListaPastas();
     baseDados->ucs = criarListaUC();
-    baseDados->proxIDAluno = 1;
-    baseDados->proxIDUC = 1;
     return baseDados;
 }
 
+void carregarFicheiros(SGBD * bd){
+    if(!bd){
+        wprintf(L"Erro %d: Base de Dados não existe\n");
+        return _ERR_RESOURCENOTFOUND;
+    }
+    //Carregar ficheiro de UCS
+    lerUCTexto(bd->ucs);
+    //Carregar ficheiro de Alunos
 
+    //Carregar ficheiro de inscrições
 
-
-
-
-//Incrementar IDAluno
-//Retorna ID Atual
-int obterIDAluno(SGBD *baseDados)
-{
-    return baseDados->proxIDAluno++;
-}
-
-//Incrementa IDUC
-//Retorna ID Atual
-int obterIDUC(SGBD *baseDados)
-{
-    return baseDados->proxIDUC++;
 }

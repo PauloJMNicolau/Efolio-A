@@ -2,7 +2,7 @@
 
 #ID-Nome-Ano-Semestre;
 
-21002   Álgebra Linear I    1   1;
+21002-Álgebra Linear I-1-1;
 21010-Arquitetura de Computadores-1-1;
 21173-Introdução à Programação-1-1;
 21174-Sistemas Computacionais-1-1;

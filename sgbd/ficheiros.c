@@ -25,6 +25,10 @@ void lerUCTexto(LIST_UC * lista){
             continue;
         processarLinhaUC(linha,lista);
     }
+    for(int i=0; i< lista->elementos; i++){
+        UC* temp = obterUC(i, lista);
+        wprintf(L"%d %S %d %d\n", temp->numero, temp->nome, temp->ano, temp->semestre);
+    }
 
     fclose(fp);
 }
@@ -32,11 +36,11 @@ void lerUCTexto(LIST_UC * lista){
 //Processar Linha de Texto do ficheiro de UC
 void processarLinhaUC(wchar_t * linha, LIST_UC * lista){
     wchar_t * temp, * buffer;
-    temp = wcstok(linha, L"-", &buffer);
-    while(temp){
-        wprintf(L"%ls\n", temp);
-        temp=wcstok(NULL, L"-", &buffer);
-    }
+    int numero = wcstol(wcstok(linha, L"-", &buffer), &temp,10);
+    wchar_t * nome = wcstok(NULL, L"-", &buffer);
+    int ano = wcstol(wcstok(NULL, L"-", &buffer), &temp,10);
+    int semestre = wcstol(wcstok(NULL, L"-", &buffer), &temp,10);
+    adicionarUC(criarUC(numero,nome,ano,semestre),lista,lista->elementos);//Adiciona sempre no final
 }
 
 #endif

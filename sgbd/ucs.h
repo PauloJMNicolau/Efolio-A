@@ -51,5 +51,7 @@ int libertarUC(UC *unidade);
 int adicionarUC(UC *unidade, LIST_UC *lista, int pos);
 //Remover elemento da lista
 int removerUC(int pos, LIST_UC *lista);
+//Obter Unidade curricular na posição
+UC * obterUC(int pos, LIST_UC * lista);
 
 #endif
