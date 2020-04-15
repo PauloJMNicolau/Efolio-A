@@ -4,6 +4,8 @@
 #include <wchar.h>
 #include <wctype.h>
 
+#ifndef _UCS_
+#define _UCS_
 /************************
  *      Estruturas      *
  * **********************/
@@ -49,3 +51,5 @@ int libertarUC(UC *unidade);
 int adicionarUC(UC *unidade, LIST_UC *lista, int pos);
 //Remover elemento da lista
 int removerUC(int pos, LIST_UC *lista);
+
+#endif

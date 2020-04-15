@@ -1,6 +1,8 @@
 #include "ficheiros.h"
 #include "macro.h"
 
+#ifndef _FICHEIROS_
+
 /* **********************
  *  Ficheiros de Texto  *
  * **********************/
@@ -9,17 +11,17 @@
 void lerUCTexto(LIST_UC * lista){
     FILE * fp = fopen("dadosUC.txt","r");
     if(!fp){
-        wprintf("Erro %d: Não foi possivel abrir o ficheiro",_ERR_READFILE);
+        wprintf(L"Erro %d: Não foi possivel abrir o ficheiro",_ERR_READFILE);
         exit(_ERR_READFILE);
     }
     wchar_t * linha = calloc(_TAMSTRING,sizeof(wchar_t));
     if(!linha){
-        wprintf("Erro %d: Não foi possivel alocar memoria para a linha",_ERR_MEMORYALLOC);
+        wprintf(L"Erro %d: Não foi possivel alocar memoria para a linha",_ERR_MEMORYALLOC);
         exit(_ERR_MEMORYALLOC);
     }
     while(!feof(fp)){
-        fwscanf(fp,"%s\n",&linha);
-        if(wcsncmp(linha,L"#",1)==0 || wcsncmp(linha," ",wcslen(linha))==0)
+        fwscanf(fp,L"%l[^;];\n",linha);
+        if(wmemcmp(linha,L"#",1)==0 || wcsncmp(linha,L" ",1)==0)
             continue;
         processarLinhaUC(linha,lista);
     }
@@ -29,10 +31,12 @@ void lerUCTexto(LIST_UC * lista){
 
 //Processar Linha de Texto do ficheiro de UC
 void processarLinhaUC(wchar_t * linha, LIST_UC * lista){
-    wchar_t * temp;
-    wcstok(linha, L"\t", temp);
-    while(temp != NULL){
-        wprintf("%s", temp);
-        wcstok(NULL, L"\t", temp);
+    wchar_t * temp, * buffer;
+    temp = wcstok(linha, L"-", &buffer);
+    while(temp){
+        wprintf(L"%ls\n", temp);
+        temp=wcstok(NULL, L"-", &buffer);
     }
 }
+
+#endif

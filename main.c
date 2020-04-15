@@ -6,7 +6,9 @@
 
 
 int main(int argc, char ** argv){
-
+    setlocale(LC_ALL,"pt_PT.UTF-8");
+    setlocale(LC_CTYPE, " ");
+    menuPrincipal();
     LIST_UC * lista = criarListaUC();
     lerUCTexto(lista);
 
