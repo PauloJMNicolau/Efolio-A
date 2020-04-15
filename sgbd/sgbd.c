@@ -3,7 +3,6 @@
 #include <wchar.h>
 #include <wctype.h>
 #include "sgbd.h"
-#include "macro.h"
 
 
 /************************************
@@ -24,7 +23,7 @@ SGBD *criarBaseDados(){
     return baseDados;
 }
 
-void carregarFicheiros(SGBD * bd){
+int carregarFicheiros(SGBD * bd){
     if(!bd){
         wprintf(L"Erro %d: Base de Dados não existe\n");
         return _ERR_RESOURCENOTFOUND;
@@ -34,5 +33,5 @@ void carregarFicheiros(SGBD * bd){
     //Carregar ficheiro de Alunos
 
     //Carregar ficheiro de inscrições
-
+    return _SUCESSO;
 }

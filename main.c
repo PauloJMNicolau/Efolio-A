@@ -21,7 +21,7 @@ void executarPrograma(){
     SGBD * sgbd = criarBaseDados();
     carregarFicheiros(sgbd);
     //Mostrar Menu
-    menuPrincipal();
+    menuPrincipal(sgbd);
     //Terminar Programa (Libertar memoria)
 }
 

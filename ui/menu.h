@@ -1,12 +1,20 @@
+#include <stdio.h>
+#include <wchar.h>
+#include <unistd.h>
+#include <locale.h>
+#include "global.h"
+#include "uiucs.h"
+#include "../sgbd/sgbd.h"
+
 #ifndef _MENU_
 #define _MENU_
 
 //Menu com lista de opções possíveis
-void menuPrincipal();
+void menuPrincipal(SGBD * bd);
 //Submenu para funções relacionadas directamente com alunos
 void menuAlunos();
 //Submenu para funções relacionadas directamente com UCs
-void menuUCS();
+void menuUCS(SGBD * bd);
 //Submenu para funções relacionadas directamente com incrições
 void menuInscricoes();
 //Submenu para funções relacionadas directamente com propinas

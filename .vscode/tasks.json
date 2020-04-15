@@ -9,6 +9,7 @@
                 "-g",
                 "${workspaceFolder}/main.c",
                 "${workspaceFolder}/ui/menu.c",
+                "${workspaceFolder}/ui/uiucs.c",
 				"${workspaceFolder}/sgbd/sgbd.c",
 				"${workspaceFolder}/sgbd/alunos.c",
 				"${workspaceFolder}/sgbd/ucs.c",
