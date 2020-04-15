@@ -9,8 +9,7 @@
 #include "ucs.h"
 #include <uchar.h>
 #include <locale.h>
-
-
+#include "macro.h"
 
 #ifndef _SGBD_
 #define _SGBD_
@@ -22,9 +21,15 @@
 typedef struct sgdb{
     LIST_ALUNO *alunos;         //Lista de Alunos
     LIST_UC *ucs;               //Lista de Unidades Curriculares
-    //TREE_INSCRICAO *inscricoes; //Lista de Inscrições
-    int proxIDAluno;            //Variável que controla auto-incremento ID Aluno
-    int proxIDUC;               //Variavel que controla auto-incremento ID UC
+    LISTA_PASTA *inscricoes;    //Lista de Inscrições
 } SGBD;
+
+/* ***********************
+ *       Headers         *
+ * ********************* */
+
+//Criar Base de Dados vazia
+SGBD *criarBaseDados();
+void carregarFicheiros(SGBD * bd);
 
 #endif

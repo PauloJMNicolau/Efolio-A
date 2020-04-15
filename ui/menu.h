@@ -1,3 +1,6 @@
+#ifndef _MENU_
+#define _MENU_
+
 //Menu com lista de opções possíveis
 void menuPrincipal();
 //Submenu para funções relacionadas directamente com alunos
@@ -12,3 +15,5 @@ void menuPropinas();
 void menuConsultas();
 //Submenu para funções relacionadas directamente com reports
 void menuReports();
+
+#endif

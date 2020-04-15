@@ -1,4 +1,3 @@
-
 #include "ucs.h"
 #include "macro.h"
 
@@ -17,7 +16,7 @@ UC * criarUC(int numero, wchar_t *nome, int ano, int semestre){
         wprintf(L"Erro %d: Impossível alocar memória para Unidade Curricular", _ERR_MEMORYALLOC);
         exit(_ERR_MEMORYALLOC);
     }
-    swprintf(unidade->nome, wcslen(nome), L"%ls", nome);
+    swprintf(unidade->nome, wcslen(nome)+1, L"%ls", nome);
     if ((ano <= 0 || ano > 3) && (semestre <= 0 || semestre > 2))
     {
         return unidade;
@@ -92,18 +91,18 @@ int libertarNoUC(NoUC * no){
 //Adicionar elemento na lista
 int adicionarUC(UC * unidade, LIST_UC * lista, int pos){
     if(!lista || !unidade){
-        wprintf(L"Erro %d: Impossível adicionar elemento na lista", _ERR_EMPTYLIST);
+        wprintf(L"Erro %d: Impossível adicionar elemento na lista\n", _ERR_EMPTYLIST);
         return _ERR_EMPTYLIST;
     }
-    if(pos<0 || pos >= lista->elementos){
-        wprintf(L"Erro %d: Possição inválida na lista", _ERR_IMPOSSIBLE);
+    if(pos<0 || pos > lista->elementos){
+        wprintf(L"Erro %d: Posição inválida na lista\n", _ERR_IMPOSSIBLE);
         return _ERR_IMPOSSIBLE;
     }
     NoUC * no = criarNoUC(unidade);
     if(lista->elementos==0){ //Lista vazia adiciona no inicio
         lista->cauda = no;
         lista->elementos++;
-    } else if(pos == lista->elementos-1){// Adiciona no final
+    } else if(pos == lista->elementos){// Adiciona no final
         no->proximo = lista->cauda->proximo;    //Aponta novo elemento para o inicio da lista
         lista->cauda->proximo = no;             //Aponta ultimo elemento atual da lista para o novo elemento
         lista->cauda = no;                      //Atualiza o ultimo elemento
@@ -122,11 +121,11 @@ int adicionarUC(UC * unidade, LIST_UC * lista, int pos){
 //Remover elemento da lista
 int removerUC(int pos, LIST_UC * lista){
     if(!lista){
-        wprintf(L"Erro %d: Impossível adicionar elemento na lista", _ERR_EMPTYLIST);
+        wprintf(L"Erro %d: Impossível remover elemento na lista", _ERR_EMPTYLIST);
         return _ERR_EMPTYLIST;
     }
     if(pos < 0 || pos >= lista->elementos){
-        wprintf(L"Erro %d: Possição inválida na lista", _ERR_IMPOSSIBLE);
+        wprintf(L"Erro %d: Posição inválida na lista", _ERR_IMPOSSIBLE);
         return _ERR_IMPOSSIBLE;
     }
     if(pos ==0){ //Remover na cabeça da lista
@@ -146,4 +145,27 @@ int removerUC(int pos, LIST_UC * lista){
         libertarNoUC(aux);
     }
     return _SUCESSO;
+}
+
+//Obter Unidade curricular na posição
+UC * obterUC(int pos, LIST_UC * lista){
+    if(!lista){
+        wprintf(L"Erro %d: Lista vazia", _ERR_EMPTYLIST);
+        return NULL;
+    }
+    if(pos < 0 || pos >lista->elementos){
+        wprintf(L"Erro %d: Possição inválida na lista", _ERR_IMPOSSIBLE);
+        return NULL;
+    }
+    if(pos == lista->elementos-1){
+        return lista->cauda->elemento;
+    } else{
+        int i =0;
+        NoUC * temp = lista->cauda;
+        while(i<=pos){
+            temp = temp->proximo;
+            i++;
+        }
+        return temp->elemento;
+    }
 }
