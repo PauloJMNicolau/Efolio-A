@@ -1,12 +1,9 @@
-#include <stdio.h>
-#include <wchar.h>
-#include <unistd.h>
-#include <locale.h>
-#include "global.h"
+
 #include "menu.h"
 
+
 //Menu principal com as opções possíveis
-void menuPrincipal() {
+void menuPrincipal(SGBD * bd) {
     int opcao;
     
     do {
@@ -25,22 +22,22 @@ void menuPrincipal() {
 
         switch (opcao) {
             case 1:
-                menuAlunos(); 
+                menuAlunos(bd); 
                 break;
             case 2:
-                menuUCS(); 
+                menuUCS(bd); 
                 break;
             case 3:
-                menuInscricoes(); 
+                menuInscricoes(bd); 
                 break;
             case 4:
-                menuPropinas(); 
+                menuPropinas(bd); 
                 break;
             case 5:
-                menuConsultas();
+                menuConsultas(bd);
                 break;
             case 6:
-                menuReports(); 
+                menuReports(bd); 
             case 0:
                 break;
             default: {
@@ -52,7 +49,7 @@ void menuPrincipal() {
 }
 
 //Submenu para funções relacionadas directamente com alunos
-void menuAlunos() {
+void menuAlunos(SGBD * bd) {
     int opcao;
     
     do {
@@ -91,7 +88,7 @@ void menuAlunos() {
 }
 
 //Submenu para funções relacionadas directamente com UCs
-void menuUCS() {
+void menuUCS(SGBD * bd) {
     int opcao;
     
     do {
@@ -102,13 +99,14 @@ void menuUCS() {
         wprintf(L"2 - Remover UC\n");
         wprintf(L"3 - Consultar UC\n");
         wprintf(L"4 - Modificar UC\n");
+        wprintf(L"5 - Listagem de UC\n");
         wprintf(L"0 - Menu anterior\n");
 
         wscanf(L"%d", &opcao);
 
         switch (opcao) {
            case 1:
-                //adicionarUC();
+                novaUC(bd);
                 break;
             case 2:
                 //removerUC();
@@ -118,6 +116,9 @@ void menuUCS() {
                 break;
             case 4:
                 //modificarUC();
+                break;
+            case 5:
+                mostrarListaUC(bd);
                 break;
             case 0:
                 break;
@@ -130,7 +131,7 @@ void menuUCS() {
 }
 
 //Submenu para funções relacionadas directamente com incrições
-void menuInscricoes() {
+void menuInscricoes(SGBD * bd) {
     int opcao;
     
     do {
@@ -170,7 +171,7 @@ void menuInscricoes() {
 
 
 //Submenu para funções relacionadas directamente com propinas
-void menuPropinas() {
+void menuPropinas(SGBD* bd) {
     int opcao;
 
     do {
@@ -198,7 +199,7 @@ void menuPropinas() {
 
 
 //Submenu para funções relacionadas directamente com consultas
-void menuConsultas() {
+void menuConsultas(SGBD * bd) {
     int opcao;
     
     do {
@@ -229,7 +230,7 @@ void menuConsultas() {
 }
 
 //Submenu para funções relacionadas directamente com reports
-void menuReports() {
+void menuReports(SGBD * bd) {
     int opcao;
     
     do {

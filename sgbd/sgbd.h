@@ -30,6 +30,6 @@ typedef struct sgdb{
 
 //Criar Base de Dados vazia
 SGBD *criarBaseDados();
-void carregarFicheiros(SGBD * bd);
+int carregarFicheiros(SGBD * bd);
 
 #endif

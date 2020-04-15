@@ -25,11 +25,6 @@ void lerUCTexto(LIST_UC * lista){
             continue;
         processarLinhaUC(linha,lista);
     }
-    for(int i=0; i< lista->elementos; i++){
-        UC* temp = obterUC(i, lista);
-        wprintf(L"%d %S %d %d\n", temp->numero, temp->nome, temp->ano, temp->semestre);
-    }
-
     fclose(fp);
 }
 
