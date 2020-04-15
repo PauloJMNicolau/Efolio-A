@@ -10,6 +10,8 @@
 #include <wchar.h>
 #include <wctype.h>
 
+#ifndef _ALUNOS_
+#define _ALUNOS_
 /************************
  *      Estruturas      *
  * **********************/
@@ -53,3 +55,5 @@ int libertarListaAluno(LIST_ALUNO *lista);
 int removerAluno(int pos, LIST_ALUNO *lista);
 //Adicionar elemento na lista
 int adicionarAluno(ALUNO *aluno, LIST_ALUNO *lista, int pos);
+
+#endif

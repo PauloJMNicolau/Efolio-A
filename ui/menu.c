@@ -69,16 +69,16 @@ void menuAlunos() {
 
         switch (opcao) {
             case 1:
-                adicionarAluno();
+                //adicionarAluno();
                 break;
             case 2:
-                removerAluno();
+                //removerAluno();
                 break;
             case 3:
-                consultarAluno();
+                //consultarAluno();
                 break;
             case 4:
-                modificarAluno();
+                //modificarAluno();
                 break;
             case 0:
                 break;
@@ -108,16 +108,16 @@ void menuUCS() {
 
         switch (opcao) {
            case 1:
-                adicionarUC();
+                //adicionarUC();
                 break;
             case 2:
-                removerUC();
+                //removerUC();
                 break;
             case 3:
-                consultarUC();
+                //consultarUC();
                 break;
             case 4:
-                modificarUC();
+                //modificarUC();
                 break;
             case 0:
                 break;
@@ -147,16 +147,16 @@ void menuInscricoes() {
 
         switch (opcao) {
             case 1:
-                adicionarInscricao();
+                //adicionarInscricao();
                 break;
             case 2:
-                removerInscricao();
+                //removerInscricao();
                 break;
             case 3:
-                consultarInscricao();
+                //consultarInscricao();
                 break;
             case 4:
-                modificarInscricao();
+                //modificarInscricao();
                 break;
             case 0:
                 break;
@@ -184,7 +184,7 @@ void menuPropinas() {
 
         switch (opcao) {
             case 1:
-                calcularPropina();
+                //calcularPropina();
                 break;
             case 0:
                 break;
@@ -213,10 +213,10 @@ void menuConsultas() {
 
         switch (opcao) {
             case 1:
-                listaInscAluno();
+                //listaInscAluno();
                 break;
             case 2:
-                listaInscUC();
+                //listaInscUC();
                 break;
             case 0:
                 break;
@@ -246,16 +246,16 @@ void menuReports() {
 
         switch (opcao) {
             case 1:
-                repECTSAluno();
+                //repECTSAluno();
                 break;
             case 2:
-                repEpocaEspExame();
+                //repEpocaEspExame();
                 break;
             case 3:
-                repAbanEscolar();
+                //repAbanEscolar();
                 break;
             case 4:
-                repTotalAlunAnoLet();
+                //repTotalAlunAnoLet();
                 break;
             case 0:
                 break;

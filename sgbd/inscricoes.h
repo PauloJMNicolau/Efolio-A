@@ -4,6 +4,8 @@
 #include <wchar.h>
 #include <wctype.h>
 
+#ifndef _INSCRICOES_
+#define _INSCRICOES_
 /************************
  *      Estruturas      *
  * **********************/
@@ -76,3 +78,5 @@ int removerPasta(NO_PASTA * pasta, LISTA_PASTA * lista);
 int removerInscricoes(int pos, NO_PASTA * lista);
 //Remover inscrição
 int removerInscricao(INSCRICAO* inscricao, LISTA_PASTA * lista);
+
+#endif

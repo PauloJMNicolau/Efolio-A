@@ -4,7 +4,16 @@
 #include <wchar.h>
 #include <wctype.h>
 #include "ficheiros.h"
+#include "inscricoes.h"
+#include "alunos.h"
+#include "ucs.h"
+#include <uchar.h>
+#include <locale.h>
 
+
+
+#ifndef _SGBD_
+#define _SGBD_
 /* ***********************
  *      Estruturas       *
  * ********************* */
@@ -17,3 +26,5 @@ typedef struct sgdb{
     int proxIDAluno;            //Variável que controla auto-incremento ID Aluno
     int proxIDUC;               //Variavel que controla auto-incremento ID UC
 } SGBD;
+
+#endif
