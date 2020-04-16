@@ -12,16 +12,16 @@
 //Menu com lista de opções possíveis
 void menuPrincipal(SGBD * bd);
 //Submenu para funções relacionadas directamente com alunos
-void menuAlunos();
+void menuAlunos(SGBD * bd);
 //Submenu para funções relacionadas directamente com UCs
 void menuUCS(SGBD * bd);
 //Submenu para funções relacionadas directamente com incrições
-void menuInscricoes();
+void menuInscricoes(SGBD * bd);
 //Submenu para funções relacionadas directamente com propinas
-void menuPropinas();
+void menuPropinas(SGBD * bd);
 //Submenu para funções relacionadas directamente com consultas
-void menuConsultas();
+void menuConsultas(SGBD * bd);
 //Submenu para funções relacionadas directamente com reports
-void menuReports();
+void menuReports(SGBD * bd);
 
 #endif
