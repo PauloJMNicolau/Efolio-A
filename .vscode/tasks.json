@@ -8,7 +8,8 @@
             "args": [
                 "-g",
                 "${workspaceFolder}/main.c",
-                //"${workspaceFolder}/ui/menu.c",
+                "${workspaceFolder}/ui/menu.c",
+                "${workspaceFolder}/ui/global.c",
                 "${workspaceFolder}/sgbd/sgbd.c",
                 "-o",
                 "${workspaceFolder}/dist/efolio"
