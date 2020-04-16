@@ -24,8 +24,4 @@ void menuConsultas();
 //Submenu para funções relacionadas directamente com reports
 void menuReports();
 
-<<<<<<< HEAD
-#endif;
-=======
 #endif
->>>>>>> 90d96be405c2db3c0803a93039495ed2a37404eb

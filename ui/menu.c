@@ -37,12 +37,7 @@ void menuPrincipal(SGBD * bd) {
                 menuConsultas(bd);
                 break;
             case 6:
-<<<<<<< HEAD
-                menuReports(); 
-                break;
-=======
                 menuReports(bd); 
->>>>>>> 90d96be405c2db3c0803a93039495ed2a37404eb
             case 0:
                 break;
             default: {
@@ -69,7 +64,7 @@ void menuAlunos(SGBD * bd) {
 
         wscanf(L"%d", &opcao);
 
-        switch (opcao) {/*
+        switch (opcao) {
             case 1:
                 //adicionarAluno();
                 break;
@@ -80,13 +75,8 @@ void menuAlunos(SGBD * bd) {
                 //consultarAluno();
                 break;
             case 4:
-<<<<<<< HEAD
-                modificarAluno();
-                break;*/
-=======
                 //modificarAluno();
                 break;
->>>>>>> 90d96be405c2db3c0803a93039495ed2a37404eb
             case 0:
                 break;
             default: {
@@ -114,7 +104,7 @@ void menuUCS(SGBD * bd) {
 
         wscanf(L"%d", &opcao);
 
-        switch (opcao) {/*
+        switch (opcao) {
            case 1:
                 novaUC(bd);
                 break;
@@ -125,16 +115,11 @@ void menuUCS(SGBD * bd) {
                 //consultarUC();
                 break;
             case 4:
-<<<<<<< HEAD
-                modificarUC();
-                break;*/
-=======
                 //modificarUC();
                 break;
             case 5:
                 mostrarListaUC(bd);
                 break;
->>>>>>> 90d96be405c2db3c0803a93039495ed2a37404eb
             case 0:
                 break;
             default: {
@@ -161,7 +146,7 @@ void menuInscricoes(SGBD * bd) {
 
         wscanf(L"%d", &opcao);
 
-        switch (opcao) {/*
+        switch (opcao) {
             case 1:
                 //adicionarInscricao();
                 break;
@@ -172,13 +157,8 @@ void menuInscricoes(SGBD * bd) {
                 //consultarInscricao();
                 break;
             case 4:
-<<<<<<< HEAD
-                modificarInscricao();
-                break;*/
-=======
                 //modificarInscricao();
                 break;
->>>>>>> 90d96be405c2db3c0803a93039495ed2a37404eb
             case 0:
                 break;
             default: {
@@ -203,15 +183,10 @@ void menuPropinas(SGBD* bd) {
 
         wscanf(L"%d", &opcao);
 
-        switch (opcao) {/*
+        switch (opcao) {
             case 1:
-<<<<<<< HEAD
-                calcularPropina();
-                break;*/
-=======
                 //calcularPropina();
                 break;
->>>>>>> 90d96be405c2db3c0803a93039495ed2a37404eb
             case 0:
                 break;
             default: {
@@ -237,18 +212,13 @@ void menuConsultas(SGBD * bd) {
 
         wscanf(L"%d", &opcao);
 
-        switch (opcao) {/*
+        switch (opcao) {
             case 1:
                 //listaInscAluno();
                 break;
             case 2:
-<<<<<<< HEAD
-                listaInscUC();
-                break;*/
-=======
                 //listaInscUC();
                 break;
->>>>>>> 90d96be405c2db3c0803a93039495ed2a37404eb
             case 0:
                 break;
             default: {
@@ -275,7 +245,7 @@ void menuReports(SGBD * bd) {
 
         wscanf(L"%d", &opcao);
 
-        switch (opcao) {/*
+        switch (opcao) {
             case 1:
                 //repECTSAluno();
                 break;
@@ -286,13 +256,8 @@ void menuReports(SGBD * bd) {
                 //repAbanEscolar();
                 break;
             case 4:
-<<<<<<< HEAD
-                repTotalAlunAnoLet();
-                break;*/
-=======
                 //repTotalAlunAnoLet();
                 break;
->>>>>>> 90d96be405c2db3c0803a93039495ed2a37404eb
             case 0:
                 break;
             default: {

@@ -34,9 +34,8 @@ int main(int argc, char ** argv){
 
 
 
-    setlocale(LC_ALL,"");
-    menuPrincipal();
-    /*
+
+    
     INSCRICAO * i1 = criarInscricao(1,2,L"2012/2013");
     INSCRICAO * i2 = criarInscricao(1,4,L"2011/2012");
     INSCRICAO * i3 = criarInscricao(1,6,L"2013/2014");
@@ -51,20 +50,9 @@ int main(int argc, char ** argv){
     adicionarInscricao(i5,inscricoes);
     adicionarInscricao(i6,inscricoes);
     
-<<<<<<< HEAD
-    TREE_INSCRICAO * arvore = criarArvore();
-    inserirNaArvore(i1,arvore);
-    inserirNaArvore(i2,arvore);
-    inserirNaArvore(i3,arvore);
-    inserirNaArvore(i4,arvore);
-    inserirNaArvore(i5,arvore);
-    inserirNaArvore(i6,arvore);*/
-    
-=======
     INSCRICAO* no = procuraInscricao(inscricoes, L"2012/2013",2,1);
     INSCRICAO* no1 = procuraInscricao(inscricoes, L"2013/2014",8,1);
     INSCRICAO* no2 = procuraInscricao(inscricoes, L"2012/2013",5,1);
->>>>>>> 90d96be405c2db3c0803a93039495ed2a37404eb
 
     removerInscricao(i6,inscricoes);
     //removerElementoInscricao(no,arvore);
