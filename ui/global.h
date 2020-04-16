@@ -8,3 +8,11 @@
 #else
 #define clearScreen() system("clear")
 #endif
+
+
+//cabeçalho dos menus, recebe string da designação do menu
+void cabecalho(char *str);
+//função verifica largura da tela
+int largTela();
+//função para imprimir no centro da tela
+void imprimirMeio(char *str);

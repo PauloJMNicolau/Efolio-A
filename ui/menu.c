@@ -11,7 +11,7 @@ void menuPrincipal() {
     
     do {
         clearScreen();
-        wprintf(L"Menu Principal\n");
+        cabecalho("Menu Principal");
         wprintf(L"Escolha uma das seguintes opções:\n");
         wprintf(L"1 - Alunos\n");
         wprintf(L"2 - UC's\n");
@@ -41,6 +41,7 @@ void menuPrincipal() {
                 break;
             case 6:
                 menuReports(); 
+                break;
             case 0:
                 break;
             default: {
@@ -57,7 +58,7 @@ void menuAlunos() {
     
     do {
         clearScreen();
-        wprintf(L"Menu Alunos\n");
+        cabecalho("Menu Alunos"); 
         wprintf(L"Escolha uma das seguintes opções:\n");
         wprintf(L"1 - Adicionar Aluno\n");
         wprintf(L"2 - Remover Aluno\n");
@@ -67,7 +68,7 @@ void menuAlunos() {
 
         wscanf(L"%d", &opcao);
 
-        switch (opcao) {
+        switch (opcao) {/*
             case 1:
                 adicionarAluno();
                 break;
@@ -79,7 +80,7 @@ void menuAlunos() {
                 break;
             case 4:
                 modificarAluno();
-                break;
+                break;*/
             case 0:
                 break;
             default: {
@@ -96,7 +97,7 @@ void menuUCS() {
     
     do {
         clearScreen();
-        wprintf(L"Menu UC's\n");
+        cabecalho("Menu UC's");
         wprintf(L"Escolha uma das seguintes opções:\n");
         wprintf(L"1 - Adicionar UC\n");
         wprintf(L"2 - Remover UC\n");
@@ -106,7 +107,7 @@ void menuUCS() {
 
         wscanf(L"%d", &opcao);
 
-        switch (opcao) {
+        switch (opcao) {/*
            case 1:
                 adicionarUC();
                 break;
@@ -118,7 +119,7 @@ void menuUCS() {
                 break;
             case 4:
                 modificarUC();
-                break;
+                break;*/
             case 0:
                 break;
             default: {
@@ -135,7 +136,7 @@ void menuInscricoes() {
     
     do {
         clearScreen();
-        wprintf(L"Menu Inscrições\n");
+        cabecalho("Menu Inscrições");
         wprintf(L"Escolha uma das seguintes opções:\n");
         wprintf(L"1 - Adicionar Inscrição\n");
         wprintf(L"2 - Remover Inscrição\n");
@@ -145,7 +146,7 @@ void menuInscricoes() {
 
         wscanf(L"%d", &opcao);
 
-        switch (opcao) {
+        switch (opcao) {/*
             case 1:
                 adicionarInscricao();
                 break;
@@ -157,7 +158,7 @@ void menuInscricoes() {
                 break;
             case 4:
                 modificarInscricao();
-                break;
+                break;*/
             case 0:
                 break;
             default: {
@@ -175,17 +176,17 @@ void menuPropinas() {
 
     do {
         clearScreen();
-        wprintf(L"Menu Propinas\n");
+        cabecalho("Menu Propinas");
         wprintf(L"Escolha uma das seguintes opções:\n");
         wprintf(L"1 - Calcular Propinas\n");
         wprintf(L"0 - Menu anterior\n");
 
         wscanf(L"%d", &opcao);
 
-        switch (opcao) {
+        switch (opcao) {/*
             case 1:
                 calcularPropina();
-                break;
+                break;*/
             case 0:
                 break;
             default: {
@@ -203,7 +204,7 @@ void menuConsultas() {
     
     do {
         clearScreen();
-        wprintf(L"Menu Consultas\n");
+        cabecalho("Menu Consultas");
         wprintf(L"Escolha uma das seguintes opções:\n");
         wprintf(L"1 - Lista de inscrições por aluno\n");
         wprintf(L"2 - Lista de inscrições por UC\n");
@@ -211,13 +212,13 @@ void menuConsultas() {
 
         wscanf(L"%d", &opcao);
 
-        switch (opcao) {
+        switch (opcao) {/*
             case 1:
                 listaInscAluno();
                 break;
             case 2:
                 listaInscUC();
-                break;
+                break;*/
             case 0:
                 break;
             default: {
@@ -234,7 +235,7 @@ void menuReports() {
     
     do {
         clearScreen();
-        wprintf(L"Menu Reports\n");
+        cabecalho("Menu Reports");
         wprintf(L"Escolha uma das seguintes opções:\n");        
         wprintf(L"1 - Número total de ECTS por aluno\n");
         wprintf(L"2 - Alunos para época especial de exames\n");
@@ -244,7 +245,7 @@ void menuReports() {
 
         wscanf(L"%d", &opcao);
 
-        switch (opcao) {
+        switch (opcao) {/*
             case 1:
                 repECTSAluno();
                 break;
@@ -256,7 +257,7 @@ void menuReports() {
                 break;
             case 4:
                 repTotalAlunAnoLet();
-                break;
+                break;*/
             case 0:
                 break;
             default: {
