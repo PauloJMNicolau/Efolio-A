@@ -1,12 +1,9 @@
-#include <stdio.h>
-#include <wchar.h>
-#include <unistd.h>
-#include <locale.h>
-#include "global.h"
+
 #include "menu.h"
 
+
 //Menu principal com as opções possíveis
-void menuPrincipal() {
+void menuPrincipal(SGBD * bd) {
     int opcao;
     
     do {
@@ -25,23 +22,27 @@ void menuPrincipal() {
 
         switch (opcao) {
             case 1:
-                menuAlunos(); 
+                menuAlunos(bd); 
                 break;
             case 2:
-                menuUCS(); 
+                menuUCS(bd); 
                 break;
             case 3:
-                menuInscricoes(); 
+                menuInscricoes(bd); 
                 break;
             case 4:
-                menuPropinas(); 
+                menuPropinas(bd); 
                 break;
             case 5:
-                menuConsultas();
+                menuConsultas(bd);
                 break;
             case 6:
+<<<<<<< HEAD
                 menuReports(); 
                 break;
+=======
+                menuReports(bd); 
+>>>>>>> 90d96be405c2db3c0803a93039495ed2a37404eb
             case 0:
                 break;
             default: {
@@ -53,7 +54,7 @@ void menuPrincipal() {
 }
 
 //Submenu para funções relacionadas directamente com alunos
-void menuAlunos() {
+void menuAlunos(SGBD * bd) {
     int opcao;
     
     do {
@@ -70,17 +71,22 @@ void menuAlunos() {
 
         switch (opcao) {/*
             case 1:
-                adicionarAluno();
+                //adicionarAluno();
                 break;
             case 2:
-                removerAluno();
+                //removerAluno();
                 break;
             case 3:
-                consultarAluno();
+                //consultarAluno();
                 break;
             case 4:
+<<<<<<< HEAD
                 modificarAluno();
                 break;*/
+=======
+                //modificarAluno();
+                break;
+>>>>>>> 90d96be405c2db3c0803a93039495ed2a37404eb
             case 0:
                 break;
             default: {
@@ -92,7 +98,7 @@ void menuAlunos() {
 }
 
 //Submenu para funções relacionadas directamente com UCs
-void menuUCS() {
+void menuUCS(SGBD * bd) {
     int opcao;
     
     do {
@@ -103,23 +109,32 @@ void menuUCS() {
         wprintf(L"2 - Remover UC\n");
         wprintf(L"3 - Consultar UC\n");
         wprintf(L"4 - Modificar UC\n");
+        wprintf(L"5 - Listagem de UC\n");
         wprintf(L"0 - Menu anterior\n");
 
         wscanf(L"%d", &opcao);
 
         switch (opcao) {/*
            case 1:
-                adicionarUC();
+                novaUC(bd);
                 break;
             case 2:
-                removerUC();
+                //removerUC();
                 break;
             case 3:
-                consultarUC();
+                //consultarUC();
                 break;
             case 4:
+<<<<<<< HEAD
                 modificarUC();
                 break;*/
+=======
+                //modificarUC();
+                break;
+            case 5:
+                mostrarListaUC(bd);
+                break;
+>>>>>>> 90d96be405c2db3c0803a93039495ed2a37404eb
             case 0:
                 break;
             default: {
@@ -131,7 +146,7 @@ void menuUCS() {
 }
 
 //Submenu para funções relacionadas directamente com incrições
-void menuInscricoes() {
+void menuInscricoes(SGBD * bd) {
     int opcao;
     
     do {
@@ -148,17 +163,22 @@ void menuInscricoes() {
 
         switch (opcao) {/*
             case 1:
-                adicionarInscricao();
+                //adicionarInscricao();
                 break;
             case 2:
-                removerInscricao();
+                //removerInscricao();
                 break;
             case 3:
-                consultarInscricao();
+                //consultarInscricao();
                 break;
             case 4:
+<<<<<<< HEAD
                 modificarInscricao();
                 break;*/
+=======
+                //modificarInscricao();
+                break;
+>>>>>>> 90d96be405c2db3c0803a93039495ed2a37404eb
             case 0:
                 break;
             default: {
@@ -171,7 +191,7 @@ void menuInscricoes() {
 
 
 //Submenu para funções relacionadas directamente com propinas
-void menuPropinas() {
+void menuPropinas(SGBD* bd) {
     int opcao;
 
     do {
@@ -185,8 +205,13 @@ void menuPropinas() {
 
         switch (opcao) {/*
             case 1:
+<<<<<<< HEAD
                 calcularPropina();
                 break;*/
+=======
+                //calcularPropina();
+                break;
+>>>>>>> 90d96be405c2db3c0803a93039495ed2a37404eb
             case 0:
                 break;
             default: {
@@ -199,7 +224,7 @@ void menuPropinas() {
 
 
 //Submenu para funções relacionadas directamente com consultas
-void menuConsultas() {
+void menuConsultas(SGBD * bd) {
     int opcao;
     
     do {
@@ -214,11 +239,16 @@ void menuConsultas() {
 
         switch (opcao) {/*
             case 1:
-                listaInscAluno();
+                //listaInscAluno();
                 break;
             case 2:
+<<<<<<< HEAD
                 listaInscUC();
                 break;*/
+=======
+                //listaInscUC();
+                break;
+>>>>>>> 90d96be405c2db3c0803a93039495ed2a37404eb
             case 0:
                 break;
             default: {
@@ -230,7 +260,7 @@ void menuConsultas() {
 }
 
 //Submenu para funções relacionadas directamente com reports
-void menuReports() {
+void menuReports(SGBD * bd) {
     int opcao;
     
     do {
@@ -247,17 +277,22 @@ void menuReports() {
 
         switch (opcao) {/*
             case 1:
-                repECTSAluno();
+                //repECTSAluno();
                 break;
             case 2:
-                repEpocaEspExame();
+                //repEpocaEspExame();
                 break;
             case 3:
-                repAbanEscolar();
+                //repAbanEscolar();
                 break;
             case 4:
+<<<<<<< HEAD
                 repTotalAlunAnoLet();
                 break;*/
+=======
+                //repTotalAlunAnoLet();
+                break;
+>>>>>>> 90d96be405c2db3c0803a93039495ed2a37404eb
             case 0:
                 break;
             default: {

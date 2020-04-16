@@ -10,11 +10,11 @@
 #define _MENU_
 
 //Menu com lista de opções possíveis
-void menuPrincipal();
+void menuPrincipal(SGBD * bd);
 //Submenu para funções relacionadas directamente com alunos
 void menuAlunos();
 //Submenu para funções relacionadas directamente com UCs
-void menuUCS();
+void menuUCS(SGBD * bd);
 //Submenu para funções relacionadas directamente com incrições
 void menuInscricoes();
 //Submenu para funções relacionadas directamente com propinas
@@ -24,4 +24,8 @@ void menuConsultas();
 //Submenu para funções relacionadas directamente com reports
 void menuReports();
 
+<<<<<<< HEAD
 #endif;
+=======
+#endif
+>>>>>>> 90d96be405c2db3c0803a93039495ed2a37404eb
