@@ -1,3 +1,8 @@
+#include <stdio.h>
+#include <wchar.h>
+#include <unistd.h>
+#include <locale.h>
+#include "global.h"
 #include "uiucs.h"
 #include "../sgbd/sgbd.h"
 
