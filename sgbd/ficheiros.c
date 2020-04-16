@@ -5,6 +5,37 @@
  *  Ficheiros de Texto  *
  * **********************/
 
+//////////////////////////////////////////////////////////////////////////////////////////////////
+// ler ficheiro lista de alunos
+void ler_listalunos(LIST_ALUNO * aluno) {
+    FILE *fp=fopen("Lista de alunos.txt", "r");
+    if(!fp){
+            wprintf("Erro %d: Não foi possivel abrir o ficheiro",_ERR_READFILE);
+            exit(_ERR_READFILE);
+        }
+    wchar_t * linha = calloc(_TAMSTRING,sizeof(wchar_t));
+    if(!linha){
+        wprintf("Erro %d: Não foi possivel alocar memoria para a linha",_ERR_MEMORYALLOC);
+        exit(_ERR_MEMORYALLOC);
+    }
+    while(!feof(fp)){
+        fwscanf(fp,"%s\n",&linha);
+        if(wcsncmp(linha,L"#",1)==0 || wcsncmp(linha," ",wcslen(linha))==0)
+            continue;
+        processarLinhalista(linha, aluno);   
+    fclose(fp);
+    }
+}
+
+void processarLinhalista(wchar_t * linha, LIST_ALUNO * aluno){
+    wchar_t * temp;
+    wcstok(linha, L"\t", temp);
+    while(temp != NULL){
+        wprintf("%s", temp);
+        wcstok(NULL, L"\t", temp);
+    }
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////
 //Ler ficheiro de UC
 void lerUCTexto(LIST_UC * lista){
     FILE * fp = fopen("dadosUC.txt","r");
