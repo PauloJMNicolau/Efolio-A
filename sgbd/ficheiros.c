@@ -11,7 +11,7 @@
 /************************************************************************/
 //ler lista de alunos
 
-void lerlistalunos(ALUNO * listaluno){
+void lerlistalunos(LIST_ALUNO * aluno){
     FILE * fp = fopen("Lista de alunos.txt","r");
     if(!fp){
         wprintf(L"Erro %d: Não foi possivel abrir o ficheiro",_ERR_READFILE);
@@ -26,19 +26,21 @@ void lerlistalunos(ALUNO * listaluno){
         fwscanf(fp,L"%l[^;];\n",linhas);
         if(wmemcmp(linhas,L"#",1)==0 || wcsncmp(linhas,L" ",1)==0)
             continue;
-        processarLinhalunos(linhas,listaluno);
+        processarLinhalunos(linhas,aluno);
     }
     fclose(fp);
 }
 
+// criar 
+
 // processar linha de texto do  ficheiro da lista de alunos
-void processarLinhalunos(wchar_t * linhas, ALUNO * listAluno){
+void processarLinhalunos(wchar_t * linhas, LIST_ALUNO * aluno){
     wchar_t * temp, * buffer;
     int numero = wcstol(wcstok(linhas, L"-", &buffer), &temp,10);
     wchar_t * nome = wcstok(NULL, L"-", &buffer);
     int pais = wcstol(wcstok(NULL, L"-", &buffer), &temp,10);
    
-    adicionarAluno(criarUC(numero,nome,pais,listaluno,ALUNO->elemento);//Adiciona sempre no final
+    adicionarAluno(criarAluno(numero,nome,pais),aluno,aluno->elementos);//Adiciona sempre no final
 }
 
 //////////////////////////////////////////////////////////////////////////
