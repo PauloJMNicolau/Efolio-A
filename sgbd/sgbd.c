@@ -31,7 +31,7 @@ int carregarFicheiros(SGBD * bd){
     //Carregar ficheiro de UCS
     lerUCTexto(bd->ucs);
     //Carregar ficheiro de Alunos
-    lerlistaluno(bd->alunos);
+    lerlistalunos(bd->alunos);
     //Carregar ficheiro de inscrições
     return _SUCESSO;
 }

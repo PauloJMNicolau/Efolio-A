@@ -12,7 +12,7 @@
 //ler lista de alunos
 
 void lerlistalunos(LIST_ALUNO * aluno){
-    FILE * fp = fopen("Lista de alunos.txt","r");
+    FILE * fp = fopen("Listaalunos.txt","r");
     if(!fp){
         wprintf(L"Erro %d: Não foi possivel abrir o ficheiro",_ERR_READFILE);
         exit(_ERR_READFILE);
@@ -31,14 +31,12 @@ void lerlistalunos(LIST_ALUNO * aluno){
     fclose(fp);
 }
 
-
-
 // processar linha de texto do  ficheiro da lista de alunos
 void processarLinhalunos(wchar_t * linhas, LIST_ALUNO * aluno){
     wchar_t * temp, * buffer;
     int numero = wcstol(wcstok(linhas, L"-", &buffer), &temp,10);
     wchar_t * nome = wcstok(NULL, L"-", &buffer);
-    int pais = wcstol(wcstok(NULL, L"-", &buffer), &temp,10);
+    wchar_t * pais = wcstok(NULL, L"-", &buffer);
    
     adicionarAluno(criarAluno(numero,nome,pais),aluno,aluno->elementos);//Adiciona sempre no final
 }
