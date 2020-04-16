@@ -31,7 +31,7 @@ void lerlistalunos(LIST_ALUNO * aluno){
     fclose(fp);
 }
 
-// criar 
+
 
 // processar linha de texto do  ficheiro da lista de alunos
 void processarLinhalunos(wchar_t * linhas, LIST_ALUNO * aluno){
@@ -42,6 +42,7 @@ void processarLinhalunos(wchar_t * linhas, LIST_ALUNO * aluno){
    
     adicionarAluno(criarAluno(numero,nome,pais),aluno,aluno->elementos);//Adiciona sempre no final
 }
+
 
 //////////////////////////////////////////////////////////////////////////
 /************************************************************************/
