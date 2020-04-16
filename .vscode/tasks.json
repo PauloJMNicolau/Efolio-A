@@ -13,25 +13,8 @@
 				"${workspaceFolder}/sgbd/sgbd.c",
 				"${workspaceFolder}/sgbd/alunos.c",
 				"${workspaceFolder}/sgbd/ucs.c",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-				"${workspaceFolder}/sgbd/inscricoes.c",
-=======
-				"${workspaceFolder}/sgbd/arvore.c",
->>>>>>> separaçao
-=======
-				"${workspaceFolder}/sgbd/inscricoes.c",
->>>>>>> reconfiguração arvore
-=======
                 "${workspaceFolder}/sgbd/inscricoes.c",
                 "${workspaceFolder}/sgbd/ficheiros.c",
->>>>>>> ficheiro
-=======
-                "${workspaceFolder}/sgbd/inscricoes.c",
-                "${workspaceFolder}/sgbd/ficheiros.c",
->>>>>>> 90d96be405c2db3c0803a93039495ed2a37404eb
                 "-o",
                 "${workspaceFolder}/dist/efolio"
             ],
