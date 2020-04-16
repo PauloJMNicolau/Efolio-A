@@ -1,5 +1,6 @@
 
 #include "menu.h"
+#include "../sgbd/sgbd.h"
 
 
 //Menu principal com as opções possíveis

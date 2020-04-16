@@ -37,4 +37,10 @@ void mostrarListaUC(SGBD * bd){
     wprintf(L"\n|%70S%8d|\n",L"Total Disciplinas",bd->ucs->elementos);
     for(int i =0; i< 80; i++)
         wprintf(L"-");
+    wprintf(L"\nPara continuar precione ENTER",bd->ucs->elementos);
+    wchar_t tecla = L' ';
+    getwchar();
+    do{
+        wscanf(L"%c", &tecla);
+    } while(tecla != L'\n');
 }
