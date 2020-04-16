@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <locale.h>
 #include "ui/menu.h"
 #include "sgbd/sgbd.h"
 
@@ -33,6 +34,8 @@ int main(int argc, char ** argv){
 
 
 
+
+    
     INSCRICAO * i1 = criarInscricao(1,2,L"2012/2013");
     INSCRICAO * i2 = criarInscricao(1,4,L"2011/2012");
     INSCRICAO * i3 = criarInscricao(1,6,L"2013/2014");

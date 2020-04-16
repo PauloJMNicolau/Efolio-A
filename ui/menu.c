@@ -9,7 +9,7 @@ void menuPrincipal(SGBD * bd) {
     
     do {
         clearScreen();
-        wprintf(L"Menu Principal\n");
+        cabecalho("Menu Principal");
         wprintf(L"Escolha uma das seguintes opções:\n");
         wprintf(L"1 - Alunos\n");
         wprintf(L"2 - UC's\n");
@@ -55,7 +55,7 @@ void menuAlunos(SGBD * bd) {
     
     do {
         clearScreen();
-        wprintf(L"Menu Alunos\n");
+        cabecalho("Menu Alunos"); 
         wprintf(L"Escolha uma das seguintes opções:\n");
         wprintf(L"1 - Adicionar Aluno\n");
         wprintf(L"2 - Remover Aluno\n");
@@ -94,7 +94,7 @@ void menuUCS(SGBD * bd) {
     
     do {
         clearScreen();
-        wprintf(L"Menu UC's\n");
+        cabecalho("Menu UC's");
         wprintf(L"Escolha uma das seguintes opções:\n");
         wprintf(L"1 - Adicionar UC\n");
         wprintf(L"2 - Remover UC\n");
@@ -137,7 +137,7 @@ void menuInscricoes(SGBD * bd) {
     
     do {
         clearScreen();
-        wprintf(L"Menu Inscrições\n");
+        cabecalho("Menu Inscrições");
         wprintf(L"Escolha uma das seguintes opções:\n");
         wprintf(L"1 - Adicionar Inscrição\n");
         wprintf(L"2 - Remover Inscrição\n");
@@ -177,7 +177,7 @@ void menuPropinas(SGBD* bd) {
 
     do {
         clearScreen();
-        wprintf(L"Menu Propinas\n");
+        cabecalho("Menu Propinas");
         wprintf(L"Escolha uma das seguintes opções:\n");
         wprintf(L"1 - Calcular Propinas\n");
         wprintf(L"0 - Menu anterior\n");
@@ -205,7 +205,7 @@ void menuConsultas(SGBD * bd) {
     
     do {
         clearScreen();
-        wprintf(L"Menu Consultas\n");
+        cabecalho("Menu Consultas");
         wprintf(L"Escolha uma das seguintes opções:\n");
         wprintf(L"1 - Lista de inscrições por aluno\n");
         wprintf(L"2 - Lista de inscrições por UC\n");
@@ -236,7 +236,7 @@ void menuReports(SGBD * bd) {
     
     do {
         clearScreen();
-        wprintf(L"Menu Reports\n");
+        cabecalho("Menu Reports");
         wprintf(L"Escolha uma das seguintes opções:\n");        
         wprintf(L"1 - Número total de ECTS por aluno\n");
         wprintf(L"2 - Alunos para época especial de exames\n");
