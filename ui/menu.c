@@ -148,10 +148,10 @@ void menuInscricoes(SGBD * bd) {
 
         switch (opcao) {
             case 1:
-                //adicionarInscricao();
+                novaInscricao(bd);
                 break;
             case 2:
-                //removerInscricao();
+                //eliminarInscricao();
                 break;
             case 3:
                 //consultarInscricao();

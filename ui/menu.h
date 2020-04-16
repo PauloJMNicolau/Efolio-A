@@ -4,6 +4,7 @@
 #include <locale.h>
 #include "global.h"
 #include "uiucs.h"
+#include "uiinscricoes.h"
 #include "../sgbd/sgbd.h"
 
 #ifndef _MENU_
@@ -16,7 +17,7 @@ void menuAlunos();
 //Submenu para funções relacionadas directamente com UCs
 void menuUCS(SGBD * bd);
 //Submenu para funções relacionadas directamente com incrições
-void menuInscricoes();
+void menuInscricoes(SGBD * bd);
 //Submenu para funções relacionadas directamente com propinas
 void menuPropinas();
 //Submenu para funções relacionadas directamente com consultas
