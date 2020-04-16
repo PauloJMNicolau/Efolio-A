@@ -2,11 +2,14 @@
 #include <stdlib.h>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 #include <string.h>
 >>>>>>> separaçao
 =======
 >>>>>>> reconfiguração arvore
+=======
+>>>>>>> 90d96be405c2db3c0803a93039495ed2a37404eb
 #include <wchar.h>
 #include <wctype.h>
 

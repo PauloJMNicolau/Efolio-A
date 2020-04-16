@@ -16,6 +16,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 				"${workspaceFolder}/sgbd/inscricoes.c",
 =======
 				"${workspaceFolder}/sgbd/arvore.c",
@@ -27,6 +28,10 @@
                 "${workspaceFolder}/sgbd/inscricoes.c",
                 "${workspaceFolder}/sgbd/ficheiros.c",
 >>>>>>> ficheiro
+=======
+                "${workspaceFolder}/sgbd/inscricoes.c",
+                "${workspaceFolder}/sgbd/ficheiros.c",
+>>>>>>> 90d96be405c2db3c0803a93039495ed2a37404eb
                 "-o",
                 "${workspaceFolder}/dist/efolio"
             ],
