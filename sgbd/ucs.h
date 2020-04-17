@@ -53,5 +53,7 @@ int adicionarUC(UC *unidade, LIST_UC *lista, int pos);
 int removerUC(int pos, LIST_UC *lista);
 //Obter Unidade curricular na posição
 UC * obterUC(int pos, LIST_UC * lista);
+//Modificar Valores UC
+void modificarValoresUC(int numero, wchar_t *nome, int ano, int semestre, UC * unidade);
 
 #endif

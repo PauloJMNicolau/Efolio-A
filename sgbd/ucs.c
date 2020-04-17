@@ -169,3 +169,15 @@ UC * obterUC(int pos, LIST_UC * lista){
         return temp->elemento;
     }
 }
+
+//Modificar Valores UC
+void modificarValoresUC(int numero, wchar_t *nome, int ano, int semestre, UC * unidade){
+    if(numero)
+        unidade->numero= numero;
+    if(nome)
+        swprintf(unidade->nome, wcslen(nome), L"%ls", nome);
+    if(ano)
+        unidade->ano = ano;
+    if(semestre)
+        unidade->semestre = semestre;
+}
