@@ -26,7 +26,22 @@ void novoaluno(SGBD * bd){
 
 
 //Remover aluno
-int removerAluno(int pos, LIST_ALUNO *lista);
+/*int removerAluno(int pos, LIST_ALUNO *lista);*/
+void removerAluno(SGBD * bd){
+    clearScreen();
+    int numero, nome , pais;
+    wchar_t * nome=calloc(_TAMSTRING, sizeof(wchar_t));
+    wprintf(L"Indique os seus dados do aluno que pretende remover: ");
+    wprintf(L"\nNumero: ");
+    wscanf(L"%d", &numero);
+    wprintf(L"\nNome: ");
+    wscanf(L"%s", nome);
+    wprintf(L"\npais: ");
+    wscanf(L"%d", &pais);
+    ALUNO * unidade = criaraluno(numero,nome,pais);
+    adicionaraluno(unidade,bd->alunos,bd->alunos->elementos);
+    free(nome);
+}
 
 
 //consultarAluno
