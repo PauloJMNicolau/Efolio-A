@@ -137,7 +137,7 @@ void menuInscricoes(SGBD * bd) {
         wprintf(L"Escolha uma das seguintes opções:\n");
         wprintf(L"1 - Adicionar Inscrição\n");
         wprintf(L"2 - Remover Inscrição\n");
-        wprintf(L"3 - Consultar Inscrição\n");
+        wprintf(L"3 - Consultar Inscrições\n");
         wprintf(L"4 - Modificar Inscrição\n");
         wprintf(L"0 - Menu anterior\n");
 
@@ -151,7 +151,7 @@ void menuInscricoes(SGBD * bd) {
                 //eliminarInscricao();
                 break;
             case 3:
-                mostrarListaInscricao();
+                mostrarListaInscricoes(bd);
                 break;
             case 4:
                 //modificarInscricao();

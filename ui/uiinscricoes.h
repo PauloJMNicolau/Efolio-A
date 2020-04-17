@@ -10,7 +10,7 @@ void novaInscricao(SGBD * bd);
 //Remover uma inscrição
 void eliminarInscricao(SGBD * bd);
 //Consultar uma inscrição
-void mostrarListaInscricao(SGBD * bd);
+void mostrarListaInscricoes(SGBD * bd);
 //Modificar uma inscrição
 void modificarInscricao(SGBD * bd);
 
