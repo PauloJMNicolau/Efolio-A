@@ -1,4 +1,4 @@
-#include "uiucs.h"
+#include "uialunos.h"
 
 
 //Adicionar uma novo aluno
@@ -8,24 +8,24 @@
 
 
 //Adicionar uma novo aluno
-/*void novoaluno(SGBD * bd){
+void novoaluno(SGBD * bd){
     clearScreen();
     int numero, nome , pais;
     wchar_t * nome=calloc(_TAMSTRING, sizeof(wchar_t));
-    wprintf(L"Preencha os seus dados pessoais ");
+    wprintf(L"Indique o seu nome: ");
     wprintf(L"\nNumero: ");
     wscanf(L"%d", &numero);
     wprintf(L"\nNome: ");
     wscanf(L"%s", nome);
     wprintf(L"\npais: ");
     wscanf(L"%d", &pais);
-    Aluno * unidade = criaraluno(numero,nome,pais);
+    aluno * unidade = criaraluno(numero,nome,pais);
     adicionaraluno(unidade,bd->ucs,bd->ucs->elementos);
     free(nome);
 }
 
 //Mostrar Lista de UCS
-void mostrarListalunos(SGBD * bd){
+/*void mostrarListalunos(SGBD * bd){
     clearScreen();
     for(int i =0; i< 80; i++)
         wprintf(L"-");

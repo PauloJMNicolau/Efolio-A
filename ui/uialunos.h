@@ -3,9 +3,18 @@
 
 #ifndef _UIALUNOS_
 #define _UIALUNOS_
-//menu alunos:
+
 //Adicionar uma novo aluno a lista
-//void novo aluno(SGBD * bd);
-//Mostrar Lista de UCS
-//void mostrarlis(SGBD * bd);
+void novoaluno(SGBD * bd);
+
+//Remover aluno
+void removeraluno (SGBD * bd);
+
+//consultarAluno
+void consultaraluno (SGBD * bd);
+
+//modificarAluno
+void modificaraluno (SGBD * bd);
 #endif
+
+
