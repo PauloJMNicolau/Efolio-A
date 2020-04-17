@@ -53,5 +53,6 @@ int adicionarUC(UC *unidade, LIST_UC *lista, int pos);
 int removerUC(int pos, LIST_UC *lista);
 //Obter Unidade curricular na posição
 UC * obterUC(int pos, LIST_UC * lista);
-
+//Procurar na lista de UC's 
+int procurarUC(int numeroUC, LIST_UC * lista);
 #endif

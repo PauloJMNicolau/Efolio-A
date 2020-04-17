@@ -169,3 +169,19 @@ UC * obterUC(int pos, LIST_UC * lista){
         return temp->elemento;
     }
 }
+
+//Procurar na lista de UC's 
+int procurarUC(int numeroUC, LIST_UC * lista) { //recebe numeroUC e bd->ucs que é do tipo LIST_UC
+    int i;
+    NoUC * tmp;  //ponteiro para percorrer lista temporariamente
+    printf("aqui");
+    tmp = lista->cauda->proximo;
+
+    while (tmp != NULL || tmp->elemento->numero != numeroUC)
+        tmp = tmp->proximo;
+
+    if (tmp == NULL)
+        return _FALSE_;
+    else
+        return _TRUE_;
+}
