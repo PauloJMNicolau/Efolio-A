@@ -4,17 +4,16 @@
 int largTela() {
 	struct winsize ws;
     int x, fd;
-
-	fd = open("/dev/tty", O_RDWR);
+	/*fd = open("/dev/tty", O_RDWR);
 	if (fd < 0)
 		err(1, "/dev/tty");
-	
-	if (ioctl(fd, TIOCGWINSZ, &ws) < 0)	//Dimensão da tela
+	*/
+	if (ioctl(0, TIOCGWINSZ, &ws) < 0)	//Dimensão da tela
 	    err(1, "/dev/tty");
 
 	x = ws.ws_col;	//largura da tela em colunas
 	
-	close(fd);
+	//close(fd);
     return x;
 }
 
