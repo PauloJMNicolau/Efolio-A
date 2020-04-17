@@ -1,11 +1,4 @@
-#include <stdio.h>
-#include <wchar.h>
-#include <sys/ioctl.h>	/* ioctl, TIOCGWINSZ */
-#include <err.h>	/* err */
-#include <fcntl.h>	/* open */
-#include <stdio.h>	/* printf */
-#include <unistd.h>	/* close */
-#include <string.h>
+#include "global.h"
 
 
 int largTela() {
