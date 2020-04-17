@@ -32,3 +32,9 @@ void novaInscricao(SGBD * bd) {
     } while(tecla != L'\n');
 }
 
+//Mostrar lista de inscrições
+void mostraListaInscricoes(){
+
+
+}
+
