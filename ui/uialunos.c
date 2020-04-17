@@ -24,8 +24,13 @@ void novoaluno(SGBD * bd){
     free(nome);
 }
 
-//Mostrar Lista de UCS
-/*void mostrarListalunos(SGBD * bd){
+
+//Remover aluno
+int removerAluno(int pos, LIST_ALUNO *lista);
+
+
+//consultarAluno
+void consultaralunos(SGBD * bd){
     clearScreen();
     for(int i =0; i< 80; i++)
         wprintf(L"-");
@@ -56,4 +61,4 @@ void novoaluno(SGBD * bd){
     do{
         wscanf(L"%c", &tecla);
     } while(tecla != L'\n');
-}*/
+}
