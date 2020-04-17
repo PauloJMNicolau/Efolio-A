@@ -33,7 +33,7 @@ void novaInscricao(SGBD * bd) {
 }
 
 //Mostrar lista de inscrições
-void mostraListaInscricoes(){
+void mostrarListaInscricoes(){
 
 
 }
