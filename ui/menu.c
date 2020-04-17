@@ -115,7 +115,7 @@ void menuUCS(SGBD * bd) {
                 mostrarListaUC(bd);
                 break;
             case 4:
-                //modificarUC();
+                modificarUnidade(bd);
                 break;
             case 0:
                 break;

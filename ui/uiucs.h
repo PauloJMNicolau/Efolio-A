@@ -12,4 +12,9 @@ void mostrarListaUC(SGBD * bd);
 void removerUnidade(SGBD * bd);
 //Imprimir Lista de UC
 void imprimirUCS(SGBD * bd);
+//Alterar Unidade
+void modificarUnidade(SGBD * bd);
+//Imprimir Dados UC
+void imprimirDadosUC(UC * unidade);
+
 #endif
