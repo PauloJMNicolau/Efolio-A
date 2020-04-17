@@ -135,7 +135,7 @@ int removerUC(int pos, LIST_UC * lista){
         libertarNoUC(temp);
     } else {    //Remove na posição
         NoUC *temp = lista->cauda->proximo;
-        for (int i = 0; i < pos; i++)
+        for (int i = 0; i < pos-1; i++)
             temp = temp->proximo;
         NoUC * aux = temp->proximo;
         temp->proximo = aux->proximo; //Aponta elemento atual para o segundo elemento seguinte da posição da lista

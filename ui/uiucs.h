@@ -8,4 +8,8 @@
 void novaUC(SGBD * bd);
 //Mostrar Lista de UCS
 void mostrarListaUC(SGBD * bd);
+//Remover UC
+void removerUnidade(SGBD * bd);
+//Imprimir Lista de UC
+void imprimirUCS(SGBD * bd);
 #endif

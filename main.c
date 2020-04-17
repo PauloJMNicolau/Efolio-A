@@ -33,7 +33,7 @@ int main(int argc, char ** argv){
     executarPrograma();
 
 
-
+// Para apagar daqui até ao fim 
 
     
     INSCRICAO * i1 = criarInscricao(1,2,L"2012/2013");

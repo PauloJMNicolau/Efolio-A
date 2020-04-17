@@ -100,7 +100,6 @@ void menuUCS(SGBD * bd) {
         wprintf(L"2 - Remover UC\n");
         wprintf(L"3 - Consultar UC\n");
         wprintf(L"4 - Modificar UC\n");
-        wprintf(L"5 - Listagem de UC\n");
         wprintf(L"0 - Menu anterior\n");
 
         wscanf(L"%d", &opcao);
@@ -110,16 +109,13 @@ void menuUCS(SGBD * bd) {
                 novaUC(bd);
                 break;
             case 2:
-                //removerUC();
+                removerUnidade(bd);
                 break;
             case 3:
-                //consultarUC();
+                mostrarListaUC(bd);
                 break;
             case 4:
                 //modificarUC();
-                break;
-            case 5:
-                mostrarListaUC(bd);
                 break;
             case 0:
                 break;
@@ -128,7 +124,7 @@ void menuUCS(SGBD * bd) {
                 sleep(1);
             }
         }
-    } while (opcao != 0);
+    } while (opcao <0 || opcao >4);
 }
 
 //Submenu para funções relacionadas directamente com incrições
