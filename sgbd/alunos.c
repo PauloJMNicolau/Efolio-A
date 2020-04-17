@@ -102,7 +102,7 @@ int adicionarAluno(ALUNO * aluno, LIST_ALUNO *lista, int pos){
         wprintf(L"Erro %d: Impossível adicionar elemento na lista", _ERR_EMPTYLIST);
         return _ERR_EMPTYLIST;
     }
-    if (pos < 0 || pos >= lista->elementos){
+    if (pos < 0 || pos > lista->elementos){
         wprintf(L"Erro %d: Possição inválida na lista", _ERR_IMPOSSIBLE);
         return _ERR_IMPOSSIBLE;
     }
@@ -110,7 +110,7 @@ int adicionarAluno(ALUNO * aluno, LIST_ALUNO *lista, int pos){
     if (lista->elementos == 0){ //Lista vazia adiciona no inicio
         lista->cauda = no;
         lista->elementos++;
-    } else if (pos == lista->elementos - 1){   // Adiciona no final
+    } else if (pos == lista->elementos){   // Adiciona no final
         no->proximo = lista->cauda->proximo; //Aponta novo elemento para o inicio da lista
         lista->cauda->proximo = no;          //Aponta ultimo elemento atual da lista para o novo elemento
         lista->cauda = no;                   //Atualiza o ultimo elemento
