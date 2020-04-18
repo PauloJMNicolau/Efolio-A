@@ -1,5 +1,5 @@
 #include "uialunos.h"
-
+#ifndef _FICHEIROS_
 
 //Adicionar uma novo aluno
 //Remover aluno
@@ -65,6 +65,10 @@ void consultaralunos(SGBD * bd){
 void modificaraluno(SGBD * bd){
     int numero, nome , pais;
     FILE * fp = fopen("Listaalunos.txt","w");
+    if(!fp){
+        wprintf(L"Erro %d: Não foi possivel abrir o ficheiro",_ERR_READFILE);
+        exit(_ERR_READFILE);
+    }
     clearScreen();
     wchar_t * nome=calloc(_TAMSTRING, sizeof(wchar_t));
     wprintf(L"Indique os seus dados do aluno que pretende modificar: ");
@@ -83,4 +87,5 @@ void modificaraluno(SGBD * bd){
 
 
     fclose(fp);
+    #endif
 }
