@@ -46,7 +46,7 @@ int libertarNoUC(NoUC *no);
 //Eliminar Lista
 int libertarListaUC(LIST_UC *lista);
 //Libertar Memoria da Unidade Curricular
-int libertarUC(UC *unidade);
+UC * libertarUC(UC *unidade);
 //Adicionar elemento na lista
 int adicionarUC(UC *unidade, LIST_UC *lista, int pos);
 //Remover elemento da lista
