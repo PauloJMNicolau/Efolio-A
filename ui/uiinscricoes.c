@@ -45,9 +45,7 @@ void mostrarListaInscricoes(SGBD * bd){
     anoLetivo = calloc(_TAMDATAS, sizeof(wchar_t));
     wprintf(L"\nIndique o ano letivo que pretende consultar: ");
     wscanf(L"%ls", anoLetivo);
-
     pasta = procuraPasta(anoLetivo, bd->inscricoes);
-    
     if (pasta != NULL){
         tmp = pasta->cauda;
         for(i =0; i<80; i++)
