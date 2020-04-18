@@ -76,7 +76,7 @@ void mostrarListaInscricoes(SGBD * bd){
 }
 
 //Remover uma inscrição
-void removerInscricao(SGBD * bd){
+void eliminarInscricao(SGBD * bd){
 
 
 }
