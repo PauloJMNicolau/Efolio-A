@@ -169,6 +169,21 @@ UC * obterUC(int pos, LIST_UC * lista){
     }
 }
 
+//Procurar na lista de UC's 
+int procurarUC(int numeroUC, LIST_UC * lista) { //recebe numeroUC e bd->ucs que é do tipo LIST_UC
+    NoUC * tmp;  //ponteiro para percorrer lista temporariamente
+    int i = 0;
+    
+    tmp = lista->cauda;
+    while (i < lista->elementos && tmp->elemento->numero != numeroUC) {
+        tmp = tmp->proximo;
+        i++;
+    }
+    if (tmp->elemento->numero == numeroUC)
+        return _TRUE_;
+    else
+        return _FALSE_;
+}
 //Modificar Valores UC
 void modificarValoresUC(int numero, wchar_t *nome, int ano, int semestre, UC * unidade){
     if(numero)

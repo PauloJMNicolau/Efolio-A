@@ -1,4 +1,11 @@
 #include <stdlib.h>
+#include <stdio.h>
+#include <wchar.h>
+#include <sys/ioctl.h>
+#include <err.h>
+#include <fcntl.h>	
+#include <unistd.h>	
+#include <string.h>
 
 //verificar tipo de sistema operativo para aplicar o comando correcto para limpar ecrã.
 //Windows - "cls"

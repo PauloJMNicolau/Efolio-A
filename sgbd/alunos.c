@@ -155,3 +155,19 @@ int removerAluno(int pos, LIST_ALUNO *lista){
     }
     return _SUCESSO;
 }
+
+//Procurar na lista de alunos 
+int procurarAluno(int numeroAluno, LIST_ALUNO * lista) { //recebe numeroAluno e bd->alunos que é do tipo LIST_ALUNO
+    NoALUNO * tmp;  //ponteiro para percorrer lista temporariamente
+    int i = 0;
+    
+    tmp = lista->cauda;
+    while (i < lista->elementos && tmp->elemento->numero != numeroAluno) {
+        tmp = tmp->proximo;
+        i++;
+    }
+    if (tmp->elemento->numero == numeroAluno)
+        return _TRUE_;
+    else
+        return _FALSE_;
+}
