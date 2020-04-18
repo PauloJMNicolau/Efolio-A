@@ -17,7 +17,6 @@ UC * criarUC(int numero, wchar_t *nome, int ano, int semestre){
         exit(_ERR_MEMORYALLOC);
     }
     wcsncpy(unidade->nome,nome,wcslen(nome));
-    //swprintf(unidade->nome, wcslen(nome)+1, L"%ls", nome);
     if ((ano <= 0 || ano > 3) && (semestre <= 0 || semestre > 2))
     {
         return unidade;
