@@ -89,12 +89,13 @@ void modificarUnidade(SGBD * bd){
             wprintf(L"\nQual o dado a alterar?\n\t0 - Numero\n\t1 - Nome\n\t2 - Ano\n\t3 - Semestre\n\t4 - Cancelar\nOpção: ");
             wscanf(L"%d",&id);
         }while(id<0 || id >4);
-        if(id ==4){
+        //Sair do ciclo
+        if(id==4){
             continuar =0;
             continue;
         }
         int n;
-        wchar_t s[_TAMSTRING];
+        wchar_t s[_TAMSTRING]=L"";
         //Executar opção escolhida
         switch(id){
             case 0:

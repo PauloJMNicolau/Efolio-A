@@ -31,5 +31,5 @@ typedef struct sgdb{
 //Criar Base de Dados vazia
 SGBD *criarBaseDados();
 int carregarFicheiros(SGBD * bd);
-
+int libertarBD(SGBD * bd);
 #endif

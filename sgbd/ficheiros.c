@@ -62,6 +62,8 @@ void lerUCTexto(LIST_UC * lista){
             continue;
         processarLinhaUC(linha,lista);
     }
+    free(linha);
+    linha = NULL;
     fclose(fp);
 }
 

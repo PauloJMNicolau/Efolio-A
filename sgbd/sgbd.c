@@ -35,3 +35,25 @@ int carregarFicheiros(SGBD * bd){
     //Carregar ficheiro de inscrições
     return _SUCESSO;
 }
+
+int libertarBD(SGBD * bd){
+    if(!bd){
+        wprintf(L"Erro %d: Não foi possivel libertar memória!", _ERR_MEMORYFREE);
+        return _ERR_MEMORYFREE;
+    }
+    if(bd->alunos){
+        libertarListaAluno(bd->alunos);
+        bd->alunos = NULL;
+    }
+    if(bd->ucs){
+        libertarListaUC(bd->ucs);
+        bd->ucs = NULL;
+    }
+    if(bd->inscricoes){
+        libertarListaPasta(bd->inscricoes);
+        bd->inscricoes = NULL;
+    }
+    free(bd);
+    bd=NULL;
+    return _SUCESSO;
+}
