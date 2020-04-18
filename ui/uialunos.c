@@ -19,8 +19,8 @@ void novoaluno(SGBD * bd){
     wscanf(L"%s", nome);
     wprintf(L"\npais: ");
     wscanf(L"%d", &pais);
-    ALUNO * unidade = criaraluno(numero,nome,pais);
-    adicionaraluno(unidade,bd->alunos,bd->alunos->elementos);
+    ALUNO * ALUNO = criaraluno(numero,nome,pais);
+    adicionaraluno(ALUNO,bd->alunos,bd->alunos->elementos);
     free(nome);
 }
 
@@ -45,8 +45,8 @@ void consultaralunos(SGBD * bd){
         wscanf(L"%s", nome);
         wprintf(L"\npais: ");
         wscanf(L"%d", &pais);
-        ALUNO * unidade = criaraluno(numero,nome,pais);
-        adicionaraluno(unidade,bd->alunos,bd->alunos->elementos);
+        ALUNO * ALUNO = criaraluno(numero,nome,pais);
+        adicionaraluno(ALUNO,bd->alunos,bd->alunos->elementos);
         free(nome);
     }
         wprintf(L"\n");
@@ -74,9 +74,9 @@ void modificaraluno(SGBD * bd){
             wprintf(L"\nID de aluno inválido\n");
     }while(numero < 0|| numero > bd->alunos->elementos);
     //Alterar Dados
-    ALUNO * unidade = obteraluno(numero-1,bd->ucs);
-    //Imprimir Dados da UC a alterar
-    imprimiralunos(unidade);
+    ALUNO * ALUNO = obteraluno(numero-1,bd->ucs);
+    //Imprimir Dados do aluno a alterar
+    imprimiralunos(ALUNO);
     //Imprimir opções
     int continuar =1;
     do{
@@ -97,26 +97,26 @@ void modificaraluno(SGBD * bd){
             case 0:
                 wprintf(L"Novo Numero: ");
                 wscanf(L"%d", &n);
-                modificarValoresaluno(n,unidade->nome,unidade->numero,unidade->pais,unidade);
+                modificarValoresaluno(n,ALUNO->nome,ALUNO->numero,ALUNO->pais,ALUNO);
                 break;
             case 1:
                 wprintf(L"Novo Nome: ");
                 wscanf(L"%S", &s);
-                modificarValoresaluno(unidade->numero,s,unidade->nome,unidade->pais,unidade);
+                modificarValoresaluno(ALUNO->numero,s,ALUNO->nome,ALUNO->pais,ALUNO);
                 break;
             case 2:
                 do{
                     wprintf(L"Novo pais: ");
                     wscanf(L"%d", &n);
                 }while(n<1 || n>3);
-                modificarValoresaluno(unidade->numero,unidade->nome,n,unidade->pais,unidade);
+                modificarValoresaluno(ALUNO->numero,ALUNO->nome,n,ALUNO->pais,ALUNO);
                 break;
         }
         wprintf(L"Pretende continuar a alterar?\n\t0 - Não\n\t1 - Sim\nOpção: ");
         wscanf(L"%d",&continuar);
     }while(continuar != 0);
     //Imprimir Dados da UC alterados
-    imprimirlistalunos(unidade);
+    imprimirlistalunos(ALUNO);
     //Esperar que utilizador diga para continuar
     wprintf(L"\nPara continuar precione ENTER",bd->alunos->elementos);
     wchar_t tecla = L' ';
@@ -133,9 +133,9 @@ void imprimirlistalunos(SGBD * bd){
         wprintf(L"\n|%4S|%8S|%45S|%7S|%10S|\n",L"Numero",L"Nome",L"pais");
     for(int i =0; i< 80; i++)
         wprintf(L"-");
-    for(int i=0; i< bd->ucs->elementos; i++){
-        UC* temp = obterUC(i, bd->ucs);
-        wprintf(L"\n|%4.d|%8d|%45S|%7d|%10d|",i+1, temp->numero, temp->nome, temp->ano, temp->semestre);
+    for(int i=0; i< bd->alunos->elementos; i++){
+        ALUNO* temp = obteraluno(i, bd->alunos);
+        wprintf(L"\n|%4.d|%8d|%45S|%7d|%10d|",i+1, temp->numero, temp->nome, temp->pais);
     }
     wprintf(L"\n");
     for(int i =0; i< 80; i++)
@@ -143,13 +143,13 @@ void imprimirlistalunos(SGBD * bd){
     
 }
 
-void imprimirDadosUC(UC * unidade){
+void imprimirDadosaluno(ALUNO * ALUNO){
     for(int i =0; i< 80; i++)
         wprintf(L"-");
-    wprintf(L"\n|%8S|%50S|%7S|%10S|\n",L"Numero",L"Nome",L"Ano",L"Semestre");
+    wprintf(L"\n|%8S|%50S|%7S|%10S|\n",L"Numero",L"Nome",L"pais");
     for(int i =0; i< 80; i++)
         wprintf(L"-");
-    wprintf(L"\n|%8d|%50S|%7d|%10d|\n",unidade->numero,unidade->nome,unidade->ano,unidade->semestre);
+    wprintf(L"\n|%8d|%50S|%7d|%10d|\n",ALUNO->numero,ALUNO->nome,ALUNO->pais);
     for(int i =0; i< 80; i++)
         wprintf(L"-");
 }
@@ -157,15 +157,15 @@ void imprimirDadosUC(UC * unidade){
 
     
     #endif
-}
+//}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//Adicionar uma nova Unidade Curricular
+//Adicionar uma nova ALUNO Curricular
 /*void novaUC(SGBD * bd){
     clearScreen();
     int ano, semestre, numero;
     wchar_t * nome=calloc(_TAMSTRING, sizeof(wchar_t));
-    wprintf(L"Preencha os dados da nova Unidade Curricular");
+    wprintf(L"Preencha os dados da nova ALUNO Curricular");
     wprintf(L"\nNumero: ");
     wscanf(L"%d", &numero);
     wprintf(L"\nNome: ");
@@ -174,8 +174,8 @@ void imprimirDadosUC(UC * unidade){
     wscanf(L"%d", &ano);
     wprintf(L"\nSemestre: ");
     wscanf(L"%d", &semestre);
-    UC * unidade = criarUC(numero,nome,ano,semestre);
-    adicionarUC(unidade,bd->ucs,bd->ucs->elementos);
+    UC * ALUNO = criarUC(numero,nome,ano,semestre);
+    adicionarUC(ALUNO,bd->ucs,bd->ucs->elementos);
     free(nome);
 }
 
@@ -206,7 +206,7 @@ void mostrarListaUC(SGBD * bd){
 }
 
 //Remover UC
-void removerUnidade(SGBD * bd){
+void removerALUNO(SGBD * bd){
     clearScreen();
     imprimirUCS(bd);
     int id = -1;
@@ -226,8 +226,8 @@ void removerUnidade(SGBD * bd){
     } while(tecla != L'\n');
 }
 
-//Alterar Unidade
-void modificarUnidade(SGBD * bd){
+//Alterar ALUNO
+void modificarALUNO(SGBD * bd){
     clearScreen();
     imprimirUCS(bd);
     int id = -1;
@@ -238,9 +238,9 @@ void modificarUnidade(SGBD * bd){
             wprintf(L"\nID de UC inválida\n");
     }while(id < 0|| id > bd->ucs->elementos);
     //Alterar Dados
-    UC * unidade = obterUC(id-1,bd->ucs);
+    UC * ALUNO = obterUC(id-1,bd->ucs);
     //Imprimir Dados da UC a alterar
-    imprimirDadosUC(unidade);
+    imprimirDadosUC(ALUNO);
     //Imprimir opções
     int continuar =1;
     do{
@@ -261,33 +261,33 @@ void modificarUnidade(SGBD * bd){
             case 0:
                 wprintf(L"Novo Numero: ");
                 wscanf(L"%d", &n);
-                modificarValoresUC(n,unidade->nome,unidade->ano,unidade->semestre,unidade);
+                modificarValoresUC(n,ALUNO->nome,ALUNO->ano,ALUNO->semestre,ALUNO);
                 break;
             case 1:
                 wprintf(L"Novo Nome: ");
                 wscanf(L"%S", &s);
-                modificarValoresUC(unidade->numero,s,unidade->ano,unidade->semestre,unidade);
+                modificarValoresUC(ALUNO->numero,s,ALUNO->ano,ALUNO->semestre,ALUNO);
                 break;
             case 2:
                 do{
                     wprintf(L"Novo Ano: ");
                     wscanf(L"%d", &n);
                 }while(n<1 || n>3);
-                modificarValoresUC(unidade->numero,unidade->nome,n,unidade->semestre,unidade);
+                modificarValoresUC(ALUNO->numero,ALUNO->nome,n,ALUNO->semestre,ALUNO);
                 break;
             case 3:
                 do{
                     wprintf(L"Novo Semestre: ");
                     wscanf(L"%d", &n);
                 }while(n<1 || n>2); 
-                modificarValoresUC(unidade->numero,unidade->nome,unidade->ano,n,unidade); 
+                modificarValoresUC(ALUNO->numero,ALUNO->nome,ALUNO->ano,n,ALUNO); 
                 break;
         }
         wprintf(L"Pretende continuar a alterar?\n\t0 - Não\n\t1 - Sim\nOpção: ");
         wscanf(L"%d",&continuar);
     }while(continuar != 0);
     //Imprimir Dados da UC alterados
-    imprimirDadosUC(unidade);
+    imprimirDadosUC(ALUNO);
     //Esperar que utilizador diga para continuar
     wprintf(L"\nPara continuar precione ENTER",bd->ucs->elementos);
     wchar_t tecla = L' ';
@@ -314,13 +314,13 @@ void imprimirUCS(SGBD * bd){
     
 }
 
-void imprimirDadosUC(UC * unidade){
+void imprimirDadosUC(UC * ALUNO){
     for(int i =0; i< 80; i++)
         wprintf(L"-");
     wprintf(L"\n|%8S|%50S|%7S|%10S|\n",L"Numero",L"Nome",L"Ano",L"Semestre");
     for(int i =0; i< 80; i++)
         wprintf(L"-");
-    wprintf(L"\n|%8d|%50S|%7d|%10d|\n",unidade->numero,unidade->nome,unidade->ano,unidade->semestre);
+    wprintf(L"\n|%8d|%50S|%7d|%10d|\n",ALUNO->numero,ALUNO->nome,ALUNO->ano,ALUNO->semestre);
     for(int i =0; i< 80; i++)
         wprintf(L"-");
 }
