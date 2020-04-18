@@ -16,7 +16,8 @@ UC * criarUC(int numero, wchar_t *nome, int ano, int semestre){
         wprintf(L"Erro %d: Impossível alocar memória para Unidade Curricular", _ERR_MEMORYALLOC);
         exit(_ERR_MEMORYALLOC);
     }
-    wcsncpy(unidade->nome,nome,wcslen(nome));
+    swprintf(unidade->nome,wcslen(nome)+1,L"%S",nome);
+    //wcsncpy(unidade->nome,nome,wcslen(nome));
     if ((ano <= 0 || ano > 3) && (semestre <= 0 || semestre > 2))
     {
         return unidade;
@@ -184,6 +185,7 @@ int procurarUC(int numeroUC, LIST_UC * lista) { //recebe numeroUC e bd->ucs que 
     else
         return _FALSE_;
 }
+
 //Modificar Valores UC
 void modificarValoresUC(int numero, wchar_t *nome, int ano, int semestre, UC * unidade){
     if(numero)

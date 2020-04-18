@@ -18,6 +18,7 @@ void processarLinhaUC(wchar_t * linha, LIST_UC * lista);
 void lerlistalunos(LIST_ALUNO * aluno);
 // processar linha de texto do  ficheiro da lista de alunos
 void processarLinhalunos(wchar_t * linhas, LIST_ALUNO * aluno);
-
+//Gravar Dados da UC no ficheiro
+void gravarUCTexto(LIST_UC * lista);
 
 #endif

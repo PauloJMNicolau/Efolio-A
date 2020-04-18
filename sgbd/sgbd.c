@@ -57,3 +57,16 @@ int libertarBD(SGBD * bd){
     bd=NULL;
     return _SUCESSO;
 }
+
+int gravarDados(SGBD * bd){
+    if(!bd){
+        wprintf(L"Erro %d: Base de Dados não existe\n");
+        return _ERR_RESOURCENOTFOUND;
+    }
+    //Gravar ficheiro de UCS
+    gravarUCTexto(bd->ucs);
+    //Gravar ficheiro de Alunos
+    
+    //Gravar ficheiro de inscrições
+    return _SUCESSO;
+}
