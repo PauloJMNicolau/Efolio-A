@@ -75,3 +75,8 @@ void mostrarListaInscricoes(SGBD * bd){
     } while(tecla != L'\n');
 }
 
+//Remover uma inscrição
+void removerInscricao(SGBD * bd){
+
+
+}

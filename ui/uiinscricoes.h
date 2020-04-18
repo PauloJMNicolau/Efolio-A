@@ -8,8 +8,8 @@
 //Adicionar uma nova inscrição
 void novaInscricao(SGBD * bd);
 //Remover uma inscrição
-void eliminarInscricao(SGBD * bd);
-//Consultar uma inscrição
+void removerInscricao(SGBD * bd);
+//Mostrar lista de inscrições por ano letivo
 void mostrarListaInscricoes(SGBD * bd);
 //Modificar uma inscrição
 void modificarInscricao(SGBD * bd);
