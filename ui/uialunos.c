@@ -24,10 +24,8 @@ void novoaluno(SGBD * bd){
     free(nome);
 }
 
-
 //Remover aluno
 int removerAluno(int pos, LIST_ALUNO *lista);
-
 
 //consultarAluno
 void consultaralunos(SGBD * bd){
@@ -49,19 +47,19 @@ void consultaralunos(SGBD * bd){
         ALUNO * unidade = criaraluno(numero,nome,pais);
         adicionaraluno(unidade,bd->alunos,bd->alunos->elementos);
         free(nome);
-}
-    wprintf(L"\n");
-    for(int i =0; i< 80; i++)
-        wprintf(L"-");
-    wprintf(L"\n|%70S%8d|\n",L"Total Alunos",bd->alunos->elementos);
-    for(int i =0; i< 80; i++)
-        wprintf(L"-");
-    wprintf(L"\nPara continuar precione ENTER",bd->alunos->elementos);
-    wchar_t tecla = L' ';
-    getwchar();
-    do{
-        wscanf(L"%c", &tecla);
-    } while(tecla != L'\n');
+    }
+        wprintf(L"\n");
+        for(int i =0; i< 80; i++)
+            wprintf(L"-");
+        wprintf(L"\n|%70S%8d|\n",L"Total Alunos",bd->alunos->elementos);
+        for(int i =0; i< 80; i++)
+            wprintf(L"-");
+        wprintf(L"\nPara continuar precione ENTER",bd->alunos->elementos);
+        wchar_t tecla = L' ';
+        getwchar();
+        do{
+            wscanf(L"%c", &tecla);
+        } while(tecla != L'\n');
 }
 //modificarAluno
 void modificaraluno(SGBD * bd){
