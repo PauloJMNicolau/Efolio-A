@@ -26,22 +26,7 @@ void novoaluno(SGBD * bd){
 
 
 //Remover aluno
-/*int removerAluno(int pos, LIST_ALUNO *lista);*/
-void removeraluno(SGBD * bd){
-    clearScreen();
-    int numero, nome , pais;
-    wchar_t * nome=calloc(_TAMSTRING, sizeof(wchar_t));
-    wprintf(L"Indique os seus dados do aluno que pretende remover: ");
-    wprintf(L"\nNumero: ");
-    wscanf(L"%d", &numero);
-    wprintf(L"\nNome: ");
-    wscanf(L"%s", nome);
-    wprintf(L"\npais: ");
-    wscanf(L"%d", &pais);
-    ALUNO * unidade = removerAluno(numero,nome,pais);
-    adicionaraluno(unidade,bd->alunos,bd->alunos->elementos);
-    free(nome);
-}
+int removerAluno(int pos, LIST_ALUNO *lista);
 
 
 //consultarAluno
@@ -79,3 +64,18 @@ void consultaralunos(SGBD * bd){
     } while(tecla != L'\n');
 }
 //modificarAluno
+void removeraluno(SGBD * bd){
+    clearScreen();
+    int numero, nome , pais;
+    wchar_t * nome=calloc(_TAMSTRING, sizeof(wchar_t));
+    wprintf(L"Indique os seus dados do aluno que pretende remover: ");
+    wprintf(L"\nNumero: ");
+    wscanf(L"%d", &numero);
+    wprintf(L"\nNome: ");
+    wscanf(L"%s", nome);
+    wprintf(L"\npais: ");
+    wscanf(L"%d", &pais);
+    ALUNO * unidade = remover_aluno(numero,nome,pais);
+    remover_aluno(unidade,bd->alunos,bd->alunos->elementos);
+    free(nome);
+}
