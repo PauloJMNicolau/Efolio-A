@@ -24,6 +24,7 @@ void executarPrograma(){
     //Mostrar Menu
     menuPrincipal(sgbd);
     //Terminar Programa (Libertar memoria)
+    libertarBD(sgbd);
 }
 
 
@@ -34,7 +35,7 @@ int main(int argc, char ** argv){
 
 
 // Para apagar daqui até ao fim 
-
+/*
     
     INSCRICAO * i1 = criarInscricao(1,2,L"2012/2013");
     INSCRICAO * i2 = criarInscricao(1,4,L"2011/2012");
@@ -55,7 +56,6 @@ int main(int argc, char ** argv){
     INSCRICAO* no2 = procuraInscricao(inscricoes, L"2012/2013",5,1);
 
     removerInscricao(i6,inscricoes);
-    //removerElementoInscricao(no,arvore);
-
+*/
     return 0;
 }

@@ -28,6 +28,8 @@ void lerlistalunos(LIST_ALUNO * aluno){
             continue;
         processarLinhalunos(linhas,aluno);
     }
+    free(linhas);
+    linhas = NULL;
     fclose(fp);
 }
 
@@ -62,6 +64,8 @@ void lerUCTexto(LIST_UC * lista){
             continue;
         processarLinhaUC(linha,lista);
     }
+    free(linha);
+    linha = NULL;
     fclose(fp);
 }
 

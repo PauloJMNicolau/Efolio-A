@@ -15,20 +15,20 @@ ALUNO *criarAluno(int numero, wchar_t *nome, wchar_t *pais){
         exit(_ERR_MEMORYALLOC);
     }
     aluno->numero = numero;
-    aluno->nome = calloc(_TAMSTRING + 1, sizeof(wchar_t));
+    aluno->nome = calloc(_TAMSTRING, sizeof(wchar_t));
     if (!aluno->nome)
     {
         wprintf(L"Erro %d: Impossível alocar memória para Aluno", _ERR_MEMORYALLOC);
         exit(_ERR_MEMORYALLOC);
     }
-    swprintf(aluno->nome, wcslen(nome) + 1, L"%ls", nome);
-    aluno->pais = calloc(_TAMSTRING + 1, sizeof(wchar_t));
+    wcsncpy(aluno->nome,nome,wcslen(nome));
+    aluno->pais = calloc(_TAMSTRING, sizeof(wchar_t));
     if (!aluno->pais)
     {
         wprintf(L"Erro %d: Impossível alocar memória para Aluno", _ERR_MEMORYALLOC);
         exit(_ERR_MEMORYALLOC);
     }
-    swprintf(aluno->pais, wcslen(pais) + 1, L"%ls", pais);
+    wcsncpy(aluno->pais,pais,wcslen(pais));
     return aluno;
 }
 
@@ -51,7 +51,8 @@ int libertarAluno(ALUNO *aluno){
             free(aluno->nome);
         aluno->nome = NULL;
         if (aluno->pais)
-            aluno->pais = NULL;
+            free(aluno->pais);
+        aluno->pais = NULL;
         free(aluno);
         aluno = NULL;
         return _SUCESSO;

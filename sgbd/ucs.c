@@ -3,20 +3,20 @@
 
 /* Criar Unidade Curricular */
 UC * criarUC(int numero, wchar_t *nome, int ano, int semestre){
-    UC *unidade = calloc(1, sizeof(unidade));
+    UC *unidade = calloc(1, sizeof(UC));
     if (!unidade)
     {
         wprintf(L"Erro %d: Impossível alocar memória para Unidade Curricular", _ERR_MEMORYALLOC);
         exit(_ERR_MEMORYALLOC);
     }
     unidade->numero = numero;
-    unidade->nome = calloc(_TAMSTRING + 1, sizeof(wchar_t));
+    unidade->nome = calloc(_TAMSTRING, sizeof(wchar_t));
     if (!unidade->nome)
     {
         wprintf(L"Erro %d: Impossível alocar memória para Unidade Curricular", _ERR_MEMORYALLOC);
         exit(_ERR_MEMORYALLOC);
     }
-    swprintf(unidade->nome, wcslen(nome)+1, L"%ls", nome);
+    wcsncpy(unidade->nome,nome,wcslen(nome));
     if ((ano <= 0 || ano > 3) && (semestre <= 0 || semestre > 2))
     {
         return unidade;
@@ -27,7 +27,7 @@ UC * criarUC(int numero, wchar_t *nome, int ano, int semestre){
 }
 
 //Libertar Memoria da Unidade Curricular
-int libertarUC(UC *unidade){
+UC * libertarUC(UC *unidade){
     if (unidade)
     {
         if (unidade->nome)
@@ -35,9 +35,8 @@ int libertarUC(UC *unidade){
         unidade->nome = NULL;
         free(unidade);
         unidade = NULL;
-        return _SUCESSO;
     }
-    return _ERR_MEMORYFREE;
+    return unidade;
 }
 
 //Criar lista vazia
@@ -81,7 +80,7 @@ NoUC * criarNoUC(UC * unidade){
 int libertarNoUC(NoUC * no){
     if(!no)
         return _ERR_MEMORYFREE;
-    libertarUC(no->elemento);
+    no->elemento = libertarUC(no->elemento);
     no->proximo = NULL;
     free(no);
     no = NULL;
@@ -128,7 +127,7 @@ int removerUC(int pos, LIST_UC * lista){
         wprintf(L"Erro %d: Posição inválida na lista", _ERR_IMPOSSIBLE);
         return _ERR_IMPOSSIBLE;
     }
-    if(pos ==0){ //Remover na cabeça da lista
+    if(pos==0){ //Remover na cabeça da lista
         NoUC * temp = lista->cauda->proximo;
         lista->cauda->proximo = temp->proximo;      //Aponta final da lista para segundo elemento da lista
         lista->elementos--;
@@ -190,7 +189,7 @@ void modificarValoresUC(int numero, wchar_t *nome, int ano, int semestre, UC * u
     if(numero)
         unidade->numero= numero;
     if(nome)
-        swprintf(unidade->nome, wcslen(nome), L"%ls", nome);
+        wcsncpy(unidade->nome,nome,wcslen(nome));
     if(ano)
         unidade->ano = ano;
     if(semestre)
