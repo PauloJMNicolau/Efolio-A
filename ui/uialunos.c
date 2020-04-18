@@ -1,5 +1,5 @@
 #include "uialunos.h"
-#ifndef _FICHEIROS_
+
 
 //Adicionar uma novo aluno
 //Remover aluno
@@ -33,12 +33,12 @@ void consultaralunos(SGBD * bd){
     clearScreen();
     for(int i =0; i< 80; i++)
         wprintf(L"-");
-        wprintf(L"\n|%8S%50S%10S%10S|\n",L"Numero",L"Nome",L"pais");
+        wprintf(L"\n|%8S%50S%10S|\n",L"Numero",L"Nome",L"pais");
     for(int i =0; i< 80; i++)
         wprintf(L"-");
     for(int i=0; i< bd->alunos->elementos; i++){
         ALUNO* temp = obterUC(i, bd->alunos);
-        wprintf(L"\n|%8d%50S%10d%10d|",temp->numero, temp->nome, temp->pais);   
+        wprintf(L"\n|%8d%50S%10d|",temp->numero, temp->nome, temp->pais);   
         wprintf(L"\nNumero: ");
         wscanf(L"%d", &numero);
         wprintf(L"\nNome: ");
@@ -71,7 +71,7 @@ void modificaraluno(SGBD * bd){
         wprintf(L"\nQual o Numero do aluno a modificar: ",bd->alunos->elementos);
         wscanf(L"%d",&numero);
         if(numero < 0|| numero > bd->alunos->elementos)
-            wprintf(L"\nID de aluno inválido\n");
+            wprintf(L"\nNumero de aluno inválido\n");
     }while(numero < 0|| numero > bd->alunos->elementos);
     //Alterar Dados
     ALUNO * ALUNO = obteraluno(numero-1,bd->ucs);
@@ -130,12 +130,12 @@ void modificaraluno(SGBD * bd){
 void imprimirlistalunos(SGBD * bd){
     for(int i =0; i< 80; i++)
         wprintf(L"-");
-        wprintf(L"\n|%4S|%8S|%45S|%7S|%10S|\n",L"Numero",L"Nome",L"pais");
+        wprintf(L"\n|%4S|%8S|%45S|%10S|\n",L"Numero",L"Nome",L"pais");
     for(int i =0; i< 80; i++)
         wprintf(L"-");
     for(int i=0; i< bd->alunos->elementos; i++){
         ALUNO* temp = obteraluno(i, bd->alunos);
-        wprintf(L"\n|%4.d|%8d|%45S|%7d|%10d|",i+1, temp->numero, temp->nome, temp->pais);
+        wprintf(L"\n|%4.d|%8d|%45S|%10d|",i+1, temp->numero, temp->nome, temp->pais);
     }
     wprintf(L"\n");
     for(int i =0; i< 80; i++)
@@ -146,18 +146,18 @@ void imprimirlistalunos(SGBD * bd){
 void imprimirDadosaluno(ALUNO * ALUNO){
     for(int i =0; i< 80; i++)
         wprintf(L"-");
-    wprintf(L"\n|%8S|%50S|%7S|%10S|\n",L"Numero",L"Nome",L"pais");
+    wprintf(L"\n|%8S|%50S|%10S|\n",L"Numero",L"Nome",L"pais");
     for(int i =0; i< 80; i++)
         wprintf(L"-");
-    wprintf(L"\n|%8d|%50S|%7d|%10d|\n",ALUNO->numero,ALUNO->nome,ALUNO->pais);
+    wprintf(L"\n|%8d|%50S|%10d|\n",ALUNO->numero,ALUNO->nome,ALUNO->pais);
     for(int i =0; i< 80; i++)
         wprintf(L"-");
 }
 
 
     
-    #endif
-//}
+
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Adicionar uma nova ALUNO Curricular
