@@ -64,18 +64,18 @@ void consultaralunos(SGBD * bd){
     } while(tecla != L'\n');
 }
 //modificarAluno
-void removeraluno(SGBD * bd){
+void modificaraluno(SGBD * bd){
     clearScreen();
     int numero, nome , pais;
     wchar_t * nome=calloc(_TAMSTRING, sizeof(wchar_t));
-    wprintf(L"Indique os seus dados do aluno que pretende remover: ");
+    wprintf(L"Indique os seus dados do aluno que pretende modificar: ");
     wprintf(L"\nNumero: ");
     wscanf(L"%d", &numero);
     wprintf(L"\nNome: ");
     wscanf(L"%s", nome);
     wprintf(L"\npais: ");
     wscanf(L"%d", &pais);
-    ALUNO * unidade = remover_aluno(numero,nome,pais);
-    remover_aluno(unidade,bd->alunos,bd->alunos->elementos);
+    ALUNO * unidade = alterar_aluno(numero,nome,pais);
+    alterar_aluno(unidade,bd->alunos,bd->alunos->elementos);
     free(nome);
 }

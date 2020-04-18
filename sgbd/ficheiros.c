@@ -12,7 +12,7 @@
 //ler lista de alunos
 
 void lerlistalunos(LIST_ALUNO * aluno){
-    FILE * fp = fopen("Listaalunos.txt","r");
+    FILE * fp = fopen("Listaalunos.txt","r+");
     if(!fp){
         wprintf(L"Erro %d: Não foi possivel abrir o ficheiro",_ERR_READFILE);
         exit(_ERR_READFILE);
