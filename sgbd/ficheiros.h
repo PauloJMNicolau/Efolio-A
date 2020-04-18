@@ -6,6 +6,7 @@
 #include "inscricoes.h"
 #include "alunos.h"
 #include "ucs.h"
+#include "sgbd.h"
 
 #ifndef _Ficheiros_
 #define _Ficheiros_

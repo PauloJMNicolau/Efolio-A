@@ -79,4 +79,12 @@ void processarLinhaUC(wchar_t * linha, LIST_UC * lista){
     adicionarUC(criarUC(numero,nome,ano,semestre),lista,lista->elementos);//Adiciona sempre no final
 }
 
+
+void gravar(SGBD * bd){
+    //
+
+
+
+}
+
 #endif
