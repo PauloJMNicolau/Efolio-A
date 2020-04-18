@@ -64,21 +64,20 @@ void consultaralunos(SGBD * bd){
 //modificarAluno
 void modificaraluno(SGBD * bd){
     int numero, nome , pais;
-    FILE * fp = fopen("Listaalunos.txt","w");
-    if(!fp){
-        wprintf(L"Erro %d: Não foi possivel abrir o ficheiro",_ERR_READFILE);
-        exit(_ERR_READFILE);
-    }
     clearScreen();
     wchar_t * nome=calloc(_TAMSTRING, sizeof(wchar_t));
-    wprintf(L"Indique os seus dados do aluno que pretende modificar: ");
-    wprintf(L"\nNumero: ");
+    wprintf(L"Indique os dados  que pretende modificar: ");
+    wprintf(L"\n1-Numero: ");
     wscanf(L"%d", &numero);  
-    wprintf(L"\nNome: ");
+    wprintf(L"\n2-Nome: ");
     wscanf(L"%s", nome);
-    wprintf(L"\npais: ");
+    wprintf(L"\n3-pais: ");
     wscanf(L"%d", &pais);
-
+    if ()
+    {
+        /* code */
+    }
+    
 
     /*ALUNO * unidade = alterar_aluno(numero,nome,pais);
     alterar_aluno(unidade,bd->alunos,bd->alunos->elementos);*/
@@ -86,6 +85,6 @@ void modificaraluno(SGBD * bd){
 
 
 
-    fclose(fp);
+    
     #endif
 }
