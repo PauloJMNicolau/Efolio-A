@@ -4,6 +4,7 @@
 #include <locale.h>
 #include "global.h"
 #include "uiucs.h"
+#include "uialunos.h"
 #include "../sgbd/sgbd.h"
 
 #ifndef _MENU_

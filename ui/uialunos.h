@@ -8,7 +8,7 @@
 void novoaluno(SGBD * bd);
 
 //Remover aluno
-void removeraluno (SGBD * bd);
+void remov_aluno (SGBD * bd);
 
 //consultarAluno
 void consultaraluno (SGBD * bd);

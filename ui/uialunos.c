@@ -20,10 +20,29 @@ void novoaluno(SGBD * bd){
 }
 
 //Remover aluno
-int removerAluno(int pos, LIST_ALUNO *lista);
+void remov_aluno(SGBD * bd){
+    clearScreen();
+    imprimirlistalunos(bd);
+    int numero = -1;
+    do{
+        wprintf(L"\nQual o numero do aluno a remover: ",bd->alunos->elementos);
+        wscanf(L"%d",&numero);
+        if(numero < 0|| numero > bd->alunos->elementos)
+            wprintf(L"\nNumero de aluno inválido\n");
+    }while(numero < 0|| numero > bd->alunos->elementos);
+    removerAluno(numero-1,bd->alunos);
+    imprimirlistalunos(bd);
+    wprintf(L"\nPara continuar precione ENTER",bd->alunos->elementos);
+    wchar_t tecla = L' ';
+    getwchar();
+    do{
+        wscanf(L"%c", &tecla);
+    } while(tecla != L'\n');
+}
+
 
 //consultarAluno
-void consultaralunos(SGBD * bd){
+void consultaraluno(SGBD * bd){
     int numero, nome, pais;
     clearScreen();
     for(int i =0; i< 80; i++)
