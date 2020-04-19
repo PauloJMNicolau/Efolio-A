@@ -67,16 +67,16 @@ void menuAlunos(SGBD * bd) {
 
         switch (opcao) {
             case 1:
-                //adicionarAluno();
+                novoaluno( bd);
                 break;
             case 2:
-                //removerAluno();
+                removerAluno(bd);
                 break;
             case 3:
-                //consultarAluno();
+                consultaralunos( bd);
                 break;
             case 4:
-                //modificarAluno();
+                modificaraluno( bd);
                 break;
             case 0:
                 break;
