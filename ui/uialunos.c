@@ -6,7 +6,7 @@
 void novoaluno(SGBD * bd){
     clearScreen();
     int numero, nome , pais;
-    wchar_t * nome=calloc(_TAMSTRING, sizeof(wchar_t));
+    wchar_t * aluno=calloc(_TAMSTRING, sizeof(wchar_t));
     wprintf(L"Indique os seus dados pessoais: ");
     wprintf(L"\nNumero: ");
     wscanf(L"%d", &numero);
