@@ -79,4 +79,20 @@ void processarLinhaUC(wchar_t * linha, LIST_UC * lista){
     adicionarUC(criarUC(numero,nome,ano,semestre),lista,lista->elementos);//Adiciona sempre no final
 }
 
+
+//Gravar Dados da UC no ficheiro
+void gravarUCTexto(LIST_UC * lista){
+    FILE * fp = fopen("dadosUC2.txt","w");
+    if(!fp){
+        wprintf(L"Erro %d: Não foi possivel abrir o ficheiro",_ERR_READFILE);
+        exit(_ERR_READFILE);
+    }
+    fwprintf(fp, L"#Unidades Curriculares;\n\n#ID-Nome-Ano-Semestre;\n\n");
+    for(int i= 0; i < lista->elementos; i++){
+        UC * aux = obterUC(i, lista);
+        fwprintf(fp, L"%d-%S-%d-%d;\n", aux->numero, aux->nome, aux->ano, aux->semestre);
+    }
+    fclose(fp);
+}
+
 #endif

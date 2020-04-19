@@ -9,7 +9,7 @@ void novaUC(SGBD * bd){
     wprintf(L"\nNumero: ");
     wscanf(L"%d", &numero);
     wprintf(L"\nNome: ");
-    wscanf(L"%s", nome);
+    wscanf(L"%S", nome);
     wprintf(L"\nAno: ");
     wscanf(L"%d", &ano);
     wprintf(L"\nSemestre: ");

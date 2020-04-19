@@ -23,6 +23,7 @@ void executarPrograma(){
     carregarFicheiros(sgbd);
     //Mostrar Menu
     menuPrincipal(sgbd);
+    gravarDados(sgbd);
     //Terminar Programa (Libertar memoria)
     libertarBD(sgbd);
 }

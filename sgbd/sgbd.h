@@ -32,4 +32,5 @@ typedef struct sgdb{
 SGBD *criarBaseDados();
 int carregarFicheiros(SGBD * bd);
 int libertarBD(SGBD * bd);
+int gravarDados(SGBD * bd);
 #endif
