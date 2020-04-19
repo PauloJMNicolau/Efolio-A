@@ -24,9 +24,9 @@ void novoAluno(SGBD * bd){
     wprintf(L"\nNumero: ");
     wscanf(L"%d", &numero);
     wprintf(L"\nNome: ");
-    wscanf(L"%l[^\n]", nome);
+    wscanf(L"%[^\n]", nome);
     wprintf(L"\nPaís: ");
-    wscanf(L"%l[^\n]", pais);
+    wscanf(L"%[^\n]", pais);
    
     ALUNO * pessoa = criarAluno(numero,nome,pais);
     adicionarAluno(pessoa,bd->alunos,bd->alunos->elementos);
