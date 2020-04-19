@@ -115,7 +115,6 @@ void imprimirdadosaluno(ALUNO * elem){
     for(int i =0; i< 80; i++)
         wprintf(L"-");
 }
-////////////////////////////////////////////////////////////
 //Alterar Aluno
 void modificaraALuno(SGBD * bd){
     clearScreen();
