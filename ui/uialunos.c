@@ -10,31 +10,37 @@ void novoaluno(SGBD * bd){
     if(!numero){
         wprintf(L"Erro %d: Não foi possivel guardar o  numero do aluno",_ERR_READFILE);
         exit(_ERR_READFILE);
-    wchar_t * nome=calloc(_TAMSTRING, sizeof(wchar_t));//nome
+    }
+     wchar_t * nome=calloc(_TAMSTRING, sizeof(wchar_t));//nome
      if(!nome){
         wprintf(L"Erro %d: Não foi possivel guardar o  nome do aluno",_ERR_READFILE);
         exit(_ERR_READFILE);
+     }
     wchar_t * pais=calloc(_TAMSTRING, sizeof(wchar_t));//pais
      if(!numero){
         wprintf(L"Erro %d: Não foi possivel guardar o  pais do aluno",_ERR_READFILE);
         exit(_ERR_READFILE);
+     
 
-    wprintf(L"Indique os seus dados pessoais: ");
-    wprintf(L"\nNumero: ");
-    wscanf(L"%d", &numero);
-    wprintf(L"\nNome: ");
-    wscanf(L"%S", nome);
-    wprintf(L"\npais: ");
-    wscanf(L"%S", &pais);
-    ALUNO * lista =criaraluno(numero,nome,pais);
-    adicionarAluno(lista,bd->alunos,bd->alunos->elementos);
-    free(nome);
-    free(numero);
-    free(pais);
+        wprintf(L"Indique os seus dados pessoais: ");
+        wprintf(L"\nNumero: ");
+        wscanf(L"%d", &numero);
+        wprintf(L"\nNome: ");
+        wscanf(L"%S", nome);
+        wprintf(L"\npais: ");
+        wscanf(L"%S", &pais);
+        ALUNO * lista =criaraluno(numero,nome,pais);
+        adicionarAluno(lista,bd->alunos,bd->alunos->elementos);
+        free(nome);
+        free(numero);
+        free(pais);
+     }
 }
-
+    
 //Remover aluno
 void remov_aluno(SGBD * bd){
+    int numero;
+    wchar_t nome , pais;
     clearScreen();
     imprimirlistalunos(bd);
     int numero = -1;
@@ -54,70 +60,53 @@ void remov_aluno(SGBD * bd){
     } while(tecla != L'\n');
 }
 
-
 //Mostrar Lista de alunos
 void mostrarListalunos(SGBD * bd){
+    int numero;
+    wchar_t nome , pais;
     clearScreen();
-    for(int i =0; i< 80; i++)
+
+    for(int i =0; i< 80; i++){
         wprintf(L"-");
         wprintf(L"\n|%8S%50S%10S%10S|\n",L"Numero",L"Nome",L"pais");
-    for(int i =0; i< 80; i++)
+    }
+    for(int i =0; i< 80; i++){
         wprintf(L"-");
-    for(int i=0; i< bd->alunos->elementos; i++){
+    }
+    for(int i=0; i< bd->alunos->elementos; i++)
         ALUNO* temp = obterUC(i, bd->ucs);
         wprintf(L"\n|%8d%50S%10d%10d|",temp->numero, temp->nome, temp->pais);
-    }
-    wprintf(L"\n");
+        wprintf(L"\n");
+    
     for(int i =0; i< 80; i++)
         wprintf(L"-");
-        wprintf(L"\n|%70S%8d|\n",L"Total Disciplinas",bd->ucs->elementos);
+        wprintf(L"\n|%70S%8d|\n",L"Total Disciplinas",bd->alunos->elementos);
+    
     for(int i =0; i< 80; i++)
         wprintf(L"-");
-        wprintf(L"\nPara continuar precione ENTER",bd->ucs->elementos);
+        wprintf(L"\nPara continuar precione ENTER",bd->alunos->elementos);
+    
     wchar_t tecla = L' ';
     getwchar();
     do{
         wscanf(L"%c", &tecla);
     } while(tecla != L'\n');
-}
-
-/*consultarAluno
-void consultaraluno(SGBD * bd){
-    int numero, nome, pais;
-    clearScreen();
-    for(int i =0; i< 80; i++)
-        wprintf(L"-");
-        wprintf(L"\n|%8S%50S%10S|\n",L"Numero",L"Nome",L"pais");
-    for(int i =0; i< 80; i++)
-        wprintf(L"-");
-    for(int i=0; i< bd->alunos->elementos; i++){
-        ALUNO* temp = obterUC(i, bd->alunos);
-        wprintf(L"\n|%8d%50S%10d|",temp->numero, temp->nome, temp->pais);   
-        wprintf(L"\nNumero: ");
-        wscanf(L"%d", &numero);
-        wprintf(L"\nNome: ");
-        wscanf(L"%s", nome);
-        wprintf(L"\npais: ");
-        wscanf(L"%d", &pais);*/
-
-
-        //ALUNO * lista = criaraluno(numero,nome,pais);
-        //adicionaraluno(lista,bd->alunos,bd->alunos->elementos);
-        //free(nome);
-    }
         wprintf(L"\n");
+
         for(int i =0; i< 80; i++)
             wprintf(L"-");
-        wprintf(L"\n|%70S%10d|\n",L"Total Alunos",bd->alunos->elementos);
+            wprintf(L"\n|%70S%10d|\n",L"Total Alunos",bd->alunos->elementos);
+
         for(int i =0; i< 80; i++)
             wprintf(L"-");
-        wprintf(L"\nPara continuar precione ENTER",bd->alunos->elementos);
+            wprintf(L"\nPara continuar precione ENTER",bd->alunos->elementos);
+            
         wchar_t tecla = L' ';
         getwchar();
         do{
             wscanf(L"%c", &tecla);
         } while(tecla != L'\n');
-}
+
 //modificarAluno
 void modificaraluno(SGBD * bd){
     clearScreen();
@@ -143,8 +132,9 @@ void modificaraluno(SGBD * bd){
         }while(numero<0 || numero >4);
         //Sair do ciclo
         if(numero==4){
-            wchar_t continuar=0;
-            wchar_t continue;
+            continuar=0;
+            
+            continue;
         }
         int n;
         wchar_t s[_TAMSTRING]=L"";
