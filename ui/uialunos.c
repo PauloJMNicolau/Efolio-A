@@ -14,8 +14,8 @@ void novoaluno(SGBD * bd){
     wscanf(L"%s", nome);
     wprintf(L"\npais: ");
     wscanf(L"%d", &pais);
-    ALUNO * ALUNO = criaraluno(numero,nome,pais);
-    adicionaraluno(ALUNO,bd->alunos,bd->alunos->elementos);
+    ALUNO * lista = criaraluno(numero,nome,pais);
+    adicionarAluno(lista,bd->alunos,bd->alunos->elementos);
     free(nome);
 }
 
@@ -59,8 +59,8 @@ void consultaraluno(SGBD * bd){
         wscanf(L"%s", nome);
         wprintf(L"\npais: ");
         wscanf(L"%d", &pais);
-        ALUNO * ALUNO = criaraluno(numero,nome,pais);
-        adicionaraluno(ALUNO,bd->alunos,bd->alunos->elementos);
+        ALUNO * lista = criaraluno(numero,nome,pais);
+        adicionaraluno(lista,bd->alunos,bd->alunos->elementos);
         free(nome);
     }
         wprintf(L"\n");
@@ -88,9 +88,9 @@ void modificaraluno(SGBD * bd){
             wprintf(L"\nNumero de aluno inválido\n");
     }while(numero < 0|| numero > bd->alunos->elementos);
     //Alterar Dados
-    ALUNO * ALUNO = obteraluno(numero-1,bd->ucs);
+    ALUNO * lista = obteraluno(numero-1,bd->ucs);
     //Imprimir Dados do aluno a alterar
-    imprimiralunos(ALUNO);
+    imprimiralunos(lista);
     //Imprimir opções
     int continuar =1;
     do{
@@ -111,26 +111,26 @@ void modificaraluno(SGBD * bd){
             case 0:
                 wprintf(L"Novo Numero: ");
                 wscanf(L"%d", &n);
-                modificarValoresaluno(n,ALUNO->nome,ALUNO->numero,ALUNO->pais,ALUNO);
+                modificarValoresaluno(n,lista->nome,lista->numero,lista->pais,lista);
                 break;
             case 1:
                 wprintf(L"Novo Nome: ");
                 wscanf(L"%S", &s);
-                modificarValoresaluno(ALUNO->numero,s,ALUNO->nome,ALUNO->pais,ALUNO);
+                modificarValoresaluno(lista->numero,s,lista->nome,lista->pais,lista);
                 break;
             case 2:
                 do{
                     wprintf(L"Novo pais: ");
                     wscanf(L"%d", &n);
                 }while(n<1 || n>3);
-                modificarValoresaluno(ALUNO->numero,ALUNO->nome,n,ALUNO->pais,ALUNO);
+                modificarValoresaluno(lista->numero,lista->nome,n,lista->pais,lista);
                 break;
         }
         wprintf(L"Pretende continuar a alterar?\n\t0 - Não\n\t1 - Sim\nOpção: ");
         wscanf(L"%d",&continuar);
     }while(continuar != 0);
     //Imprimir Dados da UC alterados
-    imprimirlistalunos(ALUNO);
+    imprimirlistalunos(lista);
     //Esperar que utilizador diga para continuar
     wprintf(L"\nPara continuar precione ENTER",bd->alunos->elementos);
     wchar_t tecla = L' ';
@@ -157,13 +157,13 @@ void imprimirlistalunos(SGBD * bd){
     
 }
 
-void imprimirDadosaluno(ALUNO * ALUNO){
+void imprimirDadosaluno(ALUNO * lista){
     for(int i =0; i< 80; i++)
         wprintf(L"-");
     wprintf(L"\n|%8S|%50S|%10S|\n",L"Numero",L"Nome",L"pais");
     for(int i =0; i< 80; i++)
         wprintf(L"-");
-    wprintf(L"\n|%8d|%50S|%10d|\n",ALUNO->numero,ALUNO->nome,ALUNO->pais);
+    wprintf(L"\n|%8d|%50S|%10d|\n",lista->numero,lista->nome, lista->pais);
     for(int i =0; i< 80; i++)
         wprintf(L"-");
 }
