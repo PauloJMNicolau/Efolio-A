@@ -1,20 +1,20 @@
 #include "uialunos.h"
 
 
-
 //Adicionar uma novo aluno
 void novoaluno(SGBD * bd){
     clearScreen();
-    int numero, nome , pais;
+    int numero;
+    wchar_t nome , pais;
     wchar_t * aluno=calloc(_TAMSTRING, sizeof(wchar_t));
     wprintf(L"Indique os seus dados pessoais: ");
     wprintf(L"\nNumero: ");
     wscanf(L"%d", &numero);
     wprintf(L"\nNome: ");
-    wscanf(L"%s", nome);
+    wscanf(L"%S", nome);
     wprintf(L"\npais: ");
-    wscanf(L"%d", &pais);
-    ALUNO * lista = criaraluno(numero,nome,pais);
+    wscanf(L"%S", &pais);
+    ALUNO * lista =criaraluno(numero,nome,pais);
     adicionarAluno(lista,bd->alunos,bd->alunos->elementos);
     free(nome);
 }
@@ -66,7 +66,7 @@ void consultaraluno(SGBD * bd){
         wprintf(L"\n");
         for(int i =0; i< 80; i++)
             wprintf(L"-");
-        wprintf(L"\n|%70S%8d|\n",L"Total Alunos",bd->alunos->elementos);
+        wprintf(L"\n|%70S%10d|\n",L"Total Alunos",bd->alunos->elementos);
         for(int i =0; i< 80; i++)
             wprintf(L"-");
         wprintf(L"\nPara continuar precione ENTER",bd->alunos->elementos);
@@ -144,12 +144,12 @@ void modificaraluno(SGBD * bd){
 void imprimirlistalunos(SGBD * bd){
     for(int i =0; i< 80; i++)
         wprintf(L"-");
-        wprintf(L"\n|%4S|%8S|%45S|%10S|\n",L"Numero",L"Nome",L"pais");
+        wprintf(L"\n|%15S|%19S|%46S|\n",L"Numero",L"Nome",L"pais");
     for(int i =0; i< 80; i++)
         wprintf(L"-");
     for(int i=0; i< bd->alunos->elementos; i++){
         ALUNO* temp = obteraluno(i, bd->alunos);
-        wprintf(L"\n|%4.d|%8d|%45S|%10d|",i+1, temp->numero, temp->nome, temp->pais);
+        wprintf(L"\n|%15.d|%19d|%46S|",i+1, temp->numero, temp->nome, temp->pais);
     }
     wprintf(L"\n");
     for(int i =0; i< 80; i++)
@@ -160,10 +160,10 @@ void imprimirlistalunos(SGBD * bd){
 void imprimirDadosaluno(ALUNO * lista){
     for(int i =0; i< 80; i++)
         wprintf(L"-");
-    wprintf(L"\n|%8S|%50S|%10S|\n",L"Numero",L"Nome",L"pais");
+    wprintf(L"\n|%15S|%19S|%46S|\n",L"Numero",L"Nome",L"pais");
     for(int i =0; i< 80; i++)
         wprintf(L"-");
-    wprintf(L"\n|%8d|%50S|%10d|\n",lista->numero,lista->nome, lista->pais);
+        wprintf(L"\n|%15d|%19S|%46d|\n",lista->numero,lista->nome, lista->pais);
     for(int i =0; i< 80; i++)
         wprintf(L"-");
 }
