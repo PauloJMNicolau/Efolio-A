@@ -23,3 +23,5 @@ void cabecalho(char *str);
 int largTela();
 //função para imprimir no centro da tela
 void imprimirMeio(char *str);
+//Função aguarda que utilizador pressione ENTER
+void pressioneENTER();

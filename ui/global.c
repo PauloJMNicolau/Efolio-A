@@ -32,3 +32,12 @@ void cabecalho(char *str) {
    	imprimirMeio("     Universidade Aberta       ");
 	imprimirMeio(str);
 }
+
+void pressioneENTER(){
+	wchar_t tecla = L' ';
+	wprintf(L"\nPara continuar pressione ENTER");
+    getwchar();
+    do{
+        wscanf(L"%c", &tecla);
+    } while(tecla != L'\n');	
+}

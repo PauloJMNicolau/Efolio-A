@@ -214,7 +214,7 @@ int procuraPosicaoInscricao(INSCRICAO * elemento, LISTA_PASTA * lista){
     NO * temp = pasta->cauda->proximo;
     int i=0;
     while(i<pasta->elementos){
-        if(temp->elemento == elemento)
+        if(temp->elemento->numeroUC == elemento->numeroUC && temp->elemento->numeroAluno == elemento->numeroAluno && !wcscmp(temp->elemento->anoLetivo, elemento->anoLetivo))
             return i;
         i++;
         temp = temp->proximo;
@@ -282,6 +282,9 @@ int removerInscricao(INSCRICAO* inscricao, LISTA_PASTA * lista){
     if(!inscricao || !lista)
         return _ERR_IMPOSSIBLE;
     NO_PASTA * pasta = procuraPasta(inscricao->anoLetivo,lista);
-    removerInscricoes(procuraPosicaoInscricao(inscricao,lista),pasta);
-    return _ERR_IMPOSSIBLE;
+    
+    if(removerInscricoes(procuraPosicaoInscricao(inscricao,lista),pasta) == _SUCESSO)
+        return _SUCESSO;
+    else
+        return _ERR_IMPOSSIBLE; 
 }
