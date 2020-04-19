@@ -117,7 +117,7 @@ void imprimirDadosUC(ALUNO * elem){
 }
 
 //Alterar Aluno
-void modificarALuno(SGBD * bd){
+void modificaraLuno(SGBD * bd){
     clearScreen();
     imprimirAlunos(bd);
     int id = -1;
@@ -151,7 +151,7 @@ void modificarALuno(SGBD * bd){
             case 0:
                 wprintf(L"Novo Numero: ");
                 wscanf(L"%d", &n);
-                modificarValoresUC(n,elem->nome,elem->pais,elem);
+                modificarValoresAluno(n,elem->nome,elem->pais,elem);
                 break;
             case 1:
                 wprintf(L"Novo Nome: ");
