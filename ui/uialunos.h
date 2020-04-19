@@ -5,16 +5,19 @@
 #define _UIALUNOS_
 
 //Adicionar uma novo aluno a lista
-void novoaluno(SGBD * bd);
+void novoAluno(SGBD * bd);
 
 //Remover aluno
 void remov_aluno (SGBD * bd);
 
 //consultarAluno
-void consultaraluno (SGBD * bd);
+void mostrarAlunos (SGBD * bd);
 
 //modificarAluno
 void modificaraluno (SGBD * bd);
+
+// Imprimir lista de alunos
+void imprimirAlunos(SGBD * bd);
 #endif
 
 

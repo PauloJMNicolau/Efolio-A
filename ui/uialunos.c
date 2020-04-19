@@ -24,9 +24,9 @@ void novoAluno(SGBD * bd){
     wprintf(L"\nNumero: ");
     wscanf(L"%d", &numero);
     wprintf(L"\nNome: ");
-    wscanf(L"%S", nome);
+    wscanf(L"%l[^\n]", nome);
     wprintf(L"\nPaís: ");
-    wscanf(L"%S", pais);
+    wscanf(L"%l[^\n]", pais);
    
     ALUNO * pessoa = criarAluno(numero,nome,pais);
     adicionarAluno(pessoa,bd->alunos,bd->alunos->elementos);
@@ -39,22 +39,22 @@ void mostrarAlunos(SGBD * bd){
     int  numero;
     wchar_t nome, pais;
     clearScreen();
-    for(int i =0; i< 80; i++)
+    for(int i =0; i< 100; i++)
         wprintf(L"-");
-        wprintf(L"\n|%8S%50S%10S%10S|\n",L"Numero",L"Nome",L"País");
-    for(int i =0; i< 80; i++)
+        wprintf(L"\n|%8S%50S%40S|\n",L"Numero",L"Nome",L"País");
+    for(int i =0; i< 100; i++)
         wprintf(L"-");
     for(int i=0; i< bd->alunos->elementos; i++){
         ALUNO* temp = obterAluno(i, bd->alunos);
-        wprintf(L"\n|%8d%50S%10d%10d|",temp->numero, temp->nome, temp->pais);
+        wprintf(L"\n|%8d%50S%40S|",temp->numero, temp->nome, temp->pais);
     }
     wprintf(L"\n");
-    for(int i =0; i< 80; i++)
+    for(int i =0; i< 100; i++)
         wprintf(L"-");
-    wprintf(L"\n|%70S%8d|\n",L"Total Disciplinas",bd->alunos->elementos);
-    for(int i =0; i< 80; i++)
+    wprintf(L"\n|%90S%8d|\n",L"Total Alunos",bd->alunos->elementos);
+    for(int i =0; i< 100; i++)
         wprintf(L"-");
-    wprintf(L"\nPara continuar precione ENTER",bd->alunos->elementos);
+    wprintf(L"\nPara continuar precione ENTER");
     wchar_t tecla = L' ';
     getwchar();
     do{
@@ -77,7 +77,7 @@ void remov_aluno(SGBD * bd){
     }while(id < 0|| id > bd->alunos->elementos);
     removerAluno(id-1,bd->alunos);
     imprimirAlunos(bd);
-    wprintf(L"\nPara continuar precione ENTER",bd->alunos->elementos);
+    wprintf(L"\nPara continuar precione ENTER");
     wchar_t tecla = L' ';
     getwchar();
     do{
@@ -85,7 +85,7 @@ void remov_aluno(SGBD * bd){
     } while(tecla != L'\n');
 }
 
-//Imprimir Lista de UC
+// Imprimir lista de alunos
 void imprimirAlunos(SGBD * bd){
     for(int i =0; i< 80; i++)
         wprintf(L"-");

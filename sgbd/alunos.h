@@ -49,5 +49,6 @@ int libertarListaAluno(LIST_ALUNO *lista);
 int removerAluno(int pos, LIST_ALUNO *lista);
 //Adicionar elemento na lista
 int adicionarAluno(ALUNO *aluno, LIST_ALUNO *lista, int pos);
-
+//Obter aluno na posição
+ALUNO * obterAluno(int pos, LIST_ALUNO * lista);
 #endif
