@@ -34,4 +34,3 @@
 21108-Sistemas Distribuidos-3-2;
 21182-Laboratório de Sistemas e Serviços Web-3-2;
 21184-Projeto de Engenharia Informática-3-2;
-21-filosofia-1-3;
