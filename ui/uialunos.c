@@ -125,7 +125,7 @@ void modificaraALuno(SGBD * bd){
         wprintf(L"\nQual o ID do aluno a modificar: ",bd->alunos->elementos);
         wscanf(L"%d",&id);
         if(id < 0|| id > bd->alunos->elementos)
-            wprintf(L"\nID de aluno inválida\n");
+            wprintf(L"\nID de aluno inválido\n");
     }while(id < 0|| id > bd->alunos->elementos);
     //Alterar Dados
     ALUNO * elem = obterAluno(id-1,bd->alunos);
