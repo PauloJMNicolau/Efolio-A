@@ -105,7 +105,7 @@ void imprimirAlunos(SGBD * bd){
 
 
 //imprimir dados dos alunos
-void imprimirDadosUC(ALUNO * elem){
+void imprimirdadosaluno(ALUNO * elem){
     for(int i =0; i< 80; i++)
         wprintf(L"-");
         wprintf(L"\n|%8S|%50S|%7S|%10S|\n",L"Numero",L"Nome",L"País");
