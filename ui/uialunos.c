@@ -23,11 +23,14 @@ void novoAluno(SGBD * bd){
     wprintf(L"Preencha os dados do aluno");
     wprintf(L"\nNumero: ");
     wscanf(L"%d", &numero);
+    
     wprintf(L"\nNome: ");
-    wscanf(L"%[^\n]", nome);
-    wprintf(L"\nPaís: ");
-    wscanf(L"%[^\n]", pais);
+    
+    wscanf(L"\n%l[^\n]", nome);
    
+    wprintf(L"\nPaís: ");
+    wscanf(L"\n%l[^\n]", pais);
+
     ALUNO * pessoa = criarAluno(numero,nome,pais);
     adicionarAluno(pessoa,bd->alunos,bd->alunos->elementos);
     free(nome);
