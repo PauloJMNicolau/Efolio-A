@@ -102,6 +102,80 @@ void imprimirAlunos(SGBD * bd){
         wprintf(L"-");
     
 }
-void modificarAluno (SGBD * bd);
 
+
+//imprimir dados dos alunos
+void imprimirdadosaluno(SGBD*bd){
+
+}
+//Alterar Aluno
+void modificarALuno(SGBD * bd){
+    clearScreen();
+    imprimirAlunos(bd);
+    int id = -1;
+    do{
+        wprintf(L"\nQual o ID do aluno a modificar: ",bd->alunos->elementos);
+        wscanf(L"%d",&id);
+        if(id < 0|| id > bd->alunos->elementos)
+            wprintf(L"\nID de aluno inválida\n");
+    }while(id < 0|| id > bd->alunos->elementos);
+    //Alterar Dados
+    ALUNO * elem = obterAluno(id-1,bd->alunos);
+    //Imprimir Dados dos alunos a alterar
+    imprimirdadosaluno(elem);
+    //Imprimir opções
+    int continuar =1;
+    do{
+        id = -1;
+        do{
+            wprintf(L"\nQual o dado a alterar?\n\t0 - Numero\n\t1 - Nome\n\t2 - Ano\n\t3 - Semestre\n\t4 - Cancelar\nOpção: ");
+            wscanf(L"%d",&id);
+        }while(id<0 || id >4);
+        //Sair do ciclo
+        if(id==4){
+            continuar =0;
+            continue;
+        }
+        int n;
+        wchar_t s[_TAMSTRING]=L"";
+        //Executar opção escolhida
+        switch(id){
+            case 0:
+                wprintf(L"Novo Numero: ");
+                wscanf(L"%d", &n);
+                modificarValoresUC(n,unidade->nome,unidade->ano,unidade->semestre,unidade);
+                break;
+            case 1:
+                wprintf(L"Novo Nome: ");
+                wscanf(L"%S", &s);
+                modificarValoresUC(unidade->numero,s,unidade->ano,unidade->semestre,unidade);
+                break;
+            case 2:
+                do{
+                    wprintf(L"Novo Ano: ");
+                    wscanf(L"%d", &n);
+                }while(n<1 || n>3);
+                modificarValoresUC(unidade->numero,unidade->nome,n,unidade->semestre,unidade);
+                break;
+            case 3:
+                do{
+                    wprintf(L"Novo Semestre: ");
+                    wscanf(L"%d", &n);
+                }while(n<1 || n>2); 
+                modificarValoresUC(unidade->numero,unidade->nome,unidade->ano,n,unidade); 
+                break;
+        }
+        wprintf(L"Pretende continuar a alterar?\n\t0 - Não\n\t1 - Sim\nOpção: ");
+        wscanf(L"%d",&continuar);
+    }while(continuar != 0);
+    //Imprimir Dados da UC alterados
+    imprimirDadosUC(unidade);
+    //Esperar que utilizador diga para continuar
+    wprintf(L"\nPara continuar precione ENTER",bd->alunos->elementos);
+    wchar_t tecla = L' ';
+    getwchar();
+    do{
+        wscanf(L"%c", &tecla);
+    } while(tecla != L'\n');
+}
 
