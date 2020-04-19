@@ -4,9 +4,11 @@
 //Adicionar uma novo aluno
 void novoaluno(SGBD * bd){
     clearScreen();
-    int numero;
-    wchar_t nome , pais;
-    wchar_t * aluno=calloc(_TAMSTRING, sizeof(wchar_t));
+    //int numero;
+    //wchar_t nome , pais;
+    int * numero=calloc(_TAMSTRING, sizeof(int));//numero
+    wchar_t * nome=calloc(_TAMSTRING, sizeof(wchar_t));//nome
+    wchar_t * pais=calloc(_TAMSTRING, sizeof(wchar_t));//pais
     wprintf(L"Indique os seus dados pessoais: ");
     wprintf(L"\nNumero: ");
     wscanf(L"%d", &numero);
@@ -17,6 +19,8 @@ void novoaluno(SGBD * bd){
     ALUNO * lista =criaraluno(numero,nome,pais);
     adicionarAluno(lista,bd->alunos,bd->alunos->elementos);
     free(nome);
+    free(numero);
+    free(pais);
 }
 
 //Remover aluno
