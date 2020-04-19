@@ -117,7 +117,7 @@ void imprimirDadosUC(ALUNO * elem){
 }
 
 //Alterar Aluno
-void modificaraLuno(SGBD * bd){
+void modificaraALuno(SGBD * bd){
     clearScreen();
     imprimirAlunos(bd);
     int id = -1;
