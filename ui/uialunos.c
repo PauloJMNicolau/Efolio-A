@@ -1,8 +1,6 @@
 #include "uialunos.h"
 
-
 //Adicionar um novo aluno
-
 // falta acrescentar as restantes memorias
 void novoAluno(SGBD * bd){
     clearScreen();
@@ -104,8 +102,6 @@ void imprimirAlunos(SGBD * bd){
         wprintf(L"-");
     
 }
-
-    
-
+void modificarAluno (SGBD * bd);
 
 
