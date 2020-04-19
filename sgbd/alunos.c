@@ -154,3 +154,27 @@ int removerAluno(int pos, LIST_ALUNO *lista){
     }
     return _SUCESSO;
 }
+
+///////////////////////////////////////////////////////////////
+//Obter aluno na posição
+ALUNO * obterAluno(int pos, LIST_ALUNO * lista){
+    if(!lista){
+        wprintf(L"Erro %d: Lista vazia", _ERR_EMPTYLIST);
+        return NULL;
+    }
+    if(pos < 0 || pos >lista->elementos){
+        wprintf(L"Erro %d: Possição inválida na lista", _ERR_IMPOSSIBLE);
+        return NULL;
+    }
+    if(pos == lista->elementos-1){
+        return lista->cauda->elemento;
+    } else{
+        int i =0;
+        NoALUNO * temp = lista->cauda;
+        while(i<=pos){
+            temp = temp->proximo;
+            i++;
+        }
+        return temp->elemento;
+    }
+}

@@ -7,20 +7,31 @@
 void novoAluno(SGBD * bd){
     clearScreen();
     int  numero;
-    wchar_t nome, pais;
+    wchar_t *nome, *pais;
 
-    wchar_t * nomes=calloc(_TAMSTRING, sizeof(wchar_t));
+    nome=calloc(_TAMSTRING, sizeof(wchar_t));
+    if(!nome){
+        wprintf(L"Erro %d: Não foi possivel alocar a memória",_ERR_MEMORYALLOC);
+        exit(_ERR_MEMORYALLOC);
+
+    }
+    pais=calloc(_TAMSTRING, sizeof(wchar_t));
+    if(!pais){
+        wprintf(L"Erro %d: Não foi possivel alocar a memória",_ERR_MEMORYALLOC);
+        exit(_ERR_MEMORYALLOC);
+    }
     wprintf(L"Preencha os dados do aluno");
     wprintf(L"\nNumero: ");
     wscanf(L"%d", &numero);
     wprintf(L"\nNome: ");
     wscanf(L"%S", nome);
     wprintf(L"\nPaís: ");
-    wscanf(L"%S", &pais);
+    wscanf(L"%S", pais);
    
     ALUNO * pessoa = criarAluno(numero,nome,pais);
     adicionarAluno(pessoa,bd->alunos,bd->alunos->elementos);
-    free(nomes);
+    free(nome);
+    free(pais);
 }
 
 //Mostrar Lista de  alunos
