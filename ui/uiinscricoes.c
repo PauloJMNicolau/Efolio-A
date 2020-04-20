@@ -76,43 +76,59 @@ void modificarInscricao(SGBD * bd){
     clearScreen();
     NO_PASTA * pasta;
     INSCRICAO * inscricao;
-    int id, n, s, opcao, continuar, numeroAluno, numeroUC;
+    int id, nA, nU, opcao, continuar, numeroAluno, numeroUC;
     wchar_t * anoLetivo;
     anoLetivo = calloc(_TAMDATAS,sizeof(wchar_t));
     wprintf(L"\nIndique o Ano Letivo que pretende consultar: ");
     wscanf(L"%S", anoLetivo);
-    pasta = procuraPasta(anoLetivo, bd->inscricoes);
-    imprimirInscricoes(pasta);
-    wprintf(L"\nIndique o ID da inscrição que pretende modificar: ");
-    wscanf(L"%d", &id);
-    inscricao = obterInscricao(id-1,pasta);
-    do{
-        opcao = -1;
-        do{
-            wprintf(L"\nQual o dado a alterar?\n\t0 - Número Aluno\n\t1 - Número Unidade Curricular\n\t3 - Cancelar\nOpção: ");
-            wscanf(L"%d",&opcao);
-        }while(opcao<0 || opcao>3);
-        //Sair do ciclo
-        if(opcao==3){
-            continuar =0;
-            continue;
-        }
-        //Executar opção escolhida
-        switch(opcao){
-            case 0:
-                wprintf(L"Novo Número de Aluno: ");
-                wscanf(L"%d", &n);
-                modificarValorInscricao(n,s,inscricao);
-                break;
-            case 1:
-                wprintf(L"Nova Unidade Curricular: ");
-                wscanf(L"%d", &s);
-                modificarValorInscricao(n,s,inscricao);
-                break;
-        }
-        wprintf(L"Pretende continuar a alterar?\n\t0 - Não\n\t1 - Sim\nOpção: ");
-        wscanf(L"%d",&continuar);
-    }while(continuar != 0);
+    if(bd->inscricoes->pastas){
+        pasta = procuraPasta(anoLetivo, bd->inscricoes);
+        imprimirInscricoes(pasta);
+        wprintf(L"\nIndique o ID da inscrição que pretende modificar: ");
+        wscanf(L"%d", &id);
+        if(pasta->elementos){
+            inscricao = obterInscricao(id-1,pasta);
+            do{
+                opcao = -1;
+                do{
+                    wprintf(L"\nQual o dado a alterar?\n\t0 - Número Aluno\n\t1 - Número Unidade Curricular\n\t3 - Cancelar\nOpção: ");
+                    wscanf(L"%d",&opcao);
+                }while(opcao<0 || opcao>3);
+                //Sair do ciclo
+                if(opcao==3){
+                    continuar =0;
+                    continue;
+                }
+                //Executar opção escolhida
+                switch(opcao){
+                    case 0:
+                        wprintf(L"\nNovo Número de Aluno: ");
+                        wscanf(L"%d", &nA);
+                        if(procurarAluno(nA,bd->alunos))
+                            modificarValorInscricao(nA,nU,inscricao);
+                        else
+                            wprintf(L"\nNúmero de Aluno inexistente");
+                        break;
+                    case 1:
+                        wprintf(L"\nNova Unidade Curricular: ");
+                        wscanf(L"%d", &nU);
+                        if(procurarUC(nU,bd->ucs))
+                            modificarValorInscricao(nA,nU,inscricao);
+                        else
+                            wprintf(L"\nNúmero de UC inexistente");
+                        break;
+                }
+                wprintf(L"\nPretende continuar a alterar?\n\t0 - Não\n\t1 - Sim\nOpção: ");
+                wscanf(L"%d",&continuar);
+            }while(continuar != 0);
+            free(anoLetivo);
+            }
+            else
+                wprintf(L"\nNão existe Inscrições neste Ano Letivo");
+            
+    }
+    else
+        wprintf(L"\nNão existe Ano Letivos");
     pressioneENTER;
 }
 
