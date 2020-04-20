@@ -288,3 +288,35 @@ int removerInscricao(INSCRICAO* inscricao, LISTA_PASTA * lista){
     else
         return _ERR_IMPOSSIBLE; 
 }
+
+//Obter inscrição na posição
+INSCRICAO * obterInscricao(int pos, NO_PASTA * lista){
+    int i =0;
+    NO * temp;
+    if(!lista){
+        wprintf(L"Erro %d: Lista vazia", _ERR_EMPTYLIST);
+        return NULL;
+    }
+    if(pos < 0 || pos >lista->elementos){
+        wprintf(L"Erro %d: Possição inválida na lista", _ERR_IMPOSSIBLE);
+        return NULL;
+    }
+    if(pos == lista->elementos-1)
+        return lista->cauda->elemento;
+    else{
+        temp = lista->cauda;
+        while(i<=pos){
+            temp = temp->proximo;
+            i++;
+        }
+        return temp->elemento;
+    }
+}
+
+//Modificar Valores UC
+void modificarValorInscricao(int numeroAluno, int numeroUC, INSCRICAO * inscricao){
+    if(numeroAluno)
+        inscricao->numeroAluno = numeroAluno;
+    if(numeroUC)
+        inscricao->numeroUC = numeroUC;
+}

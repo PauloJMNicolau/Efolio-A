@@ -78,5 +78,8 @@ int removerPasta(NO_PASTA * pasta, LISTA_PASTA * lista);
 int removerInscricoes(int pos, NO_PASTA * lista);
 //Remover inscrição
 int removerInscricao(INSCRICAO* inscricao, LISTA_PASTA * lista);
-
+//Obter inscrição na posição
+INSCRICAO * obterInscricao(int pos, NO_PASTA * lista);
+//Modificar valor de uma inscrição
+void modificarValorInscricao(int numeroAluno, int numeroUC, INSCRICAO * inscricao);
 #endif

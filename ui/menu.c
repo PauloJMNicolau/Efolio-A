@@ -154,7 +154,7 @@ void menuInscricoes(SGBD * bd) {
                 mostrarListaInscricoes(bd);
                 break;
             case 4:
-                //modificarInscricao();
+                modificarInscricao(bd);
                 break;
             case 0:
                 break;
