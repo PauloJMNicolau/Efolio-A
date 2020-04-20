@@ -76,7 +76,7 @@ void menuAlunos(SGBD * bd) {
                 mostrarAlunos( bd);
                 break;
             case 4:
-                modificarAluno( bd);
+                modificaraluno( bd);
                 break;
             case 0:
                 break;
