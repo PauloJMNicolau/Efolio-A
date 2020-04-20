@@ -37,13 +37,13 @@ void mostrarListaInscricoes(SGBD * bd){
     NO_PASTA * pasta;
     wchar_t * anoLetivo;
     anoLetivo = calloc(_TAMDATAS, sizeof(wchar_t));
-    wprintf(L"\nIndique o ano letivo que pretende consultar: ");
+    wprintf(L"\nIndique o Ano Letivo que pretende consultar: ");
     wscanf(L"%ls", anoLetivo);
     pasta = procuraPasta(anoLetivo, bd->inscricoes);
     if (pasta != NULL)
         imprimirInscricoes(pasta);
     else
-        wprintf(L"Não existe inscrições para o ano letivo indicado");
+        wprintf(L"\nNão existe referência ao Ano Letivo introduzido");
     free(anoLetivo);
     pressioneENTER();
 }
@@ -51,22 +51,29 @@ void mostrarListaInscricoes(SGBD * bd){
 //Remover uma inscrição
 void eliminarInscricao(SGBD * bd){
     clearScreen();
-    INSCRICAO * inscricao;
-    int numeroUC, numeroAluno;
+    NO_PASTA * pasta;
+    int id, opcao, numeroUC, numeroAluno;
     wchar_t * anoLetivo;   
-    anoLetivo = calloc(_TAMDATAS, sizeof(wchar_t)); 
-    wprintf(L"Preencha os dados da Inscrição que pretende remover");
-    wprintf(L"\nNúmero da UC: ");
-    wscanf(L"%d", &numeroUC);
-    wprintf(L"\nNúmero de Aluno: ");
-    wscanf(L"%d", &numeroAluno);
-    wprintf(L"\nAno Letivo [xxxx/yyyy]: ");
-    wscanf(L"%ls", anoLetivo);
-    inscricao = criarInscricao(numeroUC, numeroAluno, anoLetivo);
-    if(removerInscricao(inscricao, bd->inscricoes) == _SUCESSO)
-        wprintf(L"\nInscrição removida com sucesso\n");
+    anoLetivo = calloc(_TAMDATAS, sizeof(wchar_t));
+    wprintf(L"\nIndique o Ano Letivo que pretende consultar: ");
+    wscanf(L"%S", anoLetivo);
+    if(bd->inscricoes->pastas){
+        pasta = procuraPasta(anoLetivo, bd->inscricoes);
+        imprimirInscricoes(pasta);
+        if(pasta->elementos){
+            wprintf(L"\nIndique o ID da inscrição que pretende remover: ");
+            wscanf(L"%d", &id);
+            wprintf(L"\nTem a certeza que deseja remover esta inscrição?\n\t1 - Sim\n\t2 - Não\nopção: ");
+            wscanf(L"%d", &opcao);
+            if(opcao == 1)
+                if(removerInscricoes(id-1,pasta) == _SUCESSO)
+                    wprintf(L"\nInscrição removida");
+        }
+        else
+            wprintf(L"\nNão existe Inscrições neste Ano Letivo");
+    }
     else
-        wprintf(L"\nNão existe inscrição para os dados inseridos");
+        wprintf(L"Não existe referência ao Ano Letivo introduzido");
     free(anoLetivo);
     pressioneENTER(); 
 }
@@ -128,8 +135,8 @@ void modificarInscricao(SGBD * bd){
             
     }
     else
-        wprintf(L"\nNão existe Ano Letivos");
-    pressioneENTER;
+        wprintf(L"\nNão existe referência ao Ano Letivo introduzido");
+    pressioneENTER();
 }
 
 //Imprimir dado da inscrição
