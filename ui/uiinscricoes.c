@@ -4,29 +4,39 @@
 void novaInscricao(SGBD * bd) {
     clearScreen();
     INSCRICAO * novo;
-    int numeroUC, numeroAluno;
+    int opcao, numeroUC, numeroAluno;
     wchar_t * anoLetivo;   
     anoLetivo = calloc(_TAMDATAS, sizeof(wchar_t)); 
-    wprintf(L"Preencha os dados da nova Inscrição");
-    wprintf(L"\nNúmero da UC: ");
-    wscanf(L"%d", &numeroUC);
-    if (procurarUC(numeroUC, bd->ucs)) {
-        wprintf(L"\nNúmero de Aluno: ");
-        wscanf(L"%d", &numeroAluno);
-        if (procurarAluno(numeroAluno, bd->alunos)) {
-            wprintf(L"\nAno Letivo [xxxx/yyyy]: ");
-            wscanf(L"%ls", anoLetivo);
-            novo = criarInscricao(numeroUC, numeroAluno, anoLetivo);
-            if(adicionarInscricao(novo, bd->inscricoes) == _SUCESSO)
-                wprintf(L"Incrição Efectuada");
-            else
-                wprintf(L"Erro na Inscrição");    
+    do {
+        opcao = -1;
+        clearScreen();
+        wprintf(L"\nPreencha os dados da nova Inscrição");
+        wprintf(L"\nNúmero da UC: ");
+        wscanf(L"%d", &numeroUC);
+        if (procurarUC(numeroUC, bd->ucs)) {
+            wprintf(L"\nNúmero de Aluno: ");
+            wscanf(L"%d", &numeroAluno);
+            if (procurarAluno(numeroAluno, bd->alunos)) {
+                wprintf(L"\nAno Letivo [xxxx/yyyy]: ");
+                wscanf(L"%S", anoLetivo);
+                novo = criarInscricao(numeroUC, numeroAluno, anoLetivo);
+                if(adicionarInscricao(novo, bd->inscricoes) == _SUCESSO){
+                    wprintf(L"\nIncrição Efectuada\n\nDeseja continuar a inscrever?\n\t0 - Sim\n\t1 - Não\nopcao: ");
+                    wscanf(L"%d",&opcao);
+                }
+                else
+                    wprintf(L"\nErro na Inscrição");    
+            }
+            else {
+                wprintf(L"\nNúmero de Aluno inexistente\n\nDeseja tentar de novo?\n\t0 - Sim\n\t1 - Sair\nopcão: ");
+                wscanf(L"%d", &opcao);
+            }
         }
-        else
-            wprintf(L"Número de Aluno inexistente");
-    }
-    else
-        wprintf(L"Unidade Curricular inexistente");
+        else {
+            wprintf(L"\nUnidade Curricular inexistente\n\nDeseja tentar de novo?\n\t0 - Sim\n\t1 - Sair\nopcão: ");
+            wscanf(L"%d", &opcao);
+        }
+    }while (opcao == 0);
     free(anoLetivo);
     pressioneENTER();
 }
@@ -38,7 +48,7 @@ void mostrarListaInscricoes(SGBD * bd){
     wchar_t * anoLetivo;
     anoLetivo = calloc(_TAMDATAS, sizeof(wchar_t));
     wprintf(L"\nIndique o Ano Letivo que pretende consultar: ");
-    wscanf(L"%ls", anoLetivo);
+    wscanf(L"%S", anoLetivo);
     pasta = procuraPasta(anoLetivo, bd->inscricoes);
     if (pasta != NULL)
         imprimirInscricoes(pasta);
@@ -59,18 +69,34 @@ void eliminarInscricao(SGBD * bd){
     wscanf(L"%S", anoLetivo);
     if(bd->inscricoes->pastas){
         pasta = procuraPasta(anoLetivo, bd->inscricoes);
-        imprimirInscricoes(pasta);
-        if(pasta->elementos){
-            wprintf(L"\nIndique o ID da inscrição que pretende remover: ");
-            wscanf(L"%d", &id);
-            wprintf(L"\nTem a certeza que deseja remover esta inscrição?\n\t1 - Sim\n\t2 - Não\nopção: ");
-            wscanf(L"%d", &opcao);
-            if(opcao == 1)
-                if(removerInscricoes(id-1,pasta) == _SUCESSO)
-                    wprintf(L"\nInscrição removida");
-        }
-        else
-            wprintf(L"\nNão existe Inscrições neste Ano Letivo");
+        do {
+            if(pasta->elementos){
+                opcao = -1;
+                id = -1;
+                do{
+                    clearScreen();
+                    imprimirInscricoes(pasta);
+                    wprintf(L"\nIndique o ID da inscrição que pretende remover: ");
+                    wscanf(L"%d",&id);
+                    if(id <= 0 || id > pasta->elementos){
+                        wprintf(L"\nID da inscrição inválido\n");
+                        pressioneENTER();
+                    }
+                }while(id <= 0 || id > pasta->elementos);
+                wprintf(L"\nTem a certeza que deseja remover esta inscrição?\n\t0 - Sim\n\t1 - Sair\nopção: ");
+                wscanf(L"%d", &opcao);
+                if(opcao == 0)
+                    if(removerInscricoes(id-1,pasta) == _SUCESSO) {
+                        wprintf(L"\nInscrição removida\n");
+                        wprintf(L"\nDeseja continuar a remover?\n\t0 - Sim\n\t1 - Sair\nopcao: ");
+                        wscanf(L"%d", &opcao);
+                    }
+            }
+            else {
+                wprintf(L"\nNão existe Inscrições neste Ano Letivo");
+                opcao = -1;
+            }
+        }while(opcao == 0);
     }
     else
         wprintf(L"Não existe referência ao Ano Letivo introduzido");
@@ -90,13 +116,21 @@ void modificarInscricao(SGBD * bd){
     wscanf(L"%S", anoLetivo);
     if(bd->inscricoes->pastas){
         pasta = procuraPasta(anoLetivo, bd->inscricoes);
-        imprimirInscricoes(pasta);
-        wprintf(L"\nIndique o ID da inscrição que pretende modificar: ");
-        wscanf(L"%d", &id);
-        if(pasta->elementos){
-            inscricao = obterInscricao(id-1,pasta);
-            do{
+        do{
+            if(pasta->elementos){
                 opcao = -1;
+                id = -1;
+                do{
+                    clearScreen();
+                    imprimirInscricoes(pasta);
+                    wprintf(L"\nQual o ID da inscrição que deseja modificar: ");
+                    wscanf(L"%d",&id);
+                    if(id < 0|| id > pasta->elementos){
+                        wprintf(L"\nID da inscrição inválido\n");
+                        pressioneENTER();
+                    }
+                }while(id < 0|| id > pasta->elementos);
+                inscricao = obterInscricao(id-1,pasta);
                 do{
                     wprintf(L"\nQual o dado a alterar?\n\t0 - Número Aluno\n\t1 - Número Unidade Curricular\n\t3 - Cancelar\nOpção: ");
                     wscanf(L"%d",&opcao);
@@ -127,15 +161,16 @@ void modificarInscricao(SGBD * bd){
                 }
                 wprintf(L"\nPretende continuar a alterar?\n\t0 - Não\n\t1 - Sim\nOpção: ");
                 wscanf(L"%d",&continuar);
-            }while(continuar != 0);
-            free(anoLetivo);
             }
-            else
+            else {
                 wprintf(L"\nNão existe Inscrições neste Ano Letivo");
-            
+                break;
+            }
+        }while(continuar != 0);
     }
     else
         wprintf(L"\nNão existe referência ao Ano Letivo introduzido");
+    free(anoLetivo);
     pressioneENTER();
 }
 
