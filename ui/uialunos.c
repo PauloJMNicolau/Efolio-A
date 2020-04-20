@@ -90,12 +90,13 @@ void remov_aluno(SGBD * bd){
 void imprimirAlunos(SGBD * bd){
     for(int i =0; i< 80; i++)
         wprintf(L"-");
-    wprintf(L"\n|%4S|%8S|%45S|%7S|%10S|\n",L"ID",L"Numero",L"Nome",L"País");
+        wprintf(L"\n|%4S|%8S|%45S|%17S|\n",L"ID",L"Numero",L"Nome",L"País");
     for(int i =0; i< 80; i++)
         wprintf(L"-");
     for(int i=0; i< bd->alunos->elementos; i++){
         ALUNO* temp = obterAluno(i, bd->alunos);
-        wprintf(L"\n|%4.d|%8d|%45S|%7d|%10d|",i+1, temp->numero, temp->nome, temp->pais);
+         
+        wprintf(L"\n|%4.d|%8d|%45S|%17S|",i+1, temp->numero, temp->nome, temp->pais);
     }
     wprintf(L"\n");
     for(int i =0; i< 80; i++)
@@ -133,7 +134,7 @@ void modificaraluno(SGBD * bd){
     do{
         id = -1;
         do{
-            wprintf(L"\nQual o dado a alterar?\n\t0 - Numero\n\t1 - Nome\n\t2 - Pais\n\t3\n\t4 - Cancelar\nOpção: ");
+            wprintf(L"\nQual o dado a alterar?\n\t0 - Numero\n\t1 - Nome\n\t2 - Pais\n\t3 - Cancelar\nOpção: ");
             wscanf(L"%d",&id);
         }while(id<0 || id >4);
         //Sair do ciclo
