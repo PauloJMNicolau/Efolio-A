@@ -178,3 +178,12 @@ ALUNO * obterAluno(int pos, LIST_ALUNO * lista){
         return temp->elemento;
     }
 }
+//Modificar Valores Aluno
+void modificarValoresAluno(int numero, wchar_t *nome, wchar_t *pais, ALUNO * elem){
+    if(numero)
+        elem->numero= numero;
+    if(nome)
+        wcsncpy(elem->nome,nome,wcslen(nome));
+    if(pais)
+        elem->pais = pais;
+}
