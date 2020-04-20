@@ -68,8 +68,8 @@ void eliminarInscricao(SGBD * bd){
     anoLetivo = calloc(_TAMDATAS, sizeof(wchar_t));
     wprintf(L"\nIndique o Ano Letivo que pretende consultar: ");
     wscanf(L"%S", anoLetivo);
-    if(bd->inscricoes->pastas){
-        pasta = procuraPasta(anoLetivo, bd->inscricoes);
+    pasta = procuraPasta(anoLetivo, bd->inscricoes);
+    if(pasta != NULL){
         do {
             if(pasta->elementos){
                 opcao = -1;
@@ -100,7 +100,7 @@ void eliminarInscricao(SGBD * bd){
         }while(opcao == 0);
     }
     else
-        wprintf(L"Não existe referência ao Ano Letivo introduzido");
+        wprintf(L"\nNão existe referência ao Ano Letivo introduzido");
     free(anoLetivo);
     pressioneENTER(); 
 }
@@ -115,8 +115,8 @@ void modificarInscricao(SGBD * bd){
     anoLetivo = calloc(_TAMDATAS,sizeof(wchar_t));
     wprintf(L"\nIndique o Ano Letivo que pretende consultar: ");
     wscanf(L"%S", anoLetivo);
-    if(bd->inscricoes->pastas){
-        pasta = procuraPasta(anoLetivo, bd->inscricoes);
+    pasta = procuraPasta(anoLetivo, bd->inscricoes);
+    if(pasta != NULL){
         do{
             if(pasta->elementos){
                 opcao = -1;
