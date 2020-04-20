@@ -79,11 +79,11 @@ void eliminarInscricao(SGBD * bd){
                     imprimirInscricoes(pasta);
                     wprintf(L"\nIndique o ID da inscrição que pretende remover: ");
                     wscanf(L"%d",&id);
-                    if(id < 0 || id > pasta->elementos){
+                    if(id <= 0 || id > pasta->elementos){
                         wprintf(L"\nID da inscrição inválido\n");
                         pressioneENTER();
                     }
-                }while(id < 0 || id > pasta->elementos);
+                }while(id <= 0 || id > pasta->elementos);
                 wprintf(L"\nTem a certeza que deseja remover esta inscrição?\n\t0 - Sim\n\t1 - Sair\nopção: ");
                 wscanf(L"%d", &opcao);
                 if(opcao == 0)
@@ -126,11 +126,11 @@ void modificarInscricao(SGBD * bd){
                     imprimirInscricoes(pasta);
                     wprintf(L"\nQual o ID da inscrição que deseja modificar: ");
                     wscanf(L"%d",&id);
-                    if(id < 0|| id > pasta->elementos){
+                    if(id <= 0|| id > pasta->elementos){
                         wprintf(L"\nID da inscrição inválido\n");
                         pressioneENTER();
                     }
-                }while(id < 0|| id > pasta->elementos);
+                }while(id <= 0|| id > pasta->elementos);
                 inscricao = obterInscricao(id-1,pasta);
                 do{
                     wprintf(L"\nQual o dado a alterar?\n\t0 - Número Aluno\n\t1 - Número Unidade Curricular\n\t3 - Cancelar\nOpção: ");
