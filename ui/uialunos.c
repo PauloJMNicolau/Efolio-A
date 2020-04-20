@@ -116,7 +116,7 @@ void imprimirdadosaluno(ALUNO * elem){
         wprintf(L"-");
 }
 //Alterar Aluno
-void modificaraALuno(SGBD * bd){
+void modificarALuno(SGBD * bd){
     clearScreen();
     imprimirAlunos(bd);
     int id = -1;
