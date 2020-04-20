@@ -21,6 +21,7 @@ void novaInscricao(SGBD * bd) {
                 wscanf(L"%S", anoLetivo);
                 novo = criarInscricao(numeroUC, numeroAluno, anoLetivo);
                 if(adicionarInscricao(novo, bd->inscricoes) == _SUCESSO){
+                    wprintf(L"%d",bd->inscricoes->cauda->elementos);
                     wprintf(L"\nIncrição Efectuada\n\nDeseja continuar a inscrever?\n\t0 - Sim\n\t1 - Não\nopcao: ");
                     wscanf(L"%d",&opcao);
                 }
@@ -78,11 +79,11 @@ void eliminarInscricao(SGBD * bd){
                     imprimirInscricoes(pasta);
                     wprintf(L"\nIndique o ID da inscrição que pretende remover: ");
                     wscanf(L"%d",&id);
-                    if(id <= 0 || id > pasta->elementos){
+                    if(id < 0 || id > pasta->elementos){
                         wprintf(L"\nID da inscrição inválido\n");
                         pressioneENTER();
                     }
-                }while(id <= 0 || id > pasta->elementos);
+                }while(id < 0 || id > pasta->elementos);
                 wprintf(L"\nTem a certeza que deseja remover esta inscrição?\n\t0 - Sim\n\t1 - Sair\nopção: ");
                 wscanf(L"%d", &opcao);
                 if(opcao == 0)
@@ -192,7 +193,7 @@ void imprimirDadoInscricao(INSCRICAO * inscricao){
 void imprimirInscricoes(NO_PASTA * pasta){
     clearScreen();
     NO * tmp;
-    int i, j = 0;
+    int i, j;
     tmp = pasta->cauda;
     for(i =0; i<80; i++)
         wprintf(L"-");
@@ -200,10 +201,9 @@ void imprimirInscricoes(NO_PASTA * pasta){
     for(i =0; i<80; i++)
         wprintf(L"-");
     wprintf(L"\n");
-    while (j < pasta->elementos) {
-        wprintf(L"|%6d|%23d|%23d|%23S|\n",j+1, tmp->elemento->numeroAluno, tmp->elemento->numeroUC, tmp->elemento->anoLetivo);
+    for(j=0; j < pasta->elementos; j++) {
+        wprintf(L"|%6d|%23d|%23d|%23S|\n", j+1, tmp->elemento->numeroAluno, tmp->elemento->numeroUC, tmp->elemento->anoLetivo);
         tmp = tmp->proximo;
-        j++;
     }
     for(i =0; i<80; i++)
         wprintf(L"-");
