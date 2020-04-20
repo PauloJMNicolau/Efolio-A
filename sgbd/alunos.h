@@ -51,5 +51,6 @@ int removerAluno(int pos, LIST_ALUNO *lista);
 int adicionarAluno(ALUNO *aluno, LIST_ALUNO *lista, int pos);
 //Obter aluno na posição
 ALUNO * obterAluno(int pos, LIST_ALUNO * lista);
+//Modificar Valores Aluno
 void modificarValoresAluno(int numero, wchar_t *nome, wchar_t *pais, ALUNO * elem);
 #endif

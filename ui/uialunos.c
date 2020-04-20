@@ -158,10 +158,9 @@ void modificaraALuno(SGBD * bd){
                 modificarValoresAluno(elem->numero,s,elem->pais,elem);
                 break;
             case 2:
-                do{
-                    wprintf(L"Novo País: ");
-                    wscanf(L"%S", &s);
-                }while(s<1 || s>3);
+                
+                wprintf(L"Novo País: ");
+                wscanf(L"%S", &s);
                 modificarValoresAluno(elem->numero,elem->nome,s,elem);
                 break;
         }
