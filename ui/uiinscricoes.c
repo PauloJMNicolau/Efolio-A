@@ -19,13 +19,18 @@ void novaInscricao(SGBD * bd) {
             if (procurarAluno(numeroAluno, bd->alunos)) {
                 wprintf(L"\nAno Letivo [xxxx/yyyy]: ");
                 wscanf(L"%S", anoLetivo);
-                novo = criarInscricao(numeroUC, numeroAluno, anoLetivo);
-                if(adicionarInscricao(novo, bd->inscricoes) == _SUCESSO){
-                    wprintf(L"\nIncrição Efectuada\n\nDeseja continuar a inscrever?\n\t0 - Sim\n\t1 - Não\nopcao: ");
-                    wscanf(L"%d",&opcao);
+                novo = procuraInscricao(bd->inscricoes, anoLetivo,numeroAluno,numeroUC);
+                if (novo == NULL) {
+                    novo = criarInscricao(numeroUC, numeroAluno, anoLetivo);
+                    if(adicionarInscricao(novo, bd->inscricoes) == _SUCESSO){
+                        wprintf(L"\nIncrição Efectuada\n\nDeseja continuar a inscrever?\n\t0 - Sim\n\t1 - Não\nopcao: ");
+                        wscanf(L"%d",&opcao);
+                    }
+                    else
+                        wprintf(L"\nErro na Inscrição");   
                 }
                 else
-                    wprintf(L"\nErro na Inscrição");    
+                    wprintf(L"\nEsta inscrição já existe");
             }
             else {
                 wprintf(L"\nNúmero de Aluno inexistente\n\nDeseja tentar de novo?\n\t0 - Sim\n\t1 - Sair\nopcão: ");
