@@ -5,6 +5,7 @@
 #include "global.h"
 #include "uiucs.h"
 #include "uiinscricoes.h"
+#include "uipropinas.h"
 #include "../sgbd/sgbd.h"
 
 #ifndef _MENU_
