@@ -182,7 +182,7 @@ void menuPropinas(SGBD* bd) {
 
         switch (opcao) {
             case 1:
-                //calcularPropina();
+                calcularPropina(bd);
                 break;
             case 0:
                 break;
