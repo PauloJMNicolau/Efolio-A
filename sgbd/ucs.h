@@ -16,6 +16,7 @@ typedef struct unidade{
     wchar_t *nome; //Nome da UC
     int ano;       //Ano da UC [1,2,3]
     int semestre;  //Semestre da UC [1,2]
+    int ects;      //ECTS da UC [1-6]
 } UC;
 
 //Estrutura para No da Lista de UC
@@ -38,7 +39,7 @@ typedef struct lista_unidade{
 //Criar lista vazia
 LIST_UC *criarListaUC();
 //Criar Unidade Curricular
-UC *criarUC(int numero, wchar_t *nome, int ano, int semestre);
+UC *criarUC(int numero, wchar_t *nome, int ano, int semestre, int ects);
 //Criar No Lista UC
 NoUC *criarNoUC(UC *unidade);
 //Libertar No UC
@@ -56,6 +57,6 @@ UC * obterUC(int pos, LIST_UC * lista);
 //Procurar na lista de UC's 
 int procurarUC(int numeroUC, LIST_UC * lista);
 //Modificar Valores UC
-void modificarValoresUC(int numero, wchar_t *nome, int ano, int semestre, UC * unidade);
+void modificarValoresUC(int numero, wchar_t *nome, int ano, int semestre, int ects, UC * unidade);
 
 #endif

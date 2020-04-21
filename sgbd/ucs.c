@@ -2,7 +2,7 @@
 #include "macro.h"
 
 /* Criar Unidade Curricular */
-UC * criarUC(int numero, wchar_t *nome, int ano, int semestre){
+UC * criarUC(int numero, wchar_t *nome, int ano, int semestre, int ects){
     UC *unidade = calloc(1, sizeof(UC));
     if (!unidade)
     {
@@ -18,12 +18,13 @@ UC * criarUC(int numero, wchar_t *nome, int ano, int semestre){
     }
     swprintf(unidade->nome,wcslen(nome)+1,L"%S",nome);
     //wcsncpy(unidade->nome,nome,wcslen(nome));
-    if ((ano <= 0 || ano > 3) && (semestre <= 0 || semestre > 2))
+    if ((ano <= 0 || ano > 3) && (semestre <= 0 || semestre > 2) && ects <= 0)
     {
         return unidade;
     }
     unidade->ano = ano;
     unidade->semestre = semestre;
+    unidade->ects = ects;
     return unidade;
 }
 
@@ -187,7 +188,7 @@ int procurarUC(int numeroUC, LIST_UC * lista) { //recebe numeroUC e bd->ucs que 
 }
 
 //Modificar Valores UC
-void modificarValoresUC(int numero, wchar_t *nome, int ano, int semestre, UC * unidade){
+void modificarValoresUC(int numero, wchar_t *nome, int ano, int semestre, int ects, UC * unidade){
     if(numero)
         unidade->numero= numero;
     if(nome)
@@ -196,4 +197,6 @@ void modificarValoresUC(int numero, wchar_t *nome, int ano, int semestre, UC * u
         unidade->ano = ano;
     if(semestre)
         unidade->semestre = semestre;
+    if(ects)
+        unidade->ects = ects;
 }

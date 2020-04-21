@@ -11,6 +11,6 @@
 
 /* Constantes String */
 #define _TAMSTRING 250 //Tamanho dos Nomes
-#define _TAMDATAS   20  //Tamanho formato Datas
+#define _TAMDATAS   20 //Tamanho formato Datas
 #define _FALSE_ 0
 #define _TRUE_ 1

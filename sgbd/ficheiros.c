@@ -76,7 +76,8 @@ void processarLinhaUC(wchar_t * linha, LIST_UC * lista){
     wchar_t * nome = wcstok(NULL, L"-", &buffer);
     int ano = wcstol(wcstok(NULL, L"-", &buffer), &temp,10);
     int semestre = wcstol(wcstok(NULL, L"-", &buffer), &temp,10);
-    adicionarUC(criarUC(numero,nome,ano,semestre),lista,lista->elementos);//Adiciona sempre no final
+    int ects = wcstol(wcstok(NULL, L"-", &buffer), &temp,10);
+    adicionarUC(criarUC(numero,nome,ano,semestre,ects),lista,lista->elementos);//Adiciona sempre no final
 }
 
 
@@ -90,7 +91,7 @@ void gravarUCTexto(LIST_UC * lista){
     fwprintf(fp, L"#Unidades Curriculares;\n\n#ID-Nome-Ano-Semestre;\n\n");
     for(int i= 0; i < lista->elementos; i++){
         UC * aux = obterUC(i, lista);
-        fwprintf(fp, L"%d-%S-%d-%d;\n", aux->numero, aux->nome, aux->ano, aux->semestre);
+        fwprintf(fp, L"%d-%S-%d-%d-%d;\n", aux->numero, aux->nome, aux->ano, aux->semestre, aux->ects);
     }
     fclose(fp);
 }
