@@ -5,6 +5,6 @@
 #define _UIPROPINAS_
 
 //Função para calcular valor da propina
-void calcularPropina(SGBD * bd);
+void calcularPropinas(SGBD * bd);
 
 #endif
