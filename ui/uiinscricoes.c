@@ -21,7 +21,6 @@ void novaInscricao(SGBD * bd) {
                 wscanf(L"%S", anoLetivo);
                 novo = criarInscricao(numeroUC, numeroAluno, anoLetivo);
                 if(adicionarInscricao(novo, bd->inscricoes) == _SUCESSO){
-                    wprintf(L"%d",bd->inscricoes->cauda->elementos);
                     wprintf(L"\nIncrição Efectuada\n\nDeseja continuar a inscrever?\n\t0 - Sim\n\t1 - Não\nopcao: ");
                     wscanf(L"%d",&opcao);
                 }
@@ -141,6 +140,8 @@ void modificarInscricao(SGBD * bd){
                     continuar =0;
                     continue;
                 }
+                nA = 0;
+                nU = 0;
                 //Executar opção escolhida
                 switch(opcao){
                     case 0:
@@ -202,6 +203,8 @@ void imprimirInscricoes(NO_PASTA * pasta){
         wprintf(L"-");
     wprintf(L"\n");
     for(j=0; j < pasta->elementos; j++) {
+        if(j == 0)
+            tmp = tmp->proximo;
         wprintf(L"|%6d|%23d|%23d|%23S|\n", j+1, tmp->elemento->numeroAluno, tmp->elemento->numeroUC, tmp->elemento->anoLetivo);
         tmp = tmp->proximo;
     }
