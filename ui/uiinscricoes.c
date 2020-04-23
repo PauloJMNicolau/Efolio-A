@@ -15,7 +15,7 @@ void novaInscricao(SGBD * bd) {
         wprintf(L"\nPreencha os dados da nova Inscrição");
         wprintf(L"\nNúmero da UC: ");
         wscanf(L"%d", &numeroUC);
-        uc = procurarUC(numeroUC, bd->ucs);
+        uc = obterUC(numeroUC, bd->ucs);
         if (uc != NULL) {
             wprintf(L"\nNúmero de Aluno: ");
             wscanf(L"%d", &numeroAluno);

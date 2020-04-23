@@ -8,7 +8,7 @@ void calcularPropinas(SGBD * bd) {
     ALUNO * aluno;
     wprintf(L"\nIndique o número de aluno que deseja calcular a propina: ");
     wscanf(L"%d", &numeroAluno);
-    aluno = procurarAluno(numeroAluno, bd->alunos);
+    aluno = obterAluno(numeroAluno, bd->alunos);
     if(aluno!=NULL && bd->inscricoes->pastas > 0 && bd->inscricoes->cauda->elementos > 0){
     tmp = bd->inscricoes->cauda->cauda;
     opcao = condicaoPropina(aluno, bd->inscricoes);

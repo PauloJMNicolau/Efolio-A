@@ -170,7 +170,7 @@ UC * obterUC(int pos, LIST_UC * lista){
         return temp->elemento;
     }
 }
-
+/*
 //Procurar na lista de UC's 
 UC * procurarUC(int numeroUC, LIST_UC * lista) { //recebe numeroUC e bd->ucs que é do tipo LIST_UC
     NoUC * tmp;  //ponteiro para percorrer lista temporariamente
@@ -187,6 +187,7 @@ UC * procurarUC(int numeroUC, LIST_UC * lista) { //recebe numeroUC e bd->ucs que
     else
         return NULL;
 }
+*/
 
 //Modificar Valores UC
 void modificarValoresUC(int numero, wchar_t *nome, int ano, int semestre, int ects, UC * unidade){
