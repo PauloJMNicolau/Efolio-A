@@ -172,19 +172,20 @@ UC * obterUC(int pos, LIST_UC * lista){
 }
 
 //Procurar na lista de UC's 
-int procurarUC(int numeroUC, LIST_UC * lista) { //recebe numeroUC e bd->ucs que é do tipo LIST_UC
+UC * procurarUC(int numeroUC, LIST_UC * lista) { //recebe numeroUC e bd->ucs que é do tipo LIST_UC
     NoUC * tmp;  //ponteiro para percorrer lista temporariamente
     int i = 0;
-    
+    if(!lista)
+        return NULL;
     tmp = lista->cauda;
     while (i < lista->elementos && tmp->elemento->numero != numeroUC) {
         tmp = tmp->proximo;
         i++;
     }
     if (tmp->elemento->numero == numeroUC)
-        return _TRUE_;
+        return tmp->elemento;
     else
-        return _FALSE_;
+        return NULL;
 }
 
 //Modificar Valores UC
