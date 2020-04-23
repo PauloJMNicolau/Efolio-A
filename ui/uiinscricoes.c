@@ -4,6 +4,8 @@
 void novaInscricao(SGBD * bd) {
     clearScreen();
     INSCRICAO * novo;
+    UC * uc;
+    ALUNO * aluno;
     int opcao, numeroUC, numeroAluno;
     wchar_t * anoLetivo;   
     anoLetivo = calloc(_TAMDATAS, sizeof(wchar_t)); 
@@ -13,15 +15,17 @@ void novaInscricao(SGBD * bd) {
         wprintf(L"\nPreencha os dados da nova Inscrição");
         wprintf(L"\nNúmero da UC: ");
         wscanf(L"%d", &numeroUC);
-        if (procurarUC(numeroUC, bd->ucs)) {
+        uc = procurarUC(numeroUC, bd->ucs);
+        if (uc != NULL) {
             wprintf(L"\nNúmero de Aluno: ");
             wscanf(L"%d", &numeroAluno);
-            if (procurarAluno(numeroAluno, bd->alunos)) {
+            aluno = procurarAluno(numeroAluno, bd->alunos);
+            if (aluno != NULL) {
                 wprintf(L"\nAno Letivo [xxxx/yyyy]: ");
                 wscanf(L"%S", anoLetivo);
                 novo = procuraInscricao(bd->inscricoes, anoLetivo,numeroAluno,numeroUC);
                 if (novo == NULL) {
-                    novo = criarInscricao(numeroUC, numeroAluno, anoLetivo);
+                    novo = criarInscricao(numeroUC,uc->ects, numeroAluno, anoLetivo);
                     if(adicionarInscricao(novo, bd->inscricoes) == _SUCESSO){
                         wprintf(L"\nIncrição Efectuada\n\nDeseja continuar a inscrever?\n\t0 - Sim\n\t1 - Não\nopcao: ");
                         wscanf(L"%d",&opcao);
@@ -29,8 +33,10 @@ void novaInscricao(SGBD * bd) {
                     else
                         wprintf(L"\nErro na Inscrição");   
                 }
-                else
-                    wprintf(L"\nEsta inscrição já existe");
+                else{
+                    wprintf(L"\nEsta inscrição já existe\n\nDeseja tentar de novo?\n\t0 - Sim\n\t1 - Sair\nopcão: ");
+                    wscanf(L"%d", &opcao);
+                }
             }
             else {
                 wprintf(L"\nNúmero de Aluno inexistente\n\nDeseja tentar de novo?\n\t0 - Sim\n\t1 - Sair\nopcão: ");
@@ -203,14 +209,14 @@ void imprimirInscricoes(NO_PASTA * pasta){
     tmp = pasta->cauda;
     for(i =0; i<80; i++)
         wprintf(L"-");
-    wprintf(L"\n|%6S|%23S|%23S|%23S|\n",L"ID",L"Número de Aluno",L"Número de UC",L"Ano Letivo");
+    wprintf(L"\n|%6S|%23S|%18S|%10S|%17S|\n",L"ID",L"Número de Aluno",L"Número de UC",L"ECTS",L"Ano Letivo");
     for(i =0; i<80; i++)
         wprintf(L"-");
     wprintf(L"\n");
     for(j=0; j < pasta->elementos; j++) {
         if(j == 0)
             tmp = tmp->proximo;
-        wprintf(L"|%6d|%23d|%23d|%23S|\n", j+1, tmp->elemento->numeroAluno, tmp->elemento->numeroUC, tmp->elemento->anoLetivo);
+        wprintf(L"|%6d|%23d|%18d|%10d|%17S|\n", j+1, tmp->elemento->numeroAluno, tmp->elemento->numeroUC,tmp->elemento->ects, tmp->elemento->anoLetivo);
         tmp = tmp->proximo;
     }
     for(i =0; i<80; i++)
