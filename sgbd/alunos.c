@@ -29,6 +29,7 @@ ALUNO *criarAluno(int numero, wchar_t *nome, wchar_t *pais){
         exit(_ERR_MEMORYALLOC);
     }
     wcsncpy(aluno->pais,pais,wcslen(pais));
+    aluno->propina = 0;
     return aluno;
 }
 
@@ -157,17 +158,18 @@ int removerAluno(int pos, LIST_ALUNO *lista){
 }
 
 //Procurar na lista de alunos 
-int procurarAluno(int numeroAluno, LIST_ALUNO * lista) { //recebe numeroAluno e bd->alunos que é do tipo LIST_ALUNO
+ALUNO * procurarAluno(int numeroAluno, LIST_ALUNO * lista) { //recebe numeroAluno e bd->alunos que é do tipo LIST_ALUNO
     NoALUNO * tmp;  //ponteiro para percorrer lista temporariamente
     int i = 0;
-    
+    if(!lista)
+        return NULL;
     tmp = lista->cauda;
     while (i < lista->elementos && tmp->elemento->numero != numeroAluno) {
         tmp = tmp->proximo;
         i++;
     }
     if (tmp->elemento->numero == numeroAluno)
-        return _TRUE_;
+        return tmp->elemento;
     else
-        return _FALSE_;
+        return NULL;
 }

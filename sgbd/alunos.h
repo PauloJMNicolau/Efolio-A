@@ -15,6 +15,7 @@ typedef struct aluno{
     int numero;    //Numero de Aluno
     wchar_t *nome; //Nome do Aluno
     wchar_t *pais; //Pais do Aluno
+    int propina;   //Valor da propina do Aluno
 } ALUNO;
 
 //Estrutura para No da Lista de Alunos
@@ -50,6 +51,6 @@ int removerAluno(int pos, LIST_ALUNO *lista);
 //Adicionar elemento na lista
 int adicionarAluno(ALUNO *aluno, LIST_ALUNO *lista, int pos);
 //Procurar na lista de alunos 
-int procurarAluno(int numeroAluno, LIST_ALUNO * lista);
+ALUNO * procurarAluno(int numeroAluno, LIST_ALUNO * lista);
 
 #endif
