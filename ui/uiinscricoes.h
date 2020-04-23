@@ -13,5 +13,7 @@ void eliminarInscricao(SGBD * bd);
 void mostrarListaInscricoes(SGBD * bd);
 //Modificar uma inscrição
 void modificarInscricao(SGBD * bd);
+//Imprimir dados da inscrições
+void imprimirInscricoes(NO_PASTA * pasta);
 
 #endif

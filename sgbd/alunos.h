@@ -15,6 +15,7 @@ typedef struct aluno{
     int numero;    //Numero de Aluno
     wchar_t *nome; //Nome do Aluno
     wchar_t *pais; //Pais do Aluno
+    int propina;   //Valor da propina do Aluno
 } ALUNO;
 
 //Estrutura para No da Lista de Alunos
@@ -55,4 +56,5 @@ ALUNO * obterAluno(int pos, LIST_ALUNO * lista);
 void modificarValoresAluno(int numero, wchar_t *nome, wchar_t *pais, ALUNO * elem);
 //Procurar na lista de Alunos
 int procurarAluno(int numeroAluno, LIST_ALUNO * lista);
+
 #endif

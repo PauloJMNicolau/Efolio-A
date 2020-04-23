@@ -6,6 +6,7 @@
 #include "uiucs.h"
 #include "uiinscricoes.h"
 #include "uialunos.h"
+#include "uipropinas.h"
 #include "../sgbd/sgbd.h"
 
 #ifndef _MENU_

@@ -2,13 +2,14 @@
 #include "macro.h"
 
 //Criar Inscricao
-INSCRICAO * criarInscricao(int numeroUC, int numeroAluno, wchar_t* ano){
+INSCRICAO * criarInscricao(int numeroUC, int ects, int numeroAluno, wchar_t* ano){
     INSCRICAO * novo = calloc(1,sizeof(INSCRICAO));
     if(!novo){
         wprintf(L"Erro %d: Não foi possivel alocar memoria para a inscriçao", _ERR_MEMORYALLOC);
         exit(_ERR_MEMORYALLOC);
     }
     novo->numeroUC=numeroUC;
+    novo->ects=ects;
     novo->numeroAluno=numeroAluno;
     novo->anoLetivo=calloc(_TAMSTRING + 1, sizeof(wchar_t));
     if (!novo->anoLetivo) {
@@ -24,6 +25,7 @@ int libertarInscricao(INSCRICAO * inscricao){
     if(!inscricao)
         return _ERR_MEMORYFREE;
     inscricao->numeroUC =0;
+    inscricao->ects=0;
     inscricao->numeroAluno =0;
     if(inscricao->anoLetivo){
         free(inscricao->anoLetivo);
@@ -214,7 +216,7 @@ int procuraPosicaoInscricao(INSCRICAO * elemento, LISTA_PASTA * lista){
     NO * temp = pasta->cauda->proximo;
     int i=0;
     while(i<pasta->elementos){
-        if(temp->elemento == elemento)
+        if(temp->elemento->numeroUC == elemento->numeroUC && temp->elemento->numeroAluno == elemento->numeroAluno && !wcscmp(temp->elemento->anoLetivo, elemento->anoLetivo))
             return i;
         i++;
         temp = temp->proximo;
@@ -282,6 +284,59 @@ int removerInscricao(INSCRICAO* inscricao, LISTA_PASTA * lista){
     if(!inscricao || !lista)
         return _ERR_IMPOSSIBLE;
     NO_PASTA * pasta = procuraPasta(inscricao->anoLetivo,lista);
-    removerInscricoes(procuraPosicaoInscricao(inscricao,lista),pasta);
-    return _ERR_IMPOSSIBLE;
+    
+    if(removerInscricoes(procuraPosicaoInscricao(inscricao,lista),pasta) == _SUCESSO)
+        return _SUCESSO;
+    else
+        return _ERR_IMPOSSIBLE; 
+}
+
+//Obter inscrição na posição
+INSCRICAO * obterInscricao(int pos, NO_PASTA * lista){
+    int i =0;
+    NO * temp;
+    if(!lista){
+        wprintf(L"Erro %d: Lista vazia", _ERR_EMPTYLIST);
+        return NULL;
+    }
+    if(pos < 0 || pos >lista->elementos){
+        wprintf(L"Erro %d: Possição inválida na lista", _ERR_IMPOSSIBLE);
+        return NULL;
+    }
+    if(pos == lista->elementos-1)
+        return lista->cauda->elemento;
+    else{
+        temp = lista->cauda;
+        while(i<=pos){
+            temp = temp->proximo;
+            i++;
+        }
+        return temp->elemento;
+    }
+}
+
+//Modificar Valores UC
+void modificarValorInscricao(int numeroAluno, int numeroUC, INSCRICAO * inscricao){
+    if(numeroAluno)
+        inscricao->numeroAluno = numeroAluno;
+    if(numeroUC)
+        inscricao->numeroUC = numeroUC;
+}
+
+//Verifica se aluno frequentou o ano letivo anterior ao ano currente
+int verificaInsAnoAnterior(int numeroAluno, LISTA_PASTA * inscricao){
+    NO_PASTA * pasta = inscricao->cauda; 
+    NO * no;
+    int i;
+    if(inscricao->pastas == 1)                  //Se só existir uma pasta, então será sempre 1º ano
+        return 0;
+    while(pasta->proximo != inscricao->cauda)   //Encontrar pasta ano anterior ao currente
+        pasta = pasta->proximo;
+    no = pasta->cauda;
+    for(i=0; i < pasta->elementos; i++) {       //Verifica se aluno esteve inscrito no ano anterior
+        if(no->elemento->numeroAluno == numeroAluno)
+            return 1;
+        no = no->proximo;
+    }
+    return 0;
 }

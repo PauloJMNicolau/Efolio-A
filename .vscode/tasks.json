@@ -12,6 +12,7 @@
                 "${workspaceFolder}/ui/uiucs.c",
                 "${workspaceFolder}/ui/uialunos.c",
                 "${workspaceFolder}/ui/uiinscricoes.c",
+                "${workspaceFolder}/ui/uipropinas.c",
                 "${workspaceFolder}/ui/global.c",
 				"${workspaceFolder}/sgbd/sgbd.c",
 				"${workspaceFolder}/sgbd/alunos.c",

@@ -154,7 +154,7 @@ void menuInscricoes(SGBD * bd) {
                 mostrarListaInscricoes(bd);
                 break;
             case 4:
-                //modificarInscricao();
+                modificarInscricao(bd);
                 break;
             case 0:
                 break;
@@ -182,7 +182,7 @@ void menuPropinas(SGBD* bd) {
 
         switch (opcao) {
             case 1:
-                //calcularPropina();
+                calcularPropinas(bd);
                 break;
             case 0:
                 break;

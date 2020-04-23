@@ -29,6 +29,7 @@ ALUNO *criarAluno(int numero, wchar_t *nome, wchar_t *pais){
         exit(_ERR_MEMORYALLOC);
     }
     wcsncpy(aluno->pais,pais,wcslen(pais));
+    aluno->propina = 0;
     return aluno;
 }
 
@@ -144,7 +145,7 @@ int removerAluno(int pos, LIST_ALUNO *lista){
         libertarNoAluno(temp);
     } else { //Remove na posição
         NoALUNO *temp = lista->cauda->proximo;
-        for (int i = 0; i < pos-1; i++)
+        for (int i = 0; i < pos; i++)
             temp = temp->proximo;
         NoALUNO *aux = temp->proximo;
         temp->proximo = aux->proximo; //Aponta elemento atual para o segundo elemento seguinte da posição da lista
@@ -156,52 +157,19 @@ int removerAluno(int pos, LIST_ALUNO *lista){
     return _SUCESSO;
 }
 
-///////////////////////////////////////////////////////////////
-//Obter aluno na posição
-ALUNO * obterAluno(int pos, LIST_ALUNO * lista){
-    if(!lista){
-        wprintf(L"Erro %d: Lista vazia", _ERR_EMPTYLIST);
-        return NULL;
-    }
-    if(pos < 0 || pos >lista->elementos){
-        wprintf(L"Erro %d: Possição inválida na lista", _ERR_IMPOSSIBLE);
-        return NULL;
-    }
-    if(pos == lista->elementos-1){
-        return lista->cauda->elemento;
-    } else{
-        int i =0;
-        NoALUNO * temp = lista->cauda;
-        while(i<=pos){
-            temp = temp->proximo;
-            i++;
-        }
-        return temp->elemento;
-    }
-}
-
-//Procurar na lista de Alunos
-int procurarAluno(int numeroAluno, LIST_ALUNO * lista) { //recebe numeroAluno e bd->Aluno que é do tipo LIST_Aluno
+//Procurar na lista de alunos 
+ALUNO * procurarAluno(int numeroAluno, LIST_ALUNO * lista) { //recebe numeroAluno e bd->alunos que é do tipo LIST_ALUNO
     NoALUNO * tmp;  //ponteiro para percorrer lista temporariamente
     int i = 0;
-    
+    if(!lista)
+        return NULL;
     tmp = lista->cauda;
     while (i < lista->elementos && tmp->elemento->numero != numeroAluno) {
         tmp = tmp->proximo;
         i++;
     }
     if (tmp->elemento->numero == numeroAluno)
-        return _TRUE_;
+        return tmp->elemento;
     else
-        return _FALSE_;
-}
-
-//Modificar Valores Aluno
-void modificarValoresAluno(int numero, wchar_t *nome, wchar_t *pais, ALUNO * elem){
-    if(numero)
-        elem->numero= numero;
-    if(nome)
-        wcsncpy(elem->nome,nome,wcslen(nome));
-    if(pais)
-        elem->pais = pais;
+        return NULL;
 }
