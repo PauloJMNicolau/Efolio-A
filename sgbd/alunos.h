@@ -49,7 +49,8 @@ int libertarListaAluno(LIST_ALUNO *lista);
 int removerAluno(int pos, LIST_ALUNO *lista);
 //Adicionar elemento na lista
 int adicionarAluno(ALUNO *aluno, LIST_ALUNO *lista, int pos);
-//Procurar na lista de alunos 
-int procurarAluno(int numeroAluno, LIST_ALUNO * lista);
-
+//Obter aluno na posição
+ALUNO * obterAluno(int pos, LIST_ALUNO * lista);
+//Modificar Valores Aluno
+void modificarValoresAluno(int numero, wchar_t *nome, wchar_t *pais, ALUNO * elem);
 #endif

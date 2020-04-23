@@ -1,0 +1,16 @@
+-------------------- Auto-Git Log --------------------
+		Sat Apr 18 2020 00:28:27 GMT+0100 (Hora de verão da Europa Ocidental)
+------------------------------------------------------
+
+Modified files:
+* ui/uialunos.c
+
+
+Created files:
+* .autogit/logs/log-17-3-2020-23-58-22.txt
+
+
+Deleted files:
+
+
+Renamed files:

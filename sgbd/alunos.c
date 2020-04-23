@@ -156,18 +156,35 @@ int removerAluno(int pos, LIST_ALUNO *lista){
     return _SUCESSO;
 }
 
-//Procurar na lista de alunos 
-int procurarAluno(int numeroAluno, LIST_ALUNO * lista) { //recebe numeroAluno e bd->alunos que é do tipo LIST_ALUNO
-    NoALUNO * tmp;  //ponteiro para percorrer lista temporariamente
-    int i = 0;
-    
-    tmp = lista->cauda;
-    while (i < lista->elementos && tmp->elemento->numero != numeroAluno) {
-        tmp = tmp->proximo;
-        i++;
+///////////////////////////////////////////////////////////////
+//Obter aluno na posição
+ALUNO * obterAluno(int pos, LIST_ALUNO * lista){
+    if(!lista){
+        wprintf(L"Erro %d: Lista vazia", _ERR_EMPTYLIST);
+        return NULL;
     }
-    if (tmp->elemento->numero == numeroAluno)
-        return _TRUE_;
-    else
-        return _FALSE_;
+    if(pos < 0 || pos >lista->elementos){
+        wprintf(L"Erro %d: Possição inválida na lista", _ERR_IMPOSSIBLE);
+        return NULL;
+    }
+    if(pos == lista->elementos-1){
+        return lista->cauda->elemento;
+    } else{
+        int i =0;
+        NoALUNO * temp = lista->cauda;
+        while(i<=pos){
+            temp = temp->proximo;
+            i++;
+        }
+        return temp->elemento;
+    }
+}
+//Modificar Valores Aluno
+void modificarValoresAluno(int numero, wchar_t *nome, wchar_t *pais, ALUNO * elem){
+    if(numero)
+        elem->numero= numero;
+    if(nome)
+        wcsncpy(elem->nome,nome,wcslen(nome));
+    if(pais)
+        elem->pais = pais;
 }

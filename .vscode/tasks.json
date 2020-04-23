@@ -10,7 +10,6 @@
                 "${workspaceFolder}/main.c",
                 "${workspaceFolder}/ui/menu.c",
                 "${workspaceFolder}/ui/uiucs.c",
-                "${workspaceFolder}/ui/uiinscricoes.c",
                 "${workspaceFolder}/ui/uialunos.c",
                 "${workspaceFolder}/ui/global.c",
 				"${workspaceFolder}/sgbd/sgbd.c",
