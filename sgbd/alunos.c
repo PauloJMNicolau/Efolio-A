@@ -144,7 +144,7 @@ int removerAluno(int pos, LIST_ALUNO *lista){
         libertarNoAluno(temp);
     } else { //Remove na posição
         NoALUNO *temp = lista->cauda->proximo;
-        for (int i = 0; i < pos; i++)
+        for (int i = 0; i < pos-1; i++)
             temp = temp->proximo;
         NoALUNO *aux = temp->proximo;
         temp->proximo = aux->proximo; //Aponta elemento atual para o segundo elemento seguinte da posição da lista
@@ -179,6 +179,23 @@ ALUNO * obterAluno(int pos, LIST_ALUNO * lista){
         return temp->elemento;
     }
 }
+
+//Procurar na lista de Alunos
+int procurarAluno(int numeroAluno, LIST_ALUNO * lista) { //recebe numeroAluno e bd->Aluno que é do tipo LIST_Aluno
+    NoALUNO * tmp;  //ponteiro para percorrer lista temporariamente
+    int i = 0;
+    
+    tmp = lista->cauda;
+    while (i < lista->elementos && tmp->elemento->numero != numeroAluno) {
+        tmp = tmp->proximo;
+        i++;
+    }
+    if (tmp->elemento->numero == numeroAluno)
+        return _TRUE_;
+    else
+        return _FALSE_;
+}
+
 //Modificar Valores Aluno
 void modificarValoresAluno(int numero, wchar_t *nome, wchar_t *pais, ALUNO * elem){
     if(numero)

@@ -53,4 +53,6 @@ int adicionarAluno(ALUNO *aluno, LIST_ALUNO *lista, int pos);
 ALUNO * obterAluno(int pos, LIST_ALUNO * lista);
 //Modificar Valores Aluno
 void modificarValoresAluno(int numero, wchar_t *nome, wchar_t *pais, ALUNO * elem);
+//Procurar na lista de Alunos
+int procurarAluno(int numeroAluno, LIST_ALUNO * lista);
 #endif
