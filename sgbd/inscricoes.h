@@ -14,6 +14,7 @@
 typedef struct inscricao{
     int numeroAluno; //Numero Aluno
     int numeroUC; //Numero da UC
+    int ects;
     wchar_t * anoLetivo; //Ano Letivo
 }INSCRICAO;
 
@@ -42,7 +43,7 @@ typedef struct listaAnual{
  ********************************/
 
 //Criar Inscricao
-INSCRICAO * criarInscricao(int numeroUC, int numeroAluno, wchar_t* ano);
+INSCRICAO * criarInscricao(int numeroUC, int ects, int numeroAluno, wchar_t* ano);
 //Cria lista para pastas
 LISTA_PASTA * criarListaPastas();
 //Criar Pasta Anual
@@ -82,4 +83,6 @@ int removerInscricao(INSCRICAO* inscricao, LISTA_PASTA * lista);
 INSCRICAO * obterInscricao(int pos, NO_PASTA * lista);
 //Modificar valor de uma inscrição
 void modificarValorInscricao(int numeroAluno, int numeroUC, INSCRICAO * inscricao);
+//Verifica se aluno frequentou o ano letivo anterior ao ano currente
+int verificaInsAnoAnterior(int numeroAluno, LISTA_PASTA * inscricao);
 #endif

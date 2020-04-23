@@ -2,13 +2,14 @@
 #include "macro.h"
 
 //Criar Inscricao
-INSCRICAO * criarInscricao(int numeroUC, int numeroAluno, wchar_t* ano){
+INSCRICAO * criarInscricao(int numeroUC, int ects, int numeroAluno, wchar_t* ano){
     INSCRICAO * novo = calloc(1,sizeof(INSCRICAO));
     if(!novo){
         wprintf(L"Erro %d: Não foi possivel alocar memoria para a inscriçao", _ERR_MEMORYALLOC);
         exit(_ERR_MEMORYALLOC);
     }
     novo->numeroUC=numeroUC;
+    novo->ects=ects;
     novo->numeroAluno=numeroAluno;
     novo->anoLetivo=calloc(_TAMSTRING + 1, sizeof(wchar_t));
     if (!novo->anoLetivo) {
@@ -24,6 +25,7 @@ int libertarInscricao(INSCRICAO * inscricao){
     if(!inscricao)
         return _ERR_MEMORYFREE;
     inscricao->numeroUC =0;
+    inscricao->ects=0;
     inscricao->numeroAluno =0;
     if(inscricao->anoLetivo){
         free(inscricao->anoLetivo);
@@ -319,4 +321,22 @@ void modificarValorInscricao(int numeroAluno, int numeroUC, INSCRICAO * inscrica
         inscricao->numeroAluno = numeroAluno;
     if(numeroUC)
         inscricao->numeroUC = numeroUC;
+}
+
+//Verifica se aluno frequentou o ano letivo anterior ao ano currente
+int verificaInsAnoAnterior(int numeroAluno, LISTA_PASTA * inscricao){
+    NO_PASTA * pasta = inscricao->cauda; 
+    NO * no;
+    int i;
+    if(inscricao->pastas == 1)                  //Se só existir uma pasta, então será sempre 1º ano
+        return 0;
+    while(pasta->proximo != inscricao->cauda)   //Encontrar pasta ano anterior ao currente
+        pasta = pasta->proximo;
+    no = pasta->cauda;
+    for(i=0; i < pasta->elementos; i++) {       //Verifica se aluno esteve inscrito no ano anterior
+        if(no->elemento->numeroAluno == numeroAluno)
+            return 1;
+        no = no->proximo;
+    }
+    return 0;
 }
