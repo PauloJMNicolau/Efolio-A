@@ -1,11 +1,19 @@
+/*
+ * Ficheiro que possui todas as funções que gerem a lista de alunos
+ */
+
+#ifndef _ALUNOS_
+#define _ALUNOS_
+
+//Bibliotecas Padrão
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <wchar.h>
 #include <wctype.h>
+//Bibliotecas Próprias
+#include "macro.h"
 
-#ifndef _ALUNOS_
-#define _ALUNOS_
 /************************
  *      Estruturas      *
  * **********************/
@@ -34,27 +42,28 @@ typedef struct listAluno{
  *          Headers             *
  ********************************/
 
-//Criar lista vazia
-LIST_ALUNO *criarListaAluno();
 //Criar Aluno com dados
+//Retorna Aluno
 ALUNO *criarAluno(int numero, wchar_t *nome, wchar_t *pais);
-//Criar No Lista Aluno
-NoALUNO *criarNoAluno(ALUNO *aluno);
+//Criar lista vazia
+LIST_ALUNO * criarListaAluno();
 //Libertar Memoria Aluno
 int libertarAluno(ALUNO *aluno);
-//Libertar No Aluno
-int libertarNoAluno(NoALUNO *no);
 //Eliminar Lista
 int libertarListaAluno(LIST_ALUNO *lista);
+//Criar No Lista Aluno
+NoALUNO *criarNoAluno(ALUNO *aluno);
+//Libertar No Aluno
+int libertarNoAluno(NoALUNO *no);
+//Adicionar elemento na lista
+int adicionarAluno(ALUNO * aluno, LIST_ALUNO *lista, int pos);
 //Remover elemento da lista
 int removerAluno(int pos, LIST_ALUNO *lista);
-//Adicionar elemento na lista
-int adicionarAluno(ALUNO *aluno, LIST_ALUNO *lista, int pos);
-//Obter aluno na posição
-ALUNO * obterAluno(int pos, LIST_ALUNO * lista);
+//Procurar na lista de alunos 
+ALUNO * obterAlunoNum(int numeroAluno, LIST_ALUNO * lista);
+//Obter Aluno na posição
+ALUNO * obterAlunoPos(int pos, LIST_ALUNO * lista);
 //Modificar Valores Aluno
 void modificarValoresAluno(int numero, wchar_t *nome, wchar_t *pais, ALUNO * elem);
-//Procurar na lista de Alunos
-int procurarAluno(int numeroAluno, LIST_ALUNO * lista);
 
 #endif

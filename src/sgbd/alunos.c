@@ -1,30 +1,26 @@
-#include "alunos.h"
-#include "macro.h"
+/*
+ * Ficheiro que possui todas as funções que gerem a lista de alunos
+ */
 
-/************************************
- *         Lista de Alunos          *
- ************************************/
+#include "alunos.h"
 
 //Criar Aluno com dados
 //Retorna Aluno
 ALUNO *criarAluno(int numero, wchar_t *nome, wchar_t *pais){
     ALUNO *aluno = calloc(1, sizeof(ALUNO));
-    if (!aluno)
-    {
+    if (!aluno){
         wprintf(L"Erro %d: Impossível alocar memória para Aluno", _ERR_MEMORYALLOC);
         exit(_ERR_MEMORYALLOC);
     }
     aluno->numero = numero;
     aluno->nome = calloc(_TAMSTRING, sizeof(wchar_t));
-    if (!aluno->nome)
-    {
+    if (!aluno->nome){
         wprintf(L"Erro %d: Impossível alocar memória para Aluno", _ERR_MEMORYALLOC);
         exit(_ERR_MEMORYALLOC);
     }
     wcsncpy(aluno->nome,nome,wcslen(nome));
     aluno->pais = calloc(_TAMSTRING, sizeof(wchar_t));
-    if (!aluno->pais)
-    {
+    if (!aluno->pais){
         wprintf(L"Erro %d: Impossível alocar memória para Aluno", _ERR_MEMORYALLOC);
         exit(_ERR_MEMORYALLOC);
     }
@@ -54,6 +50,7 @@ int libertarAluno(ALUNO *aluno){
         if (aluno->pais)
             free(aluno->pais);
         aluno->pais = NULL;
+        aluno->propina=0;
         free(aluno);
         aluno = NULL;
         return _SUCESSO;
@@ -99,8 +96,7 @@ int libertarNoAluno(NoALUNO *no){
 
 //Adicionar elemento na lista
 int adicionarAluno(ALUNO * aluno, LIST_ALUNO *lista, int pos){
-    if (!lista || !aluno)
-    {
+    if (!lista || !aluno){
         wprintf(L"Erro %d: Impossível adicionar elemento na lista", _ERR_EMPTYLIST);
         return _ERR_EMPTYLIST;
     }
@@ -158,7 +154,7 @@ int removerAluno(int pos, LIST_ALUNO *lista){
 }
 
 //Procurar na lista de alunos 
-ALUNO * procurarAluno(int numeroAluno, LIST_ALUNO * lista) { //recebe numeroAluno e bd->alunos que é do tipo LIST_ALUNO
+ALUNO * obterAlunoNum(int numeroAluno, LIST_ALUNO * lista) { //recebe numeroAluno e bd->alunos que é do tipo LIST_ALUNO
     NoALUNO * tmp;  //ponteiro para percorrer lista temporariamente
     int i = 0;
     if(!lista)
@@ -172,4 +168,37 @@ ALUNO * procurarAluno(int numeroAluno, LIST_ALUNO * lista) { //recebe numeroAlun
         return tmp->elemento;
     else
         return NULL;
+}
+
+//Obter Aluno na posição
+ALUNO * obterAlunoPos(int pos, LIST_ALUNO * lista){
+    if(!lista){
+        wprintf(L"Erro %d: Lista vazia", _ERR_EMPTYLIST);
+        return NULL;
+    }
+    if(pos < 0 || pos >lista->elementos){
+        wprintf(L"Erro %d: Possição inválida na lista", _ERR_IMPOSSIBLE);
+        return NULL;
+    }
+    if(pos == lista->elementos-1){
+        return lista->cauda->elemento;
+    } else{
+        int i =0;
+        NoALUNO * temp = lista->cauda;
+        while(i<=pos){
+            temp = temp->proximo;
+            i++;
+        }
+        return temp->elemento;
+    }
+}
+
+//Modificar Valores Aluno
+void modificarValoresAluno(int numero, wchar_t *nome, wchar_t *pais, ALUNO * elem){
+    if(numero)
+        elem->numero= numero;
+    if(nome)
+        wcsncpy(elem->nome,nome,wcslen(nome));
+    if(pais)
+        elem->pais = pais;
 }

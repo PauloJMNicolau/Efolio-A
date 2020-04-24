@@ -1,44 +1,69 @@
-
-#include "menu.h"
-#include "../sgbd/sgbd.h"
-
+/*
+ * Ficheiro que possui todas as funções principais do UI (User Interface)
+ */
+#include "ui.h"
 
 //Menu principal com as opções possíveis
 void menuPrincipal(SGBD * bd) {
     int opcao;
-    
     do {
         clearScreen();
         cabecalho("Menu Principal");
         wprintf(L"Escolha uma das seguintes opções:\n");
-        wprintf(L"1 - Alunos\n");
-        wprintf(L"2 - UC's\n");
-        wprintf(L"3 - Incrições\n");
-        wprintf(L"4 - Propinas\n");
-        wprintf(L"5 - Consultas\n");
-        wprintf(L"6 - Reports\n");
+        wprintf(L"1 - Inscrever\n");
+        wprintf(L"2 - Anular\n");
+        wprintf(L"3 - Listagem de Inscrições\n");
+        wprintf(L"4 - Calcular Propinas de um aluno\n");
+        wprintf(L"5 - Gravar\n");
+        wprintf(L"6 - Gerar Reports\n");
+        wprintf(L"7 - Funcionalidades Extra\n");
         wprintf(L"0 - Sair\n");
-
         wscanf(L"%d", &opcao);
-
+        //Verifica Opção selecionada
         switch (opcao) {
             case 1:
-                menuAlunos(bd); 
-                break;
+                uiAdicionarNovaInscricao(bd); break;
             case 2:
-                menuUCS(bd); 
-                break;
+                uiRemoverInscricao(bd); break;
             case 3:
-                menuInscricoes(bd); 
-                break;
+                menuConsultas(bd); break;
             case 4:
-                menuPropinas(bd); 
-                break;
+                uiCalcularPropinas(bd);break;
             case 5:
-                menuConsultas(bd);
-                break;
+                gravarDados(bd);break;
             case 6:
-                menuReports(bd); 
+                menuReports(bd);break;
+            case 7:
+                menuExtra(bd); break;
+            case 0:
+                break;
+            default: 
+                wprintf(L"Opção inválida!\n");
+                sleep(1);
+        }
+    } while (opcao != 0);
+}
+
+//Menu com funcionalidades extra
+void menuExtra(SGBD * bd) {
+    int opcao;
+    do {
+        clearScreen();
+        cabecalho("Menu Extra");
+        wprintf(L"Escolha uma das seguintes opções:\n");
+        wprintf(L"1 - Gerir Alunos\n");
+        wprintf(L"2 - Gerir UC's\n");
+        wprintf(L"3 - Gerir Incrições\n");
+        wprintf(L"0 - Sair\n");
+        wscanf(L"%d", &opcao);
+        //Verifica Opção selecionada
+        switch (opcao) {
+            case 1:
+                menuAlunos(bd); break;
+            case 2:
+                menuUCS(bd); break;
+            case 3:
+                menuInscricoes(bd); break;
             case 0:
                 break;
             default: {
@@ -52,7 +77,6 @@ void menuPrincipal(SGBD * bd) {
 //Submenu para funções relacionadas directamente com alunos
 void menuAlunos(SGBD * bd) {
     int opcao;
-    
     do {
         clearScreen();
         cabecalho("Menu Alunos"); 
@@ -62,22 +86,16 @@ void menuAlunos(SGBD * bd) {
         wprintf(L"3 - Consultar Aluno\n");
         wprintf(L"4 - Modificar Aluno\n");
         wprintf(L"0 - Menu anterior\n");
-
         wscanf(L"%d", &opcao);
-
         switch (opcao) {
             case 1:
-                novoAluno( bd );
-                break;
+                uiAdicionarNovoAluno(bd); break;
             case 2:
-                remov_aluno( bd );
-                break;
+                uiRemoverAluno(bd); break;
             case 3:
-                mostrarAlunos( bd);
-                break;
+                uiImprimirListaAlunos(bd); break;
             case 4:
-                modificaraluno( bd);
-                break;
+                uiAlterarAluno(bd); break;
             case 0:
                 break;
             default: {
@@ -91,7 +109,6 @@ void menuAlunos(SGBD * bd) {
 //Submenu para funções relacionadas directamente com UCs
 void menuUCS(SGBD * bd) {
     int opcao;
-    
     do {
         clearScreen();
         cabecalho("Menu UC's");
@@ -101,22 +118,17 @@ void menuUCS(SGBD * bd) {
         wprintf(L"3 - Consultar UC\n");
         wprintf(L"4 - Modificar UC\n");
         wprintf(L"0 - Menu anterior\n");
-
         wscanf(L"%d", &opcao);
-
+        //Verifica opção selecionada
         switch (opcao) {
            case 1:
-                novaUC(bd);
-                break;
+                uiAdicionarNovaUC(bd); break;
             case 2:
-                removerUnidade(bd);
-                break;
+                uiRemoverUnidade(bd); break;
             case 3:
-                mostrarListaUC(bd);
-                break;
+                uiImprimirListaUC(bd); break;
             case 4:
-                modificarUnidade(bd);
-                break;
+                uiAlterarUnidade(bd); break;
             case 0:
                 break;
             default: {
@@ -127,10 +139,9 @@ void menuUCS(SGBD * bd) {
     } while (opcao <0 || opcao >4);
 }
 
-//Submenu para funções relacionadas directamente com incrições
+//Submenu para funções relacionadas directamente com Inscriçoes
 void menuInscricoes(SGBD * bd) {
     int opcao;
-    
     do {
         clearScreen();
         cabecalho("Menu Inscrições");
@@ -140,22 +151,17 @@ void menuInscricoes(SGBD * bd) {
         wprintf(L"3 - Consultar Inscrições\n");
         wprintf(L"4 - Modificar Inscrição\n");
         wprintf(L"0 - Menu anterior\n");
-
         wscanf(L"%d", &opcao);
-
+        //Verificar opção selecionada
         switch (opcao) {
             case 1:
-                novaInscricao(bd);
-                break;
+                uiAdicionarNovaInscricao(bd); break;
             case 2:
-                eliminarInscricao(bd);
-                break;
+                uiRemoverInscricao(bd); break;
             case 3:
-                mostrarListaInscricoes(bd);
-                break;
+                uiImprimirListaInscricoes(bd); break;
             case 4:
-                modificarInscricao(bd);
-                break;
+                uiAlterarInscricao(bd); break;
             case 0:
                 break;
             default: {
@@ -165,40 +171,10 @@ void menuInscricoes(SGBD * bd) {
         }
     } while (opcao != 0);
 }
-
-
-//Submenu para funções relacionadas directamente com propinas
-void menuPropinas(SGBD* bd) {
-    int opcao;
-
-    do {
-        clearScreen();
-        cabecalho("Menu Propinas");
-        wprintf(L"Escolha uma das seguintes opções:\n");
-        wprintf(L"1 - Calcular Propinas\n");
-        wprintf(L"0 - Menu anterior\n");
-
-        wscanf(L"%d", &opcao);
-
-        switch (opcao) {
-            case 1:
-                calcularPropinas(bd);
-                break;
-            case 0:
-                break;
-            default: {
-                wprintf(L"Opção inválida!\n");
-                sleep(1);
-            }
-        }
-    } while (opcao != 0);
-}
-
 
 //Submenu para funções relacionadas directamente com consultas
 void menuConsultas(SGBD * bd) {
     int opcao;
-    
     do {
         clearScreen();
         cabecalho("Menu Consultas");
@@ -206,9 +182,8 @@ void menuConsultas(SGBD * bd) {
         wprintf(L"1 - Lista de inscrições por aluno\n");
         wprintf(L"2 - Lista de inscrições por UC\n");
         wprintf(L"0 - Menu anterior\n");
-
         wscanf(L"%d", &opcao);
-
+        //Verifica opção selecionada
         switch (opcao) {
             case 1:
                 //listaInscAluno();
@@ -229,7 +204,6 @@ void menuConsultas(SGBD * bd) {
 //Submenu para funções relacionadas directamente com reports
 void menuReports(SGBD * bd) {
     int opcao;
-    
     do {
         clearScreen();
         cabecalho("Menu Reports");
@@ -239,22 +213,17 @@ void menuReports(SGBD * bd) {
         wprintf(L"3 - Situações de potencial abandono escolar\n");
         wprintf(L"4 - Número de alunos por ano letivo\n");
         wprintf(L"0 - Menu anterior\n");
-
         wscanf(L"%d", &opcao);
-
+        //Verifica opção selecionada
         switch (opcao) {
             case 1:
-                //repECTSAluno();
-                break;
+                //repECTSAluno(); break;
             case 2:
-                //repEpocaEspExame();
-                break;
+                //repEpocaEspExame(); break;
             case 3:
-                //repAbanEscolar();
-                break;
+                //repAbanEscolar(); break;
             case 4:
-                //repTotalAlunAnoLet();
-                break;
+                //repTotalAlunAnoLet(); break;
             case 0:
                 break;
             default: {

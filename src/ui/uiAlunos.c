@@ -1,12 +1,13 @@
-#include "uialunos.h"
+/*
+ * Ficheiro que possui todas as funções da UI (User Interface) de Alunos
+ */
+#include "uiAlunos.h"
 
 //Adicionar um novo aluno
-// falta acrescentar as restantes memorias
-void novoAluno(SGBD * bd){
+void uiAdicionarNovoAluno(SGBD * bd){
     clearScreen();
     int  numero;
     wchar_t *nome, *pais;
-
     nome=calloc(_TAMSTRING, sizeof(wchar_t));
     if(!nome){
         wprintf(L"Erro %d: Não foi possivel alocar a memória",_ERR_MEMORYALLOC);
@@ -21,54 +22,27 @@ void novoAluno(SGBD * bd){
     wprintf(L"Preencha os dados do aluno");
     wprintf(L"\nNumero: ");
     wscanf(L"%d", &numero);
-    
     wprintf(L"\nNome: ");
-    
     wscanf(L"\n%l[^\n]", nome);
-   
     wprintf(L"\nPaís: ");
     wscanf(L"\n%l[^\n]", pais);
-
     ALUNO * pessoa = criarAluno(numero,nome,pais);
-    adicionarAluno(pessoa,bd->alunos,bd->alunos->elementos);
+    int res = adicionarAluno(pessoa,bd->alunos,bd->alunos->elementos);
+    if(res == _SUCESSO)
+        wprintf(L"Aluno Adicionado\n");
+    else
+        wprintf(L"Não foi possivel adicionar o aluno\n");
     free(nome);
     free(pais);
-}
-
-//Mostrar Lista de  alunos
-void mostrarAlunos(SGBD * bd){
-    int  numero;
-    wchar_t nome, pais;
-    clearScreen();
-    for(int i =0; i< 100; i++)
-        wprintf(L"-");
-        wprintf(L"\n|%8S%50S%40S|\n",L"Numero",L"Nome",L"País");
-    for(int i =0; i< 100; i++)
-        wprintf(L"-");
-    for(int i=0; i< bd->alunos->elementos; i++){
-        ALUNO* temp = obterAluno(i, bd->alunos);
-        wprintf(L"\n|%8d%50S%40S|",temp->numero, temp->nome, temp->pais);
-    }
-    wprintf(L"\n");
-    for(int i =0; i< 100; i++)
-        wprintf(L"-");
-    wprintf(L"\n|%90S%8d|\n",L"Total Alunos",bd->alunos->elementos);
-    for(int i =0; i< 100; i++)
-        wprintf(L"-");
-    wprintf(L"\nPara continuar precione ENTER");
-    wchar_t tecla = L' ';
-    getwchar();
-    do{
-        wscanf(L"%c", &tecla);
-    } while(tecla != L'\n');
+    pressioneENTER();
 }
 
 //Remover UC
-void remov_aluno(SGBD * bd){
+void uiRemoverAluno(SGBD * bd){
     int  numero;
     wchar_t nome, pais;
     clearScreen();
-    imprimirAlunos(bd);
+    uiImprimirAlunos(bd);
     int id = -1;
     do{
         wprintf(L"\nQual o numero do aluno a remover: ",bd->alunos->elementos);
@@ -77,47 +51,42 @@ void remov_aluno(SGBD * bd){
             wprintf(L"\nnumero de aluno inválido\n");
     }while(id < 0|| id > bd->alunos->elementos);
     removerAluno(id-1,bd->alunos);
-    imprimirAlunos(bd);
-    wprintf(L"\nPara continuar precione ENTER");
-    wchar_t tecla = L' ';
-    getwchar();
-    do{
-        wscanf(L"%c", &tecla);
-    } while(tecla != L'\n');
+    uiImprimirAlunos(bd);
+    pressioneENTER();
 }
 
-// Imprimir lista de alunos
-void imprimirAlunos(SGBD * bd){
-    for(int i =0; i< 80; i++)
+// Imprimir lista de alunos com ID
+void uiImprimirAlunos(SGBD * bd){
+    for(int i =0; i< 100; i++)
         wprintf(L"-");
-        wprintf(L"\n|%4S|%8S|%45S|%17S|\n",L"ID",L"Numero",L"Nome",L"País");
-    for(int i =0; i< 80; i++)
+    wprintf(L"\n|%4S|%8S|%45S|%38S|\n",L"ID",L"Numero",L"Nome",L"País");
+    for(int i =0; i< 100; i++)
         wprintf(L"-");
     for(int i=0; i< bd->alunos->elementos; i++){
-        ALUNO* temp = obterAluno(i, bd->alunos);
-         
-        wprintf(L"\n|%4.d|%8d|%45S|%17S|",i+1, temp->numero, temp->nome, temp->pais);
+        ALUNO* temp = obterAlunoPos(i, bd->alunos);
+        wprintf(L"\n|%4.d|%8d|%45S|%38S|",i+1, temp->numero, temp->nome, temp->pais);
     }
     wprintf(L"\n");
-    for(int i =0; i< 80; i++)
+    for(int i =0; i< 100; i++)
         wprintf(L"-");
 }
 
 //imprimir dados dos alunos
-void imprimirdadosaluno(ALUNO * elem){
-    for(int i =0; i< 80; i++)
+void uiImprimirDadosAluno(ALUNO * elem){
+    for(int i =0; i< 100; i++)
         wprintf(L"-");
-        wprintf(L"\n|%8S|%50S|%7S|%10S|\n",L"Numero",L"Nome",L"País");
-    for(int i =0; i< 80; i++)
+        wprintf(L"\n|%8S|%50S|%40S|\n",L"Numero",L"Nome",L"País");
+    for(int i =0; i< 100; i++)
         wprintf(L"-");
-        wprintf(L"\n|%8d|%50S|%7d|%10d|\n",elem->numero,elem->nome,elem->pais);
-    for(int i =0; i< 80; i++)
+        wprintf(L"\n|%8d|%50S|%40S|\n",elem->numero,elem->nome,elem->pais);
+    for(int i =0; i< 100; i++)
         wprintf(L"-");
 }
+
 //Alterar Aluno
-void modificaraluno(SGBD * bd){
+void uiAlterarAluno(SGBD * bd){
     clearScreen();
-    imprimirAlunos(bd);
+    uiImprimirAlunos(bd);
     int id = -1;
     do{
         wprintf(L"\nQual o ID do aluno a modificar: ",bd->alunos->elementos);
@@ -126,9 +95,9 @@ void modificaraluno(SGBD * bd){
             wprintf(L"\nID de aluno inválido\n");
     }while(id < 0|| id > bd->alunos->elementos);
     //Alterar Dados
-    ALUNO * elem = obterAluno(id-1,bd->alunos);
+    ALUNO * elem = obterAlunoPos(id-1,bd->alunos);
     //Imprimir Dados dos alunos a alterar
-    imprimirdadosaluno(elem);
+    uiImprimirDadosAluno(elem);
     //Imprimir opções
     int continuar =1;
     do{
@@ -136,12 +105,9 @@ void modificaraluno(SGBD * bd){
         do{
             wprintf(L"\nQual o dado a alterar?\n\t0 - Numero\n\t1 - Nome\n\t2 - Pais\n\t3 - Cancelar\nOpção: ");
             wscanf(L"%d",&id);
-        }while(id<0 || id >4);
-        //Sair do ciclo
-        if(id==4){
-            continuar =0;
-            continue;
-        }
+            if(id<0 || id>3)
+                wprintf(L"ID inválido");
+        }while(id<0 || id >3);
         int n;
         wchar_t s[_TAMSTRING]=L"";
         //Executar opção escolhida
@@ -153,27 +119,44 @@ void modificaraluno(SGBD * bd){
                 break;
             case 1:
                 wprintf(L"Novo Nome: ");
-                wscanf(L"%S", &s);
+                wscanf(L"\n%l[^\n]", s);
                 modificarValoresAluno(elem->numero,s,elem->pais,elem);
                 break;
             case 2:
-                
                 wprintf(L"Novo País: ");
                 wscanf(L"%S", &s);
                 modificarValoresAluno(elem->numero,elem->nome,s,elem);
                 break;
+            case 3:
+                continuar = 0; continue;
         }
         wprintf(L"Pretende continuar a alterar?\n\t0 - Não\n\t1 - Sim\nOpção: ");
         wscanf(L"%d",&continuar);
     }while(continuar != 0);
     //Imprimir Dados do aluno alterados
-    imprimirdadosaluno(elem);
-    //Esperar que utilizador diga para continuar
-    wprintf(L"\nPara continuar precione ENTER",bd->alunos->elementos);
-    wchar_t tecla = L' ';
-    getwchar();
-    do{
-        wscanf(L"%c", &tecla);
-    } while(tecla != L'\n');
+    uiImprimirDadosAluno(elem);
+    pressioneENTER();
 }
 
+//Mostrar Lista de  alunos
+void uiImprimirListaAlunos(SGBD * bd){
+    int  numero;
+    wchar_t nome, pais;
+    clearScreen();
+    for(int i =0; i< 100; i++)
+        wprintf(L"-");
+        wprintf(L"\n|%8S%50S%40S|\n",L"Numero",L"Nome",L"País");
+    for(int i =0; i< 100; i++)
+        wprintf(L"-");
+    for(int i=0; i< bd->alunos->elementos; i++){
+        ALUNO* temp = obterAlunoPos(i, bd->alunos);
+        wprintf(L"\n|%8d%50S%40S|",temp->numero, temp->nome, temp->pais);
+    }
+    wprintf(L"\n");
+    for(int i =0; i< 100; i++)
+        wprintf(L"-");
+    wprintf(L"\n|%90S%8d|\n",L"Total Alunos",bd->alunos->elementos);
+    for(int i =0; i< 100; i++)
+        wprintf(L"-");
+    pressioneENTER();
+}

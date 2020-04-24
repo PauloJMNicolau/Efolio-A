@@ -1,25 +1,24 @@
+/*
+ * Ficheiro que possui todas as funções que gerem a lista de ucs
+ */
+
 #include "ucs.h"
-#include "macro.h"
 
 /* Criar Unidade Curricular */
 UC * criarUC(int numero, wchar_t *nome, int ano, int semestre, int ects){
     UC *unidade = calloc(1, sizeof(UC));
-    if (!unidade)
-    {
+    if (!unidade){
         wprintf(L"Erro %d: Impossível alocar memória para Unidade Curricular", _ERR_MEMORYALLOC);
         exit(_ERR_MEMORYALLOC);
     }
     unidade->numero = numero;
     unidade->nome = calloc(_TAMSTRING, sizeof(wchar_t));
-    if (!unidade->nome)
-    {
+    if (!unidade->nome){
         wprintf(L"Erro %d: Impossível alocar memória para Unidade Curricular", _ERR_MEMORYALLOC);
         exit(_ERR_MEMORYALLOC);
     }
     swprintf(unidade->nome,wcslen(nome)+1,L"%S",nome);
-    //wcsncpy(unidade->nome,nome,wcslen(nome));
-    if ((ano <= 0 || ano > 3) && (semestre <= 0 || semestre > 2) && ects <= 0)
-    {
+    if ((ano <= 0 || ano > 3) && (semestre <= 0 || semestre > 2) && ects <= 0){
         return unidade;
     }
     unidade->ano = ano;
@@ -28,10 +27,14 @@ UC * criarUC(int numero, wchar_t *nome, int ano, int semestre, int ects){
     return unidade;
 }
 
+//Obter valor de ECTS
+int obterECTS(UC* unidade){
+    return unidade->ects;
+}
+
 //Libertar Memoria da Unidade Curricular
 UC * libertarUC(UC *unidade){
-    if (unidade)
-    {
+    if (unidade){
         if (unidade->nome)
             free(unidade->nome);
         unidade->nome = NULL;
@@ -41,7 +44,7 @@ UC * libertarUC(UC *unidade){
     return unidade;
 }
 
-//Criar lista vazia
+//Criar lista de UC vazia
 LIST_UC * criarListaUC(){
     LIST_UC * lista = calloc(1, sizeof(LIST_UC));
     if(!lista){
@@ -53,7 +56,7 @@ LIST_UC * criarListaUC(){
     return lista;
 }
 
-//Eliminar Lista
+//Eliminar Lista de UC
 int libertarListaUC(LIST_UC * lista){
     if(!lista)
         return _ERR_MEMORYFREE;
@@ -89,7 +92,7 @@ int libertarNoUC(NoUC * no){
     return _SUCESSO;
 }
 
-//Adicionar elemento na lista
+//Adicionar elemento UC na lista
 int adicionarUC(UC * unidade, LIST_UC * lista, int pos){
     if(!lista || !unidade){
         wprintf(L"Erro %d: Impossível adicionar elemento na lista\n", _ERR_EMPTYLIST);
@@ -149,7 +152,7 @@ int removerUC(int pos, LIST_UC * lista){
 }
 
 //Obter Unidade curricular na posição
-UC * obterUC(int pos, LIST_UC * lista){
+UC * obterUCPos(int pos, LIST_UC * lista){
     if(!lista){
         wprintf(L"Erro %d: Lista vazia", _ERR_EMPTYLIST);
         return NULL;
@@ -170,9 +173,9 @@ UC * obterUC(int pos, LIST_UC * lista){
         return temp->elemento;
     }
 }
-/*
-//Procurar na lista de UC's 
-UC * procurarUC(int numeroUC, LIST_UC * lista) { //recebe numeroUC e bd->ucs que é do tipo LIST_UC
+
+//Obter UC por numero UC 
+UC * obterUCNum(int numeroUC, LIST_UC * lista) { //recebe numeroUC e bd->ucs que é do tipo LIST_UC
     NoUC * tmp;  //ponteiro para percorrer lista temporariamente
     int i = 0;
     if(!lista)
@@ -187,7 +190,6 @@ UC * procurarUC(int numeroUC, LIST_UC * lista) { //recebe numeroUC e bd->ucs que
     else
         return NULL;
 }
-*/
 
 //Modificar Valores UC
 void modificarValoresUC(int numero, wchar_t *nome, int ano, int semestre, int ects, UC * unidade){

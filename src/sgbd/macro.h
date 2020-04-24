@@ -1,5 +1,11 @@
-/* Erros */
+/*
+ * Ficheiro que possui todas as funções de gestão da Base de dados
+ */
 
+#ifndef _MACROS_
+#define _MACROS_
+
+/* Erros */
 #define _SUCESSO 0              //Sucesso
 #define _ERR_READFILE 1         //Erro a ler Ficheiro
 #define _ERR_WRITEFILE 2        //Erro a escrever no ficheiro
@@ -14,3 +20,5 @@
 #define _TAMDATAS   20 //Tamanho formato Datas
 #define _FALSE_ 0
 #define _TRUE_ 1
+
+#endif

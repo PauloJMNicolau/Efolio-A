@@ -1,37 +1,48 @@
-#include "uiinscricoes.h"
+/*
+ * Ficheiro que possui todas as funções da UI (User Interface) de Inscrições
+ */
+#include "uiInscricoes.h"
 
 //Adicionar uma nova Inscrição
-void novaInscricao(SGBD * bd) {
+void uiAdicionarNovaInscricao(SGBD * bd) {
     clearScreen();
     INSCRICAO * novo;
     UC * uc;
     ALUNO * aluno;
     int opcao, numeroUC, numeroAluno;
     wchar_t * anoLetivo;   
-    anoLetivo = calloc(_TAMDATAS, sizeof(wchar_t)); 
+    anoLetivo = calloc(_TAMDATAS, sizeof(wchar_t));
+    if(!anoLetivo){
+        wprintf(L"Erro %d: Não foi possivel alocar a memória",_ERR_MEMORYALLOC);
+        exit(_ERR_MEMORYALLOC);
+    }
     do {
         opcao = -1;
         clearScreen();
         wprintf(L"\nPreencha os dados da nova Inscrição");
         wprintf(L"\nNúmero da UC: ");
         wscanf(L"%d", &numeroUC);
-        uc = obterUC(numeroUC, bd->ucs);
+        uc = obterUCNum(numeroUC, bd->ucs);
         if (uc != NULL) {
             wprintf(L"\nNúmero de Aluno: ");
             wscanf(L"%d", &numeroAluno);
-            aluno = procurarAluno(numeroAluno, bd->alunos);
+            aluno = obterAlunoNum(numeroAluno, bd->alunos);
             if (aluno != NULL) {
                 wprintf(L"\nAno Letivo [xxxx/yyyy]: ");
                 wscanf(L"%S", anoLetivo);
                 novo = procuraInscricao(bd->inscricoes, anoLetivo,numeroAluno,numeroUC);
                 if (novo == NULL) {
-                    novo = criarInscricao(numeroUC,uc->ects, numeroAluno, anoLetivo);
-                    if(adicionarInscricao(novo, bd->inscricoes) == _SUCESSO){
-                        wprintf(L"\nIncrição Efectuada\n\nDeseja continuar a inscrever?\n\t0 - Sim\n\t1 - Não\nopcao: ");
-                        wscanf(L"%d",&opcao);
+                    if(validarInscricoes(bd, aluno, anoLetivo) == _TRUE_){
+                        novo = criarInscricao(numeroUC,0, numeroAluno, anoLetivo);
+                        if(adicionarInscricao(novo, bd->inscricoes) == _SUCESSO){
+                            wprintf(L"\nIncrição Efectuada\n\nDeseja continuar a inscrever?\n\t0 - Sim\n\t1 - Não\nopcao: ");
+                            wscanf(L"%d",&opcao);
+                        }
+                        else
+                            wprintf(L"\nErro na Inscrição"); 
                     }
                     else
-                        wprintf(L"\nErro na Inscrição");   
+                        wprintf(L"\nErro na Inscrição"); 
                 }
                 else{
                     wprintf(L"\nEsta inscrição já existe\n\nDeseja tentar de novo?\n\t0 - Sim\n\t1 - Sair\nopcão: ");
@@ -53,16 +64,16 @@ void novaInscricao(SGBD * bd) {
 }
 
 //Mostrar lista de inscrições por ano letivo
-void mostrarListaInscricoes(SGBD * bd){
+void uiImprimirListaInscricoes(SGBD * bd){
     clearScreen();
     NO_PASTA * pasta;
     wchar_t * anoLetivo;
     anoLetivo = calloc(_TAMDATAS, sizeof(wchar_t));
     wprintf(L"\nIndique o Ano Letivo que pretende consultar: ");
     wscanf(L"%S", anoLetivo);
-    pasta = procuraPasta(anoLetivo, bd->inscricoes);
+    pasta = obterPastaAno(anoLetivo, bd->inscricoes);
     if (pasta != NULL)
-        imprimirInscricoes(pasta);
+        uiImprimirInscricoes(pasta);
     else
         wprintf(L"\nNão existe referência ao Ano Letivo introduzido");
     free(anoLetivo);
@@ -70,15 +81,19 @@ void mostrarListaInscricoes(SGBD * bd){
 }
 
 //Remover uma inscrição
-void eliminarInscricao(SGBD * bd){
+void uiRemoverInscricao(SGBD * bd){
     clearScreen();
     NO_PASTA * pasta;
     int id, opcao, numeroUC, numeroAluno;
     wchar_t * anoLetivo;   
     anoLetivo = calloc(_TAMDATAS, sizeof(wchar_t));
+    if(!anoLetivo){
+        wprintf(L"Erro %d: Não foi possivel alocar a memória",_ERR_MEMORYALLOC);
+        exit(_ERR_MEMORYALLOC);
+    }
     wprintf(L"\nIndique o Ano Letivo que pretende consultar: ");
     wscanf(L"%S", anoLetivo);
-    pasta = procuraPasta(anoLetivo, bd->inscricoes);
+    pasta = obterPastaAno(anoLetivo, bd->inscricoes);
     if(pasta != NULL){
         do {
             if(pasta->elementos){
@@ -86,7 +101,7 @@ void eliminarInscricao(SGBD * bd){
                 id = -1;
                 do{
                     clearScreen();
-                    imprimirInscricoes(pasta);
+                    uiImprimirInscricoes(pasta);
                     wprintf(L"\nIndique o ID da inscrição que pretende remover: ");
                     wscanf(L"%d",&id);
                     if(id <= 0 || id > pasta->elementos){
@@ -115,17 +130,46 @@ void eliminarInscricao(SGBD * bd){
     pressioneENTER(); 
 }
 
+//Imprimir dados da inscrições
+void uiImprimirInscricoes(NO_PASTA * pasta){
+    clearScreen();
+    NO * tmp;
+    int i, j;
+    tmp = pasta->cauda;
+    for(i =0; i<80; i++)
+        wprintf(L"-");
+    wprintf(L"\n|%6S|%23S|%18S|%10S|%17S|\n",L"ID",L"Número de Aluno",L"Número de UC",L"ECTS",L"Ano Letivo");
+    for(i =0; i<80; i++)
+        wprintf(L"-");
+    wprintf(L"\n");
+    for(j=0; j < pasta->elementos; j++) {
+        if(j == 0)
+            tmp = tmp->proximo;
+        wprintf(L"|%6d|%23d|%18d|%10d|%17S|\n", j+1, tmp->elemento->numeroAluno, tmp->elemento->numeroUC,tmp->elemento->nota, tmp->elemento->anoLetivo);
+        tmp = tmp->proximo;
+    }
+    for(i =0; i<80; i++)
+        wprintf(L"-");
+    wprintf(L"\n|%52S%26d|\n", L"Total de Inscrições",pasta->elementos);
+    for(i =0; i<80; i++)
+        wprintf(L"-");
+}
+
 //Modificar valores de uma inscrição
-void modificarInscricao(SGBD * bd){
+void uiAlterarInscricao(SGBD * bd){
     clearScreen();
     NO_PASTA * pasta;
     INSCRICAO * inscricao;
-    int id, nA, nU, opcao, continuar, numeroAluno, numeroUC;
+    int id, n, opcao, continuar, numeroAluno, numeroUC;
     wchar_t * anoLetivo;
     anoLetivo = calloc(_TAMDATAS,sizeof(wchar_t));
+    if(!anoLetivo){
+        wprintf(L"Erro %d: Não foi possivel alocar a memória",_ERR_MEMORYALLOC);
+        exit(_ERR_MEMORYALLOC);
+    }
     wprintf(L"\nIndique o Ano Letivo que pretende consultar: ");
     wscanf(L"%S", anoLetivo);
-    pasta = procuraPasta(anoLetivo, bd->inscricoes);
+    pasta = obterPastaAno(anoLetivo, bd->inscricoes);
     if(pasta != NULL){
         do{
             if(pasta->elementos){
@@ -133,7 +177,7 @@ void modificarInscricao(SGBD * bd){
                 id = -1;
                 do{
                     clearScreen();
-                    imprimirInscricoes(pasta);
+                    uiImprimirInscricoes(pasta);
                     wprintf(L"\nQual o ID da inscrição que deseja modificar: ");
                     wscanf(L"%d",&id);
                     if(id <= 0|| id > pasta->elementos){
@@ -143,34 +187,37 @@ void modificarInscricao(SGBD * bd){
                 }while(id <= 0|| id > pasta->elementos);
                 inscricao = obterInscricao(id-1,pasta);
                 do{
-                    wprintf(L"\nQual o dado a alterar?\n\t0 - Número Aluno\n\t1 - Número Unidade Curricular\n\t3 - Cancelar\nOpção: ");
+                    wprintf(L"\nQual o dado a alterar?\n\t0 - Número Aluno\n\t1 - Número Unidade Curricular\n\t2 - Nota\n\t3 - Cancelar\nOpção: ");
                     wscanf(L"%d",&opcao);
                 }while(opcao<0 || opcao>3);
-                //Sair do ciclo
-                if(opcao==3){
-                    continuar =0;
-                    continue;
-                }
-                nA = 0;
-                nU = 0;
+                n = -1;
                 //Executar opção escolhida
                 switch(opcao){
                     case 0:
                         wprintf(L"\nNovo Número de Aluno: ");
-                        wscanf(L"%d", &nA);
-                        if(procurarAluno(nA,bd->alunos))
-                            modificarValorInscricao(nA,nU,inscricao);
+                        wscanf(L"%d", &n);
+                        if(obterAlunoNum(n,bd->alunos))
+                            modificarValorInscricao(n,inscricao->numeroUC, inscricao->nota,inscricao);
                         else
                             wprintf(L"\nNúmero de Aluno inexistente");
                         break;
                     case 1:
                         wprintf(L"\nNova Unidade Curricular: ");
-                        wscanf(L"%d", &nU);
-                        if(procurarUC(nU,bd->ucs))
-                            modificarValorInscricao(nA,nU,inscricao);
+                        wscanf(L"%d", &n);
+                        if(obterUCNum(n,bd->ucs))
+                            modificarValorInscricao(inscricao->numeroAluno, n , inscricao->nota,inscricao);
                         else
                             wprintf(L"\nNúmero de UC inexistente");
                         break;
+                    case 2:
+                        do{
+                            wprintf(L"\nNova nota: ");
+                            wscanf(L"%d", &n);
+                        }while(n< 0 || n> 20);
+                        modificarValorInscricao(inscricao->numeroAluno, inscricao->numeroUC,n, inscricao);
+                        break;
+                    case 3:
+                        continuar =0; continue;
                 }
                 wprintf(L"\nPretende continuar a alterar?\n\t0 - Não\n\t1 - Sim\nOpção: ");
                 wscanf(L"%d",&continuar);
@@ -188,7 +235,7 @@ void modificarInscricao(SGBD * bd){
 }
 
 //Imprimir dado da inscrição
-void imprimirDadoInscricao(INSCRICAO * inscricao){
+void uiImprimirDadoInscricao(INSCRICAO * inscricao){
     int i;
     for(i =0; i<46; i++)
         wprintf(L"-");
@@ -198,30 +245,5 @@ void imprimirDadoInscricao(INSCRICAO * inscricao){
     wprintf(L"\n");
     wprintf(L"|%23d|%23d|\n", inscricao->numeroAluno, inscricao->numeroUC);
     for(i =0; i<46; i++)
-        wprintf(L"-");
-}
-
-//Imprimir dados da inscrições
-void imprimirInscricoes(NO_PASTA * pasta){
-    clearScreen();
-    NO * tmp;
-    int i, j;
-    tmp = pasta->cauda;
-    for(i =0; i<80; i++)
-        wprintf(L"-");
-    wprintf(L"\n|%6S|%23S|%18S|%10S|%17S|\n",L"ID",L"Número de Aluno",L"Número de UC",L"ECTS",L"Ano Letivo");
-    for(i =0; i<80; i++)
-        wprintf(L"-");
-    wprintf(L"\n");
-    for(j=0; j < pasta->elementos; j++) {
-        if(j == 0)
-            tmp = tmp->proximo;
-        wprintf(L"|%6d|%23d|%18d|%10d|%17S|\n", j+1, tmp->elemento->numeroAluno, tmp->elemento->numeroUC,tmp->elemento->ects, tmp->elemento->anoLetivo);
-        tmp = tmp->proximo;
-    }
-    for(i =0; i<80; i++)
-        wprintf(L"-");
-    wprintf(L"\n|%52S%26d|\n", L"Total de Inscrições",pasta->elementos);
-    for(i =0; i<80; i++)
         wprintf(L"-");
 }

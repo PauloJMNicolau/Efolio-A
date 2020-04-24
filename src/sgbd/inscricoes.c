@@ -1,15 +1,17 @@
+/*
+ * Ficheiro que possui todas as funções de gestão da lista de inscrições
+ */
 #include "inscricoes.h"
-#include "macro.h"
 
 //Criar Inscricao
-INSCRICAO * criarInscricao(int numeroUC, int ects, int numeroAluno, wchar_t* ano){
+INSCRICAO * criarInscricao(int numeroUC, int nota, int numeroAluno, wchar_t* ano){
     INSCRICAO * novo = calloc(1,sizeof(INSCRICAO));
     if(!novo){
         wprintf(L"Erro %d: Não foi possivel alocar memoria para a inscriçao", _ERR_MEMORYALLOC);
         exit(_ERR_MEMORYALLOC);
     }
     novo->numeroUC=numeroUC;
-    novo->ects=ects;
+    novo->nota=nota;
     novo->numeroAluno=numeroAluno;
     novo->anoLetivo=calloc(_TAMSTRING + 1, sizeof(wchar_t));
     if (!novo->anoLetivo) {
@@ -25,7 +27,7 @@ int libertarInscricao(INSCRICAO * inscricao){
     if(!inscricao)
         return _ERR_MEMORYFREE;
     inscricao->numeroUC =0;
-    inscricao->ects=0;
+    inscricao->nota=0;
     inscricao->numeroAluno =0;
     if(inscricao->anoLetivo){
         free(inscricao->anoLetivo);
@@ -284,7 +286,6 @@ int removerInscricao(INSCRICAO* inscricao, LISTA_PASTA * lista){
     if(!inscricao || !lista)
         return _ERR_IMPOSSIBLE;
     NO_PASTA * pasta = procuraPasta(inscricao->anoLetivo,lista);
-    
     if(removerInscricoes(procuraPosicaoInscricao(inscricao,lista),pasta) == _SUCESSO)
         return _SUCESSO;
     else
@@ -315,18 +316,86 @@ INSCRICAO * obterInscricao(int pos, NO_PASTA * lista){
     }
 }
 
+//Obter Pasta na posição
+NO_PASTA * obterPastaPos(int pos, LISTA_PASTA * lista){
+    int i =0;
+    NO_PASTA * temp;
+    if(!lista){
+        wprintf(L"Erro %d: Lista vazia", _ERR_EMPTYLIST);
+        return NULL;
+    }
+    if(pos < 0 || pos >lista->pastas){
+        wprintf(L"Erro %d: Possição inválida na lista", _ERR_IMPOSSIBLE);
+        return NULL;
+    }
+    if(pos == lista->pastas-1)
+        return lista->cauda;
+    else{
+        temp = lista->cauda;
+        while(i<=pos){
+            temp = temp->proximo;
+            i++;
+        }
+        return temp;
+    }
+}
+
+//Obter Pasta por chave
+NO_PASTA * obterPastaAno(wchar_t * ano, LISTA_PASTA * lista){
+    NO_PASTA * temp;
+    if(!lista){
+        wprintf(L"Erro %d: Lista vazia", _ERR_EMPTYLIST);
+        return NULL;
+    }
+    if(!ano){
+        wprintf(L"Erro %d: Ano inválido na lista", _ERR_IMPOSSIBLE);
+        return NULL;
+    }
+    if(wcscmp(ano, lista->cauda->chave)==0)
+        return lista->cauda;
+    else{
+        temp = lista->cauda;
+        while(temp != lista->cauda || wcscmp(ano, temp->chave)==0){
+            temp = temp->proximo;
+        }
+        if(wcscmp(ano, temp->chave)==0)
+            return temp;
+        return NULL;
+    }
+}
+
 //Modificar Valores UC
-void modificarValorInscricao(int numeroAluno, int numeroUC, INSCRICAO * inscricao){
+void modificarValorInscricao(int numeroAluno, int numeroUC, int nota, INSCRICAO * inscricao){
     if(numeroAluno)
         inscricao->numeroAluno = numeroAluno;
     if(numeroUC)
         inscricao->numeroUC = numeroUC;
+    if(nota)
+        inscricao->nota = nota;
 }
 
 //Verifica se aluno frequentou o ano letivo anterior ao ano currente
 int verificaInsAnoAnterior(int numeroAluno, LISTA_PASTA * inscricao){
+    if(!inscricao)
+        return 0;
+    int contador =0;
     NO_PASTA * pasta = inscricao->cauda; 
-    NO * no;
+    for(int i=0; i<inscricao->pastas; i++){
+        pasta = pasta->proximo;
+        NO * aux = pasta->cauda;
+        for(int e =0; e < pasta->elementos; e++){
+            aux = aux->proximo;
+            if(aux->elemento->numeroAluno == numeroAluno){
+                contador++;
+            }
+        }
+    }
+    if(contador == 0)
+        return 0;
+    else
+        return 1;
+    
+    /*NO * no;
     int i;
     if(inscricao->pastas == 1)                  //Se só existir uma pasta, então será sempre 1º ano
         return 0;
@@ -338,5 +407,70 @@ int verificaInsAnoAnterior(int numeroAluno, LISTA_PASTA * inscricao){
             return 1;
         no = no->proximo;
     }
-    return 0;
+    return 0;*/
+}
+
+//Valida Possibilidade de Inscricao
+int validarInscricao(ALUNO * aluno, LIST_UC * unidades, wchar_t * ano, LISTA_PASTA * inscricoes){
+    int res = verificaInscricoesAnterioresAluno(aluno,ano,inscricoes);
+    int limECTS = 0;
+    if(res == _TRUE_)
+        limECTS = 84;
+    else
+        limECTS = 60;
+    int ects =0;
+    int i =0;
+    NO_PASTA * pasta = obterPastaAno(ano,inscricoes);
+    if(!pasta) //não existe ano
+        return _TRUE_; //Valida devido a nao existir ano
+    NO * aux = pasta->cauda;
+    while(ects <= limECTS && i < pasta->elementos){
+        aux = aux->proximo;
+        if(aux->elemento->numeroAluno == aluno->numero){
+            UC * temp = obterUCNum(aux->elemento->numeroUC,unidades);
+            ects += temp->ects;
+        } 
+        i++;
+    }
+    if(ects <= limECTS)
+        return _TRUE_;
+    return _FALSE_;
+}
+
+//Verifica se o aluno esteve inscrito anteriormente
+int verificaInscricoesAnterioresAluno(ALUNO * aluno, wchar_t * ano, LISTA_PASTA * lista){
+    if(!lista || !aluno || !ano){
+        wprintf(L"Erro %d: Dados inválidos", _ERR_IMPOSSIBLE);
+        return _ERR_IMPOSSIBLE;
+    }
+    if(lista->pastas == 0)
+        return _FALSE_;
+    NO_PASTA * pasta = lista->cauda;
+    for(int i=0; i< lista->pastas;i++){
+        pasta = pasta->proximo;
+        if(wcscmp(pasta->chave,ano) <0){
+            NO * aux = pasta->cauda;
+            for(int e =0; e < pasta->elementos; e++){
+                aux = aux->proximo;
+                if(aux->elemento->numeroAluno == aluno->numero){
+                    return _TRUE_;
+                }
+            }
+        }
+    }
+    return _FALSE_;
+}
+
+//Procura e retorna o ano letivo mais recente
+NO_PASTA * obterAnoLetivoRecente(LISTA_PASTA *lista){
+    if(!lista)
+        return NULL;
+    NO_PASTA * temp = lista->cauda->proximo;
+    NO_PASTA * aux = lista->cauda->proximo;
+    for(int i = 1; i<lista->pastas; i++){
+        temp = temp->proximo;
+        if(wcscmp(temp->chave, aux->chave)>0)
+            aux = temp;
+    }
+    return aux;
 }
