@@ -120,3 +120,71 @@ int condicaoPropina(ALUNO * aluno, LISTA_PASTA * inscricao) {
     opcao += verificaInsAnoAnterior(aluno->numero, inscricao);
     return opcao;
 }
+
+/************************************
+ *            Report A              *
+ ************************************/
+
+
+
+/************************************
+ *            Report B              *
+ ************************************/
+
+void gerarReportB(SGBD * bd){
+    LIST_ALUNO * alunosAux = bd->alunos;
+    LISTA_PASTA * auxInscricoes = bd->inscricoes;
+    FILE * reportFile = criarReportB();
+    //Percorrer a lista de todos os alunos
+    for(int i =0; i< alunosAux->elementos; i++){
+        REP_B * report = criarListaReportB(); //Cria estrutura de report B
+        ALUNO * aluno = obterAlunoPos(i,alunosAux);
+        //Percorrer todos os anos letivos
+        for(int p =0; p< auxInscricoes->pastas; p++){
+            NO_PASTA * pasta= obterPastaPos(p,auxInscricoes);
+            NO * no = pasta->cauda;
+            //Percorrer todas as inscrições do ano
+            for(int n = 0; n <pasta->elementos; n++){
+                no = no->proximo;
+                //Verificar se inscrição pertence ao aluno
+                if(no->elemento->numeroAluno == aluno->numero){
+                    //Pesquisa na estrutura para verificar se encontra o id da UC na estrutura
+                    REP_B_ELEM * aux = obterElementoReportBNum(no->elemento->numeroUC, report);
+                    if(aux != NULL){
+                        //Caso o id da uc esteja na estrutura, verifica se a mesma já está concluida, caso não esteja atualiza estado com nova nota
+                        if(aux->estado != 1)
+                            modificarEstado(aux,no->elemento->nota);
+                    } else
+                        //Caso não esteja na estrutura adiciona a uc à estrutura
+                        adicionarElementoRepBFim(report, criarElementoReportB(no->elemento->numeroUC, no->elemento->nota));
+                }
+            }
+        }
+        //Verifica se estrutura possui tantos elementos como unidades na bd
+        if(report->quantidade == bd->ucs->elementos){
+            int contador = 0;
+            REP_B_ELEM * aux = report->cauda;
+            //Soma todas o valor de estados da UC na estrutura.
+            for(int e =0; e < report->quantidade; e++){
+                aux = aux->proximo;
+                contador += aux->estado;
+            }
+            //Se a soma for igual ou superior ao total de ucs-3 e não for a totalidade de UC escreve no ficheiro 
+            if(contador >= bd->ucs->elementos - 3 && contador < bd->ucs->elementos){
+                escreverLinhaReportB(aluno,contador, reportFile);
+            }
+        }
+        libertarListaReportB(report);
+    }
+    terminarReportB(reportFile);
+}
+
+
+
+/************************************
+ *            Report C              *
+ ************************************/
+
+/************************************
+ *            Report D              *
+ ************************************/

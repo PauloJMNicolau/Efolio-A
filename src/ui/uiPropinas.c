@@ -7,7 +7,6 @@
 void uiCalcularPropinas(SGBD * bd) {
     clearScreen();
     int numeroAluno;
-    NO * tmp;
     ALUNO * aluno;
     wprintf(L"\nIndique o número de aluno que deseja calcular a propina: ");
     wscanf(L"%d", &numeroAluno);

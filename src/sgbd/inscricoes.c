@@ -196,7 +196,6 @@ INSCRICAO * procuraInscricao(LISTA_PASTA * lista, wchar_t * ano, int numeroAluno
     if(!pasta)
         return NULL;
     NO * temp = pasta->cauda->proximo;
-    INSCRICAO * aux= NULL;
     int i =0;
     while(i<pasta->elementos){
         if(temp->elemento->numeroAluno == numeroAluno && temp->elemento->numeroUC == numeroUC)
@@ -272,8 +271,8 @@ int removerPasta(NO_PASTA * pasta, LISTA_PASTA * lista){
             temp = temp->proximo;
         }
         temp->proximo = pasta->proximo;
-        
-        if(pasta = lista->cauda)
+        pasta = lista->cauda;
+        if(pasta)
             lista->cauda = temp;
     }
     libertarPasta(pasta);

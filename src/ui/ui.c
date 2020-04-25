@@ -219,7 +219,7 @@ void menuReports(SGBD * bd) {
             case 1:
                 //repECTSAluno(); break;
             case 2:
-                //repEpocaEspExame(); break;
+                gerarReportB(bd); break;
             case 3:
                 //repAbanEscolar(); break;
             case 4:

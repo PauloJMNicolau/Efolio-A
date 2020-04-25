@@ -84,7 +84,7 @@ void uiImprimirListaInscricoes(SGBD * bd){
 void uiRemoverInscricao(SGBD * bd){
     clearScreen();
     NO_PASTA * pasta;
-    int id, opcao, numeroUC, numeroAluno;
+    int id, opcao;
     wchar_t * anoLetivo;   
     anoLetivo = calloc(_TAMDATAS, sizeof(wchar_t));
     if(!anoLetivo){
@@ -160,7 +160,7 @@ void uiAlterarInscricao(SGBD * bd){
     clearScreen();
     NO_PASTA * pasta;
     INSCRICAO * inscricao;
-    int id, n, opcao, continuar, numeroAluno, numeroUC;
+    int id, n, opcao, continuar;
     wchar_t * anoLetivo;
     anoLetivo = calloc(_TAMDATAS,sizeof(wchar_t));
     if(!anoLetivo){
