@@ -1,23 +1,10 @@
-<<<<<<< HEAD
-=======
 /*
  * Ficheiro que possui todas as funções que gerem os reports
  */
->>>>>>> f30fae9c53582f7d72561669d64e356dd2b5ec07
 
 #ifndef _REPORTS_
 #define _REPORTS_
 
-<<<<<<< HEAD
-#include "macro.h"
-#include "alunos.h"
-#include "ucs.h"
-#include "inscricoes.h"
-
-
-
-
-=======
 //Bibliotecas Padrão
 #include <stdio.h>
 #include <stdlib.h>
@@ -85,7 +72,6 @@ REP_B_ELEM * obterElementoReportBNum(int id, REP_B * lista);
 /************************
  *      Report D        *
  * **********************/
->>>>>>> f30fae9c53582f7d72561669d64e356dd2b5ec07
 
 
 #endif

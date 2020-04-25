@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-
-#include "reports.h"
-
-
-=======
 /*
  * Ficheiro que possui todas as funções que gerem os reports
  */
@@ -132,4 +126,3 @@ REP_B_ELEM * obterElementoReportBNum(int id, REP_B * lista){
 /************************
  *      Report D        *
  * **********************/
->>>>>>> f30fae9c53582f7d72561669d64e356dd2b5ec07
