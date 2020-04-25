@@ -18,6 +18,7 @@
 #include "inscricoes.h"
 #include "alunos.h"
 #include "ucs.h"
+#include "reports.h"
 #include "macro.h"
 
 /* ***********************

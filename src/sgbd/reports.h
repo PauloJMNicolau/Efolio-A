@@ -7,7 +7,7 @@
 #include "ucs.h"
 #include "inscricoes.h"
 
-
+int verificaFicheiroECTS(ALUNO * aluno);
 
 
 
