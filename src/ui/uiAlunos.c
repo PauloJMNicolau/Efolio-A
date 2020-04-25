@@ -39,8 +39,6 @@ void uiAdicionarNovoAluno(SGBD * bd){
 
 //Remover UC
 void uiRemoverAluno(SGBD * bd){
-    int  numero;
-    wchar_t nome, pais;
     clearScreen();
     uiImprimirAlunos(bd);
     int id = -1;
@@ -75,10 +73,10 @@ void uiImprimirAlunos(SGBD * bd){
 void uiImprimirDadosAluno(ALUNO * elem){
     for(int i =0; i< 100; i++)
         wprintf(L"-");
-        wprintf(L"\n|%8S|%50S|%38S|\n",L"Numero",L"Nome",L"País");
+    wprintf(L"\n|%8S|%50S|%38S|\n",L"Numero",L"Nome",L"País");
     for(int i =0; i< 100; i++)
         wprintf(L"-");
-        wprintf(L"\n|%8d|%50S|%38S|\n",elem->numero,elem->nome,elem->pais);
+    wprintf(L"\n|%8d|%50S|%38S|\n",elem->numero,elem->nome,elem->pais);
     for(int i =0; i< 100; i++)
         wprintf(L"-");
 }
@@ -140,12 +138,10 @@ void uiAlterarAluno(SGBD * bd){
 
 //Mostrar Lista de  alunos
 void uiImprimirListaAlunos(SGBD * bd){
-    int  numero;
-    wchar_t nome, pais;
     clearScreen();
     for(int i =0; i< 100; i++)
         wprintf(L"-");
-        wprintf(L"\n|%8S%50S%40S|\n",L"Numero",L"Nome",L"País");
+    wprintf(L"\n|%8S%50S%40S|\n",L"Numero",L"Nome",L"País");
     for(int i =0; i< 100; i++)
         wprintf(L"-");
     for(int i=0; i< bd->alunos->elementos; i++){

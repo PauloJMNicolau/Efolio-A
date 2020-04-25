@@ -15,6 +15,7 @@
 #include "inscricoes.h"
 #include "alunos.h"
 #include "ucs.h"
+#include "reports.h"
 
 /* **********************
  *        Headers       *
@@ -38,5 +39,31 @@ void lerInscricoesTexto(LISTA_PASTA * lista);
 void processarLinhaInscricao(wchar_t * linha, LISTA_PASTA * lista);
 //Gravar Dados dos Alunos no ficheiro
 void gravarInscricoesTexto(LISTA_PASTA * lista);
+
+/************************************
+ *            Report A              *
+ ************************************/
+
+
+
+/************************************
+ *            Report B              *
+ ************************************/
+//Termina a escrita no report B
+int terminarReportB(FILE * fp);
+//Cria ficheiro e cabeçalho do Report B
+FILE * criarReportB();
+//Escrever linha no Report
+int escreverLinhaReportB(ALUNO * aluno, int ucsRealizadas, FILE * fp);
+
+/************************************
+ *            Report C              *
+ ************************************/
+
+/************************************
+ *            Report D              *
+ ************************************/
+
+
 
 #endif
