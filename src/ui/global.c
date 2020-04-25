@@ -15,7 +15,7 @@ void cabecalho(char *str) {
 //função verifica largura da tela
 int largTela() {
 	struct winsize ws;
-    int x, fd;
+    int x;
 	if (ioctl(0, TIOCGWINSZ, &ws) < 0)	//Dimensão da tela
 	    err(1, "/dev/tty");
 

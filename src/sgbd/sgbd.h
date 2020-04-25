@@ -19,6 +19,7 @@
 #include "alunos.h"
 #include "ucs.h"
 #include "macro.h"
+#include "reports.h"
 
 /* ***********************
  *      Estruturas       *
@@ -43,7 +44,6 @@ int libertarBD(SGBD * bd);
 int gravarDados(SGBD * bd);
 //Ler informação dos ficheiros
 int carregarFicheiros(SGBD * bd);
-
 //Validar Inscriçoes
 int validarInscricoes(SGBD * bd, ALUNO * aluno, wchar_t * ano,int ects);
 //Cálculo da propina mediante condicão do estudante
@@ -52,5 +52,26 @@ int calculoPropina(int ects, int opcao);
 void calcularPropinas(SGBD * bd, ALUNO * aluno);
 //Verifica estatuto de residente do estudante e se é 1º inscrição
 int condicaoPropina(ALUNO * aluno, LISTA_PASTA * inscricao);
+
+/************************************
+ *            Report A              *
+ ************************************/
+
+
+
+/************************************
+ *            Report B              *
+ ************************************/
+
+void gerarReportB(SGBD * bd);
+
+
+/************************************
+ *            Report C              *
+ ************************************/
+
+/************************************
+ *            Report D              *
+ ************************************/
 
 #endif

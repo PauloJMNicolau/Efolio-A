@@ -161,3 +161,54 @@ void gravarInscricoesTexto(LISTA_PASTA * lista){
     }
     fclose(fp);
 }
+
+/************************************
+ *            Report A              *
+ ************************************/
+
+
+
+/************************************
+ *            Report B              *
+ ************************************/
+
+//Escrever linha no Report
+int escreverLinhaReportB(ALUNO * aluno, int ucsRealizadas, FILE * fp){
+    if(!fp){
+        wprintf(L"Erro %d: Não foi possivel encontrar o ficheiro.", _ERR_RESOURCENOTFOUND);
+        return _ERR_RESOURCENOTFOUND;
+    }
+    fwprintf(fp, L"%d;%S;%d", aluno->numero, aluno->nome, ucsRealizadas);
+    return _SUCESSO;
+}
+
+//Cria ficheiro e cabeçalho do Report B
+FILE * criarReportB(){
+    FILE * novo = fopen("Report B", "w");
+    if(!novo){
+        wprintf(L"Erro %d: Não foi possivel abrir o ficheiro",_ERR_WRITEFILE);
+        exit(_ERR_WRITEFILE);
+    }
+    fwprintf(novo, L"# Report B - Lista de Alunos que podem fazer exames de época especial\n\n");
+    return novo;
+}
+
+//Termina a escrita no report B
+int terminarReportB(FILE * fp){
+    if(!fp){
+        wprintf(L"Erro %d: Não foi possivel encontrar o ficheiro a terminar.", _ERR_RESOURCENOTFOUND);
+        return _ERR_RESOURCENOTFOUND;
+    }
+    fwprintf(fp,L"\n\n#Fim Report B");
+    fclose(fp);
+    return _SUCESSO;
+}
+
+
+/************************************
+ *            Report C              *
+ ************************************/
+
+/************************************
+ *            Report D              *
+ ************************************/
