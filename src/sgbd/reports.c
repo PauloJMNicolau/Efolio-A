@@ -3,7 +3,7 @@
 
 //Criar elemento
 ECTS * criarElementoECTS(int numeroAluno, wchar_t * nomeAluno, int ects, wchar_t * observacao){
-    ECTS * unidade = calloc(1, sizeof(UC));
+    ECTS * unidade = calloc(1, sizeof(ECTS));
     if (!unidade){
         wprintf(L"Erro %d: Impossível alocar memória para Elemento do Report ECTS", _ERR_MEMORYALLOC);
         exit(_ERR_MEMORYALLOC);
