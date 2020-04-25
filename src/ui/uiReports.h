@@ -16,5 +16,8 @@
 
 //Report número total ECTS por aluno no ano letivo corrente
 void repECTSAluno(SGBD * bd);
+//Verificar se o aluno consta da lista do Report
+int verificaRepECTS(int numeroAluno, ListRepECTS * report);
 
+void imprimirReportECTS(ListRepECTS * report);
 #endif

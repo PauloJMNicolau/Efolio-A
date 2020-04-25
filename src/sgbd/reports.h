@@ -13,6 +13,7 @@
 
 //Estrutura de Dados UC
 typedef struct ects{
+    int numero;      //Numero de aluno
     wchar_t *nome; //Nome do aluno
     int ects;       //ECTS 
     wchar_t * observacao;  //observacao serviços acadêmicos
@@ -20,7 +21,6 @@ typedef struct ects{
 
 //Estrutura para No da Lista de UC
 typedef struct norepECTS{
-    int numero;      //Numero de aluno
     ECTS * elemento; //Elemento
     struct norepECTS * proximo; //Proximo elemento na lista
 } NoRepECTS;
@@ -32,19 +32,21 @@ typedef struct lista_repects{
 } ListRepECTS;
 
 //Criar elemento
-ECTS * criarElementoECTS(wchar_t * nomeAluno, int ects, wchar_t observacao);
+ECTS * criarElementoECTS(int numeroAluno, wchar_t * nomeAluno, int ects, wchar_t * observacao);
 //Libertar elemento
 ECTS * libertarElementoECTS(ECTS * elemento);
 //Criar nó da lista tendo como chave número de aluno
-NoRepECTS * criarNoECTS(ECTS * elemento, int numeroAluno);
+NoRepECTS * criarNoECTS(ECTS * elemento);
 //Libertar nó Report ECTS
 int  libertarNoECTS(NoRepECTS * no);
 //Criar lista report ECTS
 ListRepECTS * criarListaECTS();
 //Libertar a lista
 int libertarListaECTS(ListRepECTS * lista);
-//Adicionar à lista
-int adicionarRepECTS(ECTS * elemento, ListRepECTS * lista);
-
-
+//Adicionar elemento ECTS na lista
+int adicionarRepECTS(ECTS * unidade, ListRepECTS * lista, int pos);
+//Remover elemento da lista
+int removerElementoECTS(int pos, ListRepECTS * lista);
+//Adicionar no elemento 
+void adicionarECTS(ECTS * elemento, int ects, wchar_t * observacao);
 #endif

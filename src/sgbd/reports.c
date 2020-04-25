@@ -2,12 +2,13 @@
 #include "reports.h"
 
 //Criar elemento
-ECTS * criarElementoECTS(wchar_t * nomeAluno, int ects, wchar_t observacao){
+ECTS * criarElementoECTS(int numeroAluno, wchar_t * nomeAluno, int ects, wchar_t * observacao){
     ECTS * unidade = calloc(1, sizeof(UC));
     if (!unidade){
         wprintf(L"Erro %d: Impossível alocar memória para Elemento do Report ECTS", _ERR_MEMORYALLOC);
         exit(_ERR_MEMORYALLOC);
     }
+    unidade->numero = numeroAluno;
     unidade->ects = ects;
     unidade->nome = calloc(_TAMSTRING, sizeof(wchar_t));
     if (!unidade->nome){
@@ -20,7 +21,7 @@ ECTS * criarElementoECTS(wchar_t * nomeAluno, int ects, wchar_t observacao){
             wprintf(L"Erro %d: Impossível alocar memória para observacao do Report ECTS", _ERR_MEMORYALLOC);
             exit(_ERR_MEMORYALLOC);
         }
-        swprintf(unidade->observacao,wcslen(observacao)+1,L"%S",observacao);
+    swprintf(unidade->observacao,wcslen(observacao)+1,L"%S",observacao);
     return unidade;
 }
 
@@ -39,13 +40,12 @@ ECTS * libertarElementoECTS(ECTS * elemento){
 }
 
 //Criar nó da lista tendo como chave número de aluno
-NoRepECTS * criarNoECTS(ECTS * elemento, int numeroAluno){
+NoRepECTS * criarNoECTS(ECTS * elemento){
     NoRepECTS * novo = calloc(1,sizeof(NoRepECTS));
     if(!novo){
         wprintf(L"Erro %d: Impossível alocar memória para elemento do Report ECTS", _ERR_MEMORYALLOC);
         exit(_ERR_MEMORYALLOC);
     }
-    novo->numero = numeroAluno;
     novo->elemento = elemento;
     novo->proximo = novo;
     return novo;
@@ -87,8 +87,8 @@ int libertarListaECTS(ListRepECTS * lista){
     return _SUCESSO;
 }
 
-//Adicionar elemento UC na lista
-int adicionarUC(UC * unidade, LIST_UC * lista, int pos){
+//Adicionar elemento ECTS na lista
+int adicionarRepECTS(ECTS * unidade, ListRepECTS * lista, int pos){
     if(!lista || !unidade){
         wprintf(L"Erro %d: Impossível adicionar elemento na lista\n", _ERR_EMPTYLIST);
         return _ERR_EMPTYLIST;
@@ -97,7 +97,7 @@ int adicionarUC(UC * unidade, LIST_UC * lista, int pos){
         wprintf(L"Erro %d: Posição inválida na lista\n", _ERR_IMPOSSIBLE);
         return _ERR_IMPOSSIBLE;
     }
-    NoUC * no = criarNoUC(unidade);
+    NoRepECTS * no = criarNoECTS(unidade);
     if(lista->elementos==0){ //Lista vazia adiciona no inicio
         lista->cauda = no;
         lista->elementos++;
@@ -107,7 +107,7 @@ int adicionarUC(UC * unidade, LIST_UC * lista, int pos){
         lista->cauda = no;                      //Atualiza o ultimo elemento
         lista->elementos++;
     } else{ //Adiciona na posição;
-        NoUC * temp = lista->cauda->proximo;
+        NoRepECTS * temp = lista->cauda->proximo;
         for(int i =0;i<pos; i++)
             temp = temp->proximo;
         no->proximo = temp->proximo;    //Aponta novo elemento para o elemento seguinte da posição da lista
@@ -118,7 +118,7 @@ int adicionarUC(UC * unidade, LIST_UC * lista, int pos){
 }
 
 //Remover elemento da lista
-int removerUC(int pos, LIST_UC * lista){
+int removerElementoECTS(int pos, ListRepECTS * lista){
     if(!lista){
         wprintf(L"Erro %d: Impossível remover elemento na lista", _ERR_EMPTYLIST);
         return _ERR_EMPTYLIST;
@@ -128,22 +128,32 @@ int removerUC(int pos, LIST_UC * lista){
         return _ERR_IMPOSSIBLE;
     }
     if(pos==0){ //Remover na cabeça da lista
-        NoUC * temp = lista->cauda->proximo;
+        NoRepECTS * temp = lista->cauda->proximo;
         lista->cauda->proximo = temp->proximo;      //Aponta final da lista para segundo elemento da lista
         lista->elementos--;
-        libertarNoUC(temp);
+        libertarNoECTS(temp);
     } else {    //Remove na posição
-        NoUC *temp = lista->cauda->proximo;
+        NoRepECTS *temp = lista->cauda->proximo;
         for (int i = 0; i < pos-1; i++)
             temp = temp->proximo;
-        NoUC * aux = temp->proximo;
+        NoRepECTS * aux = temp->proximo;
         temp->proximo = aux->proximo; //Aponta elemento atual para o segundo elemento seguinte da posição da lista
         if (pos == lista->elementos - 1)
             lista->cauda = temp; //Atualiza cauda caso seja o ultimo elemento a remover
         lista->elementos--;
-        libertarNoUC(aux);
+        libertarNoECTS(aux);
     }
     return _SUCESSO;
+}
+//Adicionar no elemento 
+void adicionarECTS(ECTS * elemento, int ects, wchar_t * observacao){
+    elemento->ects = ects;
+    elemento->observacao = calloc(_TAMSTRING, sizeof(wchar_t));
+    if (!elemento->observacao){
+        wprintf(L"Erro %d: Impossível alocar memória para nome de Aluno do Report ECTS", _ERR_MEMORYALLOC);
+        exit(_ERR_MEMORYALLOC);
+    }
+    swprintf(elemento->observacao,wcslen(observacao)+1,L"%S",observacao);
 }
 
 
