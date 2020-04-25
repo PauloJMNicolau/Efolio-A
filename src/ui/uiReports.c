@@ -24,25 +24,25 @@ void repECTSAluno(SGBD * bd) {
 
     NoRepECTS * norep = report->cauda;
     
-    wchar_t * obsv;
-    obsv=calloc(_TAMSTRING,sizeof(wchar_t));
+    wchar_t * obsv = calloc(_TAMSTRING,sizeof(wchar_t));
 
     for(i=0; i<report->elementos; i++){
         ects=0;
-        obsv = L"N/A";
         for(j=0; j< pasta->elementos; j++){
             if(norep->elemento->numero == no->elemento->numeroAluno)
                 ects += obterECTS(obterUCNum(no->elemento->numeroUC, bd->ucs));   
             no = no->proximo;
         }
         if(ects > 60)
-            obsv = L"Necessita validação";
+            wcscpy(obsv,L"Necessita validação");
+        else
+            wcscpy(obsv,L"N/A");
         adicionarECTS(norep->elemento, ects, obsv);
         norep = norep->proximo;
     }
     imprimirReportECTS(report);
-    free(obsv);
     libertarListaECTS(report);
+    free(obsv);
     pressioneENTER();
 }
 
@@ -56,14 +56,21 @@ int verificaRepECTS(int numeroAluno, ListRepECTS * report){
     }
     return 0;
 }
-
+//Imprimir report total ECTS por aluno no ano corrente 
 void imprimirReportECTS(ListRepECTS * report){
     NoRepECTS * norep = report->cauda;
     int i;
-    for(i=0;i<report->elementos;i++)
-    {
-        wprintf(L"%d ", report->elementos);
-        wprintf(L"%d %S %d %S\n", norep->elemento->numero, norep->elemento->nome,norep->elemento->ects, norep->elemento->observacao);
+    for(i =0; i<80; i++)
+        wprintf(L"-");
+    wprintf(L"\n|%17S|%24S|%10S|%24S|\n",L"Número de Aluno",L"Nome do Aluno",L"ECTS",L"Observações");
+    for(i =0; i<80; i++)
+        wprintf(L"-");
+    wprintf(L"\n");
+    for(i=0;i<report->elementos;i++){
+        //wprintf(L"%d ", report->elementos);
+        wprintf(L"|%17d|%24S|%10d|%24S|\n", norep->elemento->numero, norep->elemento->nome,norep->elemento->ects, norep->elemento->observacao);
         norep =  norep->proximo;
     }
+    for(i =0; i<80; i++)
+        wprintf(L"-");
 }

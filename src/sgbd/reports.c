@@ -145,7 +145,7 @@ int removerElementoECTS(int pos, ListRepECTS * lista){
     }
     return _SUCESSO;
 }
-//Adicionar no elemento 
+//Adicionar dados no elemento 
 void adicionarECTS(ECTS * elemento, int ects, wchar_t * observacao){
     elemento->ects = ects;
     elemento->observacao = calloc(_TAMSTRING, sizeof(wchar_t));

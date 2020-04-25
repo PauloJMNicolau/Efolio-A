@@ -18,6 +18,6 @@
 void repECTSAluno(SGBD * bd);
 //Verificar se o aluno consta da lista do Report
 int verificaRepECTS(int numeroAluno, ListRepECTS * report);
-
+//Imprimir report total ECTS por aluno no ano corrente
 void imprimirReportECTS(ListRepECTS * report);
 #endif
