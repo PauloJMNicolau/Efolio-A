@@ -16,11 +16,15 @@ void uiAdicionarNovaUC(SGBD * bd){
     wprintf(L"\nNumero: ");
     wscanf(L"%d", &numero);
     wprintf(L"\nNome: ");
-    wscanf(L"%S", nome);
-    wprintf(L"\nAno: ");
-    wscanf(L"%d", &ano);
-    wprintf(L"\nSemestre: ");
-    wscanf(L"%d", &semestre);
+    wscanf(L"\n%l[^\n]", nome);
+    do{
+        wprintf(L"\nAno: ");
+        wscanf(L"%d", &ano);
+    } while(ano <=0 || ano >3);
+    do{
+        wprintf(L"\nSemestre: ");
+        wscanf(L"%d", &semestre);
+    } while(semestre <1 || semestre >2);
     wprintf(L"\nECTS: ");
     wscanf(L"%d", &ects);
     UC * unidade = criarUC(numero,nome,ano,semestre,ects);
@@ -147,7 +151,7 @@ void uiAlterarUnidade(SGBD * bd){
                     wprintf(L"Novo Ano: ");
                     wscanf(L"%d", &n);
                     if(n<1 || n>3)
-                        wprintf(L"Ano inválido");
+                        wprintf(L"Ano inválido\n");
                 }while(n<1 || n>3);
                 modificarValoresUC(unidade->numero,unidade->nome,n,unidade->semestre,unidade->ects,unidade);
                 break;
@@ -156,7 +160,7 @@ void uiAlterarUnidade(SGBD * bd){
                     wprintf(L"Novo Semestre: ");
                     wscanf(L"%d", &n);
                     if(n<1 || n>2)
-                        wprintf(L"Semestre inválido");
+                        wprintf(L"Semestre inválido\n");
                 }while(n<1 || n>2); 
                 modificarValoresUC(unidade->numero,unidade->nome,unidade->ano,n,unidade->ects,unidade); 
                 break;

@@ -45,7 +45,7 @@ int gravarDados(SGBD * bd);
 int carregarFicheiros(SGBD * bd);
 
 //Validar Inscriçoes
-int validarInscricoes(SGBD * bd, ALUNO * aluno, wchar_t * ano);
+int validarInscricoes(SGBD * bd, ALUNO * aluno, wchar_t * ano,int ects);
 //Cálculo da propina mediante condicão do estudante
 int calculoPropina(int ects, int opcao);
 //Calcular Propinas para o ultimo Ano

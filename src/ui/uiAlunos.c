@@ -75,10 +75,10 @@ void uiImprimirAlunos(SGBD * bd){
 void uiImprimirDadosAluno(ALUNO * elem){
     for(int i =0; i< 100; i++)
         wprintf(L"-");
-        wprintf(L"\n|%8S|%50S|%40S|\n",L"Numero",L"Nome",L"País");
+        wprintf(L"\n|%8S|%50S|%38S|\n",L"Numero",L"Nome",L"País");
     for(int i =0; i< 100; i++)
         wprintf(L"-");
-        wprintf(L"\n|%8d|%50S|%40S|\n",elem->numero,elem->nome,elem->pais);
+        wprintf(L"\n|%8d|%50S|%38S|\n",elem->numero,elem->nome,elem->pais);
     for(int i =0; i< 100; i++)
         wprintf(L"-");
 }
@@ -124,7 +124,7 @@ void uiAlterarAluno(SGBD * bd){
                 break;
             case 2:
                 wprintf(L"Novo País: ");
-                wscanf(L"%S", &s);
+                wscanf(L"\n%l[^\n]", s);
                 modificarValoresAluno(elem->numero,elem->nome,s,elem);
                 break;
             case 3:

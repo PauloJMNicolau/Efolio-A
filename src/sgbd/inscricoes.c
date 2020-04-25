@@ -351,6 +351,9 @@ NO_PASTA * obterPastaAno(wchar_t * ano, LISTA_PASTA * lista){
         wprintf(L"Erro %d: Ano inválido na lista", _ERR_IMPOSSIBLE);
         return NULL;
     }
+    if(lista->pastas ==0){
+        return NULL;
+    }
     if(wcscmp(ano, lista->cauda->chave)==0)
         return lista->cauda;
     else{
@@ -394,24 +397,10 @@ int verificaInsAnoAnterior(int numeroAluno, LISTA_PASTA * inscricao){
         return 0;
     else
         return 1;
-    
-    /*NO * no;
-    int i;
-    if(inscricao->pastas == 1)                  //Se só existir uma pasta, então será sempre 1º ano
-        return 0;
-    while(pasta->proximo != inscricao->cauda)   //Encontrar pasta ano anterior ao currente
-        pasta = pasta->proximo;
-    no = pasta->cauda;
-    for(i=0; i < pasta->elementos; i++) {       //Verifica se aluno esteve inscrito no ano anterior
-        if(no->elemento->numeroAluno == numeroAluno)
-            return 1;
-        no = no->proximo;
-    }
-    return 0;*/
 }
 
 //Valida Possibilidade de Inscricao
-int validarInscricao(ALUNO * aluno, LIST_UC * unidades, wchar_t * ano, LISTA_PASTA * inscricoes){
+int validarInscricao(ALUNO * aluno, LIST_UC * unidades, int ectsUC, wchar_t * ano, LISTA_PASTA * inscricoes){
     int res = verificaInscricoesAnterioresAluno(aluno,ano,inscricoes);
     int limECTS = 0;
     if(res == _TRUE_)
@@ -424,7 +413,7 @@ int validarInscricao(ALUNO * aluno, LIST_UC * unidades, wchar_t * ano, LISTA_PAS
     if(!pasta) //não existe ano
         return _TRUE_; //Valida devido a nao existir ano
     NO * aux = pasta->cauda;
-    while(ects <= limECTS && i < pasta->elementos){
+    while(ects+ectsUC <= limECTS && i < pasta->elementos){
         aux = aux->proximo;
         if(aux->elemento->numeroAluno == aluno->numero){
             UC * temp = obterUCNum(aux->elemento->numeroUC,unidades);
@@ -432,7 +421,7 @@ int validarInscricao(ALUNO * aluno, LIST_UC * unidades, wchar_t * ano, LISTA_PAS
         } 
         i++;
     }
-    if(ects <= limECTS)
+    if(ects+ectsUC <= limECTS)
         return _TRUE_;
     return _FALSE_;
 }

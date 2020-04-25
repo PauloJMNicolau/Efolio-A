@@ -196,7 +196,7 @@ void modificarValoresUC(int numero, wchar_t *nome, int ano, int semestre, int ec
     if(numero)
         unidade->numero= numero;
     if(nome)
-        wcsncpy(unidade->nome,nome,wcslen(nome));
+        wcscpy(unidade->nome,nome);
     if(ano)
         unidade->ano = ano;
     if(semestre)

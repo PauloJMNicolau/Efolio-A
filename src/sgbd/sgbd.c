@@ -75,8 +75,8 @@ int carregarFicheiros(SGBD * bd){
 }
 
 //Validar Inscriçoes
-int validarInscricoes(SGBD * bd, ALUNO * aluno, wchar_t * ano){
-    return validarInscricao(aluno,bd->ucs,ano,bd->inscricoes);
+int validarInscricoes(SGBD * bd, ALUNO * aluno, wchar_t * ano, int ects){
+    return validarInscricao(aluno,bd->ucs,ects,ano,bd->inscricoes);
 }
 
 //Calcular Propinas para o ultimo Ano

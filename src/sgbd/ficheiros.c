@@ -94,7 +94,7 @@ void processarLinhaAlunos(wchar_t * linhas, LIST_ALUNO * aluno){
 
 //Gravar Dados dos Alunos no ficheiro
 void gravarAlunosTexto(LIST_ALUNO * lista){
-    FILE * fp = fopen("dadosAlunos.txt","w");
+    FILE * fp = fopen("dadosAlunos1.txt","w");
     if(!fp){
         wprintf(L"Erro %d: Não foi possivel abrir o ficheiro",_ERR_READFILE);
         exit(_ERR_READFILE);
@@ -138,7 +138,7 @@ void lerInscricoesTexto(LISTA_PASTA * lista){
 void processarLinhaInscricao(wchar_t * linha, LISTA_PASTA * lista){
     wchar_t * temp, * buffer;
     int numeroAluno = wcstol(wcstok(linha, L";", &buffer), &temp,10);
-    int numeroUC = wcstol(wcstok(linha, L";", &buffer), &temp,10);
+    int numeroUC = wcstol(wcstok(NULL, L";", &buffer), &temp,10);
     wchar_t * ano = wcstok(NULL, L";", &buffer);
     int nota = wcstol(wcstok(NULL, L";", &buffer), &temp,10);
     adicionarInscricao(criarInscricao(numeroUC,nota, numeroAluno,ano),lista);
@@ -146,7 +146,7 @@ void processarLinhaInscricao(wchar_t * linha, LISTA_PASTA * lista){
 
 //Gravar Dados dos Alunos no ficheiro
 void gravarInscricoesTexto(LISTA_PASTA * lista){
-    FILE * fp = fopen("dadosAlunos.txt","w");
+    FILE * fp = fopen("dadosInscricoes1.txt","w");
     if(!fp){
         wprintf(L"Erro %d: Não foi possivel abrir o ficheiro",_ERR_READFILE);
         exit(_ERR_READFILE);
@@ -156,7 +156,7 @@ void gravarInscricoesTexto(LISTA_PASTA * lista){
         NO_PASTA * aux = obterPastaPos(i, lista);
         for(int e= 0; e < aux->elementos; e++){
             INSCRICAO *aux2 = obterInscricao(e,aux);
-            fwprintf(fp, L"%d;%d;%S;%S\n", aux2->numeroAluno, aux2->numeroUC, aux2->anoLetivo, aux2->nota);
+            fwprintf(fp, L"%d;%d;%S;%d\n", aux2->numeroAluno, aux2->numeroUC, aux2->anoLetivo, aux2->nota);
         }
     }
     fclose(fp);

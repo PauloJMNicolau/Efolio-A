@@ -104,6 +104,6 @@ NO_PASTA * obterAnoLetivoRecente(LISTA_PASTA *lista);
 //Verifica se o aluno esteve inscrito anteriormente
 int verificaInscricoesAnterioresAluno(ALUNO * aluno, wchar_t * ano, LISTA_PASTA * lista);
 //Valida Possibilidade de Inscricao
-int validarInscricao(ALUNO * aluno, LIST_UC * unidades, wchar_t * ano, LISTA_PASTA * inscricoes);
+int validarInscricao(ALUNO * aluno, LIST_UC * unidades,int ectsUC, wchar_t * ano, LISTA_PASTA * inscricoes);
 
 #endif

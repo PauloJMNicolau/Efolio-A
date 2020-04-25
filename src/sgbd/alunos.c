@@ -141,7 +141,7 @@ int removerAluno(int pos, LIST_ALUNO *lista){
         libertarNoAluno(temp);
     } else { //Remove na posição
         NoALUNO *temp = lista->cauda->proximo;
-        for (int i = 0; i < pos; i++)
+        for (int i = 0; i < pos-1; i++)
             temp = temp->proximo;
         NoALUNO *aux = temp->proximo;
         temp->proximo = aux->proximo; //Aponta elemento atual para o segundo elemento seguinte da posição da lista
@@ -200,5 +200,5 @@ void modificarValoresAluno(int numero, wchar_t *nome, wchar_t *pais, ALUNO * ele
     if(nome)
         wcsncpy(elem->nome,nome,wcslen(nome));
     if(pais)
-        elem->pais = pais;
+        wcsncpy(elem->pais,pais,wcslen(pais));
 }

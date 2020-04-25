@@ -32,7 +32,7 @@ void uiAdicionarNovaInscricao(SGBD * bd) {
                 wscanf(L"%S", anoLetivo);
                 novo = procuraInscricao(bd->inscricoes, anoLetivo,numeroAluno,numeroUC);
                 if (novo == NULL) {
-                    if(validarInscricoes(bd, aluno, anoLetivo) == _TRUE_){
+                    if(validarInscricoes(bd, aluno, anoLetivo, uc->ects) == _TRUE_){
                         novo = criarInscricao(numeroUC,0, numeroAluno, anoLetivo);
                         if(adicionarInscricao(novo, bd->inscricoes) == _SUCESSO){
                             wprintf(L"\nIncrição Efectuada\n\nDeseja continuar a inscrever?\n\t0 - Sim\n\t1 - Não\nopcao: ");
@@ -138,7 +138,7 @@ void uiImprimirInscricoes(NO_PASTA * pasta){
     tmp = pasta->cauda;
     for(i =0; i<80; i++)
         wprintf(L"-");
-    wprintf(L"\n|%6S|%23S|%18S|%10S|%17S|\n",L"ID",L"Número de Aluno",L"Número de UC",L"ECTS",L"Ano Letivo");
+    wprintf(L"\n|%6S|%23S|%18S|%10S|%17S|\n",L"ID",L"Número de Aluno",L"Número de UC",L"Nota",L"Ano Letivo");
     for(i =0; i<80; i++)
         wprintf(L"-");
     wprintf(L"\n");
