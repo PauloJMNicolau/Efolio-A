@@ -87,5 +87,63 @@ int libertarListaECTS(ListRepECTS * lista){
     return _SUCESSO;
 }
 
+//Adicionar elemento UC na lista
+int adicionarUC(UC * unidade, LIST_UC * lista, int pos){
+    if(!lista || !unidade){
+        wprintf(L"Erro %d: Impossível adicionar elemento na lista\n", _ERR_EMPTYLIST);
+        return _ERR_EMPTYLIST;
+    }
+    if(pos<0 || pos > lista->elementos){
+        wprintf(L"Erro %d: Posição inválida na lista\n", _ERR_IMPOSSIBLE);
+        return _ERR_IMPOSSIBLE;
+    }
+    NoUC * no = criarNoUC(unidade);
+    if(lista->elementos==0){ //Lista vazia adiciona no inicio
+        lista->cauda = no;
+        lista->elementos++;
+    } else if(pos == lista->elementos){// Adiciona no final
+        no->proximo = lista->cauda->proximo;    //Aponta novo elemento para o inicio da lista
+        lista->cauda->proximo = no;             //Aponta ultimo elemento atual da lista para o novo elemento
+        lista->cauda = no;                      //Atualiza o ultimo elemento
+        lista->elementos++;
+    } else{ //Adiciona na posição;
+        NoUC * temp = lista->cauda->proximo;
+        for(int i =0;i<pos; i++)
+            temp = temp->proximo;
+        no->proximo = temp->proximo;    //Aponta novo elemento para o elemento seguinte da posição da lista
+        temp->proximo = no;             //Aponta posicao anterior para o novo elemento
+        lista->elementos++;
+    }
+    return _SUCESSO;
+}
+
+//Remover elemento da lista
+int removerUC(int pos, LIST_UC * lista){
+    if(!lista){
+        wprintf(L"Erro %d: Impossível remover elemento na lista", _ERR_EMPTYLIST);
+        return _ERR_EMPTYLIST;
+    }
+    if(pos < 0 || pos >= lista->elementos){
+        wprintf(L"Erro %d: Posição inválida na lista", _ERR_IMPOSSIBLE);
+        return _ERR_IMPOSSIBLE;
+    }
+    if(pos==0){ //Remover na cabeça da lista
+        NoUC * temp = lista->cauda->proximo;
+        lista->cauda->proximo = temp->proximo;      //Aponta final da lista para segundo elemento da lista
+        lista->elementos--;
+        libertarNoUC(temp);
+    } else {    //Remove na posição
+        NoUC *temp = lista->cauda->proximo;
+        for (int i = 0; i < pos-1; i++)
+            temp = temp->proximo;
+        NoUC * aux = temp->proximo;
+        temp->proximo = aux->proximo; //Aponta elemento atual para o segundo elemento seguinte da posição da lista
+        if (pos == lista->elementos - 1)
+            lista->cauda = temp; //Atualiza cauda caso seja o ultimo elemento a remover
+        lista->elementos--;
+        libertarNoUC(aux);
+    }
+    return _SUCESSO;
+}
 
 
