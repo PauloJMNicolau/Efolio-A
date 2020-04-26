@@ -217,7 +217,7 @@ void menuReports(SGBD * bd) {
         //Verifica opção selecionada
         switch (opcao) {
             case 1:
-                //repECTSAluno(); break;
+                gerarReportA(bd); break;
             case 2:
                 gerarReportB(bd); break;
             case 3:

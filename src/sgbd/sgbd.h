@@ -20,6 +20,7 @@
 #include "ucs.h"
 #include "macro.h"
 #include "reports.h"
+#include"../ui/global.h"
 
 /* ***********************
  *      Estruturas       *
@@ -57,6 +58,7 @@ int condicaoPropina(ALUNO * aluno, LISTA_PASTA * inscricao);
  *            Report A              *
  ************************************/
 
+REP_A * ReportA(SGBD * bd);
 
 
 /************************************

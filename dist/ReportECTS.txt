@@ -1,0 +1,8 @@
+#Report ECTS por aluno
+
+#Nº;Nome;ECTS;Observação
+
+1800001;Ana Silva;60;N/A
+1800002;Ana Tavares;84;Analisar
+1800003;Lorenzo Peetro;60;N/A
+1800004;Pietro Giovanni;60;N/A

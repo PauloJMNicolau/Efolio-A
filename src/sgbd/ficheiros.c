@@ -166,7 +166,42 @@ void gravarInscricoesTexto(LISTA_PASTA * lista){
  *            Report A              *
  ************************************/
 
+//Cria ficheiro e cabeçalho do Report A
+FILE * criarReportA(){
+    FILE * novo = fopen("Report A", "w");
+    if(!novo){
+        wprintf(L"Erro %d: Não foi possivel abrir o ficheiro",_ERR_WRITEFILE);
+        exit(_ERR_WRITEFILE);
+    }
+    fwprintf(novo, L"# Report A - Lista de Total de ECTS por aluno no ano letivo corrente\n\n");
+    return novo;
+}
 
+//Escrever no Report A
+int escreverReportA(REP_A * report, FILE * fp){
+    int i;
+    No_REP_A * norep = report->cauda;
+    if(!fp){
+        wprintf(L"Erro %d: Não foi possivel encontrar o ficheiro.", _ERR_RESOURCENOTFOUND);
+        return _ERR_RESOURCENOTFOUND;
+    }
+    for(i=0;i<report->elementos; i++){
+        fwprintf(fp, L"%d;%S;%d;%S\n", norep->elemento->numero,norep->elemento->nome,norep->elemento->ects,norep->elemento->observacao);
+        norep = norep->proximo;
+    }
+    return _SUCESSO;
+}
+
+//Termina a escrita no report A
+int terminarReportA(FILE * fp){
+    if(!fp){
+        wprintf(L"Erro %d: Não foi possivel encontrar o ficheiro a terminar.", _ERR_RESOURCENOTFOUND);
+        return _ERR_RESOURCENOTFOUND;
+    }
+    fwprintf(fp,L"\n\n#Fim Report A");
+    fclose(fp);
+    return _SUCESSO;
+}
 
 /************************************
  *            Report B              *
@@ -204,7 +239,23 @@ int terminarReportB(FILE * fp){
     fclose(fp);
     return _SUCESSO;
 }
-
+/*
+void imprimirReportB(REP_B * reportB){
+    REP_B_ELEM* norep = reportB->cauda;
+    int i;
+    for(i =0; i<80; i++)
+        wprintf(L"-");
+    wprintf(L"\n|%20S|%30S\n",L"Número de Aluno",L"Nome do Aluno");
+    for(i =0; i<80; i++)
+        wprintf(L"-");
+    wprintf(L"\n");
+    for(i=0;i<reportB->quantidade;i++){
+        wprintf(L"|%20S|%30S|\n",norep->chave);
+        norep =  norep->proximo;
+    }
+    for(i =0; i<80; i++)
+        wprintf(L"-");
+}*/
 
 /************************************
  *            Report C              *
