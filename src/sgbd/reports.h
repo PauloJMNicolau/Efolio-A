@@ -14,6 +14,7 @@
 //Bibliotecas Próprias
 #include "macro.h"
 #include "alunos.h"
+#include "sgbd.h"
 
 /************************
  *      Estruturas      *
@@ -89,6 +90,8 @@ PROB_ABANDONO * criarListaReportC();
 int escreverLinhaReportC(ALUNO * aluno, PROB_ABANDONO * Abandono , FILE * fp);
 FILE * criarReportC();
 int terminarReportC(FILE * fp);
+void gerarReportC(SGBD * bd);
+
 
 
 ///////////////////////////////////////////////////////////////////////////
