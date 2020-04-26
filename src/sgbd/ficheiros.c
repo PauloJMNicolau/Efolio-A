@@ -165,23 +165,6 @@ void gravarInscricoesTexto(LISTA_PASTA * lista){
 /************************************
  *            Report A              *
  ************************************/
-//Imprimir reportA total ECTS por aluno no ano corrente 
-void imprimirReportA(REP_A * reportA){
-    No_REP_A * norep = reportA->cauda;
-    int i;
-    for(i =0; i<80; i++)
-        wprintf(L"-");
-    wprintf(L"\n|%17S|%24S|%10S|%24S|\n",L"Número de Aluno",L"Nome do Aluno",L"ECTS",L"Observações");
-    for(i =0; i<80; i++)
-        wprintf(L"-");
-    wprintf(L"\n");
-    for(i=0;i<reportA->elementos;i++){
-        wprintf(L"|%17d|%24S|%10d|%24S|\n", norep->elemento->numero, norep->elemento->nome,norep->elemento->ects, norep->elemento->observacao);
-        norep =  norep->proximo;
-    }
-    for(i =0; i<80; i++)
-        wprintf(L"-");
-}
 
 //Cria ficheiro e cabeçalho do Report A
 FILE * criarReportA(){
@@ -193,7 +176,7 @@ FILE * criarReportA(){
     fwprintf(novo, L"# Report A - Lista de Total de ECTS por aluno no ano letivo corrente\n\n");
     return novo;
 }
-//Escrever linha no Report A
+//Escrever no Report A
 int escreverReportA(REP_A * report, FILE * fp){
     int i;
     No_REP_A * norep = report->cauda;

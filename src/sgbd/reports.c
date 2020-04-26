@@ -30,7 +30,7 @@ REP_A_ELEM * criarElementoReportA(int numeroAluno, wchar_t * nomeAluno, int ects
     return unidade;
 }
 
-//Libertar Memoria do elemento Report REP_A_ELEM
+//Libertar Memoria do elemento 
 REP_A_ELEM * libertarElementoReportA(REP_A_ELEM * elemento){
     if (elemento){
         if (elemento->nome)
@@ -44,7 +44,7 @@ REP_A_ELEM * libertarElementoReportA(REP_A_ELEM * elemento){
     return elemento;
 }
 
-//Criar nó da lista tendo como chave número de aluno
+//Criar nó da lista
 No_REP_A * criarNoReportA(REP_A_ELEM * elemento){
     No_REP_A * novo = calloc(1,sizeof(No_REP_A));
     if(!novo){
@@ -56,7 +56,7 @@ No_REP_A * criarNoReportA(REP_A_ELEM * elemento){
     return novo;
 }
 
-//Libertar nó Report REP_A_ELEM
+//Libertar nó da lsita
 int  libertarNoReportA(No_REP_A * no){
     if(!no)
         return _ERR_MEMORYFREE;
@@ -67,7 +67,7 @@ int  libertarNoReportA(No_REP_A * no){
     return _SUCESSO;
 }
 
-//Criar lista de Report REP_A_ELEM vazia
+//Criar lista de Report A vazia
 REP_A * criarListaReportA(){
     REP_A * lista = calloc(1, sizeof(REP_A));
     if(!lista){
@@ -79,7 +79,7 @@ REP_A * criarListaReportA(){
     return lista;
 }
 
-//Eliminar Lista de UC
+//Eliminar Lista de Report A
 int libertarListaReportA(REP_A * lista){
     if(!lista)
         return _ERR_MEMORYFREE;
@@ -92,7 +92,7 @@ int libertarListaReportA(REP_A * lista){
     return _SUCESSO;
 }
 
-//Adicionar elemento REP_A_ELEM na lista
+//Adicionar elemento na lista
 int adicionarElementoRepA(REP_A_ELEM * unidade, REP_A * lista){
     if(!lista || !unidade){
         wprintf(L"Erro %d: Impossível adicionar elemento na lista\n", _ERR_EMPTYLIST);
@@ -121,7 +121,7 @@ int removerElementoRepA(REP_A * lista){
     return _SUCESSO;
 }
 
-//Adicionar dados no elemento 
+//Adicionar dados no elemento epecifico
 void adicionarDadoElementoRepA(REP_A_ELEM * elemento, int ects, wchar_t * observacao){
     elemento->ects = ects;
     swprintf(elemento->observacao,wcslen(observacao)+1,L"%S",observacao);

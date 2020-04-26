@@ -124,7 +124,7 @@ int condicaoPropina(ALUNO * aluno, LISTA_PASTA * inscricao) {
 /************************************
  *            Report A              *
  ************************************/
-void gerarReportA(SGBD * bd){
+REP_A * ReportA(SGBD * bd){
     int i,j, ects;
     REP_A * reportA = criarListaReportA();              //Inicializa a lista do report A
     NO_PASTA * pastaCorrente = bd->inscricoes->cauda;   //pasta do ano corrente
@@ -135,12 +135,12 @@ void gerarReportA(SGBD * bd){
             no = no->proximo;
             continue;
         }
-        aluno = obterAlunoNum(no->elemento->numeroAluno, bd->alunos);
+        aluno = obterAlunoNum(no->elemento->numeroAluno, bd->alunos);      //Obter aluno em questão para extrair dados necessários
         adicionarElementoRepA(criarElementoReportA(aluno->numero,aluno->nome,0,L"N/A"),reportA);    //Caso não exista é adicionado
         no = no->proximo;
     }
-    No_REP_A * noReportA = reportA->cauda;
-    for(i=0; i<reportA->elementos; i++){    //Verifica para cada aluno, quantas inscrições/ECTS têm
+    No_REP_A * noReportA = reportA->cauda;  //Aponta para a cauda da lista do Report
+    for(i=0; i<reportA->elementos; i++){    //Verifica para cada aluno, quantos ECTS têm
         ects=0;
         for(j=0; j< pastaCorrente->elementos; j++){
             if(noReportA->elemento->numero == no->elemento->numeroAluno)
@@ -153,11 +153,10 @@ void gerarReportA(SGBD * bd){
             adicionarDadoElementoRepA(noReportA->elemento, ects, L"N/A");
         noReportA = noReportA->proximo;
     }
-    FILE * fp = criarReportA();
-    escreverReportA(reportA,fp);
-    terminarReportA(fp);
-    imprimirReportA(reportA);
-    libertarListaReportA(reportA);
+    FILE * fp = criarReportA();     //abre ficheiro
+    escreverReportA(reportA,fp);    //escreve no ficheiro os dados do report A
+    terminarReportA(fp);            //fecha ficheiro
+    return reportA;                 
 }
 
 

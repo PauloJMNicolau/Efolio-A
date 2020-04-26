@@ -18,21 +18,21 @@
  *      Estruturas      *
  * **********************/
 
-//Estrutura de Dados UC
+//Estrutura de Dados Elemento Report A
 typedef struct repAElemento{
     int numero;      //Numero de aluno
     wchar_t *nome; //Nome do aluno
-    int ects;       //REP_A_ELEM 
+    int ects;       //ECTS
     wchar_t * observacao;  //observacao serviços académicos
 } REP_A_ELEM;
 
-//Estrutura para No da Lista de UC
+//Estrutura para No da Lista de Report A
 typedef struct noRepA{
     REP_A_ELEM * elemento; //Elemento
     struct noRepA * proximo; //Proximo elemento na lista
 } No_REP_A;
 
-//Estrutura de Dados Lista de Unidades Curriculares
+//Estrutura de Dados Lista de Report A
 typedef struct reportA{
     int elementos; // Quantidade de elementos na lista
     No_REP_A * cauda; //Cauda da lista
@@ -68,15 +68,15 @@ typedef struct reportb{
 REP_A_ELEM * criarElementoReportA(int numeroAluno, wchar_t * nomeAluno, int ects, wchar_t * observacao);
 //Libertar elemento
 REP_A_ELEM * libertarElementoReportA(REP_A_ELEM * elemento);
-//Criar nó da lista tendo como chave número de aluno
+//Criar nó da lista
 No_REP_A * criarNoReportA(REP_A_ELEM * elemento);
-//Libertar nó Report REP_A_ELEM
+//Libertar nó 
 int  libertarNoReportA(No_REP_A * no);
-//Criar lista report REP_A_ELEM
+//Criar lista report A
 REP_A * criarListaReportA();
 //Libertar a lista
 int libertarListaReportA(REP_A * lista);
-//Adicionar elemento REP_A_ELEM na lista
+//Adicionar elemento na lista
 int adicionarElementoRepA(REP_A_ELEM * unidade, REP_A * lista);
 //Remover elemento da lista
 int removerElementoRepA(REP_A * lista);

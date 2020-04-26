@@ -58,7 +58,7 @@ int condicaoPropina(ALUNO * aluno, LISTA_PASTA * inscricao);
  *            Report A              *
  ************************************/
 
-void gerarReportA(SGBD * bd);
+REP_A * ReportA(SGBD * bd);
 
 
 /************************************

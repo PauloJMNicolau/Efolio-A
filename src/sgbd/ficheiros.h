@@ -44,11 +44,9 @@ void gravarInscricoesTexto(LISTA_PASTA * lista);
  *            Report A              *
  ************************************/
 
-//Imprimir report total ECTS por aluno no ano corrente
-void imprimirReportA(REP_A * report);
 //Criar ficheiro para guardar Report A
 FILE * criarReportA();
-//Escrever linha no Report
+//Escrever no Report A
 int escreverReportA(REP_A * report, FILE * fp);
 //Termina a escrita no report A
 int terminarReportA(FILE * fp);
