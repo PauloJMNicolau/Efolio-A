@@ -26,15 +26,17 @@ void imprimirReportA(REP_A * report);
 /************************************
  *            Report B              *
  ************************************/
+//Gerar ReportB
 void gerarReportB(SGBD * bd);
-//Ler linha do Report B
-void imprimirReportB();
-void imprimirLinhaReportB(wchar_t * linha);
+
 /************************************
  *            Report c              *
  ************************************/
-
+//Gerar ReportC
+void gerarReportC(SGBD * bd);
 /************************************
  *            Report D              *
  ************************************/
+//Gerar ReportD
+void gerarReportD(SGBD * bd);
 #endif

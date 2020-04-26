@@ -57,23 +57,33 @@ int condicaoPropina(ALUNO * aluno, LISTA_PASTA * inscricao);
 /************************************
  *            Report A              *
  ************************************/
-
+//Gerar Report A
 REP_A * ReportA(SGBD * bd);
 
 
 /************************************
  *            Report B              *
  ************************************/
-
+//Gerar Report B
 void ReportB(SGBD * bd);
-
-
+//Ler linha do Report B
+void imprimirReportB();
+//Imprimir linha Report B
+void imprimirLinhaReportB(wchar_t * linha);
 /************************************
  *            Report C              *
  ************************************/
 
+//Ler linha do Report C
+void imprimirReportC();
+//Imprimir linha Report C
+void imprimirLinhaReportC(wchar_t * linha);
 /************************************
  *            Report D              *
  ************************************/
 
+//Ler linha do Report D
+void imprimirReportD();
+//Imprimir linha Report D
+void imprimirLinhaReportD(wchar_t * linha);
 #endif

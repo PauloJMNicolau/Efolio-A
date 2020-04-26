@@ -221,9 +221,9 @@ void menuReports(SGBD * bd) {
             case 2:
                 gerarReportB(bd); break;
             case 3:
-                //repAbanEscolar(); break;
+                //gerarReportC(bd); break;
             case 4:
-                //repTotalAlunAnoLet(); break;
+                //gerarReportD(bd); break;
             case 0:
                 break;
             default: {

@@ -257,29 +257,44 @@ void terminarLeituraReportB(FILE * fp){
     fclose(fp);
 }
 
-
-/*
-void imprimirReportB(REP_B * reportB){
-    REP_B_ELEM* norep = reportB->cauda;
-    int i;
-    for(i =0; i<80; i++)
-        wprintf(L"-");
-    wprintf(L"\n|%20S|%30S\n",L"Número de Aluno",L"Nome do Aluno");
-    for(i =0; i<80; i++)
-        wprintf(L"-");
-    wprintf(L"\n");
-    for(i=0;i<reportB->quantidade;i++){
-        wprintf(L"|%20S|%30S|\n",norep->chave);
-        norep =  norep->proximo;
-    }
-    for(i =0; i<80; i++)
-        wprintf(L"-");
-}*/
-
 /************************************
  *            Report C              *
  ************************************/
+//Abrir report C para leitura
+FILE * abrirLeituraReportC(){
+    FILE * fp =fopen("Report B.txt","r");
+    if(!fp){
+        wprintf(L"Erro %d: Não foi possivel abrir o ficheiro",_ERR_READFILE);
+        exit(_ERR_READFILE);
+    }
+    return fp;
+}
+//Fechar ficheiro Report C
+void terminarLeituraReportC(FILE * fp){
+    if(!fp){
+        wprintf(L"Erro %d: Não foi possivel encontrar o ficheiro a terminar.", _ERR_RESOURCENOTFOUND);
+        exit(_ERR_RESOURCENOTFOUND);
+    }
+    fclose(fp);
+}
 
 /************************************
  *            Report D              *
  ************************************/
+//Abrir report D para leitura
+FILE * abrirLeituraReportD(){
+    FILE * fp =fopen("Report D.txt","r");
+    if(!fp){
+        wprintf(L"Erro %d: Não foi possivel abrir o ficheiro",_ERR_READFILE);
+        exit(_ERR_READFILE);
+    }
+    return fp;
+}
+//Fechar ficheiro Report D
+void terminarLeituraReportD(FILE * fp){
+    if(!fp){
+        wprintf(L"Erro %d: Não foi possivel encontrar o ficheiro a terminar.", _ERR_RESOURCENOTFOUND);
+        exit(_ERR_RESOURCENOTFOUND);
+    }
+    fclose(fp);
+}

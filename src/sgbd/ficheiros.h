@@ -68,11 +68,17 @@ void terminarLeituraReportB(FILE * fp);
 /************************************
  *            Report C              *
  ************************************/
-
+//Abrir report C para leitura
+FILE * abrirLeituraReportC();
+//Fechar ficheiro Report C
+void terminarLeituraReportC(FILE * fp);
 /************************************
  *            Report D              *
  ************************************/
-
+//Abrir report D para leitura
+FILE * abrirLeituraReportD();
+//Fechar ficheiro Report D
+void terminarLeituraReportD(FILE * fp);
 
 
 #endif
