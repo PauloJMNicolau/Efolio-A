@@ -130,7 +130,7 @@ int condicaoPropina(ALUNO * aluno, LISTA_PASTA * inscricao) {
 REP_A * ReportA(SGBD * bd){
     int i,j, ects;
     REP_A * reportA = criarListaReportA();              //Inicializa a lista do report A
-    NO_PASTA * pastaCorrente = bd->inscricoes->cauda;   //pasta do ano corrente
+    NO_PASTA * pastaCorrente = obterAnoLetivoRecente(bd->inscricoes);   //pasta do ano corrente
     NO * no = pastaCorrente->cauda;                     //No de cada inscrição na pasta do ano corrente
     ALUNO * aluno;
     for(i=0; i < pastaCorrente->elementos; i++){        //Gerar tantos nós conforme o número de alunos inscritos

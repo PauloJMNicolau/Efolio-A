@@ -301,18 +301,22 @@ void uiImprimirListagemPorUC(SGBD * bd){
 void uiImprimirCabecalhoUC(UC * unidade, wchar_t * ano){
     for(int i =0; i<100; i++)
         wprintf(L"-");
+    wprintf(L"\n");
     wprintf(L"|%10.d|%76S|%10S|\n", unidade->numero, unidade->nome, ano);
     for(int i =0; i<100; i++)
         wprintf(L"-");
+    wprintf(L"\n");
 }
 
 //Imprime Titulo da Listagem
 void uiImprimirCabecalhoAluno(ALUNO * aluno, wchar_t * ano){
     for(int i =0; i<100; i++)
         wprintf(L"-");
+    wprintf(L"\n");
     wprintf(L"|%10.d|%76S|%10S|\n", aluno->numero, aluno->nome, ano);
     for(int i =0; i<100; i++)
         wprintf(L"-");
+    wprintf(L"\n");
 }
 
 //Imprimir Listagem por Aluno
