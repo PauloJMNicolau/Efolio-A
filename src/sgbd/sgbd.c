@@ -126,6 +126,7 @@ int condicaoPropina(ALUNO * aluno, LISTA_PASTA * inscricao) {
 /************************************
  *            Report A              *
  ************************************/
+
 REP_A * ReportA(SGBD * bd){
     int i,j, ects;
     REP_A * reportA = criarListaReportA();              //Inicializa a lista do report A
@@ -213,8 +214,6 @@ void gerarReportB(SGBD * bd){
     }
     terminarReportB(reportFile);
 }
-
-
 
 /************************************
  *            Report C              *

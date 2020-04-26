@@ -14,9 +14,24 @@
 //Bibliotecas Proprias
 #include "../sgbd/sgbd.h"
 
+/************************************
+ *            Report A              *
+ ************************************/
+
 //Gerar ReportA
 void gerarReportA(SGBD * bd);
 //Imprimir report total ECTS por aluno no ano corrente
 void imprimirReportA(REP_A * report);
 
+/************************************
+ *            Report B              *
+ ************************************/
+
+/************************************
+ *            Report c              *
+ ************************************/
+
+/************************************
+ *            Report D              *
+ ************************************/
 #endif

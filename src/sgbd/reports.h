@@ -18,6 +18,10 @@
  *      Estruturas      *
  * **********************/
 
+/************************
+ *      Report A       *
+ * **********************/
+
 //Estrutura de Dados Elemento Report A
 typedef struct repAElemento{
     int numero;      //Numero de aluno
@@ -57,6 +61,16 @@ typedef struct reportb{
 }REP_B;
 
 
+/************************
+ *      Report C        *
+ * **********************/
+
+/************************
+ *      Report D        *
+ * **********************/
+
+
+
 /* **********************
  *        Headers       *
  * **********************/
@@ -84,6 +98,7 @@ int removerElementoRepA(REP_A * lista);
 void adicionarDadoElementoRepA(REP_A_ELEM * elemento, int ects, wchar_t * observacao);
 //Verificar se o aluno consta da lista do ReportA
 int verificaElementoRepA(int numeroAluno, REP_A * report);
+
 /************************
  *      Report B        *
  * **********************/

@@ -50,6 +50,7 @@ FILE * criarReportA();
 int escreverReportA(REP_A * report, FILE * fp);
 //Termina a escrita no report A
 int terminarReportA(FILE * fp);
+
 /************************************
  *            Report B              *
  ************************************/

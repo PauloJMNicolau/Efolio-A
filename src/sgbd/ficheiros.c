@@ -176,6 +176,7 @@ FILE * criarReportA(){
     fwprintf(novo, L"# Report A - Lista de Total de ECTS por aluno no ano letivo corrente\n\n");
     return novo;
 }
+
 //Escrever no Report A
 int escreverReportA(REP_A * report, FILE * fp){
     int i;
@@ -190,6 +191,7 @@ int escreverReportA(REP_A * report, FILE * fp){
     }
     return _SUCESSO;
 }
+
 //Termina a escrita no report A
 int terminarReportA(FILE * fp){
     if(!fp){

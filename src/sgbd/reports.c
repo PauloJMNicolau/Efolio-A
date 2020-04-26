@@ -3,9 +3,11 @@
  */
 #include "reports.h"
 #include "../ui/global.h"
+
 /************************
  *      Report A       *
  * **********************/
+
 //Criar elemento
 REP_A_ELEM * criarElementoReportA(int numeroAluno, wchar_t * nomeAluno, int ects, wchar_t * observacao){
     REP_A_ELEM * unidade = calloc(1, sizeof(REP_A_ELEM));
