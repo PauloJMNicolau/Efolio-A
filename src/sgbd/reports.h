@@ -13,6 +13,7 @@
 #include <wctype.h>
 //Bibliotecas Próprias
 #include "macro.h"
+#include "alunos.h"
 
 /************************
  *      Estruturas      *
@@ -43,7 +44,7 @@ typedef struct reportcAbandono{
     int contador_semestre_1;// 1º semestre
     int contador_semestre_2;// 2º semestre
     //struct reportbElemento * proximo; //Proximo elemento
-} Prob_Abandono;
+} PROB_ABANDONO;
 
 /* **********************
  *        Headers       *
@@ -83,8 +84,13 @@ REP_B_ELEM * obterElementoReportBNum(int id, REP_B * lista);
  *      Report C        *
  * **********************/
 //////////////////////////////////////////////////////////////////////////
-void libertarElementoReportC( Prob_Abandono * elemento);
-Prob_Abandono * criarListaReportC();
+void libertarElementoReportC( PROB_ABANDONO * elemento);
+PROB_ABANDONO * criarListaReportC();
+int escreverLinhaReportC(ALUNO * aluno, PROB_ABANDONO * Abandono , FILE * fp);
+FILE * criarReportC();
+int terminarReportC(FILE * fp);
+
+
 ///////////////////////////////////////////////////////////////////////////
 
 /************************

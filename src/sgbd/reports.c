@@ -120,14 +120,13 @@ REP_B_ELEM * obterElementoReportBNum(int id, REP_B * lista){
 }
 
 
-
 /************************
  *      Report C        *
  * **********************/
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Criar lista de Report C
-Prob_Abandono * criarListaReportC(){
-    Prob_Abandono * nova = calloc(1, sizeof(Prob_Abandono));
+PROB_ABANDONO * criarListaReportC(){
+    PROB_ABANDONO * nova = calloc(1, sizeof(PROB_ABANDONO));
     
     if(!nova){
         wprintf(L"Erro %d: nâo foi possivel alocar memoria do report\n",_ERR_MEMORYALLOC);
@@ -138,7 +137,7 @@ Prob_Abandono * criarListaReportC(){
     return nova;
 }
 //Libertar memoria do Elemento Report c
-void libertarElementoReportC( Prob_Abandono * elemento){
+void libertarElementoReportC( PROB_ABANDONO * elemento){
     if(!elemento){
         wprintf(L"Erro %d: Não é possivel eliminar o elemento", _ERR_MEMORYFREE);
     }
@@ -147,7 +146,6 @@ void libertarElementoReportC( Prob_Abandono * elemento){
     free(elemento);
     elemento = NULL;
 }
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /************************
  *      Report D        *

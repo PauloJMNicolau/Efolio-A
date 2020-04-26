@@ -181,7 +181,6 @@ void gerarReportB(SGBD * bd){
     terminarReportB(reportFile);
 }
 
-
 /************************************
  *            Report C              *
  ************************************/
@@ -193,7 +192,7 @@ void gerarReportC(SGBD * bd){
     FILE * reportFile = criarReportC();
     //Percorrer a lista de todos os alunos
     for(int i =0; i< alunosAux->elementos; i++){
-        Prob_Abandono * report = criarListaReportC(); //Cria estrutura de report C
+        PROB_ABANDONO * report = criarListaReportC(); //Cria estrutura de report C
         ALUNO * aluno = obterAlunoPos(i,alunosAux);
         // obter pasta do ano letivo final
         NO_PASTA * pasta = obterAnoLetivoRecente(bd->inscricoes);
@@ -210,8 +209,15 @@ void gerarReportC(SGBD * bd){
                     } else //se uc->2semestre entao semestre2;*/
                         report->contador_semestre_2++;
             }
-         }  
+            if(report->contador_semestre_2==0){
+                if(report->contador_semestre_1>=2){
+                    PROB_ABANDONO * criarListaReportC();
+                }
+            }
+         }
+    libertarElementoReportC(report);
     }
+    
 }
 
 
