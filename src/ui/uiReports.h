@@ -26,7 +26,10 @@ void imprimirReportA(REP_A * report);
 /************************************
  *            Report B              *
  ************************************/
-
+void gerarReportB(SGBD * bd);
+//Ler linha do Report B
+void imprimirReportB();
+void imprimirLinhaReportB(wchar_t * linha);
 /************************************
  *            Report c              *
  ************************************/

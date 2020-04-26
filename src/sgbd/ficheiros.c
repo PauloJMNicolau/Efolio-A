@@ -239,6 +239,25 @@ int terminarReportB(FILE * fp){
     fclose(fp);
     return _SUCESSO;
 }
+//Abrir report B para leitura
+FILE * abrirLeituraReportB(){
+    FILE * fp =fopen("Report B.txt","r");
+    if(!fp){
+        wprintf(L"Erro %d: Não foi possivel abrir o ficheiro",_ERR_READFILE);
+        exit(_ERR_READFILE);
+    }
+    return fp;
+}
+//Fechar ficheiro Report B
+void terminarLeituraReportB(FILE * fp){
+    if(!fp){
+        wprintf(L"Erro %d: Não foi possivel encontrar o ficheiro a terminar.", _ERR_RESOURCENOTFOUND);
+        exit(_ERR_RESOURCENOTFOUND);
+    }
+    fclose(fp);
+}
+
+
 /*
 void imprimirReportB(REP_B * reportB){
     REP_B_ELEM* norep = reportB->cauda;

@@ -60,6 +60,10 @@ int terminarReportB(FILE * fp);
 FILE * criarReportB();
 //Escrever linha no Report
 int escreverLinhaReportB(ALUNO * aluno, int ucsRealizadas, FILE * fp);
+//Abrir report B para leitura
+FILE * abrirLeituraReportB();
+//Fechar ficheiro Report B
+void terminarLeituraReportB(FILE * fp);
 
 /************************************
  *            Report C              *

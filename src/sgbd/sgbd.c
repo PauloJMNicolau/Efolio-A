@@ -167,7 +167,7 @@ REP_A * ReportA(SGBD * bd){
  *            Report B              *
  ************************************/
 
-void gerarReportB(SGBD * bd){
+void ReportB(SGBD * bd){
     LIST_ALUNO * alunosAux = bd->alunos;
     LISTA_PASTA * auxInscricoes = bd->inscricoes;
     FILE * reportFile = criarReportB();

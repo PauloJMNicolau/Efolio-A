@@ -65,7 +65,7 @@ REP_A * ReportA(SGBD * bd);
  *            Report B              *
  ************************************/
 
-void gerarReportB(SGBD * bd);
+void ReportB(SGBD * bd);
 
 
 /************************************
