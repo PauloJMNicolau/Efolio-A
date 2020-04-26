@@ -73,6 +73,7 @@ void imprimirLinhaReportB(wchar_t * linha);
 /************************************
  *            Report C              *
  ************************************/
+void gerarReportC(SGBD * bd);
 
 //Ler linha do Report C
 void imprimirReportC();

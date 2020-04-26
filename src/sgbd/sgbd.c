@@ -334,3 +334,47 @@ void imprimirLinhaReportD(wchar_t * linha){
     wprintf(L"\n|%25d|%25S|%26d|",numeroAluno,nome,totalUC);
 
 }
+/************************************
+ *            Report C              *
+ ************************************/
+//criar report c
+void gerarReportC(SGBD * bd){
+    //Percorrer cada elemento da lista de alunos
+    LIST_ALUNO * alunosAux = bd->alunos;
+    FILE * reportFile = criarReportC();
+    //Percorrer a lista de todos os alunos
+    for(int i =0; i< alunosAux->elementos; i++){
+        PROB_ABANDONO * report = criarListaReportC(); //Cria estrutura de report C
+        ALUNO * aluno = obterAlunoPos(i,alunosAux);
+        // obter pasta do ano letivo final
+        NO_PASTA * pasta = obterAnoLetivoRecente(bd->inscricoes);
+        NO * no = pasta->cauda;
+        //percorrer pasta 
+        for(int p =0; p < pasta->elementos; p++){
+            no = no->proximo;
+            //comparar se inscrição pertence ao aluno
+            if(no->elemento->numeroAluno == aluno->numero){
+                UC * temp = obterUCNum(no->elemento->numeroUC, bd->ucs);
+                //se uc estiver em 1semestre então ++semestre1;
+                if( temp->semestre == 1){
+                    report->contador_semestre_1++;
+                } else //se uc->2semestre entao semestre2;*/
+                    report->contador_semestre_2++;
+            }
+        }
+        if(report->contador_semestre_2==0){
+            if(report->contador_semestre_1>=2){
+                escreverLinhaReportC(aluno, reportFile);
+            }
+        }
+         
+        libertarElementoReportC(report);
+    }
+    terminarReportC(reportFile);
+}
+
+
+
+//************************************/
+// *            Report D              *
+// ************************************/
