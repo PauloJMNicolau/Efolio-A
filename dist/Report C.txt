@@ -1,0 +1,7 @@
+# Report C - Lista de Alunos que se encontram em risco de Abandono Escolar
+
+# Nº aluno; Nome
+1800003;Lorenzo Peetro;1431805088
+
+
+#Fim Report C

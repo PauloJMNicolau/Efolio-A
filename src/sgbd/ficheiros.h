@@ -59,6 +59,9 @@ int escreverLinhaReportB(ALUNO * aluno, int ucsRealizadas, FILE * fp);
 /************************************
  *            Report C              *
  ************************************/
+int escreverLinhaReportC(ALUNO * aluno , FILE * fp);
+FILE * criarReportC();
+int terminarReportC(FILE * fp);
 
 /************************************
  *            Report D              *

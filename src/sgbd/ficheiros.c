@@ -184,7 +184,7 @@ int escreverLinhaReportB(ALUNO * aluno, int ucsRealizadas, FILE * fp){
 
 //Cria ficheiro e cabeçalho do Report B
 FILE * criarReportB(){
-    FILE * novo = fopen("Report B", "w");
+    FILE * novo = fopen("Report B.txt", "w");
     if(!novo){
         wprintf(L"Erro %d: Não foi possivel abrir o ficheiro",_ERR_WRITEFILE);
         exit(_ERR_WRITEFILE);
@@ -210,8 +210,8 @@ int terminarReportB(FILE * fp){
  ************************************/
 
 
-//Escrever linha no Report C
-int escreverLinhaReportC(ALUNO * aluno, PROB_ABANDONO * Abandono , FILE * fp){
+//Escrever linha no Report_c
+int escreverLinhaReportC(ALUNO * aluno, FILE * fp){
     if(!fp){
         wprintf(L"Erro %d: Não foi possivel encontrar o ficheiro.", _ERR_RESOURCENOTFOUND);
         return _ERR_RESOURCENOTFOUND;
@@ -220,9 +220,9 @@ int escreverLinhaReportC(ALUNO * aluno, PROB_ABANDONO * Abandono , FILE * fp){
     return _SUCESSO;
 }
 
-//Cria ficheiro e cabeçalho do Report C
+//Cria ficheiro e cabeçalho do Report 
 FILE * criarReportC(){
-    FILE * novo = fopen("Report C", "w");
+    FILE * novo = fopen("Report C.txt", "w");
     if(!novo){
         wprintf(L"Erro %d: Não foi possivel abrir o ficheiro",_ERR_WRITEFILE);
         exit(_ERR_WRITEFILE);

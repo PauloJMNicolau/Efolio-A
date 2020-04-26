@@ -13,8 +13,8 @@
 #include <wctype.h>
 //Bibliotecas Próprias
 #include "macro.h"
-#include "alunos.h"
-#include "sgbd.h"
+
+
 
 /************************
  *      Estruturas      *
@@ -85,14 +85,8 @@ REP_B_ELEM * obterElementoReportBNum(int id, REP_B * lista);
  *      Report C        *
  * **********************/
 //////////////////////////////////////////////////////////////////////////
-void libertarElementoReportC( PROB_ABANDONO * elemento);
 PROB_ABANDONO * criarListaReportC();
-int escreverLinhaReportC(ALUNO * aluno, PROB_ABANDONO * Abandono , FILE * fp);
-FILE * criarReportC();
-int terminarReportC(FILE * fp);
-void gerarReportC(SGBD * bd);
-
-
+void libertarElementoReportC( PROB_ABANDONO * elemento);
 
 ///////////////////////////////////////////////////////////////////////////
 
