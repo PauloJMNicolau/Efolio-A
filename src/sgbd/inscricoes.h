@@ -32,6 +32,7 @@ typedef struct no{
     struct no * proximo;        //Proximo elemento na lista
 } NO;
 
+        //se pertencer adicionar a estrutura 
 //Estrutura para no de pasta
 typedef struct noPasta{
     wchar_t * chave;            //Chave da pasta

@@ -185,26 +185,32 @@ void gerarReportB(SGBD * bd){
 /************************************
  *            Report C              *
  ************************************/
-//Percorrer cada elemento da lista de alunos
-// obter pasta do ano letivo final
-    //percorrer pasta 
-        //comparar se inscrição pertence ao aluno
-        //se pertencer adicionar a estrutura 
-        /*if uc 1semestre -
+//criar report c
 void gerarReportC(SGBD * bd){
+    //Percorrer cada elemento da lista de alunos
     LIST_ALUNO * alunosAux = bd->alunos;
     LISTA_PASTA * auxInscricoes = bd->inscricoes;
     FILE * reportFile = criarReportC();
-     //Percorrer a lista de todos os alunos
+    //Percorrer a lista de todos os alunos
     for(int i =0; i< alunosAux->elementos; i++){
-        REP_B * report = criarListaReportC(); //Cria estrutura de report B
+        Prob_Abandono * report = criarListaReportC(); //Cria estrutura de report C
         ALUNO * aluno = obterAlunoPos(i,alunosAux);
-
-
-
-
+        // obter pasta do ano letivo final
+        NO_PASTA * pasta = obterAnoLetivoRecente(bd->inscricoes);
+        NO * no = pasta->cauda;
+        //percorrer pasta 
+            for(int p =0; p < pasta->elementos; p++){
+                no = no->proximo;
+          //comparar se inscrição pertence ao aluno
+            if(no->elemento->numeroAluno == aluno->numero){
+                UC * temp = obterUCNum(no->elemento->numeroUC, bd->ucs);
+               //se uc estiver em 1semestre então ++semestre1;
+                    if( temp->semestre == 1){
+                       report->contador_semestre_1++;
+                    } else //se uc->2semestre entao semestre2;*/
+                    report->contador_semestre_2++;
     }
-
-/************************************
- *            Report D              *
- ************************************/
+ }  
+//************************************/
+// *            Report D              *
+// ************************************/

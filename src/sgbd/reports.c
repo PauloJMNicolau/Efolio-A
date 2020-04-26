@@ -9,7 +9,7 @@
 /************************
  *      Report B        *
  * **********************/
-/*
+
 //Criar lista de Report B
 REP_B * criarListaReportB(){
     REP_B * nova = calloc(1, sizeof(REP_B));
@@ -119,17 +119,12 @@ REP_B_ELEM * obterElementoReportBNum(int id, REP_B * lista){
     return NULL;
 }
 
-*/
+
 
 /************************
  *      Report C        *
  * **********************/
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//Percorrer a lista de alunos
-
-
-
 //Criar lista de Report C
 Prob_Abandono * criarListaReportC(){
     Prob_Abandono * nova = calloc(1, sizeof(Prob_Abandono));
@@ -152,7 +147,6 @@ void libertarElementoReportC( Prob_Abandono * elemento){
     free(elemento);
     elemento = NULL;
 }
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /************************
