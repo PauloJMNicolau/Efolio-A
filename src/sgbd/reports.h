@@ -19,43 +19,26 @@
  * **********************/
 
 //Estrutura de Dados UC
-typedef struct ects{
+typedef struct repAElemento{
     int numero;      //Numero de aluno
     wchar_t *nome; //Nome do aluno
-    int ects;       //ECTS 
-    wchar_t * observacao;  //observacao serviços acadêmicos
-} ECTS;
+    int ects;       //REP_A_ELEM 
+    wchar_t * observacao;  //observacao serviços académicos
+} REP_A_ELEM;
 
 //Estrutura para No da Lista de UC
-typedef struct norepECTS{
-    ECTS * elemento; //Elemento
-    struct norepECTS * proximo; //Proximo elemento na lista
-} NoRepECTS;
+typedef struct noRepA{
+    REP_A_ELEM * elemento; //Elemento
+    struct noRepA * proximo; //Proximo elemento na lista
+} No_REP_A;
 
 //Estrutura de Dados Lista de Unidades Curriculares
-typedef struct lista_repects{
+typedef struct reportA{
     int elementos; // Quantidade de elementos na lista
-    NoRepECTS * cauda; //Cauda da lista
-} ListRepECTS;
+    No_REP_A * cauda; //Cauda da lista
+} REP_A;
 
-//Criar elemento
-ECTS * criarElementoECTS(int numeroAluno, wchar_t * nomeAluno, int ects, wchar_t * observacao);
-//Libertar elemento
-ECTS * libertarElementoECTS(ECTS * elemento);
-//Criar nó da lista tendo como chave número de aluno
-NoRepECTS * criarNoECTS(ECTS * elemento);
-//Libertar nó Report ECTS
-int  libertarNoECTS(NoRepECTS * no);
-//Criar lista report ECTS
-ListRepECTS * criarListaECTS();
-//Libertar a lista
-int libertarListaECTS(ListRepECTS * lista);
-//Adicionar elemento ECTS na lista
-int adicionarRepECTS(ECTS * unidade, ListRepECTS * lista, int pos);
-//Remover elemento da lista
-int removerElementoECTS(int pos, ListRepECTS * lista);
-//Adicionar no elemento 
-void adicionarECTS(ECTS * elemento, int ects, wchar_t * observacao);
+
 /************************
  *      Report B        *
  * **********************/
@@ -81,7 +64,26 @@ typedef struct reportb{
 /************************
  *      Report A       *
  * **********************/
-
+//Criar elemento
+REP_A_ELEM * criarElementoReportA(int numeroAluno, wchar_t * nomeAluno, int ects, wchar_t * observacao);
+//Libertar elemento
+REP_A_ELEM * libertarElementoReportA(REP_A_ELEM * elemento);
+//Criar nó da lista tendo como chave número de aluno
+No_REP_A * criarNoReportA(REP_A_ELEM * elemento);
+//Libertar nó Report REP_A_ELEM
+int  libertarNoReportA(No_REP_A * no);
+//Criar lista report REP_A_ELEM
+REP_A * criarListaReportA();
+//Libertar a lista
+int libertarListaReportA(REP_A * lista);
+//Adicionar elemento REP_A_ELEM na lista
+int adicionarElementoRepA(REP_A_ELEM * unidade, REP_A * lista);
+//Remover elemento da lista
+int removerElementoRepA(REP_A * lista);
+//Adicionar no elemento 
+void adicionarDadoElementoRepA(REP_A_ELEM * elemento, int ects, wchar_t * observacao);
+//Verificar se o aluno consta da lista do ReportA
+int verificaElementoRepA(int numeroAluno, REP_A * report);
 /************************
  *      Report B        *
  * **********************/

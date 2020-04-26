@@ -17,7 +17,6 @@
 #include "uiAlunos.h"
 #include "uiInscricoes.h"
 #include "uiPropinas.h"
-#include "uiReports.h"
 
 //Menu principal com as opções possíveis
 void menuPrincipal(SGBD * bd);

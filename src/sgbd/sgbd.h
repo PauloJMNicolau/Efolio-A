@@ -18,9 +18,9 @@
 #include "inscricoes.h"
 #include "alunos.h"
 #include "ucs.h"
-#include "reports.h"
 #include "macro.h"
 #include "reports.h"
+#include"../ui/global.h"
 
 /* ***********************
  *      Estruturas       *
@@ -58,6 +58,7 @@ int condicaoPropina(ALUNO * aluno, LISTA_PASTA * inscricao);
  *            Report A              *
  ************************************/
 
+void gerarReportA(SGBD * bd);
 
 
 /************************************

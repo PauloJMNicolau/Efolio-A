@@ -14,7 +14,6 @@
                 "${workspaceFolder}/src/ui/uiAlunos.c",
                 "${workspaceFolder}/src/ui/uiInscricoes.c",
                 "${workspaceFolder}/src/ui/uiPropinas.c",
-                "${workspaceFolder}/src/ui/uiReports.c",
                 "${workspaceFolder}/src/ui/global.c",
 				"${workspaceFolder}/src/sgbd/sgbd.c",
 				"${workspaceFolder}/src/sgbd/alunos.c",

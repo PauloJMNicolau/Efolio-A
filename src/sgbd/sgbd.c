@@ -124,7 +124,41 @@ int condicaoPropina(ALUNO * aluno, LISTA_PASTA * inscricao) {
 /************************************
  *            Report A              *
  ************************************/
-
+void gerarReportA(SGBD * bd){
+    int i,j, ects;
+    REP_A * reportA = criarListaReportA();              //Inicializa a lista do report A
+    NO_PASTA * pastaCorrente = bd->inscricoes->cauda;   //pasta do ano corrente
+    NO * no = pastaCorrente->cauda;                     //No de cada inscrição na pasta do ano corrente
+    ALUNO * aluno;
+    for(i=0; i < pastaCorrente->elementos; i++){        //Gerar tantos nós conforme o número de alunos inscritos
+        if(verificaElementoRepA(no->elemento->numeroAluno, reportA)){   //Verifica se o aluno já têm um nó no report
+            no = no->proximo;
+            continue;
+        }
+        aluno = obterAlunoNum(no->elemento->numeroAluno, bd->alunos);
+        adicionarElementoRepA(criarElementoReportA(aluno->numero,aluno->nome,0,L"N/A"),reportA);    //Caso não exista é adicionado
+        no = no->proximo;
+    }
+    No_REP_A * noReportA = reportA->cauda;
+    for(i=0; i<reportA->elementos; i++){    //Verifica para cada aluno, quantas inscrições/ECTS têm
+        ects=0;
+        for(j=0; j< pastaCorrente->elementos; j++){
+            if(noReportA->elemento->numero == no->elemento->numeroAluno)
+                ects += obterECTS(obterUCNum(no->elemento->numeroUC, bd->ucs));   
+            no = no->proximo;
+        }
+        if(ects > 60)
+            adicionarDadoElementoRepA(noReportA->elemento, ects, L"Aguarda Validação"); //Se tiver mais de 60 ECTS então lança observação para os serviços académicos
+        else
+            adicionarDadoElementoRepA(noReportA->elemento, ects, L"N/A");
+        noReportA = noReportA->proximo;
+    }
+    FILE * fp = criarReportA();
+    escreverReportA(reportA,fp);
+    terminarReportA(fp);
+    imprimirReportA(reportA);
+    libertarListaReportA(reportA);
+}
 
 
 /************************************
