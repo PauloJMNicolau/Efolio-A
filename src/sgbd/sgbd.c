@@ -208,9 +208,14 @@ void gerarReportC(SGBD * bd){
                     if( temp->semestre == 1){
                        report->contador_semestre_1++;
                     } else //se uc->2semestre entao semestre2;*/
-                    report->contador_semestre_2++;
+                        report->contador_semestre_2++;
+            }
+         }  
     }
- }  
+}
+
+
+
 //************************************/
 // *            Report D              *
 // ************************************/
