@@ -50,7 +50,7 @@ typedef struct reportb{
 
 
 
-//Crar lista de Report B
+//Criar lista de Report B
 REP_B * criarListaReportB();
 //Libertar memoria do Elemento Report B
 void libertarElementoReportB(REP_B_ELEM * elemento);
@@ -66,14 +66,46 @@ void modificarEstado(REP_B_ELEM * elemento, int nota);
 void libertarListaReportB(REP_B * lista);
 //Obter Elemento com chave igual a id
 REP_B_ELEM * obterElementoReportBNum(int id, REP_B * lista);
-
+/////////////////////////////////////////////////////////////////////////////
 /* **********************
- *        Headers       *
+ *        Estrutura      *
  * **********************/
 /************************
  *      Report C        *
  * **********************/
 
+typedef struct reportcAbandono{
+    int contador_semestre_1;// 1º semestre
+    int contador_semestre_2;// 2º semestre
+    //struct reportbElemento * proximo; //Proximo elemento
+} Prob_Abandono;
+
+/*
+//Lista do Report c
+typedef struct reportb{
+    int quant_elementos;   //Quantidade de Elementos
+    Prob_Abandono * cauda; //Ultimo elemento da lista
+//}REP_C;
+*/
+
+
+//////////////////////////////////////////////////////////////////////////
+/*
+//Criar lista de Report c
+REP_C * criarListaReportC();
+//Libertar memoria do Elemento Report C
+void libertarElementoReportC(Prob_Abandono * elemento_c);
+//Criar elemento da lista ReportC
+Prob_Abandono* criarElementoReportC(int id, int semestre);
+
+//Modifica estado do elemento 
+void modificarEstado_C(REP_C * elemento, int semestre);
+//Liberta Memoria da Lista Report C
+void libertarListaReportC(REP_C * lista);
+//Obter Elemento com chave igual a id
+Prob_Abandono * obterElementoReportCNum(int id, REP_C * lista);
+///////////////////////////////////////////////////////////////////////////
+*/
 /************************
  *      Report D        *
  * **********************/

@@ -182,10 +182,28 @@ void gerarReportB(SGBD * bd){
 }
 
 
-
 /************************************
  *            Report C              *
  ************************************/
+//Percorrer cada elemento da lista de alunos
+// obter pasta do ano letivo final
+    //percorrer pasta 
+        //comparar se inscrição pertence ao aluno
+        //se pertencer adicionar a estrutura 
+        /*if uc 1semestre -
+void gerarReportC(SGBD * bd){
+    LIST_ALUNO * alunosAux = bd->alunos;
+    LISTA_PASTA * auxInscricoes = bd->inscricoes;
+    FILE * reportFile = criarReportC();
+     //Percorrer a lista de todos os alunos
+    for(int i =0; i< alunosAux->elementos; i++){
+        REP_B * report = criarListaReportC(); //Cria estrutura de report B
+        ALUNO * aluno = obterAlunoPos(i,alunosAux);
+
+
+
+
+    }
 
 /************************************
  *            Report D              *
