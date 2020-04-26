@@ -48,6 +48,8 @@ typedef struct reportb{
  *      Report B        *
  * **********************/
 
+
+
 //Crar lista de Report B
 REP_B * criarListaReportB();
 //Libertar memoria do Elemento Report B
@@ -65,6 +67,9 @@ void libertarListaReportB(REP_B * lista);
 //Obter Elemento com chave igual a id
 REP_B_ELEM * obterElementoReportBNum(int id, REP_B * lista);
 
+/* **********************
+ *        Headers       *
+ * **********************/
 /************************
  *      Report C        *
  * **********************/
