@@ -273,13 +273,15 @@ void uiImprimirListagemPorUC(SGBD * bd){
                     }
                 }
             }
+            //Caso tenha imprimido não volta a imprimir
             if(continuar == 1){
                 continue;
             }
+            //Imprimir inscrição atual
             uiImprimirCabecalhoUC(obterUCNum(id,bd->ucs), ano);
             wprintf(L"|%10S|%76S|%10S|\n", L"Numero", L"Nome", L"Nota");
             wprintf(L"|%10.d|%76S|%10.d|\n", aux->numeroAluno, obterAlunoNum(aux->numeroAluno,bd->alunos)->nome, aux->nota);
-            
+            //Percorre o resto das inscrições e imprime as que forem do mesmo tipo
             for(int e = i; e<pasta->elementos-1; e++){
                 INSCRICAO * ins = obterInscricao(e+1,pasta);
                 if(ins->numeroUC == id){
@@ -338,13 +340,15 @@ void uiImprimirListagemPorAluno(SGBD * bd){
                     }
                 }
             }
-            //Verifica se já imprimiu esta inscrição
+            //Caso tenha sido imprimida não volta a imprimir
             if(continuar == 1){
                 continue;
             }
+            //Imprimir inscrição atual
             uiImprimirCabecalhoAluno(obterAlunoNum(id,bd->alunos), ano);
             wprintf(L"|%10S|%76S|%10S|\n", L"Numero", L"Nome", L"Nota");
             wprintf(L"|%10.d|%76S|%10.d|\n", aux->numeroUC, obterUCNum(aux->numeroUC,bd->ucs)->nome, aux->nota);
+            //Percorre o resto das inscrições e imprime as que forem do mesmo tipo
             for(int e = i; e<pasta->elementos-1; e++){
                 INSCRICAO * ins = obterInscricao(e+1,pasta);
                 if(ins->numeroAluno == id){

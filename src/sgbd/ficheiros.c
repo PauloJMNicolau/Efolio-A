@@ -178,18 +178,19 @@ int escreverLinhaReportB(ALUNO * aluno, int ucsRealizadas, FILE * fp){
         wprintf(L"Erro %d: Não foi possivel encontrar o ficheiro.", _ERR_RESOURCENOTFOUND);
         return _ERR_RESOURCENOTFOUND;
     }
-    fwprintf(fp, L"%d;%S;%d", aluno->numero, aluno->nome, ucsRealizadas);
+    fwprintf(fp, L"%d;%S;%d\n", aluno->numero, aluno->nome, ucsRealizadas);
     return _SUCESSO;
 }
 
 //Cria ficheiro e cabeçalho do Report B
 FILE * criarReportB(){
-    FILE * novo = fopen("Report B", "w");
+    FILE * novo = fopen("Report B.txt", "w");
     if(!novo){
         wprintf(L"Erro %d: Não foi possivel abrir o ficheiro",_ERR_WRITEFILE);
         exit(_ERR_WRITEFILE);
     }
     fwprintf(novo, L"# Report B - Lista de Alunos que podem fazer exames de época especial\n\n");
+    fwprintf(novo, L"# NumeroAluno;Nome;Total UC Realizadas\n\n");
     return novo;
 }
 
