@@ -357,8 +357,10 @@ NO_PASTA * obterPastaAno(wchar_t * ano, LISTA_PASTA * lista){
         return lista->cauda;
     else{
         temp = lista->cauda;
-        while(temp != lista->cauda || wcscmp(ano, temp->chave)==0){
+        int i=0;
+        while(i<lista->pastas && wcscmp(ano, temp->chave)!=0){
             temp = temp->proximo;
+            i++;
         }
         if(wcscmp(ano, temp->chave)==0)
             return temp;

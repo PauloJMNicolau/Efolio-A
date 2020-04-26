@@ -31,5 +31,12 @@ void uiRemoverInscricao(SGBD * bd);
 void uiImprimirDadoInscricao(INSCRICAO * inscricao);
 //Modificar valores de uma inscrição
 void uiAlterarInscricao(SGBD * bd);
-
+//Imprimir Listagem por UC
+void uiImprimirListagemPorUC(SGBD * bd);
+//Imprime Titulo da Listagem UC
+void uiImprimirCabecalhoUC(UC * unidade, wchar_t *ano);
+//Imprime Titulo da Listagem Aluno
+void uiImprimirCabecalhoAluno(ALUNO * aluno, wchar_t * ano);
+//Imprimir Listagem por Aluno
+void uiImprimirListagemPorAluno(SGBD * bd);
 #endif
