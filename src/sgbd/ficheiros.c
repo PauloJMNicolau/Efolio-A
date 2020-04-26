@@ -168,7 +168,7 @@ void gravarInscricoesTexto(LISTA_PASTA * lista){
 
 //Cria ficheiro e cabeçalho do Report A
 FILE * criarReportA(){
-    FILE * novo = fopen("Report A", "w");
+    FILE * novo = fopen("Report A.txt", "w");
     if(!novo){
         wprintf(L"Erro %d: Não foi possivel abrir o ficheiro",_ERR_WRITEFILE);
         exit(_ERR_WRITEFILE);
