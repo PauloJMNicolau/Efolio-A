@@ -277,11 +277,13 @@ void uiImprimirListagemPorUC(SGBD * bd){
                 continue;
             }
             uiImprimirCabecalhoUC(obterUCNum(id,bd->ucs), ano);
-            wprintf(L"|%48.d|%49.d|\n", aux->numeroAluno, aux->nota);
+            wprintf(L"|%10S|%76S|%10S|\n", L"Numero", L"Nome", L"Nota");
+            wprintf(L"|%10.d|%76S|%10.d|\n", aux->numeroAluno, obterAlunoNum(aux->numeroAluno,bd->alunos)->nome, aux->nota);
+            
             for(int e = i; e<pasta->elementos-1; e++){
                 INSCRICAO * ins = obterInscricao(e+1,pasta);
                 if(ins->numeroUC == id){
-                    wprintf(L"|%48.d|%49.d|\n", ins->numeroAluno, ins->nota);
+                    wprintf(L"|%10.d|%76S|%10.d|\n", ins->numeroAluno, obterAlunoNum(ins->numeroAluno,bd->alunos)->nome, ins->nota);
                 }
             }
             for(int i = 0; i<100; i++)
@@ -341,6 +343,7 @@ void uiImprimirListagemPorAluno(SGBD * bd){
                 continue;
             }
             uiImprimirCabecalhoAluno(obterAlunoNum(id,bd->alunos), ano);
+            wprintf(L"|%10S|%76S|%10S|\n", L"Numero", L"Nome", L"Nota");
             wprintf(L"|%10.d|%76S|%10.d|\n", aux->numeroUC, obterUCNum(aux->numeroUC,bd->ucs)->nome, aux->nota);
             for(int e = i; e<pasta->elementos-1; e++){
                 INSCRICAO * ins = obterInscricao(e+1,pasta);
