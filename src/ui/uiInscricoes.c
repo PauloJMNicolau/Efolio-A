@@ -247,3 +247,119 @@ void uiImprimirDadoInscricao(INSCRICAO * inscricao){
     for(i =0; i<46; i++)
         wprintf(L"-");
 }
+
+//Imprimir Listagem por UC
+void uiImprimirListagemPorUC(SGBD * bd){
+    clearScreen();
+    cabecalho("Menu Reports");
+    wprintf(L"Qual o ano letivo que pretende:\nAno: ");
+    wchar_t * ano = calloc(_TAMDATAS, sizeof(wchar_t));
+    if(!ano){
+        wprintf(L"Erro %d: Não foi possivel alocar a memória",_ERR_MEMORYALLOC);
+        exit(_ERR_MEMORYALLOC);
+    }
+    wscanf(L"%S", ano);
+    NO_PASTA * pasta = obterPastaAno(ano, bd->inscricoes);
+    if(pasta){
+        for(int i = 0; i< pasta->elementos; i++){
+            INSCRICAO * aux = obterInscricao(i,pasta);
+            int id = aux->numeroUC;
+            int continuar=0;
+            //Verifica se já imprimiu esta inscrição
+            if(i>0){
+                for(int e =0; e<i; e++){
+                    if(obterInscricao(e,pasta)->numeroUC == id){
+                        continuar =1;
+                    }
+                }
+            }
+            //Caso tenha imprimido não volta a imprimir
+            if(continuar == 1){
+                continue;
+            }
+            //Imprimir inscrição atual
+            uiImprimirCabecalhoUC(obterUCNum(id,bd->ucs), ano);
+            wprintf(L"|%10S|%76S|%10S|\n", L"Numero", L"Nome", L"Nota");
+            wprintf(L"|%10.d|%76S|%10.d|\n", aux->numeroAluno, obterAlunoNum(aux->numeroAluno,bd->alunos)->nome, aux->nota);
+            //Percorre o resto das inscrições e imprime as que forem do mesmo tipo
+            for(int e = i; e<pasta->elementos-1; e++){
+                INSCRICAO * ins = obterInscricao(e+1,pasta);
+                if(ins->numeroUC == id){
+                    wprintf(L"|%10.d|%76S|%10.d|\n", ins->numeroAluno, obterAlunoNum(ins->numeroAluno,bd->alunos)->nome, ins->nota);
+                }
+            }
+            for(int i = 0; i<100; i++)
+                wprintf(L"-");
+            wprintf(L"\n");
+        }
+    }
+    free(ano);
+    pressioneENTER();
+}
+
+//Imprime Titulo da Listagem
+void uiImprimirCabecalhoUC(UC * unidade, wchar_t * ano){
+    for(int i =0; i<100; i++)
+        wprintf(L"-");
+    wprintf(L"|%10.d|%76S|%10S|\n", unidade->numero, unidade->nome, ano);
+    for(int i =0; i<100; i++)
+        wprintf(L"-");
+}
+
+//Imprime Titulo da Listagem
+void uiImprimirCabecalhoAluno(ALUNO * aluno, wchar_t * ano){
+    for(int i =0; i<100; i++)
+        wprintf(L"-");
+    wprintf(L"|%10.d|%76S|%10S|\n", aluno->numero, aluno->nome, ano);
+    for(int i =0; i<100; i++)
+        wprintf(L"-");
+}
+
+//Imprimir Listagem por Aluno
+void uiImprimirListagemPorAluno(SGBD * bd){
+    clearScreen();
+    cabecalho("Menu Reports");
+    wprintf(L"Qual o ano letivo que pretende:\nAno: ");
+    wchar_t * ano = calloc(_TAMDATAS, sizeof(wchar_t));
+    if(!ano){
+        wprintf(L"Erro %d: Não foi possivel alocar a memória",_ERR_MEMORYALLOC);
+        exit(_ERR_MEMORYALLOC);
+    }
+    wscanf(L"%S", ano);
+    NO_PASTA * pasta = obterPastaAno(ano, bd->inscricoes);
+    if(pasta){
+        for(int i = 0; i< pasta->elementos; i++){
+            INSCRICAO * aux = obterInscricao(i,pasta);
+            int id = aux->numeroAluno;
+            int continuar=0;
+            //Verifica se já imprimiu esta inscrição
+            if(i>0){
+                for(int e =0; e<i; e++){
+                    if(obterInscricao(e,pasta)->numeroAluno == id){
+                        continuar =1;
+                    }
+                }
+            }
+            //Caso tenha sido imprimida não volta a imprimir
+            if(continuar == 1){
+                continue;
+            }
+            //Imprimir inscrição atual
+            uiImprimirCabecalhoAluno(obterAlunoNum(id,bd->alunos), ano);
+            wprintf(L"|%10S|%76S|%10S|\n", L"Numero", L"Nome", L"Nota");
+            wprintf(L"|%10.d|%76S|%10.d|\n", aux->numeroUC, obterUCNum(aux->numeroUC,bd->ucs)->nome, aux->nota);
+            //Percorre o resto das inscrições e imprime as que forem do mesmo tipo
+            for(int e = i; e<pasta->elementos-1; e++){
+                INSCRICAO * ins = obterInscricao(e+1,pasta);
+                if(ins->numeroAluno == id){
+                    wprintf(L"|%10.d|%76S|%10.d|\n", ins->numeroUC, obterUCNum(ins->numeroUC,bd->ucs)->nome, ins->nota);
+                }
+            }
+            for(int i = 0; i<100; i++)
+                wprintf(L"-");
+            wprintf(L"\n");
+        }
+    }
+    free(ano);
+    pressioneENTER();
+}

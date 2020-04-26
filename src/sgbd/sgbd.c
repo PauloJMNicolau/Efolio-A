@@ -121,6 +121,8 @@ int condicaoPropina(ALUNO * aluno, LISTA_PASTA * inscricao) {
     return opcao;
 }
 
+
+
 /************************************
  *            Report A              *
  ************************************/

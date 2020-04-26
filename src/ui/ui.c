@@ -186,10 +186,10 @@ void menuConsultas(SGBD * bd) {
         //Verifica opção selecionada
         switch (opcao) {
             case 1:
-                //listaInscAluno();
+                uiImprimirListagemPorAluno(bd);
                 break;
             case 2:
-                //listaInscUC();
+                uiImprimirListagemPorUC(bd);
                 break;
             case 0:
                 break;
@@ -233,3 +233,5 @@ void menuReports(SGBD * bd) {
         }
     } while (opcao != 0);
 }
+
+
