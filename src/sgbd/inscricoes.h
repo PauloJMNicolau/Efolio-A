@@ -106,4 +106,7 @@ int verificaInscricoesAnterioresAluno(ALUNO * aluno, wchar_t * ano, LISTA_PASTA 
 //Valida Possibilidade de Inscricao
 int validarInscricao(ALUNO * aluno, LIST_UC * unidades,int ectsUC, wchar_t * ano, LISTA_PASTA * inscricoes);
 
+//Procura e retorna o ano letivo mais antigo
+NO_PASTA * obterAnoLetivoMaisAntigo(LISTA_PASTA *lista);
+
 #endif

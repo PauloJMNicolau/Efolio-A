@@ -57,9 +57,9 @@ int condicaoPropina(ALUNO * aluno, LISTA_PASTA * inscricao);
 /************************************
  *            Report A              *
  ************************************/
+
 //Gerar Report A
 REP_A * ReportA(SGBD * bd);
-
 
 /************************************
  *            Report B              *
@@ -70,6 +70,8 @@ void ReportB(SGBD * bd);
 void imprimirReportB();
 //Imprimir linha Report B
 void imprimirLinhaReportB(wchar_t * linha);
+void gerarReportB(SGBD * bd);
+
 /************************************
  *            Report C              *
  ************************************/
@@ -86,4 +88,7 @@ void imprimirLinhaReportC(wchar_t * linha);
 void imprimirReportD();
 //Imprimir linha Report D
 void imprimirLinhaReportD(wchar_t * linha);
+//Gerar Report D
+void gerarReportD(SGBD *bd);
+
 #endif

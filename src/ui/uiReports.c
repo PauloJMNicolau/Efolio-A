@@ -62,3 +62,4 @@ void gerarReportD(SGBD * bd){
     imprimirReportD();
     pressioneENTER();
 }*/
+

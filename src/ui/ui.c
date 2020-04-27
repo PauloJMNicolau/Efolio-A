@@ -224,6 +224,7 @@ void menuReports(SGBD * bd) {
                 //gerarReportC(bd); break;
             case 4:
                 //gerarReportD(bd); break;
+                gerarReportD(bd); break;
             case 0:
                 break;
             default: {

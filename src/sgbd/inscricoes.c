@@ -464,3 +464,17 @@ NO_PASTA * obterAnoLetivoRecente(LISTA_PASTA *lista){
     }
     return aux;
 }
+
+//Procura e retorna o ano letivo mais antigo
+NO_PASTA * obterAnoLetivoMaisAntigo(LISTA_PASTA *lista){
+    if(!lista)
+        return NULL;
+    NO_PASTA * temp = lista->cauda->proximo;
+    NO_PASTA * aux = lista->cauda->proximo;
+    for(int i = 1; i<lista->pastas; i++){
+        temp = temp->proximo;
+        if(wcscmp(temp->chave, aux->chave)<0)
+            aux = temp;
+    }
+    return aux;
+}
