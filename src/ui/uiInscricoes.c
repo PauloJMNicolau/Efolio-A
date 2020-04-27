@@ -33,7 +33,7 @@ void uiAdicionarNovaInscricao(SGBD * bd) {
                 novo = procuraInscricao(bd->inscricoes, anoLetivo,numeroAluno,numeroUC);
                 if (novo == NULL) {
                     if(validarInscricoes(bd, aluno, anoLetivo, uc->ects) == _TRUE_){
-                        novo = criarInscricao(numeroUC,0, numeroAluno, anoLetivo);
+                        novo = criarInscricao(numeroUC,-1, numeroAluno, anoLetivo);
                         if(adicionarInscricao(novo, bd->inscricoes) == _SUCESSO){
                             wprintf(L"\nIncrição Efectuada\n\nDeseja continuar a inscrever?\n\t0 - Sim\n\t1 - Não\nopcao: ");
                             wscanf(L"%d",&opcao);
