@@ -216,7 +216,7 @@ int escreverLinhaReportC(ALUNO * aluno, FILE * fp){
         wprintf(L"Erro %d: Não foi possivel encontrar o ficheiro.", _ERR_RESOURCENOTFOUND);
         return _ERR_RESOURCENOTFOUND;
     }
-    fwprintf(fp, L"%d;%S;%d\n", aluno->numero, aluno->nome);
+    fwprintf(fp, L"%d;%S\n", aluno->numero, aluno->nome);
     return _SUCESSO;
 }
 
