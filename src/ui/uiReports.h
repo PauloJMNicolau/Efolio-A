@@ -32,9 +32,11 @@ void ReportB(SGBD * bd);
  ************************************/
 //Gerar ReportC
 void ReportC(SGBD * bd);
+
 /************************************
  *            Report D              *
  ************************************/
 //Gerar ReportD
 void ReportD(SGBD * bd);
+
 #endif

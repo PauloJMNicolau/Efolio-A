@@ -37,7 +37,7 @@ void gravarAlunosTexto(LIST_ALUNO * lista);
 void lerInscricoesTexto(LISTA_PASTA * lista);
 //Processar Linha de Texto do ficheiro de UC
 void processarLinhaInscricao(wchar_t * linha, LISTA_PASTA * lista);
-//Gravar Dados dos Alunos no ficheiro
+//Gravar Dados das inscrições no ficheiro
 void gravarInscricoesTexto(LISTA_PASTA * lista);
 
 /************************************
@@ -58,7 +58,7 @@ int terminarReportA(FILE * fp);
 int terminarReportB(FILE * fp);
 //Cria ficheiro e cabeçalho do Report B
 FILE * criarReportB();
-//Escrever linha no Report
+//Escrever linha no Report B
 int escreverLinhaReportB(ALUNO * aluno, int ucsRealizadas, FILE * fp);
 //Abrir report B para leitura
 FILE * abrirLeituraReportB();
@@ -72,7 +72,7 @@ void terminarLeituraReportB(FILE * fp);
 FILE * abrirLeituraReportC();
 //Fechar ficheiro Report C
 void terminarLeituraReportC(FILE * fp);
-//Escrever linha no Report
+//Escrever linha no Report C
 int escreverLinhaReportC(ALUNO * aluno , FILE * fp);
 //Cria ficheiro e cabeçalho do Report C
 FILE * criarReportC();
@@ -86,7 +86,7 @@ int terminarReportC(FILE * fp);
 FILE * abrirLeituraReportD();
 //Fechar ficheiro Report D
 void terminarLeituraReportD(FILE * fp);
-//Escrever linha no Report
+//Escrever linha no Report D
 int escreverLinhaReportD(wchar_t* ano, int total, int percentagem, FILE * fp);
 //Cria ficheiro e cabeçalho do Report D
 FILE * criarReportD();

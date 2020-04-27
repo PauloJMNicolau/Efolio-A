@@ -37,7 +37,7 @@ void uiAdicionarNovoAluno(SGBD * bd){
     pressioneENTER();
 }
 
-//Remover UC
+//Remover Aluno
 void uiRemoverAluno(SGBD * bd){
     clearScreen();
     uiImprimirAlunos(bd);

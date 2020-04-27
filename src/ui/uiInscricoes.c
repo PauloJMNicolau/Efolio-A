@@ -27,13 +27,17 @@ void uiAdicionarNovaInscricao(SGBD * bd) {
             wprintf(L"\nNúmero de Aluno: ");
             wscanf(L"%d", &numeroAluno);
             aluno = obterAlunoNum(numeroAluno, bd->alunos);
+            //Verifica se existe o aluno
             if (aluno != NULL) {
                 wprintf(L"\nAno Letivo [xxxx/yyyy]: ");
                 wscanf(L"%S", anoLetivo);
                 novo = procuraInscricao(bd->inscricoes, anoLetivo,numeroAluno,numeroUC);
+                //Verifica se existe inscrição para esse ano
                 if (novo == NULL) {
+                    //Valida a inscrição do aluno
                     if(validarInscricoes(bd, aluno, anoLetivo, uc->ects) == _TRUE_){
                         novo = criarInscricao(numeroUC,-1, numeroAluno, anoLetivo);
+                        //Caso seja valido adiciona a inscriçaõ a lista
                         if(adicionarInscricao(novo, bd->inscricoes) == _SUCESSO){
                             wprintf(L"\nIncrição Efectuada\n\nDeseja continuar a inscrever?\n\t0 - Sim\n\t1 - Não\nopcao: ");
                             wscanf(L"%d",&opcao);
@@ -93,6 +97,7 @@ void uiRemoverInscricao(SGBD * bd){
     }
     wprintf(L"\nIndique o Ano Letivo que pretende consultar: ");
     wscanf(L"%S", anoLetivo);
+    //Obtem a pasta do ano letivo a consultar
     pasta = obterPastaAno(anoLetivo, bd->inscricoes);
     if(pasta != NULL){
         do {
@@ -169,6 +174,7 @@ void uiAlterarInscricao(SGBD * bd){
     }
     wprintf(L"\nIndique o Ano Letivo que pretende consultar: ");
     wscanf(L"%S", anoLetivo);
+    //Obtem a pasta do ano letivo a pesquisar
     pasta = obterPastaAno(anoLetivo, bd->inscricoes);
     if(pasta != NULL){
         do{
@@ -259,6 +265,7 @@ void uiImprimirListagemPorUC(SGBD * bd){
         exit(_ERR_MEMORYALLOC);
     }
     wscanf(L"%S", ano);
+    //Obtem a pasta do ano letivo a consultar
     NO_PASTA * pasta = obterPastaAno(ano, bd->inscricoes);
     if(pasta){
         for(int i = 0; i< pasta->elementos; i++){
@@ -330,6 +337,7 @@ void uiImprimirListagemPorAluno(SGBD * bd){
         exit(_ERR_MEMORYALLOC);
     }
     wscanf(L"%S", ano);
+    //Obtem a pasta do ano letivo a consultar
     NO_PASTA * pasta = obterPastaAno(ano, bd->inscricoes);
     if(pasta){
         for(int i = 0; i< pasta->elementos; i++){

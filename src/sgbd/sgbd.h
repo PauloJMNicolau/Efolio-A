@@ -72,13 +72,12 @@ void gerarReportB(SGBD * bd);
 void imprimirReportB();
 //Imprimir linha Report B
 void imprimirLinhaReportB(wchar_t * linha);
-void gerarReportB(SGBD * bd);
 
 /************************************
  *            Report C              *
  ************************************/
+//Gerar report C
 void gerarReportC(SGBD * bd);
-
 //Ler linha do Report C
 void imprimirReportC();
 //Imprimir linha Report C

@@ -21,7 +21,7 @@
 
 //Adicionar um novo aluno
 void uiAdicionarNovoAluno(SGBD * bd);
-//Remover UC
+//Remover Aluno
 void uiRemoverAluno(SGBD * bd);
 // Imprimir lista de alunos com ID
 void uiImprimirAlunos(SGBD * bd);

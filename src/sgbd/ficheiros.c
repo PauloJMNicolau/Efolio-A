@@ -19,8 +19,10 @@ void lerUCTexto(LIST_UC * lista){
         wprintf(L"Erro %d: Não foi possivel alocar memoria para a linha",_ERR_MEMORYALLOC);
         exit(_ERR_MEMORYALLOC);
     }
+    //Ler todas as linhas do ficheiro
     while(!feof(fp)){
         fwscanf(fp,L"%l[^\n]\n",linha);
+        //Ignora as linhas de comentário # ou vazias
         if(wmemcmp(linha,L"#",1)==0 || wcsncmp(linha,L" ",1)==0)
             continue;
         processarLinhaUC(linha,lista);
@@ -72,8 +74,10 @@ void lerListaAlunos(LIST_ALUNO * aluno){
         wprintf(L"Erro %d: Não foi possivel alocar memoria para a linha",_ERR_MEMORYALLOC);
         exit(_ERR_MEMORYALLOC);
     }
+    //Ler todas as linhas do ficheiro
     while(!feof(fp)){
         fwscanf(fp,L"%l[^\n]\n",linhas);
+        //Ignora as linhas de comentário # e linhas vazias
         if(wmemcmp(linhas,L"#",1)==0 || wcsncmp(linhas,L" ",1)==0)
             continue;
         processarLinhaAlunos(linhas,aluno);
@@ -123,8 +127,10 @@ void lerInscricoesTexto(LISTA_PASTA * lista){
         wprintf(L"Erro %d: Não foi possivel alocar memoria para a linha",_ERR_MEMORYALLOC);
         exit(_ERR_MEMORYALLOC);
     }
+    //Ler todas as linhas do ficheiro
     while(!feof(fp)){
         fwscanf(fp,L"%l[^\n]\n",linha);
+        //Ignora as linhas de comentário # e linhas vazias
         if(wmemcmp(linha,L"#",1)==0 || wcsncmp(linha,L" ",1)==0)
             continue;
         processarLinhaInscricao(linha,lista);
@@ -144,7 +150,7 @@ void processarLinhaInscricao(wchar_t * linha, LISTA_PASTA * lista){
     adicionarInscricao(criarInscricao(numeroUC,nota, numeroAluno,ano),lista);
 }
 
-//Gravar Dados dos Alunos no ficheiro
+//Gravar Dados das inscrições no ficheiro
 void gravarInscricoesTexto(LISTA_PASTA * lista){
     FILE * fp = fopen("dadosInscricoes.txt","w");
     if(!fp){
@@ -207,7 +213,7 @@ int terminarReportA(FILE * fp){
  *            Report B              *
  ************************************/
 
-//Escrever linha no Report
+//Escrever linha no Report B
 int escreverLinhaReportB(ALUNO * aluno, int ucsRealizadas, FILE * fp){
     if(!fp){
         wprintf(L"Erro %d: Não foi possivel encontrar o ficheiro.", _ERR_RESOURCENOTFOUND);
@@ -239,6 +245,7 @@ int terminarReportB(FILE * fp){
     fclose(fp);
     return _SUCESSO;
 }
+
 //Abrir report B para leitura
 FILE * abrirLeituraReportB(){
     FILE * fp =fopen("Report B.txt","r");
@@ -248,6 +255,7 @@ FILE * abrirLeituraReportB(){
     }
     return fp;
 }
+
 //Fechar ficheiro Report B
 void terminarLeituraReportB(FILE * fp){
     if(!fp){
@@ -269,6 +277,7 @@ FILE * abrirLeituraReportC(){
     }
     return fp;
 }
+
 //Fechar ficheiro Report C
 void terminarLeituraReportC(FILE * fp){
     if(!fp){
@@ -277,7 +286,6 @@ void terminarLeituraReportC(FILE * fp){
     }
     fclose(fp);
 }
-
 
 //Escrever linha no Report_c
 int escreverLinhaReportC(ALUNO * aluno, FILE * fp){
@@ -289,7 +297,7 @@ int escreverLinhaReportC(ALUNO * aluno, FILE * fp){
     return _SUCESSO;
 }
 
-//Cria ficheiro e cabeçalho do Report 
+//Cria ficheiro e cabeçalho do Report C
 FILE * criarReportC(){
     FILE * novo = fopen("Report C.txt", "w");
     if(!novo){
@@ -324,6 +332,7 @@ FILE * abrirLeituraReportD(){
     }
     return fp;
 }
+
 //Fechar ficheiro Report D
 void terminarLeituraReportD(FILE * fp){
     if(!fp){
@@ -333,7 +342,7 @@ void terminarLeituraReportD(FILE * fp){
     fclose(fp);
 }
 
-//Escrever linha no Report
+//Escrever linha no Report D
 int escreverLinhaReportD(wchar_t* ano, int total, int percentagem, FILE * fp){
     if(!fp){
         wprintf(L"Erro %d: Não foi possivel encontrar o ficheiro.", _ERR_RESOURCENOTFOUND);

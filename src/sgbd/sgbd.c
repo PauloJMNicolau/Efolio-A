@@ -83,9 +83,12 @@ int validarInscricoes(SGBD * bd, ALUNO * aluno, wchar_t * ano, int ects){
 void calcularPropinas(SGBD * bd, ALUNO * aluno){
     NO_PASTA * aux = obterAnoLetivoRecente(bd->inscricoes);
     if(aux){
+        //Verifica se o aluno é residente ou estrangeiro e se é o 1ºanoou não
         int opcao = condicaoPropina(aluno,bd->inscricoes);
         int ects = 0;
+        //Obtem o final da lista o ano letivo mais recente
         NO * temp = aux->cauda;
+        //Percorre  a lista e soma o valor das ECTS a que o aluno está inscrito
         for(int i =0; i<aux->elementos; i++){
             temp = temp->proximo;
             if(temp->elemento->numeroAluno == aluno->numero){
@@ -117,10 +120,9 @@ int condicaoPropina(ALUNO * aluno, LISTA_PASTA * inscricao) {
         opcao = 1;
     else
         opcao = 3;
-    opcao += verificaInsAnoAnterior(aluno->numero, inscricao);
+    opcao += verificaInscricoesAnterioresAluno(aluno,obterAnoLetivoRecente(inscricao), inscricao);// verificaInsAnoAnterior(aluno->numero, inscricao);
     return opcao;
 }
-
 
 
 /************************************
@@ -268,7 +270,6 @@ void imprimirLinhaReportB(wchar_t * linha){
     wchar_t * nome = wcstok(NULL,L";",&buffer);
     int totalUC = wcstol(wcstok(NULL, L";", &buffer), &temp,10);
     wprintf(L"\n|%25d|%25S|%26d|",numeroAluno,nome,totalUC);
-
 }
 
 /************************************
@@ -292,13 +293,14 @@ void gerarReportC(SGBD * bd){
             //comparar se inscrição pertence ao aluno
             if(no->elemento->numeroAluno == aluno->numero){
                 UC * temp = obterUCNum(no->elemento->numeroUC, bd->ucs);
-                //se uc estiver em 1semestre então ++semestre1;
+                //se uc estiver em 1semestre então incrementa semestre1;
                 if( temp->semestre == 1){
                     report->contador_semestre_1++;
-                } else //se uc->2semestre entao semestre2;*/
+                } else //se uc->2semestre entao incrementa semestre2;*/
                     report->contador_semestre_2++;
             }
         }
+        //escreve no report c
         if(report->contador_semestre_2==0){
             if(report->contador_semestre_1>=2){
                 escreverLinhaReportC(aluno, reportFile);
@@ -344,7 +346,6 @@ void imprimirLinhaReportC(wchar_t * linha){
     int numeroAluno = wcstol(wcstok(linha, L";", &buffer), &temp,10);
     wchar_t * nome = wcstok(NULL,L";",&buffer);
     wprintf(L"\n|%39d|%38S|",numeroAluno,nome);
-
 }
 
 /************************************
@@ -373,12 +374,15 @@ void gerarReportD(SGBD *bd){
     //Percorre as pastas de anos letivos por ordem temporal
     NO_PASTA * pasta;
     while(wcscmp(anoAux, anofinal) <= 0 ){
+        //obtem pasta referente ao ano letivo que se pretende verificar
         pasta = obterPastaAno(anoAux,bd->inscricoes);
         if(pasta != NULL){
+            //Cria a lista do ano letivo
             REP_D_LISTA * infoAnoletivo = criarListaAnoReportD();
+            //Percorre a pasta do ano letivo
             for(int p =0; p< pasta->elementos; p++){
                 INSCRICAO * no = obterInscricao(p,pasta);
-                //Verifica se o id já está na lista, caso não esteja adiciona
+                //Verifica se o idAluno já está na lista, caso não esteja adiciona
                 if(!obterElementoReportDNum(no->numeroAluno, infoAnoletivo)){
                     adicionarElementoAnoRepDFim(infoAnoletivo,criarElementoAnoReportD(no->numeroAluno));
                 }
@@ -395,6 +399,7 @@ void gerarReportD(SGBD *bd){
     REP_D_ELEM * aux = report->cauda;
     int ultimo;
     for(int i = 0; i< report->elementos; i++){
+        //verifica se é o 1º ano de dados
         if(i==0){
             ultimo =0;
         } else{
@@ -404,9 +409,10 @@ void gerarReportD(SGBD *bd){
         //Calculo de Percentagem
         int percentagem =0;
         if(ultimo ==0)
-            percentagem =(aux->totalAlunos *100) -100;
+            percentagem = 100;//Como não existiu alunos anteriormente o aumento foi de 100%
         else
-            percentagem =((aux->totalAlunos *100) / ultimo)-100;
+            //Regra de 3 simples para calcular a percentagem (subtraio os 100 do valor inicial [diferença entre o ano e o ano anterior])
+            percentagem =((aux->totalAlunos *100) / ultimo)-100; 
         //Escrever no Relatório
         escreverLinhaReportD(aux->ano, aux->totalAlunos, percentagem, reportFile);
     }

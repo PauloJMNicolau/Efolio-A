@@ -192,9 +192,9 @@ NO_PASTA * procuraPasta(wchar_t * ano, LISTA_PASTA* lista){
 INSCRICAO * procuraInscricao(LISTA_PASTA * lista, wchar_t * ano, int numeroAluno, int numeroUC){
     if(!lista)
         return NULL;
-    NO_PASTA * pasta = procuraPasta(ano,lista);
+    NO_PASTA * pasta = procuraPasta(ano,lista); //Obtem a pasta do ano fornecido
     if(!pasta)
-        return NULL;
+        return NULL; //Se não encontrou pasta, então o eleemnto não existe
     NO * temp = pasta->cauda->proximo;
     int i =0;
     while(i<pasta->elementos){
@@ -211,9 +211,9 @@ INSCRICAO * procuraInscricao(LISTA_PASTA * lista, wchar_t * ano, int numeroAluno
 int procuraPosicaoInscricao(INSCRICAO * elemento, LISTA_PASTA * lista){
     if(!elemento)
         return _ERR_IMPOSSIBLE;
-    NO_PASTA * pasta = procuraPasta(elemento->anoLetivo,lista);
+    NO_PASTA * pasta = procuraPasta(elemento->anoLetivo,lista); //Obtem a pasta do ano fornecido
     if(!pasta)
-        return -1;
+        return -1; //Se não encontrou pasta, então o eleemnto não existe
     NO * temp = pasta->cauda->proximo;
     int i=0;
     while(i<pasta->elementos){
@@ -368,7 +368,7 @@ NO_PASTA * obterPastaAno(wchar_t * ano, LISTA_PASTA * lista){
     }
 }
 
-//Modificar Valores UC
+//Modificar Valores Inscricao
 void modificarValorInscricao(int numeroAluno, int numeroUC, int nota, INSCRICAO * inscricao){
     if(numeroAluno)
         inscricao->numeroAluno = numeroAluno;
@@ -378,7 +378,7 @@ void modificarValorInscricao(int numeroAluno, int numeroUC, int nota, INSCRICAO 
         inscricao->nota = nota;
 }
 
-//Verifica se aluno frequentou o ano letivo anterior ao ano currente
+//Verifica se aluno frequentou os ano letivo anteriores ao ano currente
 int verificaInsAnoAnterior(int numeroAluno, LISTA_PASTA * inscricao){
     if(!inscricao)
         return 0;
@@ -402,27 +402,29 @@ int verificaInsAnoAnterior(int numeroAluno, LISTA_PASTA * inscricao){
 
 //Valida Possibilidade de Inscricao
 int validarInscricao(ALUNO * aluno, LIST_UC * unidades, int ectsUC, wchar_t * ano, LISTA_PASTA * inscricoes){
-    int res = verificaInscricoesAnterioresAluno(aluno,ano,inscricoes);
+    int res = verificaInscricoesAnterioresAluno(aluno,ano,inscricoes); //Verifica inscrições em anos anteriores
     int limECTS = 0;
     if(res == _TRUE_)
-        limECTS = 84;
+        limECTS = 84; //Existiram inscrições em anos anteriores
     else
-        limECTS = 60;
+        limECTS = 60; //1º Ano de inscrições para o aluno
     int ects =0;
     int i =0;
     NO_PASTA * pasta = obterPastaAno(ano,inscricoes);
     if(!pasta) //não existe ano
         return _TRUE_; //Valida devido a nao existir ano
     NO * aux = pasta->cauda;
+    //Procura todas as inscriçoes do aluno no ano a que está a realizar a inscrição
     while(ects+ectsUC <= limECTS && i < pasta->elementos){
         aux = aux->proximo;
         if(aux->elemento->numeroAluno == aluno->numero){
+            //Soma ects das uc inscritas
             UC * temp = obterUCNum(aux->elemento->numeroUC,unidades);
             ects += temp->ects;
         } 
         i++;
     }
-    if(ects+ectsUC <= limECTS)
+    if(ects+ectsUC <= limECTS) //Verifica se a quantidade de ects após inscrição é valida
         return _TRUE_;
     return _FALSE_;
 }

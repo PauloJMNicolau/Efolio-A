@@ -58,7 +58,7 @@ No_REP_A * criarNoReportA(REP_A_ELEM * elemento){
     return novo;
 }
 
-//Libertar nó da lsita
+//Libertar nó da lista
 int  libertarNoReportA(No_REP_A * no){
     if(!no)
         return _ERR_MEMORYFREE;
@@ -275,6 +275,7 @@ PROB_ABANDONO * criarListaReportC(){
     nova->contador_semestre_1 = 0;
     return nova;
 }
+
 //Libertar memoria do Elemento Report c
 void libertarElementoReportC( PROB_ABANDONO * elemento){
     if(!elemento){
@@ -389,7 +390,7 @@ int removerElementoRepDInicio(REP_D * lista){
     return _ERR_IMPOSSIBLE;
 }
 
-//Remover no inicio da lista
+//Remover no inicio da lista de anos letivos
 int removerElementoRepDAnoInicio(REP_D_LISTA * lista){
     if(!lista){
         wprintf(L"Erro %d: Não foi possivel remover elemento da lista", _ERR_IMPOSSIBLE);
@@ -463,7 +464,7 @@ void libertarListaAnoReportD(REP_D_LISTA * lista){
     lista = NULL;
 }
 
-//Obter Elemento com idAluno igual a id
+//Obter Elemento da lista de anos letivos com idAluno igual a id
 REP_D_LISTA_ELEM * obterElementoReportDNum(int id, REP_D_LISTA * lista){
     if(!lista)
         return NULL;

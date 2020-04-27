@@ -91,7 +91,7 @@ int removerPasta(NO_PASTA * pasta, LISTA_PASTA * lista);
 int removerInscricao(INSCRICAO* inscricao, LISTA_PASTA * lista);
 //Obter inscrição na posição
 INSCRICAO * obterInscricao(int pos, NO_PASTA * lista);
-//Modificar Valores UC
+//Modificar Valores da Inscricao
 void modificarValorInscricao(int numeroAluno, int numeroUC, int nota, INSCRICAO * inscricao);
 //Verifica se aluno frequentou o ano letivo anterior ao ano currente
 int verificaInsAnoAnterior(int numeroAluno, LISTA_PASTA * inscricao);
