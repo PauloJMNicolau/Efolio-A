@@ -357,8 +357,7 @@ void gerarReportD(SGBD *bd){
     wchar_t * anofinal = obterAnoLetivoRecente(bd->inscricoes)->chave;
     wchar_t * temp, *buffer;
     //Transformar ano letivo antigo em inteiro para depois poder incrementar
-    wchar_t * anoAux = calloc(wcslen(ano), sizeof(wchar_t));
-    
+    wchar_t * anoAux = calloc(_TAMDATAS, sizeof(wchar_t));
     if(!anoAux){
         wprintf(L"Erro %d: Não foi possivel alocar memoriapara o report.", _ERR_MEMORYALLOC);
         exit(_ERR_MEMORYALLOC);
@@ -408,8 +407,6 @@ void gerarReportD(SGBD *bd){
             percentagem =(aux->totalAlunos *100) -100;
         else
             percentagem =((aux->totalAlunos *100) / ultimo)-100;
-        /*if((ultimo - aux->totalAlunos) >0)
-            percentagem = 0-percentagem;*/
         //Escrever no Relatório
         escreverLinhaReportD(aux->ano, aux->totalAlunos, percentagem, reportFile);
     }

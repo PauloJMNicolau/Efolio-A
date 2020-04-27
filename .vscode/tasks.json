@@ -6,7 +6,7 @@
             "label": "Compilar",
             "command": "/usr/bin/gcc",
             "args": [
-                "-g",
+                "-g3",
                 "-Wall",
                 "${workspaceFolder}/src/main.c",
                 "${workspaceFolder}/src/ui/ui.c",
