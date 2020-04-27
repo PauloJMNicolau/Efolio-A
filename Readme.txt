@@ -59,9 +59,10 @@ Dado que foi utilizado o VSCode como IDE de desenvolvimento, a compilação foi 
 
 O comando de compilação manual é o seguinte:
 
-        gcc -g3 -Wall main.c /ui/ui.c /ui/uiUcs.c /ui/uiAlunos.c /ui/uiInscricoes.c ui/uiPropinas.c /ui/uiReports.c /ui/global.c 
-                /sgbd/sgbd.c /sgbd/alunos.c /src/sgbd/ucs.c /sgbd/inscricoes.c /sgbd/ficheiros.c /sgbd/reports.c -o /dist/efolio
+        mkdir dist
+        gcc -g3 -Wall main.c ui/ui.c ui/uiUcs.c ui/uiAlunos.c ui/uiInscricoes.c ui/uiPropinas.c ui/uiReports.c ui/global.c sgbd/sgbd.c sgbd/alunos.c sgbd/ucs.c sgbd/inscricoes.c sgbd/ficheiros.c sgbd/reports.c -o dist/efolio
 
     ou de forma abreviada:
 
-        gcc -g3 -Wall main.c /ui/*c /sgbd/*c -o efolio
+        mkdir dist
+        gcc -g3 -Wall main.c /ui/*c /sgbd/*c -o dist/efolio
