@@ -116,11 +116,12 @@ int calculoPropina(int ects, int opcao) {
 //Verifica estatuto de residente do estudante e se é 1º inscrição
 int condicaoPropina(ALUNO * aluno, LISTA_PASTA * inscricao) {
     int opcao;
-    if(wcscmp(L"Portugal",aluno->pais) == 0)
+    int res=wcscmp(L"Portugal",aluno->pais);
+    if(res == 0)
         opcao = 1;
     else
         opcao = 3;
-    opcao += verificaInscricoesAnterioresAluno(aluno,obterAnoLetivoRecente(inscricao), inscricao);// verificaInsAnoAnterior(aluno->numero, inscricao);
+    opcao += verificaInscricoesAnterioresAluno(aluno,obterAnoLetivoRecente(inscricao)->chave, inscricao);
     return opcao;
 }
 

@@ -27,7 +27,7 @@
 1800023;Matheus Davi;Brasil
 180024;Rodrigo Vinícios;Brasil
 180025;Guilherme Pinto;Portugal
-180026;Gabriel Fernandes; Portugal
+180026;Gabriel Fernandes;Portugal
 180027;Ricardo Silva;Portugal
 180028;Silvio Fernandes;Portugal
 180029;Júlia Larissa; Brasil
