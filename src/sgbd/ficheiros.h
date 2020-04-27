@@ -69,6 +69,11 @@ int escreverLinhaReportB(ALUNO * aluno, int ucsRealizadas, FILE * fp);
  *            Report D              *
  ************************************/
 
-
+//Escrever linha no Report
+int escreverLinhaReportD(wchar_t* ano, int total, int percentagem, FILE * fp);
+//Cria ficheiro e cabeçalho do Report D
+FILE * criarReportD();
+//Termina a escrita no report D
+int terminarReportD(FILE * fp);
 
 #endif

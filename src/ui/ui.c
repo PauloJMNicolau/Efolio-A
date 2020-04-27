@@ -223,7 +223,7 @@ void menuReports(SGBD * bd) {
             case 3:
                 //repAbanEscolar(); break;
             case 4:
-                //repTotalAlunAnoLet(); break;
+                gerarReportD(bd); break;
             case 0:
                 break;
             default: {

@@ -43,7 +43,7 @@ void processarLinhaUC(wchar_t * linha, LIST_UC * lista){
 
 //Gravar Dados da UC no ficheiro
 void gravarUCTexto(LIST_UC * lista){
-    FILE * fp = fopen("dadosUC2.txt","w");
+    FILE * fp = fopen("dadosUC.txt","w");
     if(!fp){
         wprintf(L"Erro %d: Não foi possivel abrir o ficheiro",_ERR_READFILE);
         exit(_ERR_READFILE);
@@ -94,7 +94,7 @@ void processarLinhaAlunos(wchar_t * linhas, LIST_ALUNO * aluno){
 
 //Gravar Dados dos Alunos no ficheiro
 void gravarAlunosTexto(LIST_ALUNO * lista){
-    FILE * fp = fopen("dadosAlunos1.txt","w");
+    FILE * fp = fopen("dadosAlunos.txt","w");
     if(!fp){
         wprintf(L"Erro %d: Não foi possivel abrir o ficheiro",_ERR_READFILE);
         exit(_ERR_READFILE);
@@ -146,7 +146,7 @@ void processarLinhaInscricao(wchar_t * linha, LISTA_PASTA * lista){
 
 //Gravar Dados dos Alunos no ficheiro
 void gravarInscricoesTexto(LISTA_PASTA * lista){
-    FILE * fp = fopen("dadosInscricoes1.txt","w");
+    FILE * fp = fopen("dadosInscricoes.txt","w");
     if(!fp){
         wprintf(L"Erro %d: Não foi possivel abrir o ficheiro",_ERR_READFILE);
         exit(_ERR_READFILE);
@@ -168,7 +168,7 @@ void gravarInscricoesTexto(LISTA_PASTA * lista){
 
 //Cria ficheiro e cabeçalho do Report A
 FILE * criarReportA(){
-    FILE * novo = fopen("Report A", "w");
+    FILE * novo = fopen("Report A.txt", "w");
     if(!novo){
         wprintf(L"Erro %d: Não foi possivel abrir o ficheiro",_ERR_WRITEFILE);
         exit(_ERR_WRITEFILE);
@@ -264,3 +264,39 @@ void imprimirReportB(REP_B * reportB){
 /************************************
  *            Report D              *
  ************************************/
+
+//Escrever linha no Report
+int escreverLinhaReportD(wchar_t* ano, int total, int percentagem, FILE * fp){
+    if(!fp){
+        wprintf(L"Erro %d: Não foi possivel encontrar o ficheiro.", _ERR_RESOURCENOTFOUND);
+        return _ERR_RESOURCENOTFOUND;
+    }
+    if(percentagem > 0)
+        fwprintf(fp, L"%S;%d;+%d%\n", ano, total, percentagem);
+    else
+        fwprintf(fp, L"%S;%d;%d%\n", ano, total, percentagem);
+    return _SUCESSO;
+}
+
+//Cria ficheiro e cabeçalho do Report D
+FILE * criarReportD(){
+    FILE * novo = fopen("Report D.txt", "w");
+    if(!novo){
+        wprintf(L"Erro %d: Não foi possivel abrir o ficheiro",_ERR_WRITEFILE);
+        exit(_ERR_WRITEFILE);
+    }
+    fwprintf(novo, L"# Report D - Total de Alunos por Ano letivo\n\n");
+    fwprintf(novo, L"# Ano letivo; Total Alunos; Percentagem\n\n");
+    return novo;
+}
+
+//Termina a escrita no report D
+int terminarReportD(FILE * fp){
+    if(!fp){
+        wprintf(L"Erro %d: Não foi possivel encontrar o ficheiro a terminar.", _ERR_RESOURCENOTFOUND);
+        return _ERR_RESOURCENOTFOUND;
+    }
+    fwprintf(fp,L"\n\n#Fim Report D");
+    fclose(fp);
+    return _SUCESSO;
+}

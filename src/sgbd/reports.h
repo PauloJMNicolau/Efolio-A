@@ -69,7 +69,30 @@ typedef struct reportb{
  *      Report D        *
  * **********************/
 
+//Estrutura de dados do elemento da lista de dados do ano letivo
+typedef struct reportDElemento{
+    int idAluno;    //ID Aluno
+    struct reportDElemento * proximo;   //Proximo elemento da lista
+} REP_D_LISTA_ELEM;
 
+//Estrutura de Dados para guardar a lista de dados do ano letivo
+typedef struct reportDLista{
+    int elementos;              //Total de elementos na lista
+    REP_D_LISTA_ELEM * cauda;   //Elemento do final da lista
+} REP_D_LISTA;
+
+//Estrutura para armazenar o elemento da Lista de Report D
+typedef struct reportDElementoD{
+    wchar_t * ano;          //Ano Letivo
+    int totalAlunos;        //Total Alunos
+    struct reportDElementoD * proximo; //Proximo elemento da lista
+} REP_D_ELEM;
+
+//Estrutura para guardar a lista de dados do report D
+typedef struct reportD{
+    int elementos;      //Total de elementos na lista
+    REP_D_ELEM * cauda; //Elemento final da lista
+}REP_D;
 
 /* **********************
  *        Headers       *
@@ -128,5 +151,31 @@ REP_B_ELEM * obterElementoReportBNum(int id, REP_B * lista);
  *      Report D        *
  * **********************/
 
+//Crar lista de Report D
+REP_D * criarListaReportD();
+//Criar elemento da lista ReportD
+REP_D_ELEM * criarElementoReportD(wchar_t * ano, int total);
+//Crar lista de Anos letivos de Report D
+REP_D_LISTA * criarListaAnoReportD();
+//Criar elemento da lista de anos letivos ReportD
+REP_D_LISTA_ELEM * criarElementoAnoReportD(int id);
+//Libertar memoria do Elemento Report D
+void libertarElementoReportD(REP_D_ELEM * elemento);
+//Libertar memoria do Elemento da lista de ano letivo de Report D
+void libertarElementoAnoReportD(REP_D_LISTA_ELEM * elemento);
+//Remover no inicio da lista
+int removerElementoRepDInicio(REP_D * lista);
+//Remover no inicio da lista
+int removerElementoRepDAnoInicio(REP_D_LISTA * lista);
+//Adiciona elemento no final da lista
+int adicionarElementoRepDFim(REP_D * lista, REP_D_ELEM * elemento);
+//Adiciona elemento no final da lista de Anos Letivos
+int adicionarElementoAnoRepDFim(REP_D_LISTA * lista, REP_D_LISTA_ELEM * elemento);
+//Liberta Memoria da Lista Report D
+void libertarListaReportD(REP_D * lista);
+//Liberta Memoria da Lista de Anos letivos Report D
+void libertarListaAnoReportD(REP_D_LISTA * lista);
+//Obter Elemento com idAluno igual a id
+REP_D_LISTA_ELEM * obterElementoReportDNum(int id, REP_D_LISTA * lista);
 
 #endif

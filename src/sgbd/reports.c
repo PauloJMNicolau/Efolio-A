@@ -261,6 +261,196 @@ REP_B_ELEM * obterElementoReportBNum(int id, REP_B * lista){
  *      Report C        *
  * **********************/
 
+
+
 /************************
  *      Report D        *
  * **********************/
+
+//Crar lista de Report D
+REP_D * criarListaReportD(){
+    REP_D * nova = calloc(1, sizeof(REP_D));
+    if(!nova){
+        wprintf(L"Erro %d: nâo foi possivel alocar memoria do report\n",_ERR_MEMORYALLOC);
+        exit(_ERR_MEMORYALLOC);
+    }
+    nova->cauda = NULL;
+    nova->elementos = 0;
+    return nova;
+}
+
+//Criar elemento da lista ReportD
+REP_D_ELEM * criarElementoReportD(wchar_t * ano, int total){
+    REP_D_ELEM * nova = calloc(1, sizeof(REP_D_ELEM));
+    if(!nova){
+        wprintf(L"Erro %d: nâo foi possivel alocar memoria do report\n",_ERR_MEMORYALLOC);
+        exit(_ERR_MEMORYALLOC);
+    }
+    nova->ano = calloc(_TAMDATAS, sizeof(wchar_t));
+    if(!nova->ano){
+        wprintf(L"Erro %d: nâo foi possivel alocar memoria do report\n",_ERR_MEMORYALLOC);
+        exit(_ERR_MEMORYALLOC);
+    }
+    wcsncpy(nova->ano,ano,wcslen(ano));
+    nova->totalAlunos= total;
+    nova->proximo = nova; //Aponta para ele mesmo, util no caso de ser o unico elemento da lista
+    return nova;
+}
+
+//Crar lista de Anos letivos de Report D
+REP_D_LISTA * criarListaAnoReportD(){
+    REP_D_LISTA * nova = calloc(1, sizeof(REP_D_LISTA));
+    if(!nova){
+        wprintf(L"Erro %d: nâo foi possivel alocar memoria do report\n",_ERR_MEMORYALLOC);
+        exit(_ERR_MEMORYALLOC);
+    }
+    nova->cauda = NULL;
+    nova->elementos = 0;
+    return nova;
+}
+
+//Criar elemento da lista de anos letivos ReportD
+REP_D_LISTA_ELEM * criarElementoAnoReportD(int id){
+    REP_D_LISTA_ELEM * nova = calloc(1, sizeof(REP_D_LISTA_ELEM));
+    if(!nova){
+        wprintf(L"Erro %d: nâo foi possivel alocar memoria do report\n",_ERR_MEMORYALLOC);
+        exit(_ERR_MEMORYALLOC);
+    }
+    nova->idAluno = id;
+    nova->proximo = nova; //Aponta para ele mesmo, util no caso de ser o unico elemento da lista
+    return nova;
+}
+
+//Libertar memoria do Elemento Report D
+void libertarElementoReportD(REP_D_ELEM * elemento){
+    if(!elemento){
+        wprintf(L"Erro %d: Não é possivel eliminar o elemento", _ERR_MEMORYFREE);
+    }
+    free(elemento->ano);
+    elemento->ano = NULL;
+    elemento->totalAlunos = 0;
+    elemento->proximo = NULL;
+    free(elemento);
+    elemento = NULL;
+}
+
+//Libertar memoria do Elemento da lista de ano letivo de Report D
+void libertarElementoAnoReportD(REP_D_LISTA_ELEM * elemento){
+    if(!elemento){
+        wprintf(L"Erro %d: Não é possivel eliminar o elemento", _ERR_MEMORYFREE);
+    }
+    elemento->idAluno =0;
+    elemento->proximo = NULL;
+    free(elemento);
+    elemento = NULL;
+}
+
+//Remover no inicio da lista
+int removerElementoRepDInicio(REP_D * lista){
+    if(!lista){
+        wprintf(L"Erro %d: Não foi possivel remover elemento da lista", _ERR_IMPOSSIBLE);
+        return _ERR_IMPOSSIBLE;
+    }
+    if(lista->cauda){
+        lista->elementos--;
+        if(lista->elementos == 0){
+            libertarElementoReportD(lista->cauda);
+            lista->cauda = NULL;
+        } else{
+            REP_D_ELEM * temp = lista->cauda->proximo;
+            lista->cauda->proximo = temp->proximo;
+            libertarElementoReportD(temp);
+        }
+        return _SUCESSO;
+    }
+    return _ERR_IMPOSSIBLE;
+}
+
+//Remover no inicio da lista
+int removerElementoRepDAnoInicio(REP_D_LISTA * lista){
+    if(!lista){
+        wprintf(L"Erro %d: Não foi possivel remover elemento da lista", _ERR_IMPOSSIBLE);
+        return _ERR_IMPOSSIBLE;
+    }
+    if(lista->cauda){
+        lista->elementos--;
+        if(lista->elementos == 0){
+            libertarElementoAnoReportD(lista->cauda);
+            lista->cauda = NULL;
+        } else{
+            REP_D_LISTA_ELEM * temp = lista->cauda->proximo;
+            lista->cauda->proximo = temp->proximo;
+            libertarElementoAnoReportD(temp);
+        }
+        return _SUCESSO;
+    }
+    return _ERR_IMPOSSIBLE;
+}
+
+//Adiciona elemento no final da lista
+int adicionarElementoRepDFim(REP_D * lista, REP_D_ELEM * elemento){
+    if(!lista || !elemento){
+        wprintf(L"Erro %d: Não foi possivel adicionar elemento da lista", _ERR_IMPOSSIBLE);
+        return _ERR_IMPOSSIBLE;
+    }
+    if(lista->elementos > 0){
+        elemento->proximo = lista->cauda->proximo;
+        lista->cauda->proximo = elemento;
+    }
+    lista->cauda = elemento;
+    lista->elementos++;
+    return _SUCESSO;
+}
+
+//Adiciona elemento no final da lista de Anos Letivos
+int adicionarElementoAnoRepDFim(REP_D_LISTA * lista, REP_D_LISTA_ELEM * elemento){
+    if(!lista || !elemento){
+        wprintf(L"Erro %d: Não foi possivel adicionar elemento da lista", _ERR_IMPOSSIBLE);
+        return _ERR_IMPOSSIBLE;
+    }
+    if(lista->elementos > 0){
+        elemento->proximo = lista->cauda->proximo;
+        lista->cauda->proximo = elemento;
+    }
+    lista->cauda = elemento;
+    lista->elementos++;
+    return _SUCESSO;
+}
+
+//Liberta Memoria da Lista Report D
+void libertarListaReportD(REP_D * lista){
+    if(!lista)
+        wprintf(L"Erro %d: Não é possivel eliminar o elemento", _ERR_MEMORYFREE);
+    while(lista->elementos !=0)
+        removerElementoRepDInicio(lista);
+    lista->cauda = NULL;
+    free(lista);
+    lista = NULL;
+    
+}
+
+//Liberta Memoria da Lista de Anos letivos Report D
+void libertarListaAnoReportD(REP_D_LISTA * lista){
+    if(!lista)
+        wprintf(L"Erro %d: Não é possivel eliminar o elemento", _ERR_MEMORYFREE);
+    while(lista->elementos !=0)
+        removerElementoRepDAnoInicio(lista);
+    lista->cauda = NULL;
+    free(lista);
+    lista = NULL;
+}
+
+//Obter Elemento com idAluno igual a id
+REP_D_LISTA_ELEM * obterElementoReportDNum(int id, REP_D_LISTA * lista){
+    if(!lista)
+        return NULL;
+    int i =0;
+    REP_D_LISTA_ELEM * temp = lista->cauda;
+    while(i<lista->elementos){
+        temp = temp->proximo;
+        if(temp->idAluno == id)
+            return temp;
+        i++;
+    }
+    return NULL;
+}

@@ -222,3 +222,71 @@ void gerarReportB(SGBD * bd){
 /************************************
  *            Report D              *
  ************************************/
+
+//Gerar Report D
+void gerarReportD(SGBD *bd){
+    //Obter ano letivo mais antigo e mais recente
+    wchar_t * ano = obterAnoLetivoMaisAntigo(bd->inscricoes)->chave;
+    wchar_t * anofinal = obterAnoLetivoRecente(bd->inscricoes)->chave;
+    wchar_t * temp, *buffer;
+    //Transformar ano letivo antigo em inteiro para depois poder incrementar
+    wchar_t * anoAux = calloc(wcslen(ano), sizeof(wchar_t));
+    
+    if(!anoAux){
+        wprintf(L"Erro %d: Não foi possivel alocar memoriapara o report.", _ERR_MEMORYALLOC);
+        exit(_ERR_MEMORYALLOC);
+    }
+    wcscpy(anoAux, ano);
+    int ano1 = wcstol(wcstok(anoAux,L"/", &buffer), &temp, 10);
+    int ano2 = wcstol(wcstok(NULL,L"", &buffer), &temp, 10);
+    wcscpy(anoAux, ano);
+    //Cria ficheiro report D
+    FILE * reportFile = criarReportD();
+    //Cria estrutura para guardar a informação
+    REP_D * report = criarListaReportD();
+    //Percorre as pastas de anos letivos por ordem temporal
+    NO_PASTA * pasta;
+    while(wcscmp(anoAux, anofinal) <= 0 ){
+        pasta = obterPastaAno(anoAux,bd->inscricoes);
+        if(pasta != NULL){
+            REP_D_LISTA * infoAnoletivo = criarListaAnoReportD();
+            for(int p =0; p< pasta->elementos; p++){
+                INSCRICAO * no = obterInscricao(p,pasta);
+                //Verifica se o id já está na lista, caso não esteja adiciona
+                if(!obterElementoReportDNum(no->numeroAluno, infoAnoletivo)){
+                    adicionarElementoAnoRepDFim(infoAnoletivo,criarElementoAnoReportD(no->numeroAluno));
+                }
+            }
+            //Adiciona informação a estrutura do report D
+            adicionarElementoRepDFim(report,criarElementoReportD(anoAux,infoAnoletivo->elementos));
+            libertarListaAnoReportD(infoAnoletivo);
+            pasta = NULL;
+        }
+        //Atualiza valor Ano Letivo
+        swprintf(anoAux, wcslen(anoAux)+1, L"%d/%d", ++ano1,++ano2);
+    }
+    //Escrever informação no ficheiro
+    REP_D_ELEM * aux = report->cauda;
+    int ultimo;
+    for(int i = 0; i< report->elementos; i++){
+        if(i==0){
+            ultimo =0;
+        } else{
+            ultimo = aux->totalAlunos;
+        }
+        aux = aux->proximo;
+        //Calculo de Percentagem
+        int percentagem =0;
+        if(ultimo ==0)
+            percentagem =(aux->totalAlunos *100) -100;
+        else
+            percentagem =((aux->totalAlunos *100) / ultimo)-100;
+        /*if((ultimo - aux->totalAlunos) >0)
+            percentagem = 0-percentagem;*/
+        //Escrever no Relatório
+        escreverLinhaReportD(aux->ano, aux->totalAlunos, percentagem, reportFile);
+    }
+    free(anoAux);
+    libertarListaReportD(report);
+    terminarReportD(reportFile);
+}
