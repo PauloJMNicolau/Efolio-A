@@ -350,44 +350,6 @@ void imprimirLinhaReportC(wchar_t * linha){
 /************************************
  *            Report D              *
  ************************************/
-//Imprimir do Report D
-void imprimirReportD(){
-    clearScreen();
-    FILE * fp = abrirLeituraReportD();
-    wchar_t * linha = calloc(_TAMSTRING,sizeof(wchar_t));
-    if(!fp){
-        wprintf(L"Erro %d: Não foi possivel encontrar o ficheiro a terminar.", _ERR_RESOURCENOTFOUND);
-        exit(_ERR_RESOURCENOTFOUND);
-    }
-    for(int i=0;i<80;i++)
-        wprintf(L"-");
-    wprintf(L"\n|%25S|%25S|%26S|\n",L"Número de Aluno", L"Nome de Aluno", L"Total de UCs Realizadas");
-    for(int i=0;i<80;i++)
-        wprintf(L"-");
-    while(!feof(fp)){
-        fwscanf(fp,L"%l[^\n]\n",linha);
-        if(wmemcmp(linha,L"#",1)==0 || wcsncmp(linha,L" ",1)==0)
-            continue;
-        imprimirLinhaReportD(linha);
-    }
-    wprintf(L"\n");
-    for(int i=0;i<80;i++)
-        wprintf(L"-");
-    free(linha);
-    linha = NULL;
-    terminarLeituraReportD(fp);
-}
-
-//Imprimir linha Report D
-void imprimirLinhaReportD(wchar_t * linha){
-    wchar_t * temp, * buffer;
-    int numeroAluno = wcstol(wcstok(linha, L";", &buffer), &temp,10);
-    wchar_t * nome = wcstok(NULL,L";",&buffer);
-    int totalUC = wcstol(wcstok(NULL, L";", &buffer), &temp,10);
-    wprintf(L"\n|%25d|%25S|%26d|",numeroAluno,nome,totalUC);
-
-}
-
 //Gerar Report D
 void gerarReportD(SGBD *bd){
     //Obter ano letivo mais antigo e mais recente
@@ -454,4 +416,41 @@ void gerarReportD(SGBD *bd){
     free(anoAux);
     libertarListaReportD(report);
     terminarReportD(reportFile);
+}
+
+//Imprimir do Report D
+void imprimirReportD(){
+    clearScreen();
+    FILE * fp = abrirLeituraReportD();
+    wchar_t * linha = calloc(_TAMSTRING,sizeof(wchar_t));
+    if(!fp){
+        wprintf(L"Erro %d: Não foi possivel encontrar o ficheiro a terminar.", _ERR_RESOURCENOTFOUND);
+        exit(_ERR_RESOURCENOTFOUND);
+    }
+    for(int i=0;i<80;i++)
+        wprintf(L"-");
+    wprintf(L"\n|%25S|%25S|%26S|\n",L"Ano Letivo", L"Quantidade de Alunos",L"Variação");
+    for(int i=0;i<80;i++)
+        wprintf(L"-");
+    while(!feof(fp)){
+        fwscanf(fp,L"%l[^\n]\n",linha);
+        if(wmemcmp(linha,L"#",1)==0 || wcsncmp(linha,L" ",1)==0)
+            continue;
+        imprimirLinhaReportD(linha);
+    }
+    wprintf(L"\n");
+    for(int i=0;i<80;i++)
+        wprintf(L"-");
+    free(linha);
+    linha = NULL;
+    terminarLeituraReportD(fp);
+}
+
+//Imprimir linha Report D
+void imprimirLinhaReportD(wchar_t * linha){
+    wchar_t * temp, * buffer;
+    wchar_t * anoLetivo = wcstok(linha, L";", &buffer);
+    int quantidade = wcstol(wcstok(NULL, L";", &buffer), &temp,10);
+    int variacao = wcstol(wcstok(NULL, L";", &buffer), &temp,10);
+    wprintf(L"\n|%25S|%25d|%26d|",anoLetivo,quantidade,variacao);
 }

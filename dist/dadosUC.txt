@@ -1,6 +1,6 @@
 #Unidades Curriculares;
 
-#ID;Nome;Ano;Semestre;ECTS;
+#ID-Nome-Ano-Semestre;
 
 21002;Álgebra Linear I;1;1;6
 21010;Arquitetura de Computadores;1;1;6

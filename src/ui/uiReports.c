@@ -37,10 +37,10 @@ void ReportC(SGBD * bd){
 /************************************
  *            Report D              *
  ************************************/
-/*//Gerar Report D
+//Gerar Report D
 void ReportD(SGBD * bd){
-    ReportD(bd);
+    gerarReportD(bd);
     imprimirReportD();
     pressioneENTER();
-}*/
+}
 

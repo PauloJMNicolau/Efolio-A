@@ -86,8 +86,6 @@ int terminarReportC(FILE * fp);
 FILE * abrirLeituraReportD();
 //Fechar ficheiro Report D
 void terminarLeituraReportD(FILE * fp);
-
-
 //Escrever linha no Report
 int escreverLinhaReportD(wchar_t* ano, int total, int percentagem, FILE * fp);
 //Cria ficheiro e cabeçalho do Report D

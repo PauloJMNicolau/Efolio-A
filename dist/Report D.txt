@@ -1,0 +1,12 @@
+# Report D - Total de Alunos por Ano letivo
+
+# Ano letivo; Total Alunos; Percentagem
+
+2012/2013;2;+100%
+2015/2016;1;-50%
+2017/2018;6;+500%
+2018/2019;9;+50%
+2019/2020;10;+11%
+
+
+#Fim Report D

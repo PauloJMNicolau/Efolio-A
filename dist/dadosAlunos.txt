@@ -1,4 +1,7 @@
-#Nº     Nome       País;
+#Alunos
+
+#Nº;Nome;País;
+
 1800001;Ana Silva;Portugal
 1800002;Ana Tavares;Portugal
 1800003;Lorenzo Peetro;Itália
