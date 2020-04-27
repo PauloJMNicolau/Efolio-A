@@ -14,6 +14,8 @@
 //Bibliotecas Próprias
 #include "macro.h"
 
+
+
 /************************
  *      Estruturas      *
  * **********************/
@@ -64,7 +66,11 @@ typedef struct reportb{
 /************************
  *      Report C        *
  * **********************/
-
+typedef struct reportcAbandono{
+    int contador_semestre_1;// 1º semestre
+    int contador_semestre_2;// 2º semestre
+    //struct reportbElemento * proximo; //Proximo elemento
+} PROB_ABANDONO;
 /************************
  *      Report D        *
  * **********************/
@@ -126,7 +132,7 @@ int verificaElementoRepA(int numeroAluno, REP_A * report);
  *      Report B        *
  * **********************/
 
-//Crar lista de Report B
+//Criar lista de Report B
 REP_B * criarListaReportB();
 //Libertar memoria do Elemento Report B
 void libertarElementoReportB(REP_B_ELEM * elemento);
@@ -146,6 +152,9 @@ REP_B_ELEM * obterElementoReportBNum(int id, REP_B * lista);
 /************************
  *      Report C        *
  * **********************/
+
+PROB_ABANDONO * criarListaReportC();
+void libertarElementoReportC( PROB_ABANDONO * elemento);
 
 /************************
  *      Report D        *

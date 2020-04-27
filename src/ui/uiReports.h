@@ -19,24 +19,22 @@
  ************************************/
 
 //Gerar ReportA
-void gerarReportA(SGBD * bd);
-//Imprimir report total ECTS por aluno no ano corrente
-void imprimirReportA(REP_A * report);
+void ReportA(SGBD * bd);
 
 /************************************
  *            Report B              *
  ************************************/
 //Gerar ReportB
-void gerarReportB(SGBD * bd);
+void ReportB(SGBD * bd);
 
 /************************************
  *            Report c              *
  ************************************/
 //Gerar ReportC
-void gerarReportC(SGBD * bd);
+void ReportC(SGBD * bd);
 /************************************
  *            Report D              *
  ************************************/
 //Gerar ReportD
-void gerarReportD(SGBD * bd);
+void ReportD(SGBD * bd);
 #endif

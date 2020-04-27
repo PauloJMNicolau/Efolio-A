@@ -262,7 +262,7 @@ void terminarLeituraReportB(FILE * fp){
  ************************************/
 //Abrir report C para leitura
 FILE * abrirLeituraReportC(){
-    FILE * fp =fopen("Report B.txt","r");
+    FILE * fp =fopen("Report C.txt","r");
     if(!fp){
         wprintf(L"Erro %d: Não foi possivel abrir o ficheiro",_ERR_READFILE);
         exit(_ERR_READFILE);
@@ -276,6 +276,40 @@ void terminarLeituraReportC(FILE * fp){
         exit(_ERR_RESOURCENOTFOUND);
     }
     fclose(fp);
+}
+
+
+//Escrever linha no Report_c
+int escreverLinhaReportC(ALUNO * aluno, FILE * fp){
+    if(!fp){
+        wprintf(L"Erro %d: Não foi possivel encontrar o ficheiro.", _ERR_RESOURCENOTFOUND);
+        return _ERR_RESOURCENOTFOUND;
+    }
+    fwprintf(fp, L"%d;%S;%d\n", aluno->numero, aluno->nome);
+    return _SUCESSO;
+}
+
+//Cria ficheiro e cabeçalho do Report 
+FILE * criarReportC(){
+    FILE * novo = fopen("Report C.txt", "w");
+    if(!novo){
+        wprintf(L"Erro %d: Não foi possivel abrir o ficheiro",_ERR_WRITEFILE);
+        exit(_ERR_WRITEFILE);
+    }
+    fwprintf(novo, L"# Report C - Lista de Alunos que se encontram em risco de Abandono Escolar\n\n");
+    fwprintf(novo, L"# Nº aluno; Nome\n");
+    return novo;
+}
+
+//Termina a escrita no report C
+int terminarReportC(FILE * fp){
+    if(!fp){
+        wprintf(L"Erro %d: Não foi possivel encontrar o ficheiro a terminar.", _ERR_RESOURCENOTFOUND);
+        return _ERR_RESOURCENOTFOUND;
+    }
+    fwprintf(fp,L"\n\n#Fim Report C");
+    fclose(fp);
+    return _SUCESSO;
 }
 
 /************************************

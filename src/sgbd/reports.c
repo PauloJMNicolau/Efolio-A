@@ -148,7 +148,7 @@ int verificaElementoRepA(int numeroAluno, REP_A * reportA){
  *      Report B        *
  * **********************/
 
-//Crar lista de Report B
+//Criar lista de Report B
 REP_B * criarListaReportB(){
     REP_B * nova = calloc(1, sizeof(REP_B));
     if(!nova){
@@ -257,11 +257,34 @@ REP_B_ELEM * obterElementoReportBNum(int id, REP_B * lista){
     return NULL;
 }
 
+
 /************************
  *      Report C        *
  * **********************/
 
 
+//Criar lista de Report C
+PROB_ABANDONO * criarListaReportC(){
+    PROB_ABANDONO * nova = calloc(1, sizeof(PROB_ABANDONO));
+    
+    if(!nova){
+        wprintf(L"Erro %d: nâo foi possivel alocar memoria do report\n",_ERR_MEMORYALLOC);
+        exit(_ERR_MEMORYALLOC);
+    }
+    nova->contador_semestre_1 = 0;
+    nova->contador_semestre_1 = 0;
+    return nova;
+}
+//Libertar memoria do Elemento Report c
+void libertarElementoReportC( PROB_ABANDONO * elemento){
+    if(!elemento){
+        wprintf(L"Erro %d: Não é possivel eliminar o elemento", _ERR_MEMORYFREE);
+    }
+    elemento->contador_semestre_1 = 0;
+    elemento->contador_semestre_2 = 0;
+    free(elemento);
+    elemento = NULL;
+}
 
 /************************
  *      Report D        *
