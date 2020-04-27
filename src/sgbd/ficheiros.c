@@ -262,7 +262,7 @@ void terminarLeituraReportB(FILE * fp){
  ************************************/
 //Abrir report C para leitura
 FILE * abrirLeituraReportC(){
-    FILE * fp =fopen("Report B.txt","r");
+    FILE * fp =fopen("Report C.txt","r");
     if(!fp){
         wprintf(L"Erro %d: Não foi possivel abrir o ficheiro",_ERR_READFILE);
         exit(_ERR_READFILE);

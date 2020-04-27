@@ -66,19 +66,15 @@ typedef struct reportb{
 /************************
  *      Report C        *
  * **********************/
-
-/************************
- *      Report D        *
- * **********************/
-
-
- *      Report c       *
- * **********************/
 typedef struct reportcAbandono{
     int contador_semestre_1;// 1º semestre
     int contador_semestre_2;// 2º semestre
     //struct reportbElemento * proximo; //Proximo elemento
 } PROB_ABANDONO;
+/************************
+ *      Report D        *
+ * **********************/
+
 
 /* **********************
  *        Headers       *
@@ -112,8 +108,6 @@ int verificaElementoRepA(int numeroAluno, REP_A * report);
  *      Report B        *
  * **********************/
 
-
-
 //Criar lista de Report B
 REP_B * criarListaReportB();
 //Libertar memoria do Elemento Report B
@@ -130,18 +124,13 @@ void modificarEstado(REP_B_ELEM * elemento, int nota);
 void libertarListaReportB(REP_B * lista);
 //Obter Elemento com chave igual a id
 REP_B_ELEM * obterElementoReportBNum(int id, REP_B * lista);
-/////////////////////////////////////////////////////////////////////////////
-/* **********************
- *        Estrutura      *
- * **********************/
+
 /************************
  *      Report C        *
  * **********************/
-//////////////////////////////////////////////////////////////////////////
+
 PROB_ABANDONO * criarListaReportC();
 void libertarElementoReportC( PROB_ABANDONO * elemento);
-
-///////////////////////////////////////////////////////////////////////////
 
 /************************
  *      Report D        *

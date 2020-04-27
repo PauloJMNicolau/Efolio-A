@@ -127,7 +127,7 @@ int condicaoPropina(ALUNO * aluno, LISTA_PASTA * inscricao) {
  *            Report A              *
  ************************************/
 //Gerar Report A
-REP_A * ReportA(SGBD * bd){
+REP_A * gerarReportA(SGBD * bd){
     int i,j, ects;
     REP_A * reportA = criarListaReportA();              //Inicializa a lista do report A
     NO_PASTA * pastaCorrente = bd->inscricoes->cauda;   //pasta do ano corrente
@@ -162,12 +162,30 @@ REP_A * ReportA(SGBD * bd){
     return reportA;                 
 }
 
+//Imprimir reportA total ECTS por aluno no ano corrente 
+void imprimirReportA(REP_A * reportA){
+    clearScreen();
+    No_REP_A * norep = reportA->cauda;
+    int i;
+    for(i =0; i<80; i++)
+        wprintf(L"-");
+    wprintf(L"\n|%17S|%24S|%10S|%24S|\n",L"Número de Aluno",L"Nome do Aluno",L"ECTS",L"Observações");
+    for(i =0; i<80; i++)
+        wprintf(L"-");
+    wprintf(L"\n");
+    for(i=0;i<reportA->elementos;i++){
+        wprintf(L"|%17d|%24S|%10d|%24S|\n", norep->elemento->numero, norep->elemento->nome,norep->elemento->ects, norep->elemento->observacao);
+        norep =  norep->proximo;
+    }
+    for(i =0; i<80; i++)
+        wprintf(L"-");
+}
 
 /************************************
  *            Report B              *
  ************************************/
 //Gerar Report B
-void ReportB(SGBD * bd){
+void gerarReportB(SGBD * bd){
     LIST_ALUNO * alunosAux = bd->alunos;
     LISTA_PASTA * auxInscricoes = bd->inscricoes;
     FILE * reportFile = criarReportB();
@@ -256,6 +274,42 @@ void imprimirLinhaReportB(wchar_t * linha){
 /************************************
  *            Report C              *
  ************************************/
+//criar report c
+void gerarReportC(SGBD * bd){
+    //Percorrer cada elemento da lista de alunos
+    LIST_ALUNO * alunosAux = bd->alunos;
+    FILE * reportFile = criarReportC();
+    //Percorrer a lista de todos os alunos
+    for(int i =0; i< alunosAux->elementos; i++){
+        PROB_ABANDONO * report = criarListaReportC(); //Cria estrutura de report C
+        ALUNO * aluno = obterAlunoPos(i,alunosAux);
+        // obter pasta do ano letivo final
+        NO_PASTA * pasta = obterAnoLetivoRecente(bd->inscricoes);
+        NO * no = pasta->cauda;
+        //percorrer pasta 
+        for(int p =0; p < pasta->elementos; p++){
+            no = no->proximo;
+            //comparar se inscrição pertence ao aluno
+            if(no->elemento->numeroAluno == aluno->numero){
+                UC * temp = obterUCNum(no->elemento->numeroUC, bd->ucs);
+                //se uc estiver em 1semestre então ++semestre1;
+                if( temp->semestre == 1){
+                    report->contador_semestre_1++;
+                } else //se uc->2semestre entao semestre2;*/
+                    report->contador_semestre_2++;
+            }
+        }
+        if(report->contador_semestre_2==0){
+            if(report->contador_semestre_1>=2){
+                escreverLinhaReportC(aluno, reportFile);
+            }
+        }
+         
+        libertarElementoReportC(report);
+    }
+    terminarReportC(reportFile);
+}
+
 //Imprimir do Report C
 void imprimirReportC(){
     clearScreen();
@@ -267,7 +321,7 @@ void imprimirReportC(){
     }
     for(int i=0;i<80;i++)
         wprintf(L"-");
-    wprintf(L"\n|%25S|%25S|%26S|\n",L"Número de Aluno", L"Nome de Aluno", L"Total de UCs Realizadas");
+    wprintf(L"\n|%39S|%38S|\n",L"Número de Aluno", L"Nome de Aluno");
     for(int i=0;i<80;i++)
         wprintf(L"-");
     while(!feof(fp)){
@@ -289,8 +343,7 @@ void imprimirLinhaReportC(wchar_t * linha){
     wchar_t * temp, * buffer;
     int numeroAluno = wcstol(wcstok(linha, L";", &buffer), &temp,10);
     wchar_t * nome = wcstok(NULL,L";",&buffer);
-    int totalUC = wcstol(wcstok(NULL, L";", &buffer), &temp,10);
-    wprintf(L"\n|%25d|%25S|%26d|",numeroAluno,nome,totalUC);
+    wprintf(L"\n|%39d|%38S|",numeroAluno,nome);
 
 }
 
@@ -334,47 +387,4 @@ void imprimirLinhaReportD(wchar_t * linha){
     wprintf(L"\n|%25d|%25S|%26d|",numeroAluno,nome,totalUC);
 
 }
-/************************************
- *            Report C              *
- ************************************/
-//criar report c
-void gerarReportC(SGBD * bd){
-    //Percorrer cada elemento da lista de alunos
-    LIST_ALUNO * alunosAux = bd->alunos;
-    FILE * reportFile = criarReportC();
-    //Percorrer a lista de todos os alunos
-    for(int i =0; i< alunosAux->elementos; i++){
-        PROB_ABANDONO * report = criarListaReportC(); //Cria estrutura de report C
-        ALUNO * aluno = obterAlunoPos(i,alunosAux);
-        // obter pasta do ano letivo final
-        NO_PASTA * pasta = obterAnoLetivoRecente(bd->inscricoes);
-        NO * no = pasta->cauda;
-        //percorrer pasta 
-        for(int p =0; p < pasta->elementos; p++){
-            no = no->proximo;
-            //comparar se inscrição pertence ao aluno
-            if(no->elemento->numeroAluno == aluno->numero){
-                UC * temp = obterUCNum(no->elemento->numeroUC, bd->ucs);
-                //se uc estiver em 1semestre então ++semestre1;
-                if( temp->semestre == 1){
-                    report->contador_semestre_1++;
-                } else //se uc->2semestre entao semestre2;*/
-                    report->contador_semestre_2++;
-            }
-        }
-        if(report->contador_semestre_2==0){
-            if(report->contador_semestre_1>=2){
-                escreverLinhaReportC(aluno, reportFile);
-            }
-        }
-         
-        libertarElementoReportC(report);
-    }
-    terminarReportC(reportFile);
-}
 
-
-
-//************************************/
-// *            Report D              *
-// ************************************/

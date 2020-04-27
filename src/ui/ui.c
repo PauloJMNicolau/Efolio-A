@@ -217,14 +217,13 @@ void menuReports(SGBD * bd) {
         //Verifica opção selecionada
         switch (opcao) {
             case 1:
-                gerarReportA(bd); break;
+                ReportA(bd); break;
             case 2:
-                gerarReportB(bd); break;
+                ReportB(bd); break;
             case 3:
-                //gerarReportC(bd); break;
-                gerarReportC(bd); break;
+                ReportC(bd); break;
             case 4:
-                //gerarReportD(bd); break;
+                //ReportD(bd); break;
             case 0:
                 break;
             default: {

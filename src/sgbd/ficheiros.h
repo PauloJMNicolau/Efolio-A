@@ -72,8 +72,11 @@ void terminarLeituraReportB(FILE * fp);
 FILE * abrirLeituraReportC();
 //Fechar ficheiro Report C
 void terminarLeituraReportC(FILE * fp);
+//Escrever linha no Report
 int escreverLinhaReportC(ALUNO * aluno , FILE * fp);
+//Cria ficheiro e cabeçalho do Report C
 FILE * criarReportC();
+//Fechar ficheiro Report C
 int terminarReportC(FILE * fp);
 
 /************************************

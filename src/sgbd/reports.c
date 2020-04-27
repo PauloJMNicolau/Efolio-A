@@ -261,7 +261,7 @@ REP_B_ELEM * obterElementoReportBNum(int id, REP_B * lista){
 /************************
  *      Report C        *
  * **********************/
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 //Criar lista de Report C
 PROB_ABANDONO * criarListaReportC(){
     PROB_ABANDONO * nova = calloc(1, sizeof(PROB_ABANDONO));
@@ -284,7 +284,7 @@ void libertarElementoReportC( PROB_ABANDONO * elemento){
     free(elemento);
     elemento = NULL;
 }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /************************
  *      Report D        *
  * **********************/
